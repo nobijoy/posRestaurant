@@ -90,10 +90,11 @@ Route::post('menuCategory/update', 'App\Http\Controllers\MenuCategoryController@
 //Route::resource('menuSubCategory', 'App\Http\Controllers\MenuSubCategoryController')->parameters('menuSubCategory', 'id');
 //Route::post('menuSubCategory/update', 'App\Http\Controllers\MenuSubCategoryController@update')->name('menuSubCategory.update');
 
-//Route::delete('menu/{id}', 'App\Http\Controllers\MenuController@delete')->name('menu.delete');
-//Route::put('menu/{id}', 'App\Http\Controllers\MenuController@restore')->name('menu.restore');
-//Route::resource('menu', 'App\Http\Controllers\MenuController')->parameters('menu', 'id');
-//Route::post('menu/{id}/update', 'App\Http\Controllers\MenuController@update')->name('menu.update');
+Route::delete('menu/{id}', 'App\Http\Controllers\MenuController@delete')->name('menu.delete');
+Route::put('menu/{id}', 'App\Http\Controllers\MenuController@restore')->name('menu.restore');
+Route::resource('menu', 'App\Http\Controllers\MenuController')->parameters('menu', 'id');
+Route::get('menu/{id}/{menu}', 'App\Http\Controllers\MenuController@edit')->name('menu.edit');
+Route::post('menu/{id}/update', 'App\Http\Controllers\MenuController@update')->name('menu.update');
 
 Route::get('getSubCatAgainstCat', 'App\Http\Controllers\CommonController@getSubCatAgainstCat')->name('getSubCatAgainstCat');
 

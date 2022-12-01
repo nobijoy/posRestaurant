@@ -10,7 +10,7 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
                 <h3 class="content-header-title">
-                    <a href="{{route('item_section')}}" class="btn btn-primary">Item List<i class="fa fa-eye"></i></a>
+                    <a href="{{ route('menu.index') }}" class="btn btn-primary">Item List<i class="fa fa-eye"></i></a>
                 </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
@@ -70,7 +70,7 @@
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="" enctype="multipart/form-data">@csrf
+                                    <form class="form" method="post" action="{{ route('menu.store') }}" enctype="multipart/form-data">@csrf
                                         <div class="form-body">
                                             @include('admin.pos.food_item.form')
                                         </div>
@@ -97,44 +97,78 @@
 @endsection
 @section('script')
     <script type="text/javascript">
+        let addedIngradient = [];
+        let ingredientSl = 0;
         $(document).ready(function () {
             //Once add button is clicked
             $("#ingredient_consumption").on("change", function(){
                 var id = $(this).val();
-                var name = $("#ingredient_consumption option:selected").text();
+                var ingredient = $("#ingredient_consumption").val();
                 if (id != "") {
-                    var sl = parseInt($("#ingredient_sl").val());
-                    var sum = sl + 1;
-                    var count = $("#ingredient_count").val() + 1;
-                    $("#ingredient_count").val(count);
-                    $("#ingredient_sl").val(sum);
-                    var newRow = '<tr id="ingredient_row_'+count + '">' +
-                            '<td id="sl_'+count + '">'+sum+'</td>' +
+                    var ingredient_details = ingredient.split('|');
+                    let index = addedIngradient.indexOf(ingredient_details[0]);
+                    if (index > -1) {
+                        Swal.fire({
+                            title: "Warning!",
+                            text: "Ingredient already remains in cart, you can change Quantity/Amount!",
+                            type: "warning",
+                            confirmButtonClass: "btn btn-primary",
+                            buttonsStyling: false
+                        });
+                        $('#ingredient_consumption').val('').change();
+                        return false;
+                    }
+
+                    ingredientSl++;
+
+                    var newRow = '<tr id="ingredient_row_'+ingredient_details[0] + '">' +
+                            '<td id="sl_'+ingredient_details[0] + '"><p>'+ingredientSl+'</p></td>' +
                             '<td>' +
-                                '<input type="hidden" id="ingreadient_id_'+count + '" name="ingredient_id[]" value="'+id+'">' +
-                                '<span id="ingreadient_name_'+count +'">'+name+'</span>' +
+                                '<input type="hidden" id="ingreadient_id_'+ingredient_details[0] + '" name="ingredient_id[]" value="'+ingredient_details[0]+'">' +
+                                '<span id="ingreadient_name_'+ingredient_details[0] +'">'+ingredient_details[1]+'</span>' +
                             '</td>' +
                             '<td>' +
                                 '<div class="input-group">' +
-                                    '<input type="text" class="form-control" name="consumption[]" placeholder="Consumption" aria-describedby="basic-addon_'+count + '">' +
+                                    '<input type="text" class="form-control" name="consumption[]" placeholder="Consumption" aria-describedby="basic-addon_'+ingredient_details[0] + '" required>' +
                                     '<div class="input-group-append">' +
-                                        '<span class="input-group-text" id="basic-addon_'+count + '">unit</span>' +
+                                        '<span class="input-group-text" id="basic-addon_'+ingredient_details[0] + '">'+ingredient_details[2]+'</span>' +
                                     '</div>' +
                                 '</div>' +
                             '</td>' +
                             '<td>' +
-                                '<button type="button" title="Delete" class="btn btn-danger" onclick="deleteContactRow(this)" data-count="'+count + '"> <i class="fa fa-trash"></i></button>' +
+                                '<button type="button" title="Delete" class="btn btn-danger" onclick="deleteContactRow(this)" data-count="'+ingredient_details[0] + '"> <i class="fa fa-trash"></i></button>' +
                             '</td>' +
                         '</tr>';
                     $('#ingredient_items').append(newRow);
+                    addedIngradient.push(ingredient_details[0])
+                    $('#ingredient_consumption').val('').change();
+                    updateRowNo();
                 }
             });
             
         });
         function deleteContactRow(cr){
+                console.log(addedIngradient);
             var rowId = $(cr).attr('data-count');
             var el = document.getElementById("ingredient_row_"+rowId);
             el.remove();
+            let ingredient_id_container_new = [];
+
+            for (let i = 0; i < addedIngradient.length; i++) {
+                if (addedIngradient[i] != rowId) {
+                    ingredient_id_container_new.push(addedIngradient[i]);
+                }
+            }
+            addedIngradient = ingredient_id_container_new;
+            updateRowNo();
+            console.log(addedIngradient);
+        }
+
+        function updateRowNo() {
+            let numRows = $("#ingredient_consumption_table tbody tr").length;
+            for (let r = 0; r < numRows; r++) {
+                $("#ingredient_consumption_table tbody tr").eq(r).find("td:first p").text(r + 1);
+            }
         }
     </script>
 @endsection
