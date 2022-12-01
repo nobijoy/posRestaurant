@@ -51,8 +51,8 @@ class MenuController extends Controller
             'code' => ['required'],
             'category_id' => ['required'],
             'price' => ['required', 'numeric'],
-            'price' => ['nullable', 'numeric'],
-            'image' => ['nullable', 'numeric'],
+            'vat' => ['nullable', 'numeric'],
+            'image' => ['nullable', 'mimes:jpg,bmp,png'],
         ]);
         // dd($request->all());
         DB::beginTransaction();
