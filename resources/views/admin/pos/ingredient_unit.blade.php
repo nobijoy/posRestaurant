@@ -121,13 +121,13 @@
                     <div class="modal-body">
                         <fieldset class="form-group floating-label-form-group">
                             <label for="name">Name<span class="text-danger">*</span></label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="Category Name"
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Unit Name"
                                 required>
                         </fieldset>
                         <fieldset class="form-group floating-label-form-group">
                             <label for="description">Description</label>
                             <textarea name="description" class="form-control" id="description"
-                                placeholder="Category description" ></textarea>
+                                placeholder="Unit description" ></textarea>
                         </fieldset>
                     </div>
                     <div class="modal-footer">
@@ -156,13 +156,13 @@
                         <input type="hidden" name="id" id="id">
                         <fieldset class="form-group floating-label-form-group">
                             <label for="name">Name<span class="text-danger">*</span></label>
-                            <input type="text" name="name" class="form-control" id="ename" placeholder="Category Name"
+                            <input type="text" name="name" class="form-control" id="ename" placeholder=""
                                 required>
                         </fieldset>
                         <fieldset class="form-group floating-label-form-group">
                             <label for="description">Description<span class="text-danger">*</span></label>
                             <textarea name="description" class="form-control" id="edescription"
-                                placeholder="Category description"></textarea>
+                                placeholder=""></textarea>
                         </fieldset>
                     </div>
                     <div class="modal-footer">

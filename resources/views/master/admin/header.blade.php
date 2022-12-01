@@ -7,8 +7,9 @@
                             class="feather icon-menu font-large-1"></i></a></li>
                 <li class="nav-item">
                     <div>
-                        <a class="navbar-brand logo-div" href="">
-                            <img class="w-100 logo" alt="stack admin logo" src="{{asset ('public/backend/images/logo/stack-logo-light-big.png')}}" id="mainLogo">
+                        <a class="navbar-brand logo-div" href="{{ route ('home') }}">
+                            <img class="brand-logo logo" alt="stack admin logo" src="{{ $gsetting->logo ? asset ('public/uploads/image/'. $gsetting->logo) :
+                        asset ('backend/images/logo/stack-logo-light-big.png')}}" id="mainLogo">
                         </a>
                     </div>
                 </li>

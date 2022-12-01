@@ -9,6 +9,7 @@ use Image;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 
+
 class AdminController extends Controller
 {
 
@@ -16,6 +17,11 @@ class AdminController extends Controller
     public function profileUpdate(Request $request)
     {
         if($request->isMethod('post')){
+            $validatedData = $request->validate([
+                'name' => ['required'],
+                'email' => ['required'],
+            ]);
+
             DB::beginTransaction();
             try{
                 $data = User::find(Auth()->user()->id);
@@ -37,7 +43,7 @@ class AdminController extends Controller
                 return back()->with('error', $th->getMessage());
             }
         }
-        $data = User::find(1);
+        $data = User::find(Auth()->user()->id);
         return view('admin.admin_profile.profile', compact('data'));
     }
 

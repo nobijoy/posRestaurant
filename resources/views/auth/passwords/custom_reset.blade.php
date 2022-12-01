@@ -10,9 +10,9 @@
     <meta name="description" content="Stack admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
     <meta name="keywords" content="admin template, stack admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
-    <title>Recover Password - Stack Responsive Bootstrap 4 Admin Template</title>
-    <link rel="apple-touch-icon" href="{{asset('public/backend/images/ico/apple-icon-120.png')}}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('public/backend//images/ico/favicon.ico')}}">
+    <title>Change Password</title>
+    <link rel="apple-touch-icon" href="{{asset('public/uploads/image/' . $gsetting->favicon)}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('public/uploads/image/' . $gsetting->favicon)}}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -54,9 +54,9 @@
                         <div class="card border-grey border-lighten-3 px-2 py-2 m-0">
                             <div class="card-header border-0 pb-0">
                                 <div class="card-title text-center">
-                                    <img src="{{asset('/public/app-assets/images/logo/stack-logo-dark.png')}}" alt="branding logo">
+                                    <img src="{{asset ('public/uploads/image/'. $gsetting->logo)}}" alt="branding logo">
                                 </div>
-                                <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span></span></h6>
+                                <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span>{{$gsetting->title}}</span></h6>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
@@ -76,7 +76,7 @@
                                             </div>
                                         </fieldset>
                                         <fieldset class="form-group position-relative has-icon-left">
-                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="New Password" required autocomplete="new-password">
 
                                             @error('password')
                                             <span class="invalid-feedback" role="alert">
@@ -88,10 +88,10 @@
                                             </div>
                                         </fieldset>
                                         <fieldset class="form-group position-relative has-icon-left">
-                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
 
                                             <div class="form-control-position">
-                                                <i class="feather icon-check-circle"></i>
+                                                <i class="feather icon-check-square"></i>
                                             </div>
                                         </fieldset>
                                         <button type="submit" class="btn btn-outline-primary btn-lg btn-block"><i class="feather icon-unlock"></i> Submit Password</button>
