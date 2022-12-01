@@ -5,7 +5,7 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
                 <h3 class="content-header-title">
-                    <a href="{{ route ('item_add')}}" class="btn btn-primary">Menu Item<i class="fa fa-plus"></i></a>
+                    <a href="{{ route ('menu.create')}}" class="btn btn-primary">Menu Item<i class="fa fa-plus"></i></a>
                 </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
@@ -53,48 +53,47 @@
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered" id="action-table">
                                             <thead>
-                                            <tr>
-                                                <th>Sl</th>
-                                                <th>Name</th>
-                                                <th>Category</th>
-                                                <th>Price</th>
-                                                <th>Description</th>
-                                                <th>Action</th>
-                                            </tr>
+                                                <tr>
+                                                    <th>Sl</th>
+                                                    <th>Name</th>
+                                                    <th>Category</th>
+                                                    <th>Sele Price</th>
+                                                    <th>Total Ingredients</th>
+                                                    <th>Action</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>fvdsz</td>
-                                                        <td>dvx</td>
-                                                        <td>svx</td>
-                                                        <td>dfvdf</td>
-                                                        <td>
-                                                                <a href="">
+                                                @if (sizeof ($datas) > 0)
+                                                    @foreach ($datas as $data)
+                                                        <tr>
+                                                            <td>{{++$sl}}</td>
+                                                            <td>{{$data->name}}</td>
+                                                            <td>{{$data->category_id ? $data->category->name : ''}}</td>
+                                                            <td>{{$data->price}}</td>
+                                                            <td>{{$data->totalIngredient()}}</td>
+                                                            <td>
+                                                                <a href="{{ route ('menu.edit', ['id'=>$data->id, 'menu'=>str_replace(" ","-",$data->name)])}}">
                                                                     <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
                                                                         <i class="fa fa-pencil-square"></i></button>
                                                                 </a>
                                                                 <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive"
-                                                                        onclick="">
+                                                                        onclick="deleteData('{{ route('menu.delete', [$data->id]) }}')">
                                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                                 </button>
-                                                                <button type="button" class="btn btn-icon btn-outline-primary btn-sm" title="Restore"
-                                                                        onclick="">
-                                                                    <i class="fa fa-undo" aria-hidden="true"></i>
-                                                                </button>
-
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                             </tbody>
                                             <tfoot class="display-hidden">
-                                            <tr>
-                                                <th>Sl</th>
-                                                <th>Name</th>
-                                                <th>Category</th>
-                                                <th>Price</th>
-                                                <th>Description</th>
-                                                <th>Action</th>
-                                            </tr>
+                                                <tr>
+                                                    <th>Sl</th>
+                                                    <th>Name</th>
+                                                    <th>Category</th>
+                                                    <th>Sele Price</th>
+                                                    <th>Total Ingredients</th>
+                                                    <th>Action</th>
+                                                </tr>
                                             </tfoot>
                                         </table>
                                     </div>

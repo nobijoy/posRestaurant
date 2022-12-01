@@ -30,8 +30,8 @@
                     <li @if($url == 'menuCategory.index') class="active"  @endif>
                         <a href="{{route('menuCategory.index')}}" data-i18n="Food Menu Category">Food Menu Category</a>
                     </li>
-                    <li @if($url == 'item_section' || $url == "item_add") class="active"  @endif>
-                        <a href="{{route('item_section')}}" data-i18n="Food Menu">Food Menu</a>
+                    <li @if($url == 'menu.index' || $url == "menu.create" || $url == "menu.edit") class="active"  @endif>
+                        <a href="{{route('menu.index')}}" data-i18n="Food Menu">Food Menu</a>
                     </li>
                     <li @if($url == 'customer.index') class="active"  @endif>
                         <a href="{{route('customer.index')}}" data-i18n="Food Menu">Customers</a>

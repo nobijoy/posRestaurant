@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use Auth;
 use DB;
 use App\Models\MenuCategory;
-use App\Models\MenuSubCategory;
+use App\Models\Ingredient;
 use App\Models\Menu;
+use App\Models\IngredientConsumption;
 use Image;
 
 class MenuController extends Controller
@@ -20,9 +21,9 @@ class MenuController extends Controller
     public function index()
     {
         $categories = MenuCategory::where('is_active', 1)->orderBy('name')->get();
-        $datas = Menu::get()->reverse();
+        $datas = Menu::where('is_active', 1)->get()->reverse();
         $sl = 0;
-        return view('admin.menus.menu.index', compact('categories', 'datas', 'sl'));
+        return view('admin.pos.food_item.index', compact('categories', 'datas', 'sl'));
     }
 
     /**
@@ -33,7 +34,8 @@ class MenuController extends Controller
     public function create()
     {
         $categories = MenuCategory::where('is_active', 1)->orderBy('name')->get();
-        return view('admin.menus.menu.create', compact('categories'));
+        $ingredients = Ingredient::where('is_active', 1)->orderBy('name')->get();
+        return view('admin.pos.food_item.create', compact('categories', 'ingredients'));
     }
 
     /**
@@ -45,45 +47,47 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'name' => ['required', 'unique:menus,name,'.$request->id.',id,category_id,'.$request->category_id],
+            'code' => ['required'],
             'category_id' => ['required'],
-            'sub_category_id' => ['required'],
-            'name' => ['required', 'unique:menus,name,'.$request->id.',id,menu_sub_category_id,'.$request->sub_category_id],
+            'price' => ['required', 'numeric'],
+            'price' => ['nullable', 'numeric'],
+            'image' => ['nullable', 'numeric'],
         ]);
-
+        // dd($request->all());
         DB::beginTransaction();
-
         try {
             $data = new Menu;
             $data->name = $request->name;
-            $data->menu_sub_category_id = $request->sub_category_id;
+            $data->code = $request->code;
+            $data->category_id = $request->category_id;
             $data->price = $request->price;
+            $data->vat = $request->vat ? $request->vat : 0;
             $data->description = $request->description;
-//            dd($data);
             if($request->file('image')){
                 $image = $request->file('image');
                 $input = time() . 'image.' . $image->getClientOriginalExtension();
                 $destinationPath = public_path('uploads/image');
-                $img = Image::make($image->getRealPath());
-                $img->orientate();
-                $img->resize(180, 120)->save($destinationPath.'/'.$input);
-                $destinationPath = public_path('/thumbnail');
                 $image->move($destinationPath,$input);
                 $data->image = $input;
-                $tmpImg = public_path('thumbnail/'.$input);
-                if (file_exists($tmpImg)) {
-                    unlink($tmpImg);
-                }
             }
+            $data->is_veg = $request->is_veg_item;
+            $data->is_bev = $request->is_beverage_item;
+            $data->is_bar = $request->is_bar_item;
             $data->is_active = 1;
             $data->created_by = Auth()->user()->id;
             $data->save();
+
+            $ingredientIds = $request->ingredient_id;
+            $consumptions = $request->consumption;
+            $ingredientConsumption = $this->ingredientConsumption($data, $ingredientIds, $consumptions);
             DB::commit();
 
-            return back()->with('success', 'New Menu Created Successfully');
+            return redirect()->route('menu.index')->with('success', 'New Food Item Added Successfully');
 
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', 'Somethings went wrong. Try Again');
+            return back()->with('error', $th->getMessage());
         }
     }
 
@@ -104,12 +108,13 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $name)
     {
         $data = Menu::findorFail($id);
         $categories = MenuCategory::where('is_active', 1)->orderBy('name')->get();
-        $subCategories = MenuSubCategory::where('is_active', 1)->where('menu_category_id', $data->subCategory->menu_category_id )->orderBy('name')->get();
-        return view('admin.menus.menu.edit', compact('categories', 'subCategories', 'data'));
+        $ingredients = Ingredient::where('is_active', 1)->orderBy('name')->get();
+        $consumptionsIngredients = IngredientConsumption::where('menu_id', $id)->where('is_active', 1)->get();
+        return view('admin.pos.food_item.edit', compact('categories', 'data', 'ingredients', 'consumptionsIngredients'));
     }
 
     /**
@@ -121,6 +126,7 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request->all());
         $validatedData = $request->validate([
             'category_id' => ['required'],
             'sub_category_id' => ['required'],
@@ -204,6 +210,21 @@ class MenuController extends Controller
             DB::rollback();
             return 'Somethings Went Wrong!';
         }
+    }
+
+    public function ingredientConsumption($menu, $ingredients, $consumptions){
+        if (sizeof($ingredients) > 0) {
+            foreach ($ingredients as $key => $ingredient) {
+                $consumption  = new IngredientConsumption;
+                $consumption->ingredient_id = $ingredient;
+                $consumption->menu_id = $menu->id;
+                $consumption->consumption_amount = $consumptions[$key];
+                $consumption->is_active = 1;
+                $consumption->created_by = Auth()->user()->id;
+                $consumption->save();
+            }
+        }
+        return 1;
     }
 
 }
