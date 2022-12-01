@@ -113,8 +113,8 @@ class MenuController extends Controller
         $data = Menu::findorFail($id);
         $categories = MenuCategory::where('is_active', 1)->orderBy('name')->get();
         $ingredients = Ingredient::where('is_active', 1)->orderBy('name')->get();
-        // $subCategories = MenuSubCategory::where('is_active', 1)->where('menu_category_id', $data->subCategory->menu_category_id )->orderBy('name')->get();
-        return view('admin.pos.food_item.edit', compact('categories', 'data', 'ingredients'));
+        $consumptionsIngredients = IngredientConsumption::where('menu_id', $id)->where('is_active', 1)->get();
+        return view('admin.pos.food_item.edit', compact('categories', 'data', 'ingredients', 'consumptionsIngredients'));
     }
 
     /**
@@ -126,6 +126,7 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request->all());
         $validatedData = $request->validate([
             'category_id' => ['required'],
             'sub_category_id' => ['required'],
