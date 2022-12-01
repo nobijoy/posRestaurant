@@ -55,7 +55,7 @@ class IngredientCategoryController extends Controller
             $data->save();
             DB::commit();
 
-            return back()->with('success', 'New IngredientCategory Created Successfully');
+            return back()->with('success', 'New Ingredient Category Created Successfully');
 
         } catch (\Throwable $th) {
             DB::rollback();
@@ -111,7 +111,7 @@ class IngredientCategoryController extends Controller
             $data->save();
             DB::commit();
 
-            return back()->with('success', 'IngredientCategory Updated Successfully');
+            return back()->with('success', 'Ingredient Category Updated Successfully');
 
         } catch (\Throwable $th) {
             DB::rollback();
@@ -140,7 +140,7 @@ class IngredientCategoryController extends Controller
             $data->deleted_by = Auth()->user()->id;
             $data->save();
             DB::commit();
-            return 'IngredientCategory Inactive Successfully!';
+            return 'Ingredient Category Inactive Successfully!';
         } catch (\Throwable $th) {
             DB::rollback();
             return 'Somethings Went Wrong!';
@@ -155,7 +155,7 @@ class IngredientCategoryController extends Controller
             $data->is_active = 1;
             $data->save();
             DB::commit();
-            return 'IngredientCategory Activated Successfully!';
+            return 'Ingredient Category Activated Successfully!';
         } catch (\Throwable $th) {
             DB::rollback();
             return 'Somethings Went Wrong!';

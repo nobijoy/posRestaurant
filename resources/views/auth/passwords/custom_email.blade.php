@@ -7,12 +7,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="Stack admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, stack admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
-    <title>Recover Password - Stack Responsive Bootstrap 4 Admin Template</title>
-    <link rel="apple-touch-icon" href="{{asset('public/backend/images/ico/apple-icon-120.png')}}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('public/backend//images/ico/favicon.ico')}}">
+    <title>Recover Password</title>
+    <link rel="apple-touch-icon" href="{{asset('public/uploads/image/' . $gsetting->favicon)}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('public/uploads/image/' . $gsetting->favicon)}}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -54,7 +51,7 @@
                         <div class="card border-grey border-lighten-3 px-2 py-2 m-0">
                             <div class="card-header border-0 pb-0">
                                 <div class="card-title text-center">
-                                    <img src="{{asset('/public/app-assets/images/logo/stack-logo-dark.png')}}" alt="branding logo">
+                                    <img src="{{asset ('public/uploads/image/'. $gsetting->logo)}}" alt="branding logo">
                                 </div>
                                 <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span>We will send
                                             you a link to reset password.</span></h6>
@@ -71,6 +68,11 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
+                                            @if(session()->has('status'))
+                                                <div class="alert alert-success pt-2">
+                                                    {{ session()->get('status') }}
+                                                </div>
+                                            @endif
                                             <div class="form-control-position">
                                                 <i class="feather icon-mail"></i>
                                             </div>

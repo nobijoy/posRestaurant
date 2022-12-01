@@ -117,7 +117,7 @@ class IngredientController extends Controller
             $data->updated_by = Auth()->user()->id;
             $data->save();
             DB::commit();
-            return back()->with('success', 'Ingredient Unit updated Successfully');
+            return back()->with('success', 'Ingredient updated Successfully');
 
         } catch (\Throwable $th) {
             DB::rollback();

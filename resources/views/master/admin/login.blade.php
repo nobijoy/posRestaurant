@@ -8,7 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Title</title>
-    <link rel="apple-touch-icon" href="{{asset('/public/backend/images/ico/apple-icon-120.png')}}">
+    <link rel="apple-touch-icon" href="{{asset('public/uploads/image/'.$gsetting->favicon)}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('public/uploads/image/' . $gsetting->favicon)}}">
+
     <link
         href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i"
         rel="stylesheet">
@@ -66,11 +68,10 @@
                                 <div class="card-header border-0">
                                     <div class="card-title text-center">
                                         <div class="p-1">
-                                            <img src="{{asset('/public/app-assets/images/logo/stack-logo-dark.png')}}" alt="branding logo">
+                                            <img src="{{asset ('public/uploads/image/'. $gsetting->logo)}}" alt="branding logo">
                                         </div>
                                     </div>
-                                    <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span>Login with
-                                            Stack</span></h6>
+                                    <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span>{{$gsetting->title}}</span></h6>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
