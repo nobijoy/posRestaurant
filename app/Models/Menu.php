@@ -21,4 +21,8 @@ class Menu extends Model
     public function deletedBy(){
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
+    public function totalIngredient(){
+        $total = $this->hasMany(IngredientConsumption::class, 'menu_id', 'id')->where('is_active', 1)->count();
+        return $total;
+    }
 }

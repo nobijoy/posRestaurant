@@ -159,7 +159,7 @@
         }
 
         // If default collapsed menu then enable expand menu on hover
-        if( compactMenu === true ){
+        if (compactMenu === true) {
             $(".main-menu-content").find('li.active').parents('li').addClass('menu-collapsed-open');
         }
 
@@ -538,24 +538,6 @@
         }, 100);
     });
 
-    // main menu internationalization
-
-    // init i18n and load language file
-    i18next
-        .use(window.i18nextXHRBackend)
-        .init({
-                debug: false,
-                fallbackLng: "en",
-                backend: {
-                    loadPath: "../../../app-assets/data/locales/{{lng}}.json",
-                },
-                returnObjects: true
-            },
-            function (err, t) {
-                // resources have been loaded
-                jqueryI18next.init(i18next, $);
-            });
-
     // change language according to data-language of dropdown item
     $(".dropdown-language .dropdown-item").on("click", function () {
         var $this = $(this);
@@ -571,17 +553,17 @@
         });
     })
 
-      // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
-        let vh = window.innerHeight * 0.01;
-        // Then we set the value in the --vh custom property to the root of the document
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+    let vh = window.innerHeight * 0.01;
+    // Then we set the value in the --vh custom property to the root of the document
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-        // We listen to the resize event
-        window.addEventListener('resize', () => {
+    // We listen to the resize event
+    window.addEventListener('resize', () => {
         // We execute the same script to get the inner height
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
-        })
+    })
 
 
 })(window, document, jQuery);
