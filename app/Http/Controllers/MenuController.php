@@ -80,7 +80,8 @@ class MenuController extends Controller
 
             $ingredientIds = $request->ingredient_id;
             $consumptions = $request->consumption;
-            $ingredientConsumption = $this->ingredientConsumption($data, $ingredientIds, $consumptions);
+            $einconids = $request->ingredient_consuption_id;
+            $ingredientConsumption = $this->ingredientConsumption($data, $einconids, $ingredientIds, $consumptions);
             DB::commit();
 
             return redirect()->route('menu.index')->with('success', 'New Food Item Added Successfully');
@@ -114,7 +115,12 @@ class MenuController extends Controller
         $categories = MenuCategory::where('is_active', 1)->orderBy('name')->get();
         $ingredients = Ingredient::where('is_active', 1)->orderBy('name')->get();
         $consumptionsIngredients = IngredientConsumption::where('menu_id', $id)->where('is_active', 1)->get();
-        return view('admin.pos.food_item.edit', compact('categories', 'data', 'ingredients', 'consumptionsIngredients'));
+        $conIds = [];
+        foreach ($consumptionsIngredients as $key => $value) {
+            array_push($conIds, strval($value->ingredient_id));
+        }
+
+        return view('admin.pos.food_item.edit', compact('categories', 'data', 'ingredients', 'consumptionsIngredients', 'conIds'));
     }
 
     /**
@@ -126,11 +132,13 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
         $validatedData = $request->validate([
+            'name' => ['required', 'unique:menus,name,'.$id.',id,category_id,'.$request->category_id],
+            'code' => ['required'],
             'category_id' => ['required'],
-            'sub_category_id' => ['required'],
-            'name' => ['required', 'unique:menus,name,'.$request->id.',id,menu_sub_category_id,'.$request->sub_category_id],
+            'price' => ['required', 'numeric'],
+            'vat' => ['nullable', 'numeric'],
+            'image' => ['nullable', 'mimes:jpg,bmp,png'],
         ]);
 
         DB::beginTransaction();
@@ -138,34 +146,36 @@ class MenuController extends Controller
         try {
             $data = Menu::find($id);
             $data->name = $request->name;
-            $data->menu_sub_category_id = $request->sub_category_id;
+            $data->code = $request->code;
+            $data->category_id = $request->category_id;
             $data->price = $request->price;
+            $data->vat = $request->vat ? $request->vat : 0;
             $data->description = $request->description;
             if($request->file('image')){
                 $image = $request->file('image');
                 $input = time() . 'image.' . $image->getClientOriginalExtension();
                 $destinationPath = public_path('uploads/image');
-                $img = Image::make($image->getRealPath());
-                $img->orientate();
-                $img->resize(180, 120)->save($destinationPath.'/'.$input);
-                $destinationPath = public_path('/thumbnail');
                 $image->move($destinationPath,$input);
                 $data->image = $input;
-                $tmpImg = public_path('thumbnail/'.$input);
-                if (file_exists($tmpImg)) {
-                    unlink($tmpImg);
-                }
             }
+            $data->is_veg = $request->is_veg_item;
+            $data->is_bev = $request->is_beverage_item;
+            $data->is_bar = $request->is_bar_item;
             $data->is_active = 1;
-            $data->updated_by = Auth()->user()->id;
+            $data->created_by = Auth()->user()->id;
             $data->save();
+
+            $ingredientIds = $request->ingredient_id;
+            $consumptions = $request->consumption;
+            $einconids = $request->ingredient_consuption_id;
+            $ingredientConsumption = $this->ingredientConsumption($data, $einconids, $ingredientIds, $consumptions);
             DB::commit();
 
             return back()->with('success', 'Menu Updated Successfully');
 
         } catch (\Throwable $th) {
             DB::rollback();
-//            return back()->with('error', $th->getMessage());
+           return back()->with('error', $th->getMessage());
             return back()->with('error', 'Somethings went wrong. Try Again');
         }
     }
@@ -197,6 +207,20 @@ class MenuController extends Controller
         }
     }
 
+    public function deleteMenuIngredient($id)
+    {
+        DB::beginTransaction();
+        try {
+            $data = IngredientConsumption::findorFail($id);
+            $data->delete();
+            DB::commit();
+            return 'Menu Ingredient Item Deleted Successfully!';
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return 'Somethings Went Wrong!';
+        }
+    }
+
     public function restore($id)
     {
         DB::beginTransaction();
@@ -212,15 +236,20 @@ class MenuController extends Controller
         }
     }
 
-    public function ingredientConsumption($menu, $ingredients, $consumptions){
-        if (sizeof($ingredients) > 0) {
+    public function ingredientConsumption($menu, $einconids, $ingredients, $consumptions){
+        if (isset($ingredients)) {
             foreach ($ingredients as $key => $ingredient) {
-                $consumption  = new IngredientConsumption;
+                if ($einconids[$key]) {
+                    $consumption  = IngredientConsumption::find($einconids[$key]);
+                    $consumption->updated_by = Auth()->user()->id;
+                }else{
+                    $consumption  = new IngredientConsumption;
+                    $consumption->created_by = Auth()->user()->id;
+                }
                 $consumption->ingredient_id = $ingredient;
                 $consumption->menu_id = $menu->id;
                 $consumption->consumption_amount = $consumptions[$key];
                 $consumption->is_active = 1;
-                $consumption->created_by = Auth()->user()->id;
                 $consumption->save();
             }
         }

@@ -51,6 +51,36 @@
                     </tr>
                 </thead>
                 <tbody id="ingredient_items">
+                    @if($url == 'menu.edit')
+                        @if (sizeof($consumptionsIngredients) > 0)
+                            <?php $ciSl = 0; $array = [];?>
+                            @foreach ($consumptionsIngredients as $ckey => $ci)
+                            <tr id="ingredient_row_0{{$ci->id}}">
+                                <input type="hidden" name="ingredient_consuption_id[]" value="{{$ci->id}}">
+                                <td id="sl_0{{$ci->id}}"><p>{{++$ciSl}}</p></td>
+                                <td>
+                                    <input type="hidden" id="ingreadient_id_0{{$ci->id}}" value="{{$ci->ingredient_id}}" 
+                                    name="ingredient_id[]" value="'+ingredient_details[0]+'">
+                                    <span id="ingreadient_name_'+ingredient_details[0] +'">{{$ci->ingredient->name}}</span>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="consumption[]" value="{{$ci->consumption_amount}}" placeholder="Consumption" 
+                                        aria-describedby="basic-addon_0{{$ci->id}}" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="basic-addon_0{{$ci->id}}">{{$ci->ingredient->unit->name}}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" title="Delete" class="btn btn-danger" onclick="deleteData('{{ route('deleteMenuIngredient', [$ci->id]) }}')"
+                                    data-count="0{{$ci->id}}"> <i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <?php array_push($array, $ci->id); ?>
+                            @endforeach
+                        @endif
+                    @endif
                     
                 </tbody>
             </table>
@@ -68,11 +98,11 @@
     <div class="form-group col-md-6 ">
         <label for="description">Description</label>
         <textarea id="description" class="form-control" name="description" cols="30" rows="1"
-        placeholder="Ex:Fried egg, grilled tomato, bacon/mushroom Avocado, mayo on toasted panini"></textarea>
+        placeholder="Ex:Fried egg, grilled tomato, bacon/mushroom Avocado, mayo on toasted panini">@if($url == 'menu.edit'){{$data->description}}@else{{old('description')}}@endif</textarea>
     </div>
 
     <div class="form-group col-md-6 ">
-        <label for="image">Image</label>
+        <label for="image">@if($url == 'menu.edit') Change Image @else Image @endif</label>
         <input type="file" name="image" id="image" class="form-control">
     </div>
 

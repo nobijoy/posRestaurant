@@ -122,6 +122,7 @@
                     ingredientSl++;
 
                     var newRow = '<tr id="ingredient_row_'+ingredient_details[0] + '">' +
+                            '<input type="hidden" name="ingredient_consuption_id[]" value="">'+
                             '<td id="sl_'+ingredient_details[0] + '"><p>'+ingredientSl+'</p></td>' +
                             '<td>' +
                                 '<input type="hidden" id="ingreadient_id_'+ingredient_details[0] + '" name="ingredient_id[]" value="'+ingredient_details[0]+'">' +
@@ -136,7 +137,7 @@
                                 '</div>' +
                             '</td>' +
                             '<td>' +
-                                '<button type="button" title="Delete" class="btn btn-danger" onclick="deleteContactRow(this)" data-count="'+ingredient_details[0] + '"> <i class="fa fa-trash"></i></button>' +
+                                '<button type="button" title="Delete" class="btn btn-danger" onclick="deleteConsumptionRow(this)" data-count="'+ingredient_details[0] + '"> <i class="fa fa-trash"></i></button>' +
                             '</td>' +
                         '</tr>';
                     $('#ingredient_items').append(newRow);
@@ -147,8 +148,7 @@
             });
             
         });
-        function deleteContactRow(cr){
-                console.log(addedIngradient);
+        function deleteConsumptionRow(cr){
             var rowId = $(cr).attr('data-count');
             var el = document.getElementById("ingredient_row_"+rowId);
             el.remove();
@@ -161,7 +161,6 @@
             }
             addedIngradient = ingredient_id_container_new;
             updateRowNo();
-            console.log(addedIngradient);
         }
 
         function updateRowNo() {

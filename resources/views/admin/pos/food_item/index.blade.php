@@ -59,6 +59,7 @@
                                                     <th>Category</th>
                                                     <th>Sele Price</th>
                                                     <th>Total Ingredients</th>
+                                                    <th>Image</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -71,6 +72,13 @@
                                                             <td>{{$data->category_id ? $data->category->name : ''}}</td>
                                                             <td>{{$data->price}}</td>
                                                             <td>{{$data->totalIngredient()}}</td>
+                                                            <td>
+                                                                <a href="{{ $data->image ? asset ('/public/uploads/image/'.$data->image) : '#' }}" target="_blank" 
+                                                                    rel="noopener noreferrer"> 
+                                                                    <img src="{{ $data->image ? asset ('/public/uploads/image/'.$data->image) : '#' }}" 
+                                                                    width="70px" height="40px" alt="">
+                                                                </a>
+                                                            </td>
                                                             <td>
                                                                 <a href="{{ route ('menu.edit', ['id'=>$data->id, 'menu'=>str_replace(" ","-",$data->name)])}}">
                                                                     <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
@@ -92,6 +100,7 @@
                                                     <th>Category</th>
                                                     <th>Sele Price</th>
                                                     <th>Total Ingredients</th>
+                                                    <th>Image</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </tfoot>
