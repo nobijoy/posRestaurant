@@ -10,7 +10,7 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
                 <h3 class="content-header-title">
-                    <a href="{{route('waste.index')}}" class="btn btn-primary">Item List<i class="fa fa-eye"></i></a>
+                    <a href="{{route('waste.index')}}" class="btn btn-primary">Waste Item List<i class="fa fa-eye"></i></a>
                 </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
