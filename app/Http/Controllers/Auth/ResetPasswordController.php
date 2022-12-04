@@ -20,6 +20,10 @@ class ResetPasswordController extends Controller
     |
     */
 
+    public function __construct(){
+        $this->middleware('smtp');
+    }
+    
     use ResetsPasswords;
     public function showResetForm(Request $request)
     {

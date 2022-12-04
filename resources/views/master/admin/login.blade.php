@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Title</title>
+    <title>{{$gsetting->title ? $gsetting->title : "POS"}}</title>
     <link rel="apple-touch-icon" href="{{asset('public/uploads/image/'.$gsetting->favicon)}}">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('public/uploads/image/' . $gsetting->favicon)}}">
 
@@ -16,17 +16,20 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('/public/backend/vendors/css/vendors.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset ('/public/backend/vendors/css/forms/selects/select2.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset ('/public/backend/vendors/css/forms/selects/select2.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('/public/backend/vendors/css/extensions/toastr.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/public/backend/vendors/css/charts/morris.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/public/backend/vendors/css/extensions/unslider.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('/public/backend/vendors/css/weather-icons/climacons.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset ('/public/backend/vendors/css/tables/datatable/datatables.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+        href="{{asset('/public/backend/vendors/css/weather-icons/climacons.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset ('/public/backend/vendors/css/tables/datatable/datatables.min.css')}}">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -38,7 +41,8 @@
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('/public/backend/css/core/menu/menu-types/vertical-menu.css')}}">
+    <link rel="stylesheet" type="text/css"
+        href="{{asset('/public/backend/css/core/menu/menu-types/vertical-menu.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/public/backend/css/core/colors/palette-gradient.css')}}">
     <!-- link(rel='stylesheet', type='text/css', href=app_assets_path+'/css'+rtl+'/pages/users.css')-->
     <!-- END: Page CSS-->
@@ -53,7 +57,8 @@
 </head>
 
 
-<body class="vertical-layout vertical-menu 1-column   blank-page blank-page" data-open="click" data-menu="vertical-menu" data-col="1-column">
+<body class="vertical-layout vertical-menu 1-column   blank-page blank-page" data-open="click" data-menu="vertical-menu"
+    data-col="1-column">
     <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-overlay"></div>
@@ -68,10 +73,12 @@
                                 <div class="card-header border-0">
                                     <div class="card-title text-center">
                                         <div class="p-1">
-                                            <img src="{{asset ('public/uploads/image/'. $gsetting->logo)}}" alt="branding logo">
+                                            <img src="{{asset ('public/uploads/image/'. $gsetting->logo)}}"
+                                                alt="branding logo">
                                         </div>
                                     </div>
-                                    <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2"><span>{{$gsetting->title}}</span></h6>
+                                    <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
+                                        <span>{{$gsetting->title}}</span></h6>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
@@ -79,6 +86,7 @@
                                             <div class="alert alert-danger">
                                                 <ul>
                                                     @foreach ($errors->all() as $error)
+                                                    <button type="button" class="close" data-dismiss="alert">×</button>
                                                         <li>{{ $error }}</li>
                                                     @endforeach
                                                 </ul>
@@ -86,46 +94,52 @@
                                         @endif
                                         @if ($message = Session::get('success'))
                                             <div class="alert alert-success alert-block">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
                                                 <strong>{{ $message }}</strong>
                                             </div>
                                         @endif
                                         @if ($message = Session::get('error'))
                                             <div class="alert alert-danger alert-block">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
                                                 <strong>{{ $message }}</strong>
                                             </div>
                                         @endif
-                                        <form class="form-horizontal form-simple" action="{{route('login')}}" method="POST">
+                                        <form class="form-horizontal form-simple" action="{{route('login')}}"
+                                            method="POST">
                                             @csrf
                                             <fieldset class="form-group position-relative has-icon-left mb-0">
-                                                <input type="text" class="form-control form-control-lg" name="email" id="user-name" placeholder="Your Username" required>
+                                                <input type="text" class="form-control form-control-lg" name="email"
+                                                    id="user-name" placeholder="Your Username" required>
                                                 <div class="form-control-position">
                                                     <i class="feather icon-user"></i>
                                                 </div>
                                             </fieldset>
                                             <fieldset class="form-group position-relative has-icon-left">
-                                                <input type="password" class="form-control form-control-lg" name="password" id="user-password" placeholder="Enter Password" required>
+                                                <input type="password" class="form-control form-control-lg"
+                                                    name="password" id="user-password" placeholder="Enter Password"
+                                                    required>
                                                 <div class="form-control-position">
                                                     <i class="fa fa-key"></i>
                                                 </div>
                                             </fieldset>
                                             <div class="form-group row">
-                                                <div class="col-sm-6 col-12 text-center text-sm-left">
-{{--                                                    <fieldset>--}}
-{{--                                                        <input type="checkbox" id="remember-me" class="chk-remember">--}}
-{{--                                                        <label for="remember-me"> Remember Me</label>--}}
-{{--                                                    </fieldset>--}}
+                                                <div class="col-sm-6 col-12 text-center text-sm-left"></div>
+                                                <div class="col-sm-6 col-12 text-center text-sm-right">
+                                                    @if ($gsetting->smtp_check == 1)
+                                                        <a href="{{ route('password.request') }}" class="card-link">Forgot Password?</a>
+                                                    @endif
                                                 </div>
-                                                <div class="col-sm-6 col-12 text-center text-sm-right"><a href="{{ route('password.request') }}" class="card-link">Forgot Password?</a></div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary btn-lg btn-block"><i class="feather icon-unlock"></i> Login</button>
+                                            <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                                <i class="feather icon-unlock"></i> Login</button>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="card-footer">
-{{--                                    <div class="">--}}
-{{--                                        <p class="float-sm-left text-center m-0"><a href="recover-password.html" class="card-link">Recover password</a></p>--}}
-{{--                                        <p class="float-sm-right text-center m-0">New to Stack? <a href="register-simple.html" class="card-link">Sign Up</a></p>--}}
-{{--                                    </div>--}}
                                 </div>
                             </div>
                         </div>
@@ -168,9 +182,9 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
 
-            $(".form").submit( function (){
+            $(".form").submit(function () {
                 $("#submitBtn").attr("disabled", true);
                 return true;
             });
