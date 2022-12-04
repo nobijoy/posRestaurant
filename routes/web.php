@@ -94,6 +94,7 @@ Route::group(['middleware' => ['auth']], function(){
     //Route::resource('menuSubCategory', 'App\Http\Controllers\MenuSubCategoryController')->parameters('menuSubCategory', 'id');
     //Route::post('menuSubCategory/update', 'App\Http\Controllers\MenuSubCategoryController@update')->name('menuSubCategory.update');
 
+    Route::delete('delete-menu-ingredient/{id}', 'App\Http\Controllers\MenuController@deleteMenuIngredient')->name('deleteMenuIngredient');
     Route::delete('menu/{id}', 'App\Http\Controllers\MenuController@delete')->name('menu.delete');
     Route::put('menu/{id}', 'App\Http\Controllers\MenuController@restore')->name('menu.restore');
     Route::resource('menu', 'App\Http\Controllers\MenuController')->parameters('menu', 'id');
