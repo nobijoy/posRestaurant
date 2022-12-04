@@ -64,5 +64,27 @@ class POSController extends Controller
         return view('admin.pos_setting.pos_setting', compact('data'));
     }
 
+    public function emailSetup(Request $request){
+        $data = PosSetting::find(1);
+        if($request->isMethod('post')){
+            if ($request->smtp_check) {
+                $data->smtp_check = 1;
+            }else{
+                $data->smtp_check = 0;
+            }
+            $data->mail_transport = $request->mail_transport;
+            $data->mail_host = $request->mail_host;
+            $data->mail_port = $request->mail_port;
+            $data->mail_encryption = $request->mail_encryption;
+            $data->mail_username = $request->mail_username;
+            $data->mail_password = $request->mail_password;
+            $data->mail_from_name = $request->mail_from_name;
+            $data->mail_from_address = $request->mail_from_address;
+
+            $data->save();
+            return back()->with('success', 'Email Setting Updated Successfully!');
+        }
+        return view('admin.pos_setting.email', compact('data'));
+    }
 
 }

@@ -22,6 +22,7 @@
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('public/backend/vendors/css/vendors.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/backend/vendors/css/forms/selects/select2.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset ('public/backend/vendors/css/forms/toggle/switchery.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/backend/vendors/css/extensions/toastr.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/backend/vendors/css/charts/morris.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/backend/vendors/css/extensions/unslider.css')}}">
@@ -93,6 +94,8 @@
     <script src="{{ asset ('public/backend/vendors/js/forms/select/select2.full.min.js')}}"></script>
     <script src="{{ asset ('public/backend/vendors/js/extensions/toastr.min.js')}}"></script>
     <script src="{{ asset ('public/backend/vendors/js/extensions/sweetalert2.all.min.js')}}"></script>
+    <script src="{{ asset ('public/backend/vendors/js/forms/toggle/bootstrap-checkbox.min.js')}}"></script>
+    <script src="{{ asset ('public/backend/vendors/js/forms/toggle/switchery.min.js')}}"></script>
     <script src="{{ asset ('public/backend/vendors/js/tables/datatable/datatables.min.js')}}"></script>
     <script src="{{asset('public/backend/data/jvector/visitor-data.js')}}"></script>
     <script src="{{asset('public/backend/vendors/js/charts/chart.min.js')}}"></script>

@@ -81,6 +81,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::match(['get', 'post'], 'profile/{name}', 'App\Http\Controllers\AdminController@profileUpdate')->name('profileUpdate');
     Route::match(['get', 'post'], 'change-password/{name}', 'App\Http\Controllers\AdminController@passwordUpdate')->name('changePassword');
     Route::match(['get', 'post'], 'managepos', 'App\Http\Controllers\POSController@posUpdate')->name('managePOS');
+    Route::match(['get', 'post'], 'email-setup', 'App\Http\Controllers\POSController@emailSetup')->name('emailSetup');
 
 
     Route::delete('menuCategory/{id}', 'App\Http\Controllers\MenuCategoryController@delete')->name('menuCategory.delete');

@@ -18,6 +18,9 @@
                     <li @if($url == 'managePOS') class="active"  @endif>
                         <a href="{{route('managePOS')}}" data-i18n="Setting">Manage POS</a>
                     </li>
+                    <li @if($url == 'emailSetup') class="active"  @endif>
+                        <a href="{{route('emailSetup')}}" data-i18n="Email Setup">Email Setup</a>
+                    </li>
                     <li @if($url == 'ingredient_category.index') class="active"  @endif>
                         <a href="{{route('ingredient_category.index')}}" data-i18n="Setting">Ingredient Category</a>
                     </li>
