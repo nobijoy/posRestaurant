@@ -13,9 +13,9 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route ('home') }}">Home</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Menu</a>
+                        <li class="breadcrumb-item"><a href="#">Inventory</a>
                         </li>
-                        <li class="breadcrumb-item active"><a href="#">Waste List</a>
+                        <li class="breadcrumb-item active"><a href="#">Waste Item List</a>
                         </li>
                     </ol>
                 </div>

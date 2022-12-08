@@ -18,7 +18,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="">Home</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Menu</a>
+                        <li class="breadcrumb-item"><a href="#">Inventory</a>
                         </li>
                         <li class="breadcrumb-item active"><a href="#">Add Waste Item</a>
                         </li>
@@ -66,7 +66,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">Add Waste</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">Add Waste Item</h4>
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">

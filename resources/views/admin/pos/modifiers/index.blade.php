@@ -1,11 +1,11 @@
 @extends('master.admin.master')
-@section('title', 'Modifiers')
+@section('title', 'Modifiers List')
 @section('body')
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
                 <h3 class="content-header-title">
-                    <a href="{{ route ('modifiers.add')}}" class="btn btn-primary">Modifiers <i class="fa fa-plus"></i></a>
+                    <a href="{{ route ('modifiers.add')}}" class="btn btn-primary">Add Modifiers <i class="fa fa-plus"></i></a>
                 </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">

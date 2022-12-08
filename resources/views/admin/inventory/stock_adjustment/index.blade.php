@@ -1,11 +1,11 @@
 @extends('master.admin.master')
-@section('title', 'Menu Item')
+@section('title', 'Add Stock Item')
 @section('body')
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
                 <h3 class="content-header-title">
-                    <a href="{{ route ('stock_adjustment.add')}}" class="btn btn-primary">Stock Item<i class="fa fa-plus"></i></a>
+                    <a href="{{ route ('stock_adjustment.add')}}" class="btn btn-primary">Add Stock Item <i class="fa fa-plus"></i></a>
                 </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
@@ -13,7 +13,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route ('home') }}">Home</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Menu</a>
+                        <li class="breadcrumb-item"><a href="#">Inventory</a>
                         </li>
                         <li class="breadcrumb-item active"><a href="#">Stock Adjustment List</a>
                         </li>

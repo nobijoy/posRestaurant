@@ -5,18 +5,15 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
                 <h3 class="content-header-title">
-                    <a href="{{ route ('menu.create')}}" class="btn btn-primary">Menu Item<i class="fa fa-plus"></i></a>
+                    <a href="{{ route ('menu.create')}}" class="btn btn-primary"> Add Menu Item <i class="fa fa-plus"></i></a>
                 </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route ('home') }}">Home</a>
-                        </li>
-                        <li class="breadcrumb-item"><a href="#">Menu</a>
-                        </li>
-                        <li class="breadcrumb-item active"><a href="#">Menu List</a>
-                        </li>
+                        <li class="breadcrumb-item"><a href="{{ route ('home') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Setup</a></li>
+                        <li class="breadcrumb-item active"><a href="#">Menu List</a></li>
                     </ol>
                 </div>
             </div>
@@ -73,9 +70,9 @@
                                                             <td>{{$data->price}}</td>
                                                             <td>{{$data->totalIngredient()}}</td>
                                                             <td>
-                                                                <a href="{{ $data->image ? asset ('/public/uploads/image/'.$data->image) : '#' }}" target="_blank" 
-                                                                    rel="noopener noreferrer"> 
-                                                                    <img src="{{ $data->image ? asset ('/public/uploads/image/'.$data->image) : '#' }}" 
+                                                                <a href="{{ $data->image ? asset ('/public/uploads/image/'.$data->image) : '#' }}" target="_blank"
+                                                                    rel="noopener noreferrer">
+                                                                    <img src="{{ $data->image ? asset ('/public/uploads/image/'.$data->image) : '#' }}"
                                                                     width="70px" height="40px" alt="">
                                                                 </a>
                                                             </td>

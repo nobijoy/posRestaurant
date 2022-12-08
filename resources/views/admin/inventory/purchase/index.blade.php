@@ -13,7 +13,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route ('home') }}">Home</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Menu</a>
+                        <li class="breadcrumb-item"><a href="#">Inventory</a>
                         </li>
                         <li class="breadcrumb-item active"><a href="#">Purchase List</a>
                         </li>
@@ -59,7 +59,8 @@
                                                 <th>Date</th>
                                                 <th>Supplier</th>
                                                 <th>Grand Total</th>
-                                                <th>Due	Added By</th>
+                                                <th>Due</th>
+                                                <th>Added By</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
@@ -68,6 +69,7 @@
                                                         <td>1</td>
                                                         <td>43345343</td>
                                                         <td>dvx</td>
+                                                        <td>svx</td>
                                                         <td>svx</td>
                                                         <td>dfvdf</td>
                                                         <td>dfvdf</td>

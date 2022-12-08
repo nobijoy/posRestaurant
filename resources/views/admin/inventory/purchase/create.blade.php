@@ -18,7 +18,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="">Home</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Menu</a>
+                        <li class="breadcrumb-item"><a href="#">Inventory</a>
                         </li>
                         <li class="breadcrumb-item active"><a href="#">Add Purchase</a>
                         </li>
