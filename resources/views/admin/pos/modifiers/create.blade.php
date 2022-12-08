@@ -66,7 +66,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">Add New Menu</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">Add New Modifiers</h4>
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">

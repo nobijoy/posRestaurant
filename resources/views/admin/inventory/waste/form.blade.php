@@ -37,7 +37,7 @@
         </select>
     </div>
 
-    <div class="form-group col-md-4 ">
+    <div class="form-group col-md-4 pt-2">
         <a href="#" data-toggle="modal"data-target="#read_me" class="btn btn-danger">Read Me First</a>
     </div>
 

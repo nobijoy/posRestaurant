@@ -3,10 +3,19 @@
 @section('body')
     <div class="content-wrapper">
         <div class="content-header row">
-            <div class="content-header-left col-md-1 col-4 mb-1">
+            <div class="content-header-left col-md-6 col-4 mb-1">
                 <h3 class="content-header-title">
-                    <a href="#" data-toggle="modal" data-target="#add_customer" class="btn btn-primary">Add Customer</a>
+                    <a href="#" data-toggle="modal" data-target="#add_customer" class="btn btn-primary">Add Customer <i class="fa fa-plus"></i></a>
                 </h3>
+            </div>
+            <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
+                <div class="breadcrumb-wrapper col-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route ('home') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Setup</a></li>
+                        <li class="breadcrumb-item active"><a href="#">Customers List</a></li>
+                    </ol>
+                </div>
             </div>
         </div>
         <div class="content-body">

@@ -7,7 +7,11 @@
 
     <div class="form-group col-md-4 ">
         <label for="supplier">Supplier <span class="text-danger">*</span></label>
-        <input type="text" id="supplier" class="form-control" placeholder="" name="supplier" value=""  required>
+        <select name="supplier" id="supplier" class="form-control select2">
+            <option value="">Select</option>
+            <option value="1" >Supplier 1</option>
+            <option value="2" >Supplier 2</option>
+        </select>
     </div>
 
     <div class="form-group col-md-4 ">
@@ -16,16 +20,16 @@
     </div>
 
     <div class="form-group col-md-4 ">
-        <label for="ingredient_consumption">Ingredient Consumption</label>
-        <select name="ingredient_consumption" id="ingredient_consumption" class="form-control select2">
+        <label for="ingredients">Ingredient Consumption</label>
+        <select name="ingredients" id="ingredients" class="form-control select2">
             <option value="">Select</option>
             <option value="1" >Ingredient 1</option>
             <option value="2" >Ingredient 2</option>
         </select>
     </div>
 
-    <div class="form-group col-md-6 ">
-        <a href="#" data-toggle="modal"data-target="#read_me" class="btn btn-danger">Read Me First</a>
+    <div class="form-group col-md-6 pt-2">
+        <a href="#" data-toggle="modal" data-target="#read_me" class="btn btn-danger">Read Me First</a>
     </div>
 </div>
 <div class="row">

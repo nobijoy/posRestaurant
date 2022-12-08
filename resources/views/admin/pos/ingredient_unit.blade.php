@@ -5,14 +5,15 @@
     <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-1">
             <h3 class="content-header-title">
-                <a href="#" data-toggle="modal" data-target="#addcategory" class="btn btn-primary">Add Units</a>
+                <a href="#" data-toggle="modal" data-target="#addcategory" class="btn btn-primary">Add Ingredient Units <i class="fa fa-plus"></i></a>
             </h3>
         </div>
         <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
             <div class="row breadcrumbs-top">
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route ('home') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Setup</a></li>
                         <li class="breadcrumb-item active"><a href="#">Ingredient Units</a></li>
                     </ol>
                 </div>
@@ -112,7 +113,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="myModalLabel35">Add Units</h3>
+                    <h3 class="modal-title" id="myModalLabel35">Add Ingredient Units</h3>
                     <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

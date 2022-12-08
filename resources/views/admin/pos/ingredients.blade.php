@@ -5,14 +5,15 @@
     <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-1">
             <h3 class="content-header-title">
-                <a href="#" data-toggle="modal" data-target="#addcategory" class="btn btn-primary">Add Ingredients</a>
+                <a href="#" data-toggle="modal" data-target="#addcategory" class="btn btn-primary">Add Ingredients <i class="fa fa-plus"></i></a>
             </h3>
         </div>
         <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
             <div class="row breadcrumbs-top">
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route ('home') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Setup</a></li>
                         <li class="breadcrumb-item active"><a href="#">Ingredients</a></li>
                     </ol>
                 </div>
