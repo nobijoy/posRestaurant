@@ -48,17 +48,24 @@
 
     <div class="form-group col-md-6 ">
         <label for="description">Description<span class="text-danger">*</span></label>
-        <textarea id="description" class="form-control" placeholder="Description" name="description" cols="30" rows="1"></textarea>
+        <textarea id="description" class="form-control" placeholder="Description" name="description"  rows="3"></textarea>
     </div>
 
-    <div class="form-group col-md-6 ">
-        <label for="cgst">CGST<span class="text-danger">*</span></label>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-4 ">
+        <label for="vat">VAT</label>
+        <input type="number" id="vat" class="form-control" placeholder="" name="vat" value="">
+    </div>
+
+    <div class="form-group col-md-4 ">
+        <label for="cgst">CGST</label>
         <input type="number" id="cgst" class="form-control" placeholder="" name="cgst" value="">
     </div>
 
-    <div class="form-group col-md-6 ">
-        <label for="sgst">SGST<span class="text-danger">*</span></label>
+    <div class="form-group col-md-4 ">
+        <label for="sgst">SGST</label>
         <input type="number" id="sgst" class="form-control" placeholder="" name="sgst" value=""  >
     </div>
-
 </div>

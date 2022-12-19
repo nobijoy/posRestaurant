@@ -11,7 +11,7 @@
     </div>
 
     <div class="form-group col-md-4 ">
-        <label for="res_person">Responsible Person</label>
+        <label for="res_person">Responsible Person <span class="text-danger">*</span></label>
         <select name="res_person" id="res_person" class="form-control select2">
             <option value="">Select</option>
             <option value="1" >Admin</option>
@@ -20,8 +20,8 @@
     </div>
 
     <div class="form-group col-md-4 ">
-        <label for="ingredient_consumption">Ingredients <span class="text-danger">*</span> (Only purchased Ingredients are listed)</label>
-        <select name="ingredient_consumption" id="ingredient_consumption" class="form-control select2">
+        <label for="ingredients">Ingredients <span class="text-danger">*</span> (Only purchased Ingredients are listed)</label>
+        <select name="ingredients" id="ingredients" class="form-control select2">
             <option value="">Select</option>
             <option value="1" >Ingredient 1</option>
             <option value="2" >Ingredient 2</option>
@@ -32,7 +32,7 @@
         <label for="food_menu">Food Menu</label>
         <select name="food_menu" id="food_menu" class="form-control select2">
             <option value="">Select</option>
-            <option value="1" >ALur Bhorta</option>
+            <option value="1" >Alur Bhorta</option>
             <option value="2" >Dim bhaji</option>
         </select>
     </div>
@@ -44,6 +44,10 @@
     <div class="form-group col-md-4 ">
         <label for="waste_quantity">Food Menu Waste Quantity <span class="text-danger">*</span></label>
         <input type="number" id="waste_quantity" class="form-control" placeholder="" name="waste_quantity" value=""  required>
+    </div>
+
+    <div class="form-group col-md-4 pt-2">
+        <button type="button" class="btn btn-icon btn-danger"  onclick="">Delete</button>
     </div>
 
 
@@ -78,8 +82,8 @@
     </div>
 
     <div class="form-group col-md-6 ">
-        <label for="note">Note<span class="text-danger">*</span></label>
-        <textarea id="note" class="form-control" placeholder="" name="note" cols="30" rows="1"></textarea>
+        <label for="note">Note</label>
+        <textarea id="note" class="form-control" placeholder="" name="note" rows="3"></textarea>
     </div>
 
 </div>

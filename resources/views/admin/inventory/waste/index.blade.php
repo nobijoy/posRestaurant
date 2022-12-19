@@ -67,29 +67,22 @@
                                             </thead>
                                             <tbody>
                                                     <tr>
-                                                        <td>1</td>
-                                                        <td>fvdsz</td>
-                                                        <td>dvx</td>
-                                                        <td>svx</td>
-                                                        <td>svx</td>
-                                                        <td>svx</td>
-                                                        <td>svx</td>
-                                                        <td>dfvdf</td>
-                                                        <td>
-                                                                <a href="{{ route ('waste.edit')}}">
-                                                                    <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
-                                                                        <i class="fa fa-pencil-square"></i></button>
-                                                                </a>
-                                                                <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive"
-                                                                        onclick="">
-                                                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                                                </button>
-                                                                <button type="button" class="btn btn-icon btn-outline-primary btn-sm" title="Restore"
-                                                                        onclick="">
-                                                                    <i class="fa fa-undo" aria-hidden="true"></i>
-                                                                </button>
 
-                                                        </td>
+{{--                                                        <td>--}}
+{{--                                                                <a href="{{ route ('waste.edit')}}">--}}
+{{--                                                                    <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">--}}
+{{--                                                                        <i class="fa fa-pencil-square"></i></button>--}}
+{{--                                                                </a>--}}
+{{--                                                                <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive"--}}
+{{--                                                                        onclick="">--}}
+{{--                                                                    <i class="fa fa-trash" aria-hidden="true"></i>--}}
+{{--                                                                </button>--}}
+{{--                                                                <button type="button" class="btn btn-icon btn-outline-primary btn-sm" title="Restore"--}}
+{{--                                                                        onclick="">--}}
+{{--                                                                    <i class="fa fa-undo" aria-hidden="true"></i>--}}
+{{--                                                                </button>--}}
+
+{{--                                                        </td>--}}
                                                     </tr>
                                             </tbody>
                                             <tfoot class="display-hidden">

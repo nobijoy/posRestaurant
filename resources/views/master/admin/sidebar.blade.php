@@ -7,6 +7,13 @@
                     <i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span>
                 </a>
             </li>
+
+            <li  class="nav-item @if($url == 'outlet_setting') active @endif"  >
+                <a href="{{route('outlet_setting')}}" data-i18n="outlet_setting">
+                    <i class="feather icon-shopping-bag"></i><span class="menu-title" data-i18n="outlet_setting">Outlet Setting</span>
+                </a>
+            </li>
+
             <li class="nav-item">
                 <a href="#">
                     <i class="feather icon-settings"></i><span class="menu-title" data-i18n="Setup">Setup</span>
@@ -53,7 +60,7 @@
                     <i class="feather icon-briefcase"></i><span class="menu-title" data-i18n="Inventory">Inventory</span>
                 </a>
                 <ul class="menu-content">
-                    <li @if($url == 'purchase.index') class="active"  @endif>
+                    <li @if($url == 'purchase.index' || $url == 'purchase.create' || $url == 'purchase.edit') class="active"  @endif>
                         <a href="{{route('purchase.index')}}" data-i18n="">Purchase</a>
                     </li>
                     <li @if($url == 'stock_adjustment.index') class="active"  @endif>
@@ -65,7 +72,13 @@
                 </ul>
             </li>
 
-{{--            <li class=" nav-item">--}}
+            <li  class="nav-item @if($url == 'attendence.index') active @endif"  >
+                <a href="{{route('attendence.index')}}" data-i18n="Attendance">
+                    <i class="feather icon-clock"></i><span class="menu-title" data-i18n="Inventory">Attendance</span>
+                </a>
+            </li>
+
+            {{--            <li class=" nav-item">--}}
 {{--                <a href="">--}}
 {{--                    <i class="feather icon-printer"></i><span class="menu-title" data-i18n="Invoice Details">Invoice Details</span>--}}
 {{--                </a>--}}

@@ -42,35 +42,53 @@
                                         <table class="table table-striped table-bordered" id="action-table">
                                             <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>User Name</th>
-                                                <th>Type of Action</th>
-                                                <th>Object</th>
-                                                <th>Description</th>
-                                                <th>Action Time</th>
+                                                <th>SN</th>
+                                                <th>Reference No</th>
+                                                <th>Date</th>
+                                                <th>Employee</th>
+                                                <th>In Time</th>
+                                                <th>Out Time</th>
+                                                <th>Time Count</th>
+                                                <th>Note</th>
+                                                <th>Added By</th>
                                                 <th>Actions</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Name</td>
-                                                <td>xyz</td>
-                                                <td>Full Name</td>
-                                                <td>Super Admin</td>
-                                                <td>12.00</td>
-                                                <td>
-                                                    <a data-toggle="modal"data-target="#edit_attendence" data-target-id=""
-                                                       data-name="" >
-                                                        <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
-                                                            <i class="fa fa-pencil-square"></i></button>
-                                                    </a>
-                                                    <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive"
-                                                            onclick="deleteData()">
-                                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                                @if (sizeof ($datas) > 0)
+                                                    @foreach ($datas as $data)
+                                                        <tr>
+                                                            <td>{{++$sl}}</td>
+                                                            <td>{{$data->reference_no}}</td>
+                                                            <td>{{$data->date}}</td>
+                                                            <td>{{$data->employee}}</td>
+                                                            <td>{{$data->in_time}}</td>
+                                                            <td>{{$data->out_time}}</td>
+                                                            <td>{{$data->time_count}} Hour</td>
+                                                            <td>{{$data->note}}</td>
+                                                            <td>{{$data->created_by}}</td>
+                                                            <td>
+                                                                @if($data->is_active == 1)
+                                                                    <a data-toggle="modal" data-target="#edit_attendence" data-target-id="{{$data->id}}"
+                                                                       data-reference_no="{{$data->reference_no}}" data-date="{{$data->date}}" data-employee="{{$data->employee}}"
+                                                                       data-in_time="{{$data->in_time}}" data-out_time="{{$data->out_time}}" data-note="{{$data->note}}" >
+                                                                        <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
+                                                                            <i class="fa fa-pencil-square"></i></button>
+                                                                    </a>
+                                                                    <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive"
+                                                                            onclick="deleteData('{{ route('attendence.delete', [$data->id]) }}')">
+                                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                    </button>
+                                                                @else
+                                                                    <button type="button" class="btn btn-icon btn-outline-primary btn-sm" title="Restore"
+                                                                            onclick="restoreData('{{ route('attendence.restore', [$data->id]) }}')">
+                                                                        <i class="fa fa-undo" aria-hidden="true"></i>
+                                                                    </button>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                             </tbody>
 
                                             </tr>
@@ -97,24 +115,37 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="" method="post"  class="clearForm form" enctype="multipart/form-data">
+                    <form action="{{route('attendence.store')}}" method="post"  class="clearForm form" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="user_name">User Name<span class="text-danger">*</span></label>
-                                <input type="text" name="user_name" class="form-control" id="user_name" placeholder="" value="" required>
+                                <label for="reference_no">Reference Number <span class="text-danger">*</span></label>
+                                <input type="text" name="reference_no" class="form-control" id="reference_no" placeholder="" value="" required>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="action_type">Type of Action<span class="text-danger">*</span></label>
-                                <select class="form-select w-100" id="action_type" name="action_type" required>
-                                    <option selected>Select</option>
-                                    <option value="0" selected>In</option>
-                                    <option value="1" selected>Out</option>
+                                <label for="date">Date <span class="text-danger">*</span></label>
+                                <input type="date" name="date" class="form-control" id="date" value="" required>
+                            </fieldset>
+                            <fieldset class="form-group floating-label-form-group">
+                                <label for="employee">Employee<span class="text-danger">*</span></label>
+                                <select class="form-select w-100 select2" id="employee" name="employee" required>
+                                    <option value="" selected >Select</option>
+                                    @foreach ($employees as $employee)
+                                        <option value="{{$employee->id}}" >{{$employee->name}}</option>
+                                    @endforeach
                                 </select>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="action_time">Action Time<span class="text-danger">*</span></label>
-                                <input type="datetime-local" name="action_time" class="form-control" id="action_time" value="" required>
+                                <label for="in_time">In Time <span class="text-danger">*</span></label>
+                                <input type="time" name="in_time" class="form-control" id="in_time" placeholder="" value="" required>
+                            </fieldset>
+                            <fieldset class="form-group floating-label-form-group">
+                                <label for="out_time">Out Time <span class="text-danger">*</span></label>
+                                <input type="time" name="out_time" class="form-control" id="out_time" placeholder="" value="" required>
+                            </fieldset>
+                            <fieldset class="form-group floating-label-form-group">
+                                <label for="note">Note</label>
+                                <textarea name="note" class="form-control" id="note" placeholder="Enter description" value=""></textarea>
                             </fieldset>
                         </div>
                         <div class="modal-footer">
@@ -138,24 +169,38 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="" method="post"  class="clearForm form" enctype="multipart/form-data">
+                    <form action="{{route('attendence.update')}}" method="post"  class="clearForm form" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
+                            <input type="hidden" name="id" id="id">
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="user_name">User Name<span class="text-danger">*</span></label>
-                                <input type="text" name="user_name" class="form-control" id="user_name" placeholder="User Name" value="" required>
+                                <label for="reference_no">Reference Number <span class="text-danger">*</span></label>
+                                <input type="text" name="reference_no" class="form-control" id="edit_reference_no" placeholder="" value="" >
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="action_type">Type of Action<span class="text-danger">*</span></label>
-                                <select class="form-select w-100" id="action_type" name="action_type" required>
-                                    <option selected>Select</option>
-                                    <option value="0" selected>In</option>
-                                    <option value="1" selected>Out</option>
+                                <label for="date">Date <span class="text-danger">*</span></label>
+                                <input type="date" name="date" class="form-control" id="edit_date" value="" >
+                            </fieldset>
+                            <fieldset class="form-group floating-label-form-group">
+                                <label for="employee">Employee<span class="text-danger">*</span></label>
+                                <select class="form-select w-100 select2" id="edit_employee" name="employee" >
+                                    <option value="">Select</option>
+                                    @foreach ($employees as $employee)
+                                        <option value="{{$employee->id}}" @if(($url == 'attendence.edit') && $data->employee == $employee->id) selected @endif>{{$employee->name}}</option>
+                                    @endforeach
                                 </select>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="action_time">Action Time<span class="text-danger">*</span></label>
-                                <input type="datetime-local" name="action_time" class="form-control" id="action_time" value="" required>
+                                <label for="in_time">In Time <span class="text-danger">*</span></label>
+                                <input type="time" name="in_time" class="form-control" id="edit_in_time" placeholder="" value="" >
+                            </fieldset>
+                            <fieldset class="form-group floating-label-form-group">
+                                <label for="out_time">Out Time <span class="text-danger">*</span></label>
+                                <input type="time" name="out_time" class="form-control" id="edit_out_time" placeholder="" value="" >
+                            </fieldset>
+                            <fieldset class="form-group floating-label-form-group">
+                                <label for="note">Note</label>
+                                <textarea name="note" class="form-control" id="edit_note" placeholder="Enter description" value=""></textarea>
                             </fieldset>
                         </div>
                         <div class="modal-footer">
@@ -173,10 +218,20 @@
     <script type="text/javascript">
         $("#edit_attendence").on("show.bs.modal", function (e) {
             var id = $(e.relatedTarget).data('target-id');
-            var name = $(e.relatedTarget).data('name');
+            var reference_no = $(e.relatedTarget).data('reference_no');
+            var date = $(e.relatedTarget).data('date');
+            var employee = $(e.relatedTarget).data('employee');
+            var in_time = $(e.relatedTarget).data('in_time');
+            var out_time = $(e.relatedTarget).data('out_time');
+            var note = $(e.relatedTarget).data('note');
 
             $('.modal-body #id').val(id);
-            $('.modal-body #ename').val(name);
+            $('.modal-body #edit_reference_no').val(reference_no);
+            $('.modal-body #edit_date').val(date);
+            $('.modal-body #edit_employee').val(employee).change();
+            $('.modal-body #edit_in_time').val(in_time);
+            $('.modal-body #edit_out_time').val(out_time);
+            $('.modal-body #edit_note').val(note);
 
         });
 

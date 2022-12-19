@@ -88,7 +88,7 @@ class MenuController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', $th->getMessage());
+            return back()->with('error', 'Somethings went wrong. Try Again');
         }
     }
 
