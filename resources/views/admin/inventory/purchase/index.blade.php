@@ -5,7 +5,7 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
                 <h3 class="content-header-title">
-                    <a href="{{ route ('purchase.add')}}" class="btn btn-primary">Add Purchase Item<i class="fa fa-plus"></i></a>
+                    <a href="{{ route ('purchase.create')}}" class="btn btn-primary">Add Purchase Item<i class="fa fa-plus"></i></a>
                 </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
@@ -60,21 +60,23 @@
                                                 <th>Supplier</th>
                                                 <th>Grand Total</th>
                                                 <th>Due</th>
-                                                <th>Added By</th>
+                                                <th>Total Ingredient</th>
                                                 <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>43345343</td>
-                                                        <td>dvx</td>
-                                                        <td>svx</td>
-                                                        <td>svx</td>
-                                                        <td>dfvdf</td>
-                                                        <td>dfvdf</td>
-                                                        <td>
-                                                                <a href="{{route('purchase.edit')}}">
+                                                @if(sizeof($datas) > 0)
+                                                    @foreach($datas as $data)
+                                                        <tr>
+                                                            <td>{{++$sl}}</td>
+                                                            <td>{{$data->reference_no}}</td>
+                                                            <td>{{date('Y-m-d', strtotime($data->date))}}</td>
+                                                            <td>{{$data->supplier ? $data->supplierInfo->name : ''}}</td>
+                                                            <td>{{$data->totalPurchaseCost()}}</td>
+                                                            <td>{{$data->totalDueAmount()}}</td>
+                                                            <td>{{$data->totalIngredient()}}</td>
+                                                            <td>
+                                                                <a href="{{route('purchase.edit', [$data->id])}}">
                                                                     <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
                                                                         <i class="fa fa-pencil-square"></i></button>
                                                                 </a>
@@ -82,13 +84,10 @@
                                                                         onclick="">
                                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                                 </button>
-                                                                <button type="button" class="btn btn-icon btn-outline-primary btn-sm" title="Restore"
-                                                                        onclick="">
-                                                                    <i class="fa fa-undo" aria-hidden="true"></i>
-                                                                </button>
-
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                             </tbody>
                                             <tfoot class="display-hidden">
 

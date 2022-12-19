@@ -20,8 +20,8 @@
     </div>
 
     <div class="form-group col-md-4 ">
-        <label for="ingredient_consumption">Ingredients</label>
-        <select name="ingredient_consumption" id="ingredient_consumption" class="form-control select2">
+        <label for="ingredients">Ingredients <span class="text-danger">*</span></label>
+        <select name="ingredients" id="ingredients" class="form-control select2">
             <option value="">Select</option>
             <option value="1" >Ingredient 1</option>
             <option value="2" >Ingredient 2</option>
@@ -58,7 +58,7 @@
 
     <div class="form-group col-md-6 ">
         <label for="note">Note<span class="text-danger">*</span></label>
-        <textarea id="note" class="form-control" placeholder="" name="note" cols="30" rows="1"></textarea>
+        <textarea id="note" class="form-control" placeholder="" name="note" rows="3"></textarea>
     </div>
 
 </div>

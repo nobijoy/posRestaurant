@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::group(['middleware' => ['auth']], function(){    
+Route::group(['middleware' => ['auth']], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/setting', [App\Http\Controllers\HomeController::class, 'setting'])->name('setting');
     Route::get('/category', [App\Http\Controllers\HomeController::class, 'category'])->name('category');
@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/menu_edit', [App\Http\Controllers\HomeController::class, 'menuEdit'])->name('menu_edit');
     Route::get('/user', [App\Http\Controllers\HomeController::class, 'user'])->name('user');
     Route::get('/user_search', [App\Http\Controllers\HomeController::class, 'userSearch'])->name('user_search');
-    Route::get('/user_attendence', [App\Http\Controllers\HomeController::class, 'userAttendence'])->name('user_attendence');
+//    Route::get('/user_attendence', [App\Http\Controllers\HomeController::class, 'userAttendence'])->name('user_attendence');
     Route::get('/add_member', [App\Http\Controllers\HomeController::class, 'addMember'])->name('add_member');
     Route::get('/member_point', [App\Http\Controllers\HomeController::class, 'memberPoint'])->name('member_point');
     Route::get('/employees', [App\Http\Controllers\HomeController::class, 'employees'])->name('employees');
@@ -66,9 +66,9 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/modifiers/add', [App\Http\Controllers\HomeController::class, 'modifiersAdd'])->name('modifiers.add');
     Route::get('/modifiers/edit', [App\Http\Controllers\HomeController::class, 'modifiersEdit'])->name('modifiers.edit');
 
-    Route::get('/purchase', [App\Http\Controllers\HomeController::class, 'purchase'])->name('purchase.index');
-    Route::get('/purchase/add', [App\Http\Controllers\HomeController::class, 'purchaseAdd'])->name('purchase.add');
-    Route::get('/purchase/edit', [App\Http\Controllers\HomeController::class, 'purchaseEdit'])->name('purchase.edit');
+    // Route::get('/purchase', [App\Http\Controllers\HomeController::class, 'purchase'])->name('purchase.index');
+    // Route::get('/purchase/add', [App\Http\Controllers\HomeController::class, 'purchaseAdd'])->name('purchase.add');
+    // Route::get('/purchase/edit', [App\Http\Controllers\HomeController::class, 'purchaseEdit'])->name('purchase.edit');
 
     Route::get('/stock_adjustment', [App\Http\Controllers\HomeController::class, 'stockAdjustment'])->name('stock_adjustment.index');
     Route::get('/stock_adjustment/add', [App\Http\Controllers\HomeController::class, 'stockAdjustmentAdd'])->name('stock_adjustment.add');
@@ -82,6 +82,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::match(['get', 'post'], 'change-password/{name}', 'App\Http\Controllers\AdminController@passwordUpdate')->name('changePassword');
     Route::match(['get', 'post'], 'managepos', 'App\Http\Controllers\POSController@posUpdate')->name('managePOS');
     Route::match(['get', 'post'], 'email-setup', 'App\Http\Controllers\POSController@emailSetup')->name('emailSetup');
+    Route::match(['get', 'post'], 'outlet_setting', 'App\Http\Controllers\OutletSettingController@setup')->name('outlet_setting');
 
 
     Route::delete('menuCategory/{id}', 'App\Http\Controllers\MenuCategoryController@delete')->name('menuCategory.delete');
@@ -139,4 +140,15 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('expense_item', 'App\Http\Controllers\ExpenseItemController')->parameters('expense_item', 'id');
     Route::post('expense_item/update', 'App\Http\Controllers\ExpenseItemController@update')->name('expense_item.update');
 
+    Route::delete('attendence/{id}', 'App\Http\Controllers\AttendenceController@delete')->name('attendence.delete');
+    Route::put('attendence/{id}', 'App\Http\Controllers\AttendenceController@restore')->name('attendence.restore');
+    Route::resource('attendence', 'App\Http\Controllers\AttendenceController')->parameters('attendence', 'id');
+    Route::post('attendence/update', 'App\Http\Controllers\AttendenceController@update')->name('attendence.update');
+
+    // purchase
+    
+    Route::delete('purchase/{id}', 'App\Http\Controllers\PurchaseController@delete')->name('purchase.delete');
+    Route::put('purchase/{id}', 'App\Http\Controllers\PurchaseController@restore')->name('purchase.restore');
+    Route::resource('purchase', 'App\Http\Controllers\PurchaseController')->parameters('purchase', 'id');
+    Route::post('purchase/{id}/update', 'App\Http\Controllers\PurchaseController@update')->name('purchase.update');
 });

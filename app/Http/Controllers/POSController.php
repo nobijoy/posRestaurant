@@ -16,7 +16,7 @@ class POSController extends Controller
 
             DB::beginTransaction();
             try{
-                $data = PosSetting::find(1);
+                $data = PosSetting::find(1)->get();
                 if(!$data){
                     $data = new PosSetting();
                 }

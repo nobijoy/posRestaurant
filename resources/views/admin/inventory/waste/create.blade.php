@@ -99,9 +99,9 @@
     <script type="text/javascript">
         $(document).ready(function () {
             //Once add button is clicked
-            $("#ingredient_consumption").on("change", function(){
+            $("#ingredients").on("change", function(){
                 var id = $(this).val();
-                var name = $("#ingredient_consumption option:selected").text();
+                var name = $("#ingredients option:selected").text();
                 if (id != "") {
                     var sl = parseInt($("#ingredient_sl").val());
                     var sum = sl + 1;
