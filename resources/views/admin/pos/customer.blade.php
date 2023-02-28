@@ -75,7 +75,7 @@
                                                         <td>{{$data->date_of_anniversary}}</td>
                                                         <td>{{$data->address}}</td>
                                                         <td>{{$data->gst_number}}</td>
-                                                        <td>{{$data->created_by}}</td>
+                                                        <td>{{$data->created_by ? $data->createdBy->name : ''}}</td>
                                                         <td>
                                                             @if($data->is_active == 1)
                                                                 <a data-toggle="modal" data-target="#edit_supplier" data-target-id="{{$data->id}}"

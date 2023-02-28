@@ -4,30 +4,66 @@
 
             <li @if($url == 'home') class="active" @else class="nav-item" @endif>
                 <a  href="{{route('home')}}">
-                    <i class="feather icon-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span>
+                    <i class="feather icon-home"></i><span class="menu-title" data-i18n="Home">Home</span>
                 </a>
             </li>
 
-            <li  class="nav-item @if($url == 'outlet_setting') active @endif"  >
-                <a href="{{route('outlet_setting')}}" data-i18n="outlet_setting">
-                    <i class="feather icon-shopping-bag"></i><span class="menu-title" data-i18n="outlet_setting">Outlet Setting</span>
+            <li @if($url == 'dashboard') class="active" @else class="nav-item" @endif>
+                <a  href="{{route('dashboard')}}">
+                    <i class="feather icon-grid"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span>
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="#">
-                    <i class="feather icon-settings"></i><span class="menu-title" data-i18n="Setup">Setup</span>
+{{--            <li  class="nav-item @if($url == 'setting') active @endif"  >--}}
+{{--                <a href="{{route('setting')}}" data-i18n="outlet_setting">--}}
+{{--                    <i class="feather icon-settings"></i><span class="menu-title" data-i18n="outlet_setting">Setting</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+
+            <li class=" nav-item">
+                <a href="">
+                    <i class="feather icon-settings"></i><span class="menu-title" data-i18n="Supplier">Business Setting</span>
                 </a>
                 <ul class="menu-content">
-{{--                    <li @if($url == 'setting') class="active"  @endif>--}}
-{{--                        <a href="{{route('setting')}}" data-i18n="Setting">POS Setting</a>--}}
-{{--                    </li>--}}
+                    <li @if($url == 'setting') class="active"  @endif>
+                        <a href="{{route('setting')}}" data-i18n="Info">General Setting</a>
+                    </li>
+                    <li @if($url == 'outlet_setting') class="active"  @endif>
+                        <a href="{{route('outlet_setting')}}" data-i18n="Payment">Outlet Setting</a>
+                    </li>
                     <li @if($url == 'managePOS') class="active"  @endif>
                         <a href="{{route('managePOS')}}" data-i18n="Setting">Manage POS</a>
                     </li>
                     <li @if($url == 'emailSetup') class="active"  @endif>
                         <a href="{{route('emailSetup')}}" data-i18n="Email Setup">Email Setup</a>
                     </li>
+                    <li @if($url == 'apiSetup') class="active"  @endif>
+                        <a href="{{route('apiSetup')}}" data-i18n="Email Setup">Email Setup</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li  class="nav-item @if($url == 'expense.index') active @endif"  >
+                <a href="{{route('expense.index')}}" data-i18n="outlet_setting">
+                    <i class="feather icon-dollar-sign"></i><span class="menu-title" data-i18n="outlet_setting">Expenses</span>
+                </a>
+            </li>
+
+{{--            <li  class="nav-item @if($url == 'outlet_setting') active @endif"  >--}}
+{{--                <a href="{{route('outlet_setting')}}" data-i18n="outlet_setting">--}}
+{{--                    <i class="feather icon-shopping-bag"></i><span class="menu-title" data-i18n="outlet_setting">Outlet Setting</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+
+            <li class="nav-item">
+                <a href="#">
+                    <i class="feather icon-file-text"></i><span class="menu-title" data-i18n="Setup">Setup</span>
+                </a>
+                <ul class="menu-content">
+{{--                    <li @if($url == 'setting') class="active"  @endif>--}}
+{{--                        <a href="{{route('setting')}}" data-i18n="Setting">POS Setting</a>--}}
+{{--                    </li>--}}
+
                     <li @if($url == 'ingredient_category.index') class="active"  @endif>
                         <a href="{{route('ingredient_category.index')}}" data-i18n="Setting">Ingredient Category</a>
                     </li>
@@ -43,14 +79,17 @@
                     <li @if($url == 'menu.index' || $url == "menu.create" || $url == "menu.edit") class="active"  @endif>
                         <a href="{{route('menu.index')}}" data-i18n="Food Menu">Food Menu</a>
                     </li>
-                    <li @if($url == 'customer.index') class="active"  @endif>
-                        <a href="{{route('customer.index')}}" data-i18n="Food Menu">Customers</a>
-                    </li>
                     <li @if($url == 'expense_item.index') class="active"  @endif>
                         <a href="{{route('expense_item.index')}}" data-i18n="Food Menu">Expense Item</a>
                     </li>
-                    <li @if($url == 'modifiers') class="active"  @endif>
-                        <a href="{{route('modifiers')}}" data-i18n="Food Menu">Modifier</a>
+{{--                    <li @if($url == 'modifiers') class="active"  @endif>--}}
+{{--                        <a href="{{route('modifiers')}}" data-i18n="Food Menu">Modifier</a>--}}
+{{--                    </li>--}}
+                    <li @if($url == 'payment_method.index') class="active"  @endif>
+                        <a href="{{route('payment_method.index')}}" data-i18n="Food Menu">Payment Method</a>
+                    </li>
+                    <li @if($url == 'table.index') class="active"  @endif>
+                        <a href="{{route('table.index')}}" data-i18n="Food Menu">Table</a>
                     </li>
                 </ul>
             </li>
@@ -63,6 +102,9 @@
                     <li @if($url == 'purchase.index' || $url == 'purchase.create' || $url == 'purchase.edit') class="active"  @endif>
                         <a href="{{route('purchase.index')}}" data-i18n="">Purchase</a>
                     </li>
+                    <li @if($url == 'stock.index') class="active"  @endif>
+                        <a href="{{route('stock.index')}}" data-i18n="">Stock</a>
+                    </li>
                     <li @if($url == 'stock_adjustment.index') class="active"  @endif>
                         <a href="{{route('stock_adjustment.index')}}" data-i18n="">Stock Adjustment</a>
                     </li>
@@ -72,13 +114,65 @@
                 </ul>
             </li>
 
-            <li  class="nav-item @if($url == 'attendence.index') active @endif"  >
-                <a href="{{route('attendence.index')}}" data-i18n="Attendance">
-                    <i class="feather icon-clock"></i><span class="menu-title" data-i18n="Inventory">Attendance</span>
+            <li class=" nav-item">
+                <a href="">
+                    <i class="feather icon-user"></i><span class="menu-title" data-i18n="User">Manage Employee</span>
                 </a>
+                <ul class="menu-content">
+                    <li @if($url == 'employee.index') class="active"  @endif>
+                        <a href="{{route('employee.index')}}" data-i18n="Employee">Employee</a>
+                    </li>
+                    <li @if($url == 'department.index') class="active"  @endif>
+                        <a href="{{route('department.index')}}" data-i18n="Department">Department</a>
+                    </li>
+                    <li @if($url == 'designation.index') class="active"  @endif>
+                        <a href="{{route('designation.index')}}" data-i18n="Designation">Designation</a>
+                    </li>
+                    <li @if($url == 'attendence.index') class="active"  @endif>
+                        <a href="{{route('attendence.index')}}" data-i18n="Attendence">Attendence</a>
+                    </li>
+                </ul>
             </li>
 
-            {{--            <li class=" nav-item">--}}
+{{--            <li  class="nav-item @if($url == 'attendence.index') active @endif"  >--}}
+{{--                <a href="{{route('attendence.index')}}" data-i18n="Attendance">--}}
+{{--                    <i class="feather icon-clock"></i><span class="menu-title" data-i18n="Inventory">Attendance</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+
+            <li class=" nav-item">
+                <a href="">
+                    <i class="feather icon-users"></i><span class="menu-title" data-i18n="Supplier">Manage Customers</span>
+                </a>
+                <ul class="menu-content">
+                    <li @if($url == 'customer.index') class="active"  @endif>
+                        <a href="{{route('customer.index')}}" data-i18n="Food Menu">Customers</a>
+                    </li>
+{{--                    <li @if($url == 'customer_payment.index') class="active"  @endif>--}}
+{{--                        <a href="{{route('customer_payment.index')}}" data-i18n="Payment">Payment</a>--}}
+{{--                    </li>--}}
+                </ul>
+            </li>
+
+            <li class=" nav-item">
+                <a href="">
+                    <i class="feather icon-command"></i><span class="menu-title" data-i18n="Supplier">Supplier</span>
+                </a>
+                <ul class="menu-content">
+                    <li @if($url == 'supplier.index') class="active"  @endif>
+                        <a href="{{route('supplier.index')}}" data-i18n="Info">Info</a>
+                    </li>
+                    <li @if($url == 'supplier_payment.index') class="active"  @endif>
+                        <a href="{{route('supplier_payment.index')}}" data-i18n="Payment">Due Payment</a>
+                    </li>
+                </ul>
+            </li>
+
+
+            {{-------------------- project url end -----------------}}
+
+
+{{--            <li class=" nav-item">--}}
 {{--                <a href="">--}}
 {{--                    <i class="feather icon-printer"></i><span class="menu-title" data-i18n="Invoice Details">Invoice Details</span>--}}
 {{--                </a>--}}
@@ -182,20 +276,6 @@
 {{--                    </li>--}}
 {{--                </ul>--}}
 {{--            </li>--}}
-
-            <li class=" nav-item">
-                <a href="">
-                    <i class="feather icon-command"></i><span class="menu-title" data-i18n="Supplier">Supplier</span>
-                </a>
-                <ul class="menu-content">
-                    <li @if($url == 'supplier.index') class="active"  @endif>
-                        <a href="{{route('supplier.index')}}" data-i18n="Info">Info</a>
-                    </li>
-                    <li @if($url == 'supplier_payment.index') class="active"  @endif>
-                        <a href="{{route('supplier_payment.index')}}" data-i18n="Payment">Payment</a>
-                    </li>
-                </ul>
-            </li>
 
 {{--            <li class=" nav-item">--}}
 {{--                <a href="">--}}

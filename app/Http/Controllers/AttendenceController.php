@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Employee;
 use Auth;
 use DB;
 use App\Models\Attendence;
@@ -17,7 +18,7 @@ class AttendenceController extends Controller
      */
     public function index()
     {
-        $employees = User::orderBy('id', 'desc')->get();
+        $employees = Employee::where('is_active', 1)->orderBy('id', 'desc')->get();
         $datas = Attendence::where('is_active', 1)->get()->reverse();
         $sl = 0;
         return view('admin.users.attendence',compact('employees','sl','datas'));
@@ -53,7 +54,7 @@ class AttendenceController extends Controller
             $data->is_active = 1;
             $start_time = Carbon::parse($request->input('in_time'));
             $finish_time = Carbon::parse($request->input('out_time'));
-            $data->time_count = $finish_time->floatDiffInHours($start_time, false);
+            $data->time_count = $finish_time->floatDiffInHours($start_time, true);
             $data->created_by = Auth()->user()->id;
             $data->save();
             DB::commit();
@@ -109,7 +110,7 @@ class AttendenceController extends Controller
             $data->is_active = 1;
             $start_time = Carbon::parse($request->input('in_time'));
             $finish_time = Carbon::parse($request->input('out_time'));
-            $data->time_count = $finish_time->floatDiffInHours($start_time, false);
+            $data->time_count = $finish_time->floatDiffInHours($start_time, true);
             $data->updated_by = Auth()->user()->id;
             $data->save();
             DB::commit();

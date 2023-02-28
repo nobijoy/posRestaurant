@@ -5,7 +5,7 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
                 <h3 class="content-header-title">
-                    <a href="{{ route ('waste.add')}}" class="btn btn-primary">Add Waste Item<i class="fa fa-plus"></i></a>
+                    <a href="{{ route ('waste.create')}}" class="btn btn-primary">Add Waste Item<i class="fa fa-plus"></i></a>
                 </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
@@ -68,21 +68,29 @@
                                             <tbody>
                                                     <tr>
 
-{{--                                                        <td>--}}
-{{--                                                                <a href="{{ route ('waste.edit')}}">--}}
-{{--                                                                    <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">--}}
-{{--                                                                        <i class="fa fa-pencil-square"></i></button>--}}
-{{--                                                                </a>--}}
-{{--                                                                <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive"--}}
-{{--                                                                        onclick="">--}}
-{{--                                                                    <i class="fa fa-trash" aria-hidden="true"></i>--}}
-{{--                                                                </button>--}}
-{{--                                                                <button type="button" class="btn btn-icon btn-outline-primary btn-sm" title="Restore"--}}
-{{--                                                                        onclick="">--}}
-{{--                                                                    <i class="fa fa-undo" aria-hidden="true"></i>--}}
-{{--                                                                </button>--}}
+                                                        <td>dfsf</td>
+                                                        <td>dfsf</td>
+                                                        <td>dfsf</td>
+                                                        <td>dfsf</td>
+                                                        <td>dfsf</td>
+                                                        <td>dfsf</td>
+                                                        <td>dfsf</td>
+                                                        <td>dfsf</td>
+                                                        <td>
+                                                                <a href="{{ route ('waste.edit', 'id')}}">
+                                                                    <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
+                                                                        <i class="fa fa-pencil-square"></i></button>
+                                                                </a>
+                                                                <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive"
+                                                                        onclick="">
+                                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-icon btn-outline-primary btn-sm" title="Restore"
+                                                                        onclick="">
+                                                                    <i class="fa fa-undo" aria-hidden="true"></i>
+                                                                </button>
 
-{{--                                                        </td>--}}
+                                                        </td>
                                                     </tr>
                                             </tbody>
                                             <tfoot class="display-hidden">

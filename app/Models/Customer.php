@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
+
+    public function createdBy(){
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+    public function updatedBy(){
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+    public function deletedBy(){
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
 }

@@ -25,6 +25,9 @@ class CreateSuppliersTable extends Migration
             $table->UnsignedBigInteger('created_by')->Unsigned()->nullable();
             $table->UnsignedBigInteger('updated_by')->Unsigned()->nullable();
             $table->UnsignedBigInteger('deleted_by')->Unsigned()->nullable();
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('deleted_by')->references('id')->on('users')->onDelete('restrict');
             $table->timestamps();
         });
     }

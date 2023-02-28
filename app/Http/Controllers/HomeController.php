@@ -25,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        return view('admin.home.home');
+    }
+    public function dashboard()
+    {
         return view('admin.dashboard');
     }
     public function user()
@@ -211,6 +215,10 @@ class HomeController extends Controller
     {
         return view('admin.inventory.purchase.edit');
     }
+    public function stock()
+    {
+        return view('admin.inventory.stock.index');
+    }
     public function stockAdjustment()
     {
         return view('admin.inventory.stock_adjustment.index');
@@ -222,18 +230,6 @@ class HomeController extends Controller
     public function stockAdjustmentEdit()
     {
         return view('admin.inventory.stock_adjustment.edit');
-    }
-    public function waste()
-    {
-        return view('admin.inventory.waste.index');
-    }
-    public function wasteAdd()
-    {
-        return view('admin.inventory.waste.create');
-    }
-    public function wasteEdit()
-    {
-        return view('admin.inventory.waste.edit');
     }
 
 }

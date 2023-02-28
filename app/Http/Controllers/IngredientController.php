@@ -64,7 +64,6 @@ class IngredientController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', $th->getMessage());
             return back()->with('error', 'Somethings went wrong. Try Again');
         }
     }
@@ -143,7 +142,7 @@ class IngredientController extends Controller
             return 'Ingredient Unit Inactive Successfully!';
         } catch (\Throwable $th) {
             DB::rollback();
-            return 'Somrthings Went Wrong!';
+            return 'Somethings Went Wrong!';
         }
     }
 
@@ -158,7 +157,7 @@ class IngredientController extends Controller
             return 'Ingredient Unit Activated Successfully!';
         } catch (\Throwable $th) {
             DB::rollback();
-            return 'Somrthings Went Wrong!';
+            return 'Somethings Went Wrong!';
         }
     }
 }

@@ -99,9 +99,15 @@
     <script type="text/javascript">
         $(document).ready(function () {
             //Once add button is clicked
-            $("#ingredients").on("change", function(){
+            $("#food_menu").on("change", function(){
                 var id = $(this).val();
-                var name = $("#ingredients option:selected").text();
+                var url = "{{ route('menu.info', ['-a']) }}";
+                url = url.replace('-a', id);
+                // console.log(url)
+                $.get(url, function (data) {
+                    console.log(data);
+                });
+                var name = $("#food_menu option:selected").text();
                 if (id != "") {
                     var sl = parseInt($("#ingredient_sl").val());
                     var sum = sl + 1;
@@ -128,19 +134,19 @@
                         '<td>' +
                         '<input type="number" class="form-control" id="loss_amount'+count + '" name="loss_amount[]" value="" readonly>' +
                         '</td>' +
-                        '<td>' +
-                        '<button type="button" title="Delete" class="btn btn-danger" onclick="deleteContactRow(this)" data-count="'+count + '"> <i class="fa fa-trash"></i></button>' +
-                        '</td>' +
+                        // '<td>' +
+                        // '<button type="button" title="Delete" class="btn btn-danger" onclick="deleteContactRow(this)" data-count="'+count + '"> <i class="fa fa-trash"></i></button>' +
+                        // '</td>' +
                         '</tr>';
                     $('#ingredient_items').append(newRow);
                 }
-            });
+             });
 
         });
-        function deleteContactRow(cr){
-            var rowId = $(cr).attr('data-count');
-            var el = document.getElementById("ingredient_row_"+rowId);
-            el.remove();
-        }
+        // function deleteContactRow(cr){
+        //     var rowId = $(cr).attr('data-count');
+        //     var el = document.getElementById("ingredient_row_"+rowId);
+        //     el.remove();
+        // }
     </script>
 @endsection

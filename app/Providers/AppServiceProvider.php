@@ -28,7 +28,6 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*',function($settings){
             $settings->with('url', Route::currentRouteName());
              $settings->with('gsetting', DB::table('pos_settings')->find(1));
-            // $settings->with('gcontact', DB::table('contactpages')->find(1));
 
             if (!session()->has('popup'))
             {

@@ -26,13 +26,12 @@ class OutletSettingController extends Controller
                     $data->save();
                     DB::commit();
                     return back()->with('success', 'Data updated successfully!');
-                } catch (Throwable $th) {
+                } catch (\Throwable $th) {
                     DB::rollback();
                     return back()->with('error', 'Something is wrong');
                 }
             }
             $data = OutletSetting::find(1);
-//            dd($data);
             return view('admin.pos_setting.outlet_setting', compact('data'));
         }
     }
