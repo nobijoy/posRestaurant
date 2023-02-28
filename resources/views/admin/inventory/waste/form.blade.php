@@ -14,31 +14,35 @@
         <label for="res_person">Responsible Person <span class="text-danger">*</span></label>
         <select name="res_person" id="res_person" class="form-control select2">
             <option value="">Select</option>
-            <option value="1" >Admin</option>
-            <option value="2" >Admin User</option>
+            @foreach($employees as $employee)
+                <option value="{{$employee->id}}" >{{$employee->name}}</option>
+{{--                <option value="{{$employee->id}}" @if(($url == 'purchase.edit') && ($data->supplier == $type->id)) selected @endif">{{$type->name}}</option>--}}
+            @endforeach
         </select>
     </div>
 
     <div class="form-group col-md-4 ">
         <label for="ingredients">Ingredients <span class="text-danger">*</span> (Only purchased Ingredients are listed)</label>
-        <select name="ingredients" id="ingredients" class="form-control select2">
-            <option value="">Select</option>
-            <option value="1" >Ingredient 1</option>
-            <option value="2" >Ingredient 2</option>
-        </select>
+        <input type="text" id="ingredients" class="form-control" placeholder="Select" name="ingredients" value=""  readonly>
+{{--        <select name="ingredients" id="ingredients" class="form-control select2 select2-hidden-accessible" >--}}
+{{--            <option value="">Select</option>--}}
+{{--            <option value="1" >Ingredient 1</option>--}}
+{{--            <option value="2" >Ingredient 2</option>--}}
+{{--        </select>--}}
     </div>
 
     <div class="form-group col-md-4 ">
         <label for="food_menu">Food Menu</label>
-        <select name="food_menu" id="food_menu" class="form-control select2">
+        <select name="food_menu" id="food_menu"  class="form-control select2">
             <option value="">Select</option>
-            <option value="1" >Alur Bhorta</option>
-            <option value="2" >Dim bhaji</option>
+            @foreach($menus as $menu)
+                <option value="{{$menu->id}}">{{$menu->name}}</option>
+            @endforeach
         </select>
     </div>
 
     <div class="form-group col-md-4 pt-2">
-        <a href="#" data-toggle="modal"data-target="#read_me" class="btn btn-danger">Read Me First</a>
+        <a href="#" data-toggle="modal" data-target="#read_me" class="btn btn-danger">Read Me First</a>
     </div>
 
     <div class="form-group col-md-4 ">
@@ -47,7 +51,7 @@
     </div>
 
     <div class="form-group col-md-4 pt-2">
-        <button type="button" class="btn btn-icon btn-danger"  onclick="">Delete</button>
+        <button type="button" class="btn btn-icon btn-danger" onclick="">Delete</button>
     </div>
 
 
@@ -57,14 +61,13 @@
     <input type="hidden" id="ingredient_sl" value="0">
     <div class="form-group col-md-12 ">
         <div class="table-responsive">
-            <table class="table table-bordered" id="">
+            <table class="table table-bordered" id="ingredient_table">
                 <thead>
                 <tr>
                     <th>Sl</th>
                     <th>Ingredient(Code)</th>
                     <th>Quantity/Amount</th>
                     <th>Loss Amount</th>
-                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody id="ingredient_items">

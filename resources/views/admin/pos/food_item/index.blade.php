@@ -91,15 +91,6 @@
                                                 @endif
                                             </tbody>
                                             <tfoot class="display-hidden">
-                                                <tr>
-                                                    <th>Sl</th>
-                                                    <th>Name</th>
-                                                    <th>Category</th>
-                                                    <th>Sele Price</th>
-                                                    <th>Total Ingredients</th>
-                                                    <th>Image</th>
-                                                    <th>Action</th>
-                                                </tr>
                                             </tfoot>
                                         </table>
                                     </div>

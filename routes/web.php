@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/setting', [App\Http\Controllers\HomeController::class, 'setting'])->name('setting');
     Route::get('/category', [App\Http\Controllers\HomeController::class, 'category'])->name('category');
     Route::get('/sub_category', [App\Http\Controllers\HomeController::class, 'subCategory'])->name('sub_category');
@@ -70,19 +71,18 @@ Route::group(['middleware' => ['auth']], function(){
     // Route::get('/purchase/add', [App\Http\Controllers\HomeController::class, 'purchaseAdd'])->name('purchase.add');
     // Route::get('/purchase/edit', [App\Http\Controllers\HomeController::class, 'purchaseEdit'])->name('purchase.edit');
 
+    Route::get('/stock', [App\Http\Controllers\HomeController::class, 'stock'])->name('stock.index');
     Route::get('/stock_adjustment', [App\Http\Controllers\HomeController::class, 'stockAdjustment'])->name('stock_adjustment.index');
     Route::get('/stock_adjustment/add', [App\Http\Controllers\HomeController::class, 'stockAdjustmentAdd'])->name('stock_adjustment.add');
     Route::get('/stock_adjustment/edit', [App\Http\Controllers\HomeController::class, 'stockAdjustmentEdit'])->name('stock_adjustment.edit');
-
-    Route::get('/waste', [App\Http\Controllers\HomeController::class, 'waste'])->name('waste.index');
-    Route::get('/waste/add', [App\Http\Controllers\HomeController::class, 'wasteAdd'])->name('waste.add');
-    Route::get('/waste/edit', [App\Http\Controllers\HomeController::class, 'wasteEdit'])->name('waste.edit');
 
     Route::match(['get', 'post'], 'profile/{name}', 'App\Http\Controllers\AdminController@profileUpdate')->name('profileUpdate');
     Route::match(['get', 'post'], 'change-password/{name}', 'App\Http\Controllers\AdminController@passwordUpdate')->name('changePassword');
     Route::match(['get', 'post'], 'managepos', 'App\Http\Controllers\POSController@posUpdate')->name('managePOS');
     Route::match(['get', 'post'], 'email-setup', 'App\Http\Controllers\POSController@emailSetup')->name('emailSetup');
+    Route::match(['get', 'post'], 'apiSetup', 'App\Http\Controllers\POSController@emailSetup')->name('apiSetup');
     Route::match(['get', 'post'], 'outlet_setting', 'App\Http\Controllers\OutletSettingController@setup')->name('outlet_setting');
+    Route::match(['get', 'post'], 'setting', 'App\Http\Controllers\SettingController@manage')->name('setting');
 
 
     Route::delete('menuCategory/{id}', 'App\Http\Controllers\MenuCategoryController@delete')->name('menuCategory.delete');
@@ -120,6 +120,21 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('ingredient', 'App\Http\Controllers\IngredientController')->parameters('ingredient', 'id');
     Route::post('ingredient/update', 'App\Http\Controllers\IngredientController@update')->name('ingredient.update');
 
+    Route::delete('employee/{id}', 'App\Http\Controllers\EmployeeController@delete')->name('employee.delete');
+    Route::put('employee/{id}', 'App\Http\Controllers\EmployeeController@restore')->name('employee.restore');
+    Route::resource('employee', 'App\Http\Controllers\EmployeeController')->parameters('employee', 'id');
+    Route::post('employee/update', 'App\Http\Controllers\EmployeeController@update')->name('employee.update');
+
+    Route::delete('department/{id}', 'App\Http\Controllers\DepartmentController@delete')->name('department.delete');
+    Route::put('department/{id}', 'App\Http\Controllers\DepartmentController@restore')->name('department.restore');
+    Route::resource('department', 'App\Http\Controllers\DepartmentController')->parameters('department', 'id');
+    Route::post('department/update', 'App\Http\Controllers\DepartmentController@update')->name('department.update');
+
+    Route::delete('designation/{id}', 'App\Http\Controllers\DesignationController@delete')->name('designation.delete');
+    Route::put('designation/{id}', 'App\Http\Controllers\DesignationController@restore')->name('designation.restore');
+    Route::resource('designation', 'App\Http\Controllers\DesignationController')->parameters('designation', 'id');
+    Route::post('designation/update', 'App\Http\Controllers\DesignationController@update')->name('designation.update');
+
     Route::delete('supplier/{id}', 'App\Http\Controllers\SupplierController@delete')->name('supplier.delete');
     Route::put('supplier/{id}', 'App\Http\Controllers\SupplierController@restore')->name('supplier.restore');
     Route::resource('supplier', 'App\Http\Controllers\SupplierController')->parameters('supplier', 'id');
@@ -135,6 +150,16 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('customer', 'App\Http\Controllers\CustomerController')->parameters('customer', 'id');
     Route::post('customer/update', 'App\Http\Controllers\CustomerController@update')->name('customer.update');
 
+//    Route::delete('customer_payment/{id}', 'App\Http\Controllers\SupplierPaymentController@delete')->name('customer_payment.delete');
+//    Route::put('customer_payment/{id}', 'App\Http\Controllers\SupplierPaymentController@restore')->name('customer_payment.restore');
+//    Route::resource('customer_payment', 'App\Http\Controllers\SupplierPaymentController')->parameters('customer_payment', 'id');
+//    Route::post('customer_payment/update', 'App\Http\Controllers\SupplierPaymentController@update')->name('customer_payment.update');
+
+    Route::delete('expense/{id}', 'App\Http\Controllers\ExpenseController@delete')->name('expense.delete');
+    Route::put('expense/{id}', 'App\Http\Controllers\ExpenseController@restore')->name('expense.restore');
+    Route::resource('expense', 'App\Http\Controllers\ExpenseController')->parameters('expense', 'id');
+    Route::post('expense/update', 'App\Http\Controllers\ExpenseController@update')->name('expense.update');
+
     Route::delete('expense_item/{id}', 'App\Http\Controllers\ExpenseItemController@delete')->name('expense_item.delete');
     Route::put('expense_item/{id}', 'App\Http\Controllers\ExpenseItemController@restore')->name('expense_item.restore');
     Route::resource('expense_item', 'App\Http\Controllers\ExpenseItemController')->parameters('expense_item', 'id');
@@ -145,10 +170,31 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('attendence', 'App\Http\Controllers\AttendenceController')->parameters('attendence', 'id');
     Route::post('attendence/update', 'App\Http\Controllers\AttendenceController@update')->name('attendence.update');
 
+    Route::delete('table/{id}', 'App\Http\Controllers\TableController@delete')->name('table.delete');
+    Route::put('table/{id}', 'App\Http\Controllers\TableController@restore')->name('table.restore');
+    Route::resource('table', 'App\Http\Controllers\TableController')->parameters('table', 'id');
+    Route::post('table/update', 'App\Http\Controllers\TableController@update')->name('table.update');
+
+    Route::delete('payment_method/{id}', 'App\Http\Controllers\PaymentMethodController@delete')->name('payment_method.delete');
+//    Route::put('payment_method/{id}', 'App\Http\Controllers\PurchaseController@restore')->name('payment_method.restore');
+    Route::resource('payment_method', 'App\Http\Controllers\PaymentMethodController')->parameters('payment_method', 'id');
+    Route::post('payment_method/update', 'App\Http\Controllers\PaymentMethodController@update')->name('payment_method.update');
+
     // purchase
-    
+
+    Route::delete('delete-purchase-ingredient/{id}', 'App\Http\Controllers\PurchaseController@deletePurchaseIngredient')->name('deletePurchaseIngredient');
     Route::delete('purchase/{id}', 'App\Http\Controllers\PurchaseController@delete')->name('purchase.delete');
     Route::put('purchase/{id}', 'App\Http\Controllers\PurchaseController@restore')->name('purchase.restore');
     Route::resource('purchase', 'App\Http\Controllers\PurchaseController')->parameters('purchase', 'id');
+//    Route::get('menu/{id}/{menu}', 'App\Http\Controllers\MenuController@edit')->name('menu.edit');
     Route::post('purchase/{id}/update', 'App\Http\Controllers\PurchaseController@update')->name('purchase.update');
+
+//    Route::get('/waste', [App\Http\Controllers\WasteController::class, 'waste'])->name('waste.index');
+//    Route::get('/waste/add', [App\Http\Controllers\WasteController::class, 'wasteAdd'])->name('waste.add');
+//    Route::get('/waste/edit', [App\Http\Controllers\WasteController::class, 'wasteEdit'])->name('waste.edit');
+    Route::resource('waste', 'App\Http\Controllers\WasteController')->parameters('waste', 'id');
+    Route::get('menu-info/{id}', ['App\Http\Controllers\WasteController', 'showMenuInfo'])->name('menu.info');
+
+
+
 });

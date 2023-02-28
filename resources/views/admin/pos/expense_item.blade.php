@@ -89,11 +89,6 @@
                                             @endif
                                             </tbody>
                                             <tfoot class="display-hidden">
-                                            <tr>
-                                                <th>Sl</th>
-                                                <th>Name</th>
-                                                <th>Action</th>
-                                            </tr>
                                             </tfoot>
                                         </table>
                                     </div>
@@ -126,7 +121,7 @@
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
                                 <label for="description">Description</label>
-                                <textarea type="text" name="description" class="form-control" id="description" placeholder="description"></textarea>
+                                <textarea name="description" class="form-control" id="description" placeholder="description"></textarea>
                             </fieldset>
                         </div>
                         <div class="modal-footer">
@@ -155,12 +150,12 @@
                         <div class="modal-body">
                             <input type="hidden" name="id" id="id">
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="name">Category Name<span class="text-danger">*</span></label>
+                                <label for="name">Expense Item Name<span class="text-danger">*</span></label>
                                 <input type="text" name="name" class="form-control" id="edit_name" placeholder="" required>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="description">Category description</label>
-                                <textarea type="text" name="description" class="form-control" id="edit_description" placeholder="" ></textarea>
+                                <label for="description">Description</label>
+                                <textarea name="description" class="form-control" id="edit_description" placeholder="" ></textarea>
                             </fieldset>
                         </div>
                         <div class="modal-footer">

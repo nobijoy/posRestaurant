@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Supplier;
 use App\Models\SupplierPayment;
 use Illuminate\Http\Request;
 use Auth;
@@ -18,8 +19,9 @@ class SupplierPaymentController extends Controller
     public function index()
     {
         $datas = SupplierPayment::where('is_active', 1)-> get()->reverse();
+        $suppliers = Supplier::where('is_active', 1)-> get()->reverse();
         $sl = 0;
-        return view('admin.supplier.payment', compact('datas', 'sl'));
+        return view('admin.supplier.payment', compact('datas', 'sl', 'suppliers'));
     }
 
     /**
@@ -42,7 +44,7 @@ class SupplierPaymentController extends Controller
     {
         $validatedData = $request->validate([
             'name' => ['required'],
-            'receipt_number' => ['required', 'unique:suppliers,receipt_number'],
+            'receipt_number' => ['required', 'unique:supplier_payments,receipt_number'],
             'amount' => ['required'],
         ]);
 
@@ -98,11 +100,11 @@ class SupplierPaymentController extends Controller
      */
     public function update(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => ['required'],
-            'receipt_number' => ['required'],
-            'amount' => ['required'],
-        ]);
+//        $validatedData = $request->validate([
+//            'name' => ['required'],
+//            'receipt_number' => ['required', 'unique:supplier_payments,receipt_number' .$request->id. ',id'],
+//            'amount' => ['required'],
+//        ]);
         DB::beginTransaction();
 
         try {

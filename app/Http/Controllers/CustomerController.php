@@ -131,7 +131,6 @@ class CustomerController extends Controller
         } catch (\Throwable $th) {
             DB::rollback();
             return back()->with('error', 'Somethings went wrong. Try Again');
-//            return back()->with('error', 'Somethings went wrong. Try Again');
         }
     }
 

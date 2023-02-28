@@ -67,11 +67,11 @@
                                                 @foreach ($datas as $data)
                                                     <tr>
                                                         <td>{{++$sl}}</td>
-                                                        <td>{{$data->name}}</td>
+                                                        <td>{{$data->name ? $data->supplierInfo->name: ''}}</td>
                                                         <td>{{$data->receipt_number}}</td>
                                                         <td>{{$data->amount}}</td>
                                                         <td>{{$data->payment_time}}</td>
-                                                        <td>{{$data->created_by}}</td>
+                                                        <td>{{$data->created_by ? $data->createdBy->name: ''}}</td>
                                                         <td>
                                                             @if($data->is_active == 1)
                                                                 <a data-toggle="modal" data-target="#edit_payment" data-target-id="{{$data->id}}"
@@ -122,7 +122,12 @@
                         <div class="modal-body">
                             <fieldset class="form-group floating-label-form-group">
                                 <label for="name">Supplier Name<span class="text-danger">*</span></label>
-                                <input type="text" name="name" class="form-control" id="name" placeholder="" value="" required>
+                                <select name="name" id="name" class="select2 form-control" required>
+                                    <option value="" >Select</option>
+                                    @foreach ($suppliers as $supplier)
+                                        <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                                    @endforeach
+                                </select>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
                                 <label for="receipt_number">Receipt Number<span class="text-danger">*</span></label>

@@ -53,7 +53,7 @@ class MenuCategoryController extends Controller
             $data->save();
             DB::commit();
 
-            return back()->with('success', 'New MenuCategory Created Successfully');
+            return back()->with('success', 'New Menu Category Created Successfully');
 
         } catch (\Throwable $th) {
             DB::rollback();
@@ -106,7 +106,7 @@ class MenuCategoryController extends Controller
             $data->save();
             DB::commit();
 
-            return back()->with('success', 'MenuCategory Updated Successfully');
+            return back()->with('success', 'Menu Category Updated Successfully');
 
         } catch (\Throwable $th) {
             DB::rollback();
@@ -134,7 +134,7 @@ class MenuCategoryController extends Controller
             $data->deleted_by = Auth()->user()->id;
             $data->save();
             DB::commit();
-            return 'MenuCategory Inactive Successfully!';
+            return 'Menu Category Inactive Successfully!';
         } catch (\Throwable $th) {
             DB::rollback();
             return 'Somethings Went Wrong!';

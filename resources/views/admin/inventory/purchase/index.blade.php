@@ -81,7 +81,7 @@
                                                                         <i class="fa fa-pencil-square"></i></button>
                                                                 </a>
                                                                 <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive"
-                                                                        onclick="">
+                                                                        onclick="deleteData('{{ route('purchase.delete', [$data->id]) }}')">
                                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                                 </button>
                                                             </td>

@@ -53,6 +53,40 @@
                     </tr>
                 </thead>
                 <tbody id="ingredient_items">
+                    @if($url == 'purchase.edit')
+                        @if (sizeof($purchase_ingredient) > 0)
+                            <?php $ciSl = 0; $array = [];?>
+                            @foreach ($purchase_ingredient as $ckey => $ci)
+                                <tr id="ingredient_row_{{$ci->id}}">
+                                    <input type="hidden" name="purchase_ingredient_id[]" value="{{$ci->id}}">
+                                    <td id="sl_{{$ci->id}}"><p>{{++$ciSl}}</p></td>
+                                    <td>
+                                        <input type="hidden" id="ingreadient_id_{{$ci->id}}" name="ingredient_id[]" value="{{$ci->ingredient_id}}">
+                                        <span id="ingreadient_name_{{$ci->ingredient_id}}">{{$ci->ingredient->name}} </span>
+                                        </td>
+                                    <td>
+                                        <input type="text" class="form-control" name="unit_price[]" placeholder="unit_price" value="{{$ci->unit_price}}" required
+                                        onKeyup="subTotal(this)" data-for="{{$ci->ingredient_id}}" id ="unit-price_{{$ci->ingredient_id}}">
+                                        </td>
+                                    <td>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="quantity_amount[]" value="{{$ci->quantity_amount}}" placeholder="Quantity/Amount" aria-describedby="basic-addon_{{$ci->ingredient_id}}"
+                                            required onKeyup="subTotal(this)" data-for="{{$ci->ingredient_id}}" id="amount_{{$ci->ingredient_id}}">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="basic-addon_{{$ci->ingredient_id}}">{{$ci->ingredient->unit->name}}</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    <td>
+                                        <input type="text" class="form-control total-price" name="total_price[]" id="total_price_{{$ci->ingredient_id}}" placeholder="total_price" value="{{$ci->total}}" readonly>
+                                        </td>
+                                    <td>
+                                        <button type="button" title="Delete" class="btn btn-danger" onclick="deleteData('{{ route('deletePurchaseIngredient', [$ci->id]) }}')" data-count="{{$ci->ingredient_id}}"> <i class="fa fa-trash"></i></button>
+                                        </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    @endif
 
                 </tbody>
             </table>
@@ -69,17 +103,17 @@
     <div class="col-md-3">
         <div class="form-group col-md-12 ">
             <label for="g_total">G.Total <span class="text-danger">*</span></label>
-            <input type="number" id="g_total" class="form-control" placeholder="" name="g_total" @if($url == 'purchase.edit') value="{{$data->totalPurchaseCost()}}}"@else  value="{{old('g_total')}}" @endif readonly >
+            <input type="number" id="g_total" class="form-control" placeholder="" name="g_total" @if($url == 'purchase.edit') value="{{$data->totalPurchaseCost()}}"@else  value="{{old('g_total')}}" @endif readonly >
         </div>
 
         <div class="form-group col-md-12 ">
             <label for="paid">Paid</label>
-            <input type="number" id="paid" class="form-control" min="0.01" step="0.01" placeholder="Enter Paid Amount" name="paid" @if($url == 'purchase.edit') value="{{$data->totalPurchaseCost()-$data->totalDueAmount()}}}"@else  value="{{old('paid')}}" @endif  >
+            <input type="number" id="paid" class="form-control" min="0.01" step="0.01" placeholder="Enter Paid Amount" name="paid" @if($url == 'purchase.edit') value="{{$data->paid}}"@else  value="{{old('paid')}}" @endif  >
         </div>
 
         <div class="form-group col-md-12  ">
             <label for="due">Due</label>
-            <input type="number" id="due" class="form-control" placeholder="" name="due" @if($url == 'purchase.edit') value="{{$data->totalDueAmount()}}}"@else  value="{{old('due')}}" @endif readonly >
+            <input type="number" id="due" class="form-control" placeholder="" name="due" @if($url == 'purchase.edit') value="{{$data->totalPurchaseCost() - $data->paid}}"@else  value="{{old('due')}}" @endif readonly >
         </div>
     </div>
 

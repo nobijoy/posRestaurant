@@ -54,12 +54,12 @@
                                         <thead>
                                             <tr>
                                                 <th>Sl</th>
+                                                <th>Code</th>
                                                 <th>Name</th>
                                                 <th>Purchase Price(in unit)</th>
                                                 <th>Category</th>
                                                 <th>Alert Quantity</th>
                                                 <th>Units</th>
-                                                <th>Code</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -68,12 +68,12 @@
                                             @foreach ($datas as $data)
                                             <tr>
                                                 <td>{{++$sl}}</td>
+                                                <td>{{$data->code}}</td>
                                                 <td>{{$data->name}}</td>
                                                 <td>{{$data->price}}</td>
                                                 <td>{{$data->category->name}}</td>
                                                 <td>{{$data->alert_qty}}</td>
                                                 <td>{{$data->unit->name}}</td>
-                                                <td>{{$data->code}}</td>
                                                 <td>
                                                     @if($data->is_active == 1)
                                                     <a data-toggle="modal" data-target="#editcategory"
@@ -103,16 +103,6 @@
                                             @endif
                                         </tbody>
                                         <tfoot class="display-hidden">
-                                            <tr>
-                                                <th>Sl</th>
-                                                <th>Name</th>
-                                                <th>Purchase Price(in unit)</th>
-                                                <th>Category</th>
-                                                <th>Alert Quantity</th>
-                                                <th>Units</th>
-                                                <th>Code</th>
-                                                <th>Action</th>
-                                            </tr>
                                         </tfoot>
                                     </table>
                                 </div>

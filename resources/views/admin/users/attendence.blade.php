@@ -61,12 +61,12 @@
                                                             <td>{{++$sl}}</td>
                                                             <td>{{$data->reference_no}}</td>
                                                             <td>{{$data->date}}</td>
-                                                            <td>{{$data->employee}}</td>
+                                                            <td>{{$data->employee ? $data->employeeInfo->name : ''}}</td>
                                                             <td>{{$data->in_time}}</td>
                                                             <td>{{$data->out_time}}</td>
                                                             <td>{{$data->time_count}} Hour</td>
                                                             <td>{{$data->note}}</td>
-                                                            <td>{{$data->created_by}}</td>
+                                                            <td>{{$data->created_by ? $data->createdBy->name : ''}}</td>
                                                             <td>
                                                                 @if($data->is_active == 1)
                                                                     <a data-toggle="modal" data-target="#edit_attendence" data-target-id="{{$data->id}}"

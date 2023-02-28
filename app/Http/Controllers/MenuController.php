@@ -212,7 +212,7 @@ class MenuController extends Controller
         DB::beginTransaction();
         try {
             $data = IngredientConsumption::findorFail($id);
-            $data->delete();
+            $data->is_active = 0;
             DB::commit();
             return 'Menu Ingredient Item Deleted Successfully!';
         } catch (\Throwable $th) {
