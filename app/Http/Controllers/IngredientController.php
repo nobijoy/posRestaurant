@@ -19,7 +19,7 @@ class IngredientController extends Controller
     public function index()
     {
         $sl = 0;
-        $datas = Ingredient::where('is_active', 1)->get()->reverse();
+        $datas = Ingredient::with(['category', 'unit'])->where('is_active', 1)->get()->reverse();
         $units = IngredientUnit::where('is_active', 1)->orderBy('name')->get();
         $categories = IngredientCategory::where('is_active', 1)->orderBy('name')->get();
         return view('admin.pos.ingredients', compact('sl', 'datas', 'units', 'categories'));

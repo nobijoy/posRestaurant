@@ -19,7 +19,7 @@ class AttendenceController extends Controller
     public function index()
     {
         $employees = Employee::where('is_active', 1)->orderBy('id', 'desc')->get();
-        $datas = Attendence::where('is_active', 1)->get()->reverse();
+        $datas = Attendence::with(['employeeInfo','createdBy'])->where('is_active', 1)->get()->reverse();
         $sl = 0;
         return view('admin.users.attendence',compact('employees','sl','datas'));
     }

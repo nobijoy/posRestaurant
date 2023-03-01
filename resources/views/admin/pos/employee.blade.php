@@ -5,7 +5,7 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-4 mb-1">
                 <h3 class="content-header-title">
-                    <a href="#" data-toggle="modal" data-target="#add_customer" class="btn btn-primary">Add Employee <i class="fa fa-plus"></i></a>
+                    <a href="#" data-toggle="modal" data-target="#add_employee" class="btn btn-primary">Add Employee <i class="fa fa-plus"></i></a>
                 </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
@@ -76,7 +76,7 @@
                                                         <td>{{$data->address}}</td>
                                                         <td>
                                                             @if($data->is_active == 1)
-                                                                <a data-toggle="modal" data-target="#edit_supplier" data-target-id="{{$data->id}}"
+                                                                <a data-toggle="modal" data-target="#edit_employee" data-target-id="{{$data->id}}"
                                                                    data-name="{{$data->name}}" data-address="{{$data->address}}" data-date_of_birth="{{$data->date_of_birth}}"
                                                                    data-phone="{{$data->phone}}" data-email="{{$data->email}}" data-department="{{$data->department}}"
                                                                    data-designation="{{$data->designation}}" >
@@ -110,7 +110,7 @@
         </div>
 
         <!-- Start Add Modal -->
-        <div class="modal fade text-left" id="add_customer" tabindex="-1" role="dialog"
+        <div class="modal fade text-left" id="add_employee" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel35" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -145,9 +145,9 @@
                                     <label for="designation">Select Designation<span class="text-danger">*</span></label>
                                     <select name="designation" id="designation" class="select2 form-control" required>
                                         <option value="" >Select</option>
-                                            @foreach ($designations as $designation)
-                                                <option value="{{$designation->id}}">{{$designation->name}}</option>
-                                            @endforeach
+{{--                                            @foreach ($designations as $designation)--}}
+{{--                                                <option value="{{$designation->id}}">{{$designation->name}}</option>--}}
+{{--                                            @endforeach--}}
                                     </select>
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
@@ -175,7 +175,7 @@
         <!-- End Add Modal -->
 
         <!-- Start Edit Modal -->
-        <div class="modal fade text-left" id="edit_supplier" tabindex="-1" role="dialog"
+        <div class="modal fade text-left" id="edit_employee" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel35" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -214,6 +214,7 @@
                                         @foreach ($designations as $designation)
                                             <option value="{{$designation->id}}">{{$designation->name}}</option>
                                         @endforeach
+
                                     </select>
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
@@ -243,7 +244,7 @@
 @endsection
 @section('script')
     <script type="text/javascript">
-        $("#edit_supplier").on("show.bs.modal", function (e) {
+        $("#edit_employee").on("show.bs.modal", function (e) {
             var id = $(e.relatedTarget).data('target-id');
             var name = $(e.relatedTarget).data('name');
             var address = $(e.relatedTarget).data('address');
@@ -261,11 +262,36 @@
             $('.modal-body #edit_date_of_birth').val(date_of_birth);
             $('.modal-body #edit_phone').val(phone);
             $('.modal-body #edit_email').val(email);
+            $('#edit_department').on('change', function () {
+                var id = $(this).val();
+                var url = "{{route('getDegAgainstDept')}}";
+                if(id != ''){
+                    getDegAgainstDept(id, url, '#edit_designation');
+                }else{
+                    var output = '<option value="">No data available</option>';
+                    $('#edit_designation').html(output) ;
+                }
+            });
+            $('.select2').select2();
 
         });
 
-        $("#edit_supplier").on("hide.bs.modal", function (e) {
+        $("#edit_employee").on("hide.bs.modal", function (e) {
             location.reload();
+        });
+
+        $("#add_employee").on("show.bs.modal", function (e) {
+            $('#department').on('change', function () {
+                var id = $(this).val();
+                var url = "{{route('getDegAgainstDept')}}";
+                if(id != ''){
+                    getDegAgainstDept(id, url, '#designation');
+                }else{
+                    var output = '<option value="">No data available</option>';
+                    $('#designation').html(output) ;
+                }
+            });
+            $('.select2').select2();
         });
     </script>
 @endsection
