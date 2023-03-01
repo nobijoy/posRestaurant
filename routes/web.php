@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/pos', [App\Http\Controllers\HomeController::class, 'pos'])->name('pos');
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/setting', [App\Http\Controllers\HomeController::class, 'setting'])->name('setting');
     Route::get('/category', [App\Http\Controllers\HomeController::class, 'category'])->name('category');
@@ -103,6 +104,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('menu/{id}/update', 'App\Http\Controllers\MenuController@update')->name('menu.update');
 
     Route::get('getSubCatAgainstCat', 'App\Http\Controllers\CommonController@getSubCatAgainstCat')->name('getSubCatAgainstCat');
+    Route::get('getDegAgainstDept', 'App\Http\Controllers\CommonController@getDegAgainstDept')->name('getDegAgainstDept');
 
 
     Route::delete('ingredient_category/{id}', 'App\Http\Controllers\IngredientCategoryController@delete')->name('ingredient_category.delete');

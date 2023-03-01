@@ -14,11 +14,11 @@
                 </a>
             </li>
 
-{{--            <li  class="nav-item @if($url == 'setting') active @endif"  >--}}
-{{--                <a href="{{route('setting')}}" data-i18n="outlet_setting">--}}
-{{--                    <i class="feather icon-settings"></i><span class="menu-title" data-i18n="outlet_setting">Setting</span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
+            <li  class="nav-item @if($url == 'pos') active @endif"  >
+                <a href="{{route('pos')}}" data-i18n="pos">
+                    <i class="feather icon-dollar-sign"></i><span class="menu-title" data-i18n="pos">POS</span>
+                </a>
+            </li>
 
             <li class=" nav-item">
                 <a href="">
@@ -38,16 +38,11 @@
                         <a href="{{route('emailSetup')}}" data-i18n="Email Setup">Email Setup</a>
                     </li>
                     <li @if($url == 'apiSetup') class="active"  @endif>
-                        <a href="{{route('apiSetup')}}" data-i18n="Email Setup">Email Setup</a>
+                        <a href="{{route('apiSetup')}}" data-i18n="Email Setup">Api Setup</a>
                     </li>
                 </ul>
             </li>
 
-            <li  class="nav-item @if($url == 'expense.index') active @endif"  >
-                <a href="{{route('expense.index')}}" data-i18n="outlet_setting">
-                    <i class="feather icon-dollar-sign"></i><span class="menu-title" data-i18n="outlet_setting">Expenses</span>
-                </a>
-            </li>
 
 {{--            <li  class="nav-item @if($url == 'outlet_setting') active @endif"  >--}}
 {{--                <a href="{{route('outlet_setting')}}" data-i18n="outlet_setting">--}}
@@ -110,6 +105,9 @@
                     </li>
                     <li @if($url == 'waste.index') class="active"  @endif>
                         <a href="{{route('waste.index')}}" data-i18n="">Waste</a>
+                    </li>
+                    <li @if($url == 'expense.index') class="active"  @endif>
+                        <a href="{{route('expense.index')}}" data-i18n="">Expense</a>
                     </li>
                 </ul>
             </li>

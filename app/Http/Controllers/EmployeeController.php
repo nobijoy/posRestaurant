@@ -18,7 +18,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $datas = Employee::where('is_active', 1)->get()->reverse();
+        $datas = Employee::with(['designationInfo','deptInfo'])->where('is_active', 1)->get()->reverse();
         $departments = Department::where('is_active', 1)->get()->reverse();
         $designations = Designation::where('is_active', 1)->get()->reverse();
         $sl = 0;

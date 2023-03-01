@@ -18,7 +18,7 @@ class DesignationController extends Controller
     public function index()
     {
         $departments = Department::where('is_active', 1)->orderBy('name')->get();
-        $datas = Designation::where('is_active', 1)->get()->reverse();
+        $datas = Designation::with(['departmentInfo'])->where('is_active', 1)->get()->reverse();
         $sl = 0;
         return view('admin.department.designation', compact('departments','datas', 'sl'));
     }

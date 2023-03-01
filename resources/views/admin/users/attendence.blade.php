@@ -124,7 +124,7 @@
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
                                 <label for="date">Date <span class="text-danger">*</span></label>
-                                <input type="date" name="date" class="form-control" id="date" value="" required>
+                                <input type="date" name="date" class="form-control" id="date" value="{{date('Y-m-d')}}" required>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
                                 <label for="employee">Employee<span class="text-danger">*</span></label>

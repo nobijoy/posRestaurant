@@ -21,7 +21,7 @@ class MenuController extends Controller
     public function index()
     {
         $categories = MenuCategory::where('is_active', 1)->orderBy('name')->get();
-        $datas = Menu::where('is_active', 1)->get()->reverse();
+        $datas = Menu::with(['category'])->where('is_active', 1)->get()->reverse();
         $sl = 0;
         return view('admin.pos.food_item.index', compact('categories', 'datas', 'sl'));
     }
@@ -34,7 +34,7 @@ class MenuController extends Controller
     public function create()
     {
         $categories = MenuCategory::where('is_active', 1)->orderBy('name')->get();
-        $ingredients = Ingredient::where('is_active', 1)->orderBy('name')->get();
+        $ingredients = Ingredient::with(['unit'])->where('is_active', 1)->orderBy('name')->get();
         return view('admin.pos.food_item.create', compact('categories', 'ingredients'));
     }
 
@@ -113,8 +113,8 @@ class MenuController extends Controller
     {
         $data = Menu::findorFail($id);
         $categories = MenuCategory::where('is_active', 1)->orderBy('name')->get();
-        $ingredients = Ingredient::where('is_active', 1)->orderBy('name')->get();
-        $consumptionsIngredients = IngredientConsumption::where('menu_id', $id)->where('is_active', 1)->get();
+        $ingredients = Ingredient::with(['unit'])->where('is_active', 1)->orderBy('name')->get();
+        $consumptionsIngredients = IngredientConsumption::with(['ingredient','ingredient.unit'])->where('menu_id', $id)->where('is_active', 1)->get();
         $conIds = [];
         foreach ($consumptionsIngredients as $key => $value) {
             array_push($conIds, strval($value->ingredient_id));

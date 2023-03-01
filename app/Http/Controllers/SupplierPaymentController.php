@@ -18,7 +18,7 @@ class SupplierPaymentController extends Controller
      */
     public function index()
     {
-        $datas = SupplierPayment::where('is_active', 1)-> get()->reverse();
+        $datas = SupplierPayment::with(['supplierInfo','createdBy'])->where('is_active', 1)-> get()->reverse();
         $suppliers = Supplier::where('is_active', 1)-> get()->reverse();
         $sl = 0;
         return view('admin.supplier.payment', compact('datas', 'sl', 'suppliers'));
@@ -100,11 +100,11 @@ class SupplierPaymentController extends Controller
      */
     public function update(Request $request)
     {
-//        $validatedData = $request->validate([
-//            'name' => ['required'],
-//            'receipt_number' => ['required', 'unique:supplier_payments,receipt_number' .$request->id. ',id'],
-//            'amount' => ['required'],
-//        ]);
+        $validatedData = $request->validate([
+            'name' => ['required'],
+            'receipt_number' => ['required', 'unique:supplier_payments,receipt_number,' .$request->id. ',id'],
+            'amount' => ['required'],
+        ]);
         DB::beginTransaction();
 
         try {
