@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('*',function($settings){
             $settings->with('url', Route::currentRouteName());
-             $settings->with('gsetting', DB::table('pos_settings')->find(1));
+             $settings->with('gsetting', (new \App\Models\PosSetting())->getDetailsById(1));
 
             if (!session()->has('popup'))
             {

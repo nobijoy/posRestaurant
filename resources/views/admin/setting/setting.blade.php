@@ -169,26 +169,26 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-3 mt-2">
-                                                    <a class="btn btn-primary font-weight-bolder">Reset Transactional Data</a>
+                                                    <a class="btn btn-primary font-weight-bolder text-white">Reset Transactional Data</a>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-3 ">
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-3 ">
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-3 mt-2">
-                                                    <a class="btn btn-primary font-weight-bolder">White Label</a>
+                                                    <a class="btn btn-primary font-weight-bolder text-white">White Label</a>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-3 mt-2">
-                                                    <a class="btn btn-primary font-weight-bolder">Printers</a>
+                                                    <a class="btn btn-primary font-weight-bolder text-white">Printers</a>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-3 mt-2">
-                                                    <a class="btn btn-primary font-weight-bolder">Tax Settings</a>
+                                                    <a class="btn btn-primary font-weight-bolder text-white">Tax Settings</a>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-3 mt-2">
-                                                    <a class="btn btn-primary font-weight-bolder">Software Update</a>
+                                                    <a class="btn btn-primary font-weight-bolder text-white">Software Update</a>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4 col-lg-3 mt-2">
-                                                    <a class="btn btn-primary font-weight-bolder">License Transfer</a>
+                                                    <a class="btn btn-primary font-weight-bolder text-white">License Transfer</a>
                                                 </div>
                                             </div>
 
