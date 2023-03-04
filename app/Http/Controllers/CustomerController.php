@@ -17,7 +17,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $datas = Customer::with(['createdBy'])->where('is_active', 1)->get()->reverse();
+        $datas = Customer::with(['createdBy','re'])->where('is_active', 1)->get()->reverse();
         $sl = 0;
         return view('admin.pos.customer', compact('datas', 'sl'));
     }
