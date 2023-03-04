@@ -101,3 +101,42 @@ function getDegAgainstDept(id, url, view) {
         }
     });
 }
+
+function getIngrerdientInfoById(id, url, view) {
+    $.ajax({
+        url: url,
+        type: "get",
+        data: {
+            "id": id,
+        },
+        contentType: "application/json;charset=UTF-8",
+        dataType: "json",
+        success: function (data) {
+            console.log(view)
+            // if(view = '')
+        },
+
+        error: function (e) {
+            console.log(e);
+        }
+    });
+}
+function menuIngredients(id, url, view) {
+    $.ajax({
+        url: url,
+        type: "get",
+        data: {
+            "id": id,
+        },
+        contentType: "application/json;charset=UTF-8",
+        dataType: "json",
+        success: function (data) {
+            console.log(data)
+            // if(view = '')
+        },
+
+        error: function (e) {
+            console.log(e);
+        }
+    });
+}

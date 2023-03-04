@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Designation;
+use App\Models\Ingredient;
 use App\Models\MenuSubCategory;
 use Illuminate\Http\Request;
 
@@ -17,5 +18,9 @@ class CommonController extends Controller
         $datas = Designation::where('department', $request->id)->where('is_active', 1)->orderBy('name')->get();
 
         return json_encode($datas);
+    }
+    public function getIngrerdientInfoById(Request $request){
+        $data = Ingredient::find($request->id);
+        return json_encode($data);
     }
 }

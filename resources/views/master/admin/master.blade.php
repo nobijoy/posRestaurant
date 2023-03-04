@@ -109,7 +109,7 @@
     <script src="{{asset('public/backend/js/core/app-menu.js')}}"></script>
     <script src="{{asset('public/backend/js/core/app.js')}}"></script>
     <script src="{{asset('public/backend/assets/js/datatable.js')}}"></script>
-    <script src="{{asset('public/backend/assets/js/common.js?v1.1')}}"></script>
+    <script src="{{asset('public/backend/assets/js/common.js?v1.2')}}"></script>
     <script src="{{asset('public/backend/assets/js/scripts.js')}}"></script>
     <script src="{{asset('public/app-assets/js/scripts/forms/form-login-register.js')}}"></script>
 

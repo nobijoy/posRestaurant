@@ -66,32 +66,38 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            @if(sizeof($datas) > 0)
+                                                @foreach($datas as $data)
+                                                    <?php $ingredients = json_decode($data->ingredients);?>
                                                     <tr>
-
-                                                        <td>dfsf</td>
-                                                        <td>dfsf</td>
-                                                        <td>dfsf</td>
-                                                        <td>dfsf</td>
-                                                        <td>dfsf</td>
-                                                        <td>dfsf</td>
-                                                        <td>dfsf</td>
-                                                        <td>dfsf</td>
+                                                        <td>{{++$sl}}</td>
+                                                        <td>{{$data->reference_no}}</td>
+                                                        <td>{{$data->date}}</td>
+                                                        <td>{{$data->total_loss}}</td>
+                                                        <td>{{sizeof($ingredients)}}</td>
+                                                        <td>{{$data->res_person? $data->employeeInfo->name : ''}}</td>
+                                                        <td>{{$data->note}}</td>
+                                                        <td>{{$data->created_by? $data->createdBy->name: ''}}</td>
                                                         <td>
-                                                                <a href="{{ route ('waste.edit', 'id')}}">
+                                                            @if($data->is_active == 1)
+                                                                <a href="{{ route ('waste.edit', $data->id)}}">
                                                                     <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
                                                                         <i class="fa fa-pencil-square"></i></button>
                                                                 </a>
                                                                 <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive"
-                                                                        onclick="">
+                                                                        onclick="deleteData('{{ route('waste.delete',[$data->id])}}')">
                                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                                 </button>
+                                                            @else
                                                                 <button type="button" class="btn btn-icon btn-outline-primary btn-sm" title="Restore"
                                                                         onclick="">
                                                                     <i class="fa fa-undo" aria-hidden="true"></i>
                                                                 </button>
-
+                                                            @endif
                                                         </td>
                                                     </tr>
+                                                @endforeach
+                                            @endif
                                             </tbody>
                                             <tfoot class="display-hidden">
                                             </tfoot>

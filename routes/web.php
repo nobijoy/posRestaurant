@@ -105,6 +105,7 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::get('getSubCatAgainstCat', 'App\Http\Controllers\CommonController@getSubCatAgainstCat')->name('getSubCatAgainstCat');
     Route::get('getDegAgainstDept', 'App\Http\Controllers\CommonController@getDegAgainstDept')->name('getDegAgainstDept');
+    Route::get('getIngrerdientInfoById', 'App\Http\Controllers\CommonController@getIngrerdientInfoById')->name('getIngrerdientInfoById');
 
 
     Route::delete('ingredient_category/{id}', 'App\Http\Controllers\IngredientCategoryController@delete')->name('ingredient_category.delete');
@@ -195,7 +196,10 @@ Route::group(['middleware' => ['auth']], function(){
 //    Route::get('/waste/add', [App\Http\Controllers\WasteController::class, 'wasteAdd'])->name('waste.add');
 //    Route::get('/waste/edit', [App\Http\Controllers\WasteController::class, 'wasteEdit'])->name('waste.edit');
     Route::resource('waste', 'App\Http\Controllers\WasteController')->parameters('waste', 'id');
-    Route::get('menu-info/{id}', ['App\Http\Controllers\WasteController', 'showMenuInfo'])->name('menu.info');
+    Route::post('waste/{id}/update', 'App\Http\Controllers\WasteController@update')->name('waste.update');
+    Route::get('menu-info', ['App\Http\Controllers\WasteController', 'showMenuInfo'])->name('menu.info');
+    Route::delete('waste/{id}/delete', 'App\Http\Controllers\WasteController@delete')->name('waste.delete');
+
 
 
 

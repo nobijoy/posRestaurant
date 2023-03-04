@@ -165,7 +165,7 @@ class PurchaseController extends Controller
             $data->deleted_by = Auth()->user()->id;
             $data->save();
             DB::commit();
-            return 'Menu Inactive Successfully!';
+            return 'Purchase Inactive Successfully!';
         } catch (\Throwable $th) {
             DB::rollback();
             return 'Somethings Went Wrong!';
