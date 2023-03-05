@@ -22,7 +22,7 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/pos', [App\Http\Controllers\HomeController::class, 'pos'])->name('pos');
+    Route::get('/pos', [App\Http\Controllers\POSController::class, 'pos'])->name('pos');
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/setting', [App\Http\Controllers\HomeController::class, 'setting'])->name('setting');
     Route::get('/category', [App\Http\Controllers\HomeController::class, 'category'])->name('category');
