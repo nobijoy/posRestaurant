@@ -87,4 +87,8 @@ class POSController extends Controller
         return view('admin.pos_setting.email', compact('data'));
     }
 
+    public function pos(){
+        return view('pos.pos_view');
+    }
+
 }

@@ -16,7 +16,7 @@
 
             <li  class="nav-item @if($url == 'pos') active @endif"  >
                 <a href="{{route('pos')}}" data-i18n="pos">
-                    <i class="feather icon-dollar-sign"></i><span class="menu-title" data-i18n="pos">POS</span>
+                    <i class="feather icon-pocket"></i><span class="menu-title" data-i18n="pos">POS</span>
                 </a>
             </li>
 
@@ -38,7 +38,7 @@
                         <a href="{{route('emailSetup')}}" data-i18n="Email Setup">Email Setup</a>
                     </li>
                     <li @if($url == 'apiSetup') class="active"  @endif>
-                        <a href="{{route('apiSetup')}}" data-i18n="Email Setup">Api Setup</a>
+                        <a href="{{route('apiSetup')}}" data-i18n="Email Setup">3rd Party Setup</a>
                     </li>
                 </ul>
             </li>
@@ -52,7 +52,7 @@
 
             <li class="nav-item">
                 <a href="#">
-                    <i class="feather icon-file-text"></i><span class="menu-title" data-i18n="Setup">Setup</span>
+                    <i class="feather icon-file-text"></i><span class="menu-title" data-i18n="Setup">Food Menu Setup</span>
                 </a>
                 <ul class="menu-content">
 {{--                    <li @if($url == 'setting') class="active"  @endif>--}}
@@ -74,9 +74,9 @@
                     <li @if($url == 'menu.index' || $url == "menu.create" || $url == "menu.edit") class="active"  @endif>
                         <a href="{{route('menu.index')}}" data-i18n="Food Menu">Food Menu</a>
                     </li>
-                    <li @if($url == 'expense_item.index') class="active"  @endif>
-                        <a href="{{route('expense_item.index')}}" data-i18n="Food Menu">Expense Item</a>
-                    </li>
+{{--                    <li @if($url == 'expense_item.index') class="active"  @endif>--}}
+{{--                        <a href="{{route('expense_item.index')}}" data-i18n="Food Menu">Expense Item</a>--}}
+{{--                    </li>--}}
 {{--                    <li @if($url == 'modifiers') class="active"  @endif>--}}
 {{--                        <a href="{{route('modifiers')}}" data-i18n="Food Menu">Modifier</a>--}}
 {{--                    </li>--}}
@@ -100,14 +100,28 @@
                     <li @if($url == 'stock.index') class="active"  @endif>
                         <a href="{{route('stock.index')}}" data-i18n="">Stock</a>
                     </li>
-                    <li @if($url == 'stock_adjustment.index') class="active"  @endif>
-                        <a href="{{route('stock_adjustment.index')}}" data-i18n="">Stock Adjustment</a>
-                    </li>
-                    <li @if($url == 'waste.index') class="active"  @endif>
+{{--                    <li @if($url == 'stock_adjustment.index') class="active"  @endif>--}}
+{{--                        <a href="{{route('stock_adjustment.index')}}" data-i18n="">Stock Adjustment</a>--}}
+{{--                    </li>--}}
+                    <li @if($url == 'waste.index'|| $url == 'waste.create' || $url == 'waste.edit') class="active"  @endif>
                         <a href="{{route('waste.index')}}" data-i18n="">Waste</a>
                     </li>
+{{--                    <li @if($url == 'expense.index') class="active"  @endif>--}}
+{{--                        <a href="{{route('expense.index')}}" data-i18n="">Expense</a>--}}
+{{--                    </li>--}}
+                </ul>
+            </li>
+
+            <li class=" nav-item">
+                <a href="">
+                    <i class="feather icon-dollar-sign"></i><span class="menu-title" data-i18n="Supplier">Manage Expense</span>
+                </a>
+                <ul class="menu-content">
                     <li @if($url == 'expense.index') class="active"  @endif>
-                        <a href="{{route('expense.index')}}" data-i18n="">Expense</a>
+                        <a href="{{route('expense.index')}}" data-i18n="Info">Expense</a>
+                    </li>
+                    <li @if($url == 'expense_item.index') class="active"  @endif>
+                        <a href="{{route('expense_item.index')}}" data-i18n="Payment">Expense Item</a>
                     </li>
                 </ul>
             </li>
