@@ -81,3 +81,13 @@ td .input-group {
     overflow-x: hidden;
     height: 500px !important;
 }
+.pos-scroll-item{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 100vh;
+}
+.food-item-img{
+    height: 100px;
+    width: 100%;
+    object-fit: cover;
+}
