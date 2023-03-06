@@ -5,17 +5,57 @@
 @section('body')
 
     <section class="mt-1">
-        <div class="row">
-
-{{--            running order card start--}}
-
+        <div class="row ">
+           {{-- running order card start --}}
             <div class="col-md-2">
-                <div class="ml-1 card rounded">
+                <div class="row ml-1 card rounded">
                     <div class="card-header py-0 mx-auto">
                         <h4 class="text-center mb-0 font-weight-bold">Running Orders<span class="btn text-primary"><i class="feather icon-repeat"></i></span></h4>
                         <input type="text" name="" id="" class="mb-1 rounded form-control" placeholder="Search here">
                     </div>
-                    <div class="card-body bg-light-grey-blue h-50 overflow-y-scroll">
+                    <div class="card-body bg-light-grey-blue pos-left-items overflow-y-scroll mb-1">
+                        <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
+                            <p>Cust: Walk-in Customer</p>
+                            <p>Order: rKK230305-001</p>
+                            <p>Order Type: Dine In</p>
+                            <p>Table: None</p>
+                            <p>Waiter: Rakesh</p>
+                        </div>
+                        <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
+                            <p>Cust: Walk-in Customer</p>
+                            <p>Order: rKK230305-001</p>
+                            <p>Order Type: Dine In</p>
+                            <p>Table: None</p>
+                            <p>Waiter: Rakesh</p>
+                        </div>
+                        <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
+                            <p>Cust: Walk-in Customer</p>
+                            <p>Order: rKK230305-001</p>
+                            <p>Order Type: Dine In</p>
+                            <p>Table: None</p>
+                            <p>Waiter: Rakesh</p>
+                        </div>
+                        <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
+                            <p>Cust: Walk-in Customer</p>
+                            <p>Order: rKK230305-001</p>
+                            <p>Order Type: Dine In</p>
+                            <p>Table: None</p>
+                            <p>Waiter: Rakesh</p>
+                        </div>
+                        <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
+                            <p>Cust: Walk-in Customer</p>
+                            <p>Order: rKK230305-001</p>
+                            <p>Order Type: Dine In</p>
+                            <p>Table: None</p>
+                            <p>Waiter: Rakesh</p>
+                        </div>
+                        <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
+                            <p>Cust: Walk-in Customer</p>
+                            <p>Order: rKK230305-001</p>
+                            <p>Order Type: Dine In</p>
+                            <p>Table: None</p>
+                            <p>Waiter: Rakesh</p>
+                        </div>
                         <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
                             <p>Cust: Walk-in Customer</p>
                             <p>Order: rKK230305-001</p>
@@ -31,7 +71,9 @@
                             <p>Waiter: Rakesh</p>
                         </div>
                     </div>
-                    <div class="card-footer h-auto p-0 pt-1">
+                </div>
+                <div class="row ml-1 card rounded mb-1">
+                    <div class="card-body">
                         <div class="row btn-group mx-auto text-center">
                             <div class="col-12 ">
                                 <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Modify Order<i class="feather icon-edit"></i></button>
@@ -61,11 +103,11 @@
                     </div>
                 </div>
             </div>
-{{--                Running order card end--}}
+            {{-- Running order card end --}}
 
 
-            <div class="col-md-5 px-0">
-                <div class="card vh-100 rounded">
+            <div class="col-md-5 ">
+                <div class="vh-100 card rounded mb-2">
                     <div class="card-header pb-0">
                         <div class="row d-flex justify-content-around text-center">
                             <div class="col-3">
@@ -75,7 +117,7 @@
                                 <button class="btn w-100 bg-light-grey-blue mb-1 mx-auto font-weight-bold">Takeaway <i class="feather icon-shopping-bag"></i></button>
                             </div>
                             <div class="col-3">
-                                <button class="btn w-100 bg-light-grey-blue mb-1 mx-auto font-weight-bold">Delivary <i class="feather icon-truck"></i></button>
+                                <button class="btn w-100 bg-light-grey-blue mb-1 mx-auto font-weight-bold">Delivery <i class="feather icon-truck"></i></button>
                             </div>
                             <div class="col-3">
                                 <button class="btn w-100 bg-light-grey-blue mb-1 mx-auto font-weight-bold">Table <i class="feather icon-grid"></i></button>
@@ -109,8 +151,8 @@
 
                     <div class="card-body">
                         <div class="row">
-{{--                            <input type="hidden" id="ingredient_count" value="0">--}}
-{{--                            <input type="hidden" id="ingredient_sl" value="0">--}}
+                           {{-- <input type="hidden" id="ingredient_count" value="0"> --}}
+                           {{-- <input type="hidden" id="ingredient_sl" value="0"> --}}
                             <div class="form-group col-md-12 ">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="order_table">
@@ -131,7 +173,6 @@
                             </div>
                         </div>
                     </div>
-
 
                 </div>
             </div>

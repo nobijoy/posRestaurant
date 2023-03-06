@@ -44,7 +44,7 @@
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/style.css?v1.2')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/css/admin-styles.css')}}">
     <!-- END: Custom CSS-->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
@@ -55,7 +55,7 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu 2-columns h-100 fixed-navbar" data-open="click" data-menu="vertical-menu"
+<body class="vertical-layout vertical-menu 2-columns vh-100 fixed-navbar" data-open="click" data-menu="vertical-menu"
       data-col="2-columns">
 <input type="hidden" id="csrfToken" value="{{ csrf_token() }}">
 <!-- BEGIN: Header-->
@@ -82,7 +82,7 @@
 {{--<div class="sidenav-overlay"></div>--}}
 {{--<div class="drag-target"></div>--}}
 <!-- BEGIN: Footer-->
-{{--@include('master.admin.footer')--}}
+{{-- @include('master.admin.footer') --}}
 <!-- END: Footer-->
 
 
