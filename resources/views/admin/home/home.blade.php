@@ -11,7 +11,6 @@ Home
             <div class="col-md-4 col-sm-12 my-2">
                 <img src="{{Auth()->user()->user_img ? asset('public/uploads/image/'.Auth()->user()->user_img) : asset('public/backend/images/avatar.jpg')}}"
                 alt="{{auth()->user()->name}}" class="w-100">
-                {{-- <img src="https://dsbeta.work/demo/irestora_plus/images/chef.png" alt="" class="w-100"> --}}
             </div>
             <div class="col-sm-12 mt-5 col-md-8">
                 <h1 class="bg-blue px-3 py-1 font-weight-bolder text-white round">{{auth()->user()->name}}</h1>
