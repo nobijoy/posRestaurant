@@ -76,3 +76,8 @@ td .input-group {
 	border-color: #000;
 	outline: 0;
 }
+
+.pos-left-items {
+    overflow-x: hidden;
+    height: 500px !important;
+}

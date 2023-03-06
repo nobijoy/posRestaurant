@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Throwable;
 use App\Models\PosSetting;
 use Illuminate\Http\Request;
-use DB;
-use Image;
+use Intervention\Image\Image;
+use Illuminate\Support\Facades\DB;
 
 class POSController extends Controller
 {
@@ -13,10 +14,8 @@ class POSController extends Controller
     public function posUpdate(Request $request){
         $data = PosSetting::find(1);
         if($request->isMethod('post')){
-
             DB::beginTransaction();
             try{
-//                $data = null;
                 if(!$data){
                     $data = new PosSetting();
                 }
@@ -51,7 +50,6 @@ class POSController extends Controller
                     }
                 }
                 $data->title = $request->title;
-//                dd($data);
                 $data->save();
                 DB::commit();
                 return back()->with('success', 'Data updated successfully!');
@@ -60,7 +58,6 @@ class POSController extends Controller
                 return back()->with('error', $th->getMessage());
             }
         }
-//        $data = PosSetting::find(1);
         return view('admin.pos_setting.pos_setting', compact('data'));
     }
 
