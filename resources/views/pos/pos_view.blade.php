@@ -23,7 +23,13 @@
                             <p>Table: None</p>
                             <p>Waiter: Rakesh</p>
                         </div>
-
+                        <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
+                            <p>Cust: Walk-in Customer</p>
+                            <p>Order: rKK230305-001</p>
+                            <p>Order Type: Dine In</p>
+                            <p>Table: None</p>
+                            <p>Waiter: Rakesh</p>
+                        </div>
                     </div>
                     <div class="card-footer h-auto p-0 pt-1">
                         <div class="row btn-group mx-auto text-center">
@@ -58,10 +64,10 @@
 {{--                Running order card end--}}
 
 
-            <div class="col-md-4">
+            <div class="col-md-5 px-0">
                 <div class="card vh-100 rounded">
-                    <div class="card-header">
-                        <div class="row d-flex align-items-center text-center">
+                    <div class="card-header pb-0">
+                        <div class="row d-flex justify-content-around text-center">
                             <div class="col-3">
                                 <button class="btn w-100 bg-light-grey-blue mb-1 ml-auto font-weight-bold">Dine In <i class="feather icon-grid"></i></button>
                             </div>
@@ -71,16 +77,67 @@
                             <div class="col-3">
                                 <button class="btn w-100 bg-light-grey-blue mb-1 mx-auto font-weight-bold">Delivary <i class="feather icon-truck"></i></button>
                             </div>
-                            <div class="col-">
+                            <div class="col-3">
                                 <button class="btn w-100 bg-light-grey-blue mb-1 mx-auto font-weight-bold">Table <i class="feather icon-grid"></i></button>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <select name="waiter_list" id="waiter_list" class="form-control select2" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="">Waiter1</option>
+                                    <option value="">Waiter2</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5">
+                                <select name="customer_list" id="customer_list" class="form-control select2" required>
+                                    <option value="" selected>Select</option>
+                                    <option value="">Customer1</option>
+                                    <option value="">Customer1</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 px-0">
+                                <a href="" class="btn btn-secondary">
+                                    <i class="feather icon-edit"></i>
+                                </a>
+                                <a href="" class="btn btn-secondary">
+                                    <i class="feather icon-plus"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="card-body">
+                        <div class="row">
+{{--                            <input type="hidden" id="ingredient_count" value="0">--}}
+{{--                            <input type="hidden" id="ingredient_sl" value="0">--}}
+                            <div class="form-group col-md-12 ">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="order_table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 3%">Sl</th>
+                                                <th>Item</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th>Discount</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="order_items">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
 
 
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="mr-1 card vh-100 rounded">
                     <h3>item</h3>
                 </div>
