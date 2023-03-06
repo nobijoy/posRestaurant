@@ -32,19 +32,19 @@
 
     <!-- BEGIN: Theme CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('public/backend/css/bootstrap.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/css/bootstrap-extended.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/css/bootstrap-extended.css?v1.1')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/backend/css/colors.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/backend/css/components.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/backend/css/plugins/extensions/toastr.css')}}">
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/css/core/menu/menu-types/vertical-menu.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/css/core/menu/menu-types/vertical-menu.css?v1.1')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/backend/css/core/colors/palette-gradient.css')}}">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/style.css?v1.1')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/css/admin-styles.css')}}">
     <!-- END: Custom CSS-->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">

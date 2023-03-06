@@ -19,13 +19,18 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 }
 
 .logo {
-	width: 210px;
-	height: 30px;
+	width: 107px;
+	height: 48px;
 }
 
 .menu-collapsed .logo {
-	width: 30px;
-	height: 30px;
+    width: 42px;
+    height: 32px;
+}
+
+.fav {
+    width: 32px;
+    height: 32px;
 }
 
 td .input-group {
