@@ -65,12 +65,12 @@
                                         <div class="row align-items-center d-block">
                                             @if($data && $data->logo)
                                                 <div class="col-6 mb-2 mx-auto">
-                                                    <img src="{{ asset('public/uploads/image/'.$data->logo)}}" class="img-box">
+                                                    <img src="{{ asset('public/uploads/image/'.$data->logo)}}" class="main-logo">
                                                 </div>
                                             @endif
 
                                             <div class="form-group col-6 mb-2 mx-auto">
-                                                <label for="logo">Select LOGO (Logo Size Should Be 80 x 80 <span class="danger">*</span>): </label>
+                                                <label for="logo">Select LOGO (Logo Size Should Be 107 x 75 <span class="danger">*</span>): </label>
                                                 <input type="file" name="logo" id="logo" class="form-control">
                                             </div>
 
