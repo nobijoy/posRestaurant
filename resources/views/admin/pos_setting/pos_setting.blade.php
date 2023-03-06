@@ -76,7 +76,7 @@
 
                                             @if($data && $data->favicon)
                                                 <div class="col-6 mb-2 mx-auto">
-                                                    <img src="{{ asset('public/uploads/image/'.$data->favicon)}}" class="img-box">
+                                                    <img src="{{ asset('public/uploads/image/'.$data->favicon)}}" class="fav">
                                                 </div>
                                             @endif
 

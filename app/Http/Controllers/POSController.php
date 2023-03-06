@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Throwable;
 use App\Models\PosSetting;
 use Illuminate\Http\Request;
-use Intervention\Image\Image;
-use Illuminate\Support\Facades\DB;
+use Image;
+use DB;
 
 class POSController extends Controller
 {
@@ -25,7 +24,7 @@ class POSController extends Controller
                     $destinationPath = public_path('uploads/image');
                     $img = Image::make($image->getRealPath());
                     $img->orientate();
-                    $img->resize(275, 80)->save($destinationPath.'/'.$input);
+                    $img->resize(107, 75)->save($destinationPath.'/'.$input);
                     $destinationPath = public_path('/thumbnail');
                     $image->move($destinationPath,$input);
                     $data->logo = $input;

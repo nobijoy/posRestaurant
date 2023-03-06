@@ -710,8 +710,8 @@ html [type="button"],
     position: relative;
     padding: 0rem 1rem;
     transition: 300ms ease all; }
-    .header-navbar .navbar-header .navbar-brand {
-      padding: 15px 0px; }
+    /* .header-navbar .navbar-header .navbar-brand {
+      padding: 15px 0px; } */
       .header-navbar .navbar-header .navbar-brand .brand-logo {
         vertical-align: sub; }
       .header-navbar .navbar-header .navbar-brand .brand-text {
