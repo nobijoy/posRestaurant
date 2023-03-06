@@ -84,15 +84,20 @@ td .input-group {
 
 .pos-left-items {
     overflow-x: hidden;
+    overflow-y: auto;
     height: 500px !important;
 }
 .pos-scroll-item{
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 100vh;
 }
 .food-item-img{
     height: 100px;
     width: 100%;
     object-fit: cover;
+}
+
+.pos-section{
+    height: 890px;
 }

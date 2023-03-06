@@ -7,13 +7,13 @@
     <section class="mt-1">
         <div class="row ">
            {{-- running order card start --}}
-            <div class="col-md-2">
+            <div class="col-md-2 pos-section">
                 <div class="row ml-1 card rounded">
                     <div class="card-header py-0 mx-auto">
                         <h4 class="text-center mb-0 font-weight-bold">Running Orders<span class="btn text-primary"><i class="feather icon-repeat"></i></span></h4>
                         <input type="text" name="" id="" class="mb-1 rounded form-control" placeholder="Search here">
                     </div>
-                    <div class="card-body bg-light-grey-blue pos-left-items overflow-y-scroll mb-1">
+                    <div class="card-body bg-light-grey-blue pos-left-items mb-1">
                         <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
                             <p>Cust: Walk-in Customer</p>
                             <p>Order: rKK230305-001</p>
@@ -106,8 +106,8 @@
             {{-- Running order card end --}}
 
 
-            <div class="col-md-5 ">
-                <div class="vh-100 card rounded mb-2">
+            <div class="col-md-5">
+                <div class="card rounded pos-section">
                     <div class="card-header pb-0">
                         <div class="row d-flex justify-content-around text-center">
                             <div class="col-3">
@@ -149,7 +149,7 @@
                         </div>
                     </div>
 
-                    <div class="card-body pos-scroll-item">
+                    <div class="card-body pos-left-items ">
                         <div class="row">
                            {{-- <input type="hidden" id="ingredient_count" value="0"> --}}
                            {{-- <input type="hidden" id="ingredient_sl" value="0"> --}}
@@ -222,7 +222,7 @@
 
 
             <div class="col-md-5 pl-0">
-                <div class="mr-1 card vh-100 rounded">
+                <div class="mr-1 card rounded pos-section">
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col-md-12">
