@@ -139,9 +139,17 @@
 
             <div class="col-md-5">
                 <div class="mr-1 card vh-100 rounded">
-                    <h3>item</h3>
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input class="mb-1 rounded form-control" type="text" name="search" id="search" placeholder="Name or Code or Category or VEG or BEV or BAR">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
         </div>
     </section>
 @endsection
