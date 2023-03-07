@@ -17,7 +17,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $datas = Customer::with(['createdBy','re'])->where('is_active', 1)->get()->reverse();
+        $datas = Customer::with(['createdBy'])->where('is_active', 1)->get()->reverse();
         $sl = 0;
         return view('admin.pos.customer', compact('datas', 'sl'));
     }
@@ -40,12 +40,12 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => ['required'],
-            'phone' => ['required'],
-            'email' => ['required', 'unique:customers,email'],
-            'gst_number' => ['required', 'unique:customers,gst_number'],
-        ]);
+//        $validatedData = $request->validate([
+//            'name' => ['required'],
+//            'phone' => ['required'],
+//            'email' => ['required', 'unique:customers,email'],
+//            'gst_number' => ['required', 'unique:customers,gst_number'],
+//        ]);
 
             DB::beginTransaction();
 
@@ -104,12 +104,12 @@ class CustomerController extends Controller
      */
     public function update(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => ['required'],
-            'phone' => ['required'],
-            'email' => ['required'],
-            'gst_number' => ['required'],
-        ]);
+//        $validatedData = $request->validate([
+//            'name' => ['required'],
+//            'phone' => ['required'],
+//            'email' => ['required'],
+//            'gst_number' => ['required'],
+//        ]);
 
         DB::beginTransaction();
 

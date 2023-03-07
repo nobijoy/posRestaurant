@@ -134,23 +134,23 @@
                                     <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" value="" >
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
-                                    <label for="email">Email<span class="text-danger">*</span></label>
+                                    <label for="email">Email</label>
                                     <input type="email" name="email" class="form-control" id="email" placeholder="example@.com" value="" >
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
-                                    <label for="date_of_birth">Date Of Birth<span class="text-danger">*</span></label>
+                                    <label for="date_of_birth">Date Of Birth</label>
                                     <input type="date" name="date_of_birth" class="form-control" id="date_of_birth" placeholder="" value="" >
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
-                                    <label for="date_of_anniversary">Date Of Anniversary<span class="text-danger">*</span></label>
+                                    <label for="date_of_anniversary">Date Of Anniversary</label>
                                     <input type="date" name="date_of_anniversary" class="form-control" id="date_of_anniversary" placeholder="" value="" >
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
-                                    <label for="address">Address<span class="text-danger">*</span></label>
+                                    <label for="address">Address</label>
                                     <input type="text" name="address" class="form-control" id="address" placeholder="House-1, Road-2" value="" >
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
-                                    <label for="gst_number">Gst Number<span class="text-danger">*</span></label>
+                                    <label for="gst_number">Gst Number</label>
                                     <input type="text" name="gst_number" class="form-control" id="gst_number" placeholder="UYH3436" value="" >
                                 </fieldset>
                             </div>
@@ -190,23 +190,23 @@
                                     <input type="text" name="phone" class="form-control" id="edit_phone" placeholder="" value="" >
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
-                                    <label for="email">Email<span class="text-danger">*</span></label>
+                                    <label for="email">Email</label>
                                     <input type="email" name="email" class="form-control" id="edit_email" placeholder="" value="" >
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
-                                    <label for="date_of_birth">Date Of Birth<span class="text-danger">*</span></label>
+                                    <label for="date_of_birth">Date Of Birth</label>
                                     <input type="date" name="date_of_birth" class="form-control" id="edit_date_of_birth" placeholder="" value="" >
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
-                                    <label for="date_of_anniversary">Date Of Anniversary<span class="text-danger">*</span></label>
+                                    <label for="date_of_anniversary">Date Of Anniversary</label>
                                     <input type="date" name="date_of_anniversary" class="form-control" id="edit_date_of_anniversary" placeholder="" value="" >
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
-                                    <label for="address">Address<span class="text-danger">*</span></label>
+                                    <label for="address">Address</label>
                                     <input type="text" name="address" class="form-control" id="edit_address" placeholder="" value="" >
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
-                                    <label for="gst_number">Gst Number<span class="text-danger">*</span></label>
+                                    <label for="gst_number">Gst Number</label>
                                     <input type="text" name="gst_number" class="form-control" id="edit_gst_number" placeholder="" value="" >
                                 </fieldset>
                             </div>

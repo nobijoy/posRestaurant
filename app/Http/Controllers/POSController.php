@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use DB;
 use Image;
+use App\Models\Employee;
+use App\Models\Customer;
 use App\Models\Menu;
 use App\Models\PosSetting;
 use App\Models\MenuCategory;
@@ -86,9 +88,11 @@ class POSController extends Controller
     }
 
     public function pos(){
+        $waiters = Employee::where('designation', '2')->where('is_active','1')->get();
+        $customers = Customer::where('is_active','1')->get();
         $menuCategories = MenuCategory::where('is_active', 1)->orderBY('name')->get();
         $menus = Menu::where('is_active', 1)->orderBY('name')->get();
-        return view('pos.pos_view', compact('menuCategories', 'menus'));
+        return view('pos.pos_view', compact('customers', 'waiters', 'menuCategories', 'menus'));
     }
 
 }

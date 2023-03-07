@@ -127,15 +127,17 @@
                             <div class="col-md-5">
                                 <select name="waiter_list" id="waiter_list" class="form-control select2" required>
                                     <option value="" selected>Select</option>
-                                    <option value="">Waiter1</option>
-                                    <option value="">Waiter2</option>
+                                    @foreach ($waiters as $type)
+                                        <option value="{{$type->id}}" >{{$type->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-5">
                                 <select name="customer_list" id="customer_list" class="form-control select2" required>
                                     <option value="" selected>Select</option>
-                                    <option value="">Customer1</option>
-                                    <option value="">Customer1</option>
+                                    @foreach ($customers as $type)
+                                        <option value="{{$type->id}}" >{{$type->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-2 px-0">
