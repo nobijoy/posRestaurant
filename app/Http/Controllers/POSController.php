@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PosSetting;
-use Illuminate\Http\Request;
-use Image;
 use DB;
+use Image;
+use App\Models\Menu;
+use App\Models\PosSetting;
+use App\Models\MenuCategory;
+use Illuminate\Http\Request;
 
 class POSController extends Controller
 {
@@ -84,7 +86,9 @@ class POSController extends Controller
     }
 
     public function pos(){
-        return view('pos.pos_view');
+        $menuCategories = MenuCategory::where('is_active', 1)->orderBY('name')->get();
+        $menus = Menu::where('is_active', 1)->orderBY('name')->get();
+        return view('pos.pos_view', compact('menuCategories', 'menus'));
     }
 
 }

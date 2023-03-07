@@ -226,7 +226,7 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col-md-12">
-                                <input class="mb-1 rounded form-control" type="text" name="search" id="search" placeholder="&#x1F50E;&#xFE0E; Name or Code or Category or VEG or BEV or BAR">
+                                <input class="mb-1 rounded form-control" type="text" name="search" id="search" placeholder="Name or Code or Category or VEG or BEV or BAR">
                             </div>
                         </div>
                     </div>
@@ -235,49 +235,40 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-2 pos-scroll-item pl-0 pr-1">
-                                    <div class="px-0 mb-1">
-                                        <a class="btn bg-light-grey-blue btn-block">All</a>
-                                    </div>
-                                    <div class="px-0 mb-1">
-                                        <a class="btn bg-light-grey-blue btn-block">Chinese</a>
-                                    </div>
-                                    <div class="px-0 mb-1">
-                                        <a class="btn bg-light-grey-blue btn-block">Italian</a>
-                                    </div>
-                                    <div class="px-0 mb-1">
-                                        <a class="btn bg-light-grey-blue btn-block">Fast Food</a>
-                                    </div>
-                                    <div class="px-0 mb-1">
-                                        <a class="btn bg-light-grey-blue btn-block">Bevarage</a>
-                                    </div>
-                                    <div class="px-0 mb-1">
-                                        <a class="btn bg-light-grey-blue btn-block">Mexican</a>
-                                    </div>
-                                    <div class="px-0 mb-1">
-                                        <a class="btn bg-light-grey-blue btn-block">Indian</a>
-                                    </div>
+                                    @if(sizeof($menuCategories) > 0)
+                                        <div class="px-0 mb-1">
+                                            <a class="btn bg-light-grey-blue btn-block pos-btn-active">All</a>
+                                        </div>
+                                        @foreach ($menuCategories as $cat)
+                                            <div class="px-0 mb-1">
+                                                <button type="button" class="btn bg-light-grey-blue btn-block">{{$cat->name}}</button>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
 
 
                                 <div class="col-md-10 pos-scroll-item">
                                     <div class="row">
-                                        <div class="col-md-3 ">
-                                            <div class="card ">
-                                                <div class="card-content box-shadow-1 rounded">
-                                                    <img class="food-item-img img-fluid" src="public\app-assets\images\banner\banner-23.jpg" alt="Card image cap">
-                                                    <div class="card-body p-0 text-center">
-                                                        <h6 class="">Hot & Sour Soup <br>Price: 1200 </h6>
-                                                    </div>
+                                        @if (sizeof($menus) > 0)
+                                            @foreach ($menus as $menu)
+                                                <div class="col-md-3 ">
+                                                    <a href="javascript:" title="{{ $menu->name }}">
+                                                        <div class="card">
+                                                            <div class="card-content box-shadow-1 rounded">
+                                                                <img class="food-item-img img-fluid" alt="{{ $menu->name }}"
+                                                                src="{{ $menu->image ? asset ('public/uploads/image/'.$menu->image) : asset('public/image/no-image-icon.png') }}" >
+                                                                <div class="card-body p-0 text-center">
+                                                                    <h6 class="text-dark">{{ mb_strimwidth($menu->name, 0, 12, '....') }}</span> <br>Price: {{ $menu->price }} </h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
                                                 </div>
-                                            </div>
-                                        </div>
-
+                                            @endforeach
+                                        @endif
                                     </div>
-
-
-
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -287,4 +278,10 @@
 
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script>
+
+    </script>
 @endsection
