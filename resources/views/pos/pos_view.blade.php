@@ -239,36 +239,21 @@
                                 <div class="col-md-2 pos-scroll-item pl-0 pr-1">
                                     @if(sizeof($menuCategories) > 0)
                                         <div class="px-0 mb-1">
-                                            <a class="btn bg-light-grey-blue btn-block pos-btn-active">All</a>
+                                            <button class="btn bg-light-grey-blue btn-block pos-btn-active"
+                                            onclick="loadMenuByCategory('{{ route ('loadMenuByCategory', ['All'])}}')">All</button>
                                         </div>
                                         @foreach ($menuCategories as $cat)
                                             <div class="px-0 mb-1">
-                                                <button type="button" class="btn bg-light-grey-blue btn-block">{{$cat->name}}</button>
+                                                <button type="button" class="btn bg-light-grey-blue btn-block"
+                                                onclick="loadMenuByCategory('{{ route ('loadMenuByCategory', [$cat->id])}}')">{{$cat->name}}</button>
                                             </div>
                                         @endforeach
                                     @endif
                                 </div>
 
-
                                 <div class="col-md-10 pos-scroll-item">
-                                    <div class="row">
-                                        @if (sizeof($menus) > 0)
-                                            @foreach ($menus as $menu)
-                                                <div class="col-md-3 ">
-                                                    <a href="javascript:" title="{{ $menu->name }}">
-                                                        <div class="card">
-                                                            <div class="card-content box-shadow-1 rounded">
-                                                                <img class="food-item-img img-fluid" alt="{{ $menu->name }}"
-                                                                src="{{ $menu->image ? asset ('public/uploads/image/'.$menu->image) : asset('public/image/no-image-icon.png') }}" >
-                                                                <div class="card-body p-0 text-center">
-                                                                    <h6 class="text-dark">{{ mb_strimwidth($menu->name, 0, 12, '....') }}</span> <br>Price: {{ $menu->price }} </h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            @endforeach
-                                        @endif
+                                    <div class="row" id="menu-section">
+                                        @include('pos.menus')
                                     </div>
                                 </div>
                             </div>
@@ -284,6 +269,19 @@
 
 @section('script')
     <script>
+        function loadMenuByCategory(url) {
+            $.ajax({
+                url : url,
+                dataType : 'json',
 
+                success: function (data) {
+                    $("#menu-section").empty().html(data.view);
+                },
+
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
     </script>
 @endsection
