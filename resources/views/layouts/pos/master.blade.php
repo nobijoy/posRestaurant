@@ -28,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('public/backend/vendors/css/extensions/unslider.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/backend/vendors/css/weather-icons/climacons.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/backend/vendors/css/tables/datatable/datatables.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css') }}">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -44,7 +45,7 @@
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/style.css?v1.3')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style.css?v1.3')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/css/admin-styles.css')}}">
     <!-- END: Custom CSS-->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">

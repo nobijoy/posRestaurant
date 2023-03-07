@@ -13,62 +13,48 @@
                         <h4 class="text-center mb-0 font-weight-bold">Running Orders<span class="btn text-primary"><i class="feather icon-repeat"></i></span></h4>
                         <input type="text" name="" id="" class="mb-1 rounded form-control" placeholder="Search here">
                     </div>
-                    <div class="card-body bg-light-grey-blue pos-left-items mb-1">
-                        <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
-                            <p>Cust: Walk-in Customer</p>
-                            <p>Order: rKK230305-001</p>
-                            <p>Order Type: Dine In</p>
-                            <p>Table: None</p>
-                            <p>Waiter: Rakesh</p>
+                    <div class="card-body pos-left-items mb-1">
+                        <div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded">
+                            <span>Cust: Walk-in Customer</span><br>
+                            <span>Order: rKK230305-001</span><br>
+                            <span>Order Type: Dine In</span><br>
+                            <span>Table: None</span><br>
+                            <span>Waiter: Rakesh</span>
                         </div>
-                        <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
-                            <p>Cust: Walk-in Customer</p>
-                            <p>Order: rKK230305-001</p>
-                            <p>Order Type: Dine In</p>
-                            <p>Table: None</p>
-                            <p>Waiter: Rakesh</p>
+                        <div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded">
+                            <span>Cust: Walk-in Customer</span><br>
+                            <span>Order: rKK230305-001</span><br>
+                            <span>Order Type: Dine In</span><br>
+                            <span>Table: None</span><br>
+                            <span>Waiter: Rakesh</span>
                         </div>
-                        <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
-                            <p>Cust: Walk-in Customer</p>
-                            <p>Order: rKK230305-001</p>
-                            <p>Order Type: Dine In</p>
-                            <p>Table: None</p>
-                            <p>Waiter: Rakesh</p>
+                        <div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded">
+                            <span>Cust: Walk-in Customer</span><br>
+                            <span>Order: rKK230305-001</span><br>
+                            <span>Order Type: Dine In</span><br>
+                            <span>Table: None</span><br>
+                            <span>Waiter: Rakesh</span>
                         </div>
-                        <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
-                            <p>Cust: Walk-in Customer</p>
-                            <p>Order: rKK230305-001</p>
-                            <p>Order Type: Dine In</p>
-                            <p>Table: None</p>
-                            <p>Waiter: Rakesh</p>
+                        <div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded">
+                            <span>Cust: Walk-in Customer</span><br>
+                            <span>Order: rKK230305-001</span><br>
+                            <span>Order Type: Dine In</span><br>
+                            <span>Table: None</span><br>
+                            <span>Waiter: Rakesh</span>
                         </div>
-                        <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
-                            <p>Cust: Walk-in Customer</p>
-                            <p>Order: rKK230305-001</p>
-                            <p>Order Type: Dine In</p>
-                            <p>Table: None</p>
-                            <p>Waiter: Rakesh</p>
+                        <div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded">
+                            <span>Cust: Walk-in Customer</span><br>
+                            <span>Order: rKK230305-001</span><br>
+                            <span>Order Type: Dine In</span><br>
+                            <span>Table: None</span><br>
+                            <span>Waiter: Rakesh</span>
                         </div>
-                        <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
-                            <p>Cust: Walk-in Customer</p>
-                            <p>Order: rKK230305-001</p>
-                            <p>Order Type: Dine In</p>
-                            <p>Table: None</p>
-                            <p>Waiter: Rakesh</p>
-                        </div>
-                        <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
-                            <p>Cust: Walk-in Customer</p>
-                            <p>Order: rKK230305-001</p>
-                            <p>Order Type: Dine In</p>
-                            <p>Table: None</p>
-                            <p>Waiter: Rakesh</p>
-                        </div>
-                        <div class="border-black bg-white mb-1 p-1 line-height-1 rounded">
-                            <p>Cust: Walk-in Customer</p>
-                            <p>Order: rKK230305-001</p>
-                            <p>Order Type: Dine In</p>
-                            <p>Table: None</p>
-                            <p>Waiter: Rakesh</p>
+                        <div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded">
+                            <span>Cust: Walk-in Customer</span><br>
+                            <span>Order: rKK230305-001</span><br>
+                            <span>Order Type: Dine In</span><br>
+                            <span>Table: None</span><br>
+                            <span>Waiter: Rakesh</span>
                         </div>
                     </div>
                 </div>
@@ -156,38 +142,20 @@
                            {{-- <input type="hidden" id="ingredient_count" value="0"> --}}
                            {{-- <input type="hidden" id="ingredient_sl" value="0"> --}}
                             <div class="form-group col-md-12 pos-left-items">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="order_table">
-                                        <thead>
-                                            <tr>
-                                                <th>Sl</th>
-                                                <th>Item</th>
-                                                <th>Price</th>
-                                                <th>Quantity</th>
-                                                <th>Discount</th>
-                                                <th>Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="order_items" >
-                                            <tr>
-                                                <td class="border-0">1</td>
-                                                <td class="border-0">Beef Burger</td>
-                                                <td class="border-0">230</td>
-                                                <td class="border-0">1</td>
-                                                <td class="border-0">20</td>
-                                                <td class="border-0">210</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="border-0">1</td>
-                                                <td class="border-0">Beef Burger</td>
-                                                <td class="border-0">230</td>
-                                                <td class="border-0">1</td>
-                                                <td class="border-0">20</td>
-                                                <td class="border-0">210</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <table class="w-100" id="order_table" >
+                                    <thead class="thead-bordered  text-center">
+                                        <tr>
+                                            <th width="10%">Sl</th>
+                                            <th width="40%">Item</th>
+                                            <th width="15%">Price</th>
+                                            <th width="20%">Quantity</th>
+                                            {{-- <th width="15%">Discount</th> --}}
+                                            <th width="15%">Sub Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="order_items" >
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -268,6 +236,8 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset ('public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js') }}"></script>
+    <script src="{{ asset ('public/app-assets/js/scripts/forms/input-groups.js') }}"></script>
     <script>
         function loadMenuByCategory(url) {
             $.ajax({
@@ -282,6 +252,115 @@
                     console.log(error);
                 }
             });
+        }
+    </script>
+    <script type="text/javascript">
+        let addItemToCart = [];
+        let cartItemSl = 0;
+
+        function addToCart(item){
+            var item_details = $(item).attr('data-details').split('|');
+            let index = addItemToCart.indexOf(item_details[0]);
+
+            if (index > -1) {
+                console.log(item_details[0]);
+                let qty = $('#cmenu_qty_'+item_details[0]).val();
+                let uqty = parseInt(qty) + 1;
+                $('#cmenu_qty_'+item_details[0]).val(uqty);
+                calculateSubtotal(item_details[0])
+                return false;
+            }
+
+            cartItemSl++;
+            var newRow = '<tr id="menu-details'+item_details[0] + '">' +
+                '<td class="border-0 text-center" id="cmenu_sl_'+item_details[0] + '"><span>'+cartItemSl+'</span></td>' +
+                '<td class="border-0">' +
+                '<input type="hidden" id="cmenu_id_'+item_details[0] + '" name="cmenu_id[]" value="'+item_details[0]+ '">' +
+                '<span id="cmenu_name_'+item_details[0]+ '">'+item_details[1]+ '</span>' +
+                '</td>' +
+                '<td class="border-0 text-center">' +
+                '<input type="hidden" id="cmenu_price_'+item_details[0] + '" name="cmenu_price[]" value="'+item_details[2]+ '">' +
+                '<span class="" id="cmenu_price_text_'+item_details[0]+ '">'+item_details[2]+ '</span>' +
+                '</td>' +
+                '<td class="border-0">'+
+                    '<input type="text" class="touchspin text-center" onchange="calculateSubtotal('+item_details[0]+')"  onkeyup="calculateSubtotal('+item_details[0]+')" id="cmenu_qty_'+item_details[0] + '" name="cmenu_qty[]" value="1" data-bts-min="1" data-bts-max="100" />'+
+                '</td>'+
+                // '<td class="border-0">'+
+                //     '<input type="text" class="form-control text-center phone" id="cmenu_discount_'+item_details[0] + '" onkeyup="calculateSubtotal('+item_details[0]+')" name="cmenu_discount[]" value="0" />'+
+                // '</td>'+
+                '<td class="border-0 text-center">' +
+                '<input type="hidden" id="cmenu_total_price_'+item_details[0] + '" name="cmenu_total_price[]" value="'+item_details[2]+ '">' +
+                '<span class="" id="cmenu_total_price_text_'+item_details[0]+ '">'+item_details[2]+ '</span>' +
+                '</td>' +
+
+                '</tr>';
+
+            $('#order_items').append(newRow);
+            $('.touchspin').TouchSpin();
+            addItemToCart.push(item_details[0])
+            updateRowNo();
+        }
+        function deleteConsumptionRow(cr){
+            Swal.fire({
+                title: "Are you sure?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+                confirmButtonClass: "btn btn-warning mr-10",
+                cancelButtonClass: "btn btn-danger ml-1",
+                buttonsStyling: false,
+            }).then(function (result) {
+                if (result.value) {
+                    var rowId = $(cr).attr('data-count');
+                    var el = document.getElementById("ingredient_row_"+rowId);
+                    el.remove();
+                    let ingredient_id_container_new = [];
+
+                    for (let i = 0; i < addItemToCart.length; i++) {
+                        if (addItemToCart[i] != rowId) {
+                            ingredient_id_container_new.push(addItemToCart[i]);
+                        }
+                    }
+                    addItemToCart = ingredient_id_container_new;
+                    updateRowNo();
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                }
+            });
+
+        }
+
+        function updateRowNo() {
+            let numRows = $("#order_table tbody tr").length;
+            for (let r = 0; r < numRows; r++) {
+                $("#order_table tbody tr").eq(r).find("td:first p").text(r + 1);
+            }
+        }
+
+        function calculateSubtotal(target){
+            var price = $("#cmenu_price_"+target).val();
+            var qty = $("#cmenu_qty_"+target).val();
+
+            let subTotal = 0;
+            subTotal = parseFloat(price) * parseFloat(qty);
+            subTotal = subTotal.toFixed(2);
+            if (subTotal == 'NaN') {
+                $("#cmenu_total_price_"+target).val(0.00);
+                $("#cmenu_total_price_text_"+target).html(0.00);
+
+            }else{
+                $("#cmenu_total_price_"+target).val(subTotal);
+                $("#cmenu_total_price_text_"+target).html(subTotal);
+            }
+        }
+
+        function grandTotal() {
+            var total = 0;
+            $('.total-price').each(function (index, element) {
+                total = total + parseFloat($(element).val());
+            });
+            $("#total_loss").val(total.toFixed(2));
         }
     </script>
 @endsection
