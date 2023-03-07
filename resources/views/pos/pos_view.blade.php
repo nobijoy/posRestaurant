@@ -204,16 +204,16 @@
                             <div class="col-md-12 mt-1">
                                 <div class="row">
                                     <div class="col-3">
-                                        <button class="btn w-100 bg-danger mb-1 ml-auto font-weight-bold">Cancel</button>
+                                        <button class="btn w-100 bg-danger mb-1 ml-auto text-white font-weight-bold">Cancel</button>
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn w-100 bg-purple mb-1 mx-auto font-weight-bold">Draft</button>
+                                        <button class="btn w-100 bg-purple mb-1 mx-auto text-white font-weight-bold">Draft</button>
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn w-100 bg-primary mb-1 mx-auto font-weight-bold">Quick Invoice</button>
+                                        <button class="btn w-100 bg-primary mb-1 mx-auto text-white font-weight-bold">Quick Invoice</button>
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn w-100 bg-success mb-1 mx-auto font-weight-bold">Place Order</button>
+                                        <button class="btn w-100 bg-success mb-1 mx-auto text-white font-weight-bold">Place Order</button>
                                     </div>
                                 </div>
                             </div>
