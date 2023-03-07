@@ -22,17 +22,20 @@
 
             <li class=" nav-item">
                 <a href="">
-                    <i class="feather icon-settings"></i><span class="menu-title" data-i18n="Supplier">Business Setting</span>
+                    <i class="feather icon-settings"></i><span class="menu-title" data-i18n="Supplier">Setting</span>
                 </a>
                 <ul class="menu-content">
                     <li @if($url == 'setting') class="active"  @endif>
-                        <a href="{{route('setting')}}" data-i18n="Info">General Setting</a>
+                        <a href="{{route('setting')}}" data-i18n="Setting">General Setting</a>
                     </li>
-                    <li @if($url == 'outlet_setting') class="active"  @endif>
-                        <a href="{{route('outlet_setting')}}" data-i18n="Payment">Outlet Setting</a>
-                    </li>
+{{--                    <li @if($url == 'outlet_setting') class="active"  @endif>--}}
+{{--                        <a href="{{route('outlet_setting')}}" data-i18n="Outlet Setting">Outlet Setting</a>--}}
+{{--                    </li>--}}
                     <li @if($url == 'managePOS') class="active"  @endif>
-                        <a href="{{route('managePOS')}}" data-i18n="Setting">Manage POS</a>
+                        <a href="{{route('managePOS')}}" data-i18n="Website Content Setup">Website Setup</a>
+                    </li>
+                    <li @if($url == 'printer_setup') class="active"  @endif>
+                        <a href="{{route('printer_setup')}}" data-i18n="POS View Setup">Printer Setup</a>
                     </li>
                     <li @if($url == 'emailSetup') class="active"  @endif>
                         <a href="{{route('emailSetup')}}" data-i18n="Email Setup">Email Setup</a>

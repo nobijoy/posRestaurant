@@ -61,7 +61,7 @@
                                 <div class="card-body">
                                     <form class="form" method="post" action="{{ route ('managePOS') }}" enctype="multipart/form-data">
                                         @csrf
-                                        <h4 class="form-section">General Settings</h4>
+                                        <h4 class="form-section">POS View Setup</h4>
                                         <div class="row align-items-center d-block">
                                             @if($data && $data->logo)
                                                 <div class="col-6 mb-2 mx-auto">
