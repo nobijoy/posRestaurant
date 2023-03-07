@@ -106,3 +106,8 @@ td .input-group {
 .pos-section{
     height: 890px;
 }
+
+.pos-btn-active {
+    background: #00b5b8 !important;
+    color: #fff !important;
+}
