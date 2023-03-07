@@ -95,4 +95,15 @@ class POSController extends Controller
         return view('pos.pos_view', compact('customers', 'waiters', 'menuCategories', 'menus'));
     }
 
+    public function loadMenuByCategory($id){
+        if ($id == 'All') {
+            $menus = Menu::where('is_active', 1)->orderBY('name')->get();
+        }else{
+            $menus = Menu::where('is_active', 1)->where('category_id', $id)->orderBY('name')->get();
+        }
+        return response()->json([
+            'view' => view('pos.menus', compact('menus'))->render(),
+        ]);
+    }
+
 }
