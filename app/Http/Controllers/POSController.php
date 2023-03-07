@@ -94,6 +94,10 @@ class POSController extends Controller
         $menus = Menu::where('is_active', 1)->orderBY('name')->get();
         return view('pos.pos_view', compact('customers', 'waiters', 'menuCategories', 'menus'));
     }
+    public function setting()
+    {
+        return view('admin.pos.setting');
+    }
 
     public function loadMenuByCategory($id){
         if ($id == 'All') {

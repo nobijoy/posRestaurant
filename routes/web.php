@@ -22,56 +22,11 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/pos', [App\Http\Controllers\POSController::class, 'pos'])->name('pos');
     Route::get('/loadMenuByCategory/{id}', [App\Http\Controllers\POSController::class, 'loadMenuByCategory'])->name('loadMenuByCategory');
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
-    Route::get('/setting', [App\Http\Controllers\HomeController::class, 'setting'])->name('setting');
-    Route::get('/category', [App\Http\Controllers\HomeController::class, 'category'])->name('category');
-    Route::get('/sub_category', [App\Http\Controllers\HomeController::class, 'subCategory'])->name('sub_category');
-    Route::get('/menu', [App\Http\Controllers\HomeController::class, 'menu'])->name('menu');
-    Route::get('/menu_add', [App\Http\Controllers\HomeController::class, 'menuAdd'])->name('menu_add');
-    Route::get('/menu_edit', [App\Http\Controllers\HomeController::class, 'menuEdit'])->name('menu_edit');
-    Route::get('/user', [App\Http\Controllers\HomeController::class, 'user'])->name('user');
-    Route::get('/user_search', [App\Http\Controllers\HomeController::class, 'userSearch'])->name('user_search');
-//    Route::get('/user_attendence', [App\Http\Controllers\HomeController::class, 'userAttendence'])->name('user_attendence');
-    Route::get('/add_member', [App\Http\Controllers\HomeController::class, 'addMember'])->name('add_member');
-    Route::get('/member_point', [App\Http\Controllers\HomeController::class, 'memberPoint'])->name('member_point');
-    Route::get('/employees', [App\Http\Controllers\HomeController::class, 'employees'])->name('employees');
-    Route::get('/employyee_payment', [App\Http\Controllers\HomeController::class, 'employeePayment'])->name('employyee_payment');
-    Route::get('/employyee_loan', [App\Http\Controllers\HomeController::class, 'employeeLoan'])->name('employyee_loan');
-    //Route::get('/supplier_info', [App\Http\Controllers\HomeController::class, 'supplierInfo'])->name('supplier_info');
-    //Route::get('/supplier_payment', [App\Http\Controllers\HomeController::class, 'supplierPayment'])->name('supplier_payment');
-    Route::get('/product_list', [App\Http\Controllers\HomeController::class, 'productList'])->name('product_list');
-    Route::get('/product_type', [App\Http\Controllers\HomeController::class, 'productType'])->name('product_type');
-    Route::get('/cash_in', [App\Http\Controllers\HomeController::class, 'cashIn'])->name('cash_in');
-    Route::get('/cash_out', [App\Http\Controllers\HomeController::class, 'cashOut'])->name('cash_out');
-    Route::get('/expendiser', [App\Http\Controllers\HomeController::class, 'expendiser'])->name('expendiser');
-    Route::get('/balance', [App\Http\Controllers\HomeController::class, 'balance'])->name('balance');
-    Route::get('/inventory_info', [App\Http\Controllers\HomeController::class, 'inventoryInfo'])->name('inventory_info');
-    Route::get('/inventory_damage', [App\Http\Controllers\HomeController::class, 'inventoryDamage'])->name('inventory_damage');
-    Route::get('/inventory_barcode', [App\Http\Controllers\HomeController::class, 'inventoryBarcode'])->name('inventory_barcode');
-    Route::get('/discount', [App\Http\Controllers\HomeController::class, 'discount'])->name('discount');
-    Route::get('/product_purchase', [App\Http\Controllers\HomeController::class, 'productPurchase'])->name('product_purchase');
-    Route::get('/product_summary', [App\Http\Controllers\HomeController::class, 'productSummary'])->name('product_summary');
-    Route::get('/return_product', [App\Http\Controllers\HomeController::class, 'returnProduct'])->name('return_product');
-    Route::get('/return_summary', [App\Http\Controllers\HomeController::class, 'returnSummary'])->name('return_summary');
-    Route::get('/invoice_details', [App\Http\Controllers\HomeController::class, 'invoiceDetails'])->name('invoice_details');
-    Route::get('/invoice_search', [App\Http\Controllers\HomeController::class, 'invoiceSearch'])->name('invoice_search');
-    Route::get('/return_invoice', [App\Http\Controllers\HomeController::class, 'returnInvoice'])->name('return_invoice');
-    Route::get('/return_search', [App\Http\Controllers\HomeController::class, 'returnSearch'])->name('return_search');
-    Route::get('/invoice_due', [App\Http\Controllers\HomeController::class, 'invoiceDue'])->name('invoice_due');
-    Route::get('/ingredient_category', [App\Http\Controllers\HomeController::class, 'ingredientCategory'])->name('ingredient_category');
-    Route::get('/ingredient_units', [App\Http\Controllers\HomeController::class, 'ingredientUnits'])->name('ingredient_units');
-    Route::get('/ingredients', [App\Http\Controllers\HomeController::class, 'ingredients'])->name('ingredients');
-    Route::get('/item_add', [App\Http\Controllers\HomeController::class, 'itemAdd'])->name('item_add');
-    Route::get('/item_section', [App\Http\Controllers\HomeController::class, 'itemSection'])->name('item_section');
-    Route::get('/modifiers', [App\Http\Controllers\HomeController::class, 'modifiers'])->name('modifiers');
-    Route::get('/modifiers/add', [App\Http\Controllers\HomeController::class, 'modifiersAdd'])->name('modifiers.add');
-    Route::get('/modifiers/edit', [App\Http\Controllers\HomeController::class, 'modifiersEdit'])->name('modifiers.edit');
 
-    // Route::get('/purchase', [App\Http\Controllers\HomeController::class, 'purchase'])->name('purchase.index');
-    // Route::get('/purchase/add', [App\Http\Controllers\HomeController::class, 'purchaseAdd'])->name('purchase.add');
-    // Route::get('/purchase/edit', [App\Http\Controllers\HomeController::class, 'purchaseEdit'])->name('purchase.edit');
+    Route::get('/pos', [App\Http\Controllers\POSController::class, 'pos'])->name('pos');
+    Route::get('/setting', [App\Http\Controllers\POSController::class, 'setting'])->name('setting');
 
     Route::get('/stock', [App\Http\Controllers\HomeController::class, 'stock'])->name('stock.index');
     Route::get('/stock_adjustment', [App\Http\Controllers\HomeController::class, 'stockAdjustment'])->name('stock_adjustment.index');
@@ -91,11 +46,6 @@ Route::group(['middleware' => ['auth']], function(){
     Route::put('menuCategory/{id}', 'App\Http\Controllers\MenuCategoryController@restore')->name('menuCategory.restore');
     Route::resource('menuCategory', 'App\Http\Controllers\MenuCategoryController')->parameters('menuCategory', 'id');
     Route::post('menuCategory/update', 'App\Http\Controllers\MenuCategoryController@update')->name('menuCategory.update');
-
-    //Route::delete('menuSubCategory/{id}', 'App\Http\Controllers\MenuSubCategoryController@delete')->name('menuSubCategory.delete');
-    //Route::put('menuSubCategory/{id}', 'App\Http\Controllers\MenuSubCategoryController@restore')->name('menuSubCategory.restore');
-    //Route::resource('menuSubCategory', 'App\Http\Controllers\MenuSubCategoryController')->parameters('menuSubCategory', 'id');
-    //Route::post('menuSubCategory/update', 'App\Http\Controllers\MenuSubCategoryController@update')->name('menuSubCategory.update');
 
     Route::delete('delete-menu-ingredient/{id}', 'App\Http\Controllers\MenuController@deleteMenuIngredient')->name('deleteMenuIngredient');
     Route::delete('menu/{id}', 'App\Http\Controllers\MenuController@delete')->name('menu.delete');
@@ -154,11 +104,6 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('customer', 'App\Http\Controllers\CustomerController')->parameters('customer', 'id');
     Route::post('customer/update', 'App\Http\Controllers\CustomerController@update')->name('customer.update');
 
-//    Route::delete('customer_payment/{id}', 'App\Http\Controllers\SupplierPaymentController@delete')->name('customer_payment.delete');
-//    Route::put('customer_payment/{id}', 'App\Http\Controllers\SupplierPaymentController@restore')->name('customer_payment.restore');
-//    Route::resource('customer_payment', 'App\Http\Controllers\SupplierPaymentController')->parameters('customer_payment', 'id');
-//    Route::post('customer_payment/update', 'App\Http\Controllers\SupplierPaymentController@update')->name('customer_payment.update');
-
     Route::delete('expense/{id}', 'App\Http\Controllers\ExpenseController@delete')->name('expense.delete');
     Route::put('expense/{id}', 'App\Http\Controllers\ExpenseController@restore')->name('expense.restore');
     Route::resource('expense', 'App\Http\Controllers\ExpenseController')->parameters('expense', 'id');
@@ -180,7 +125,6 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('table/update', 'App\Http\Controllers\TableController@update')->name('table.update');
 
     Route::delete('payment_method/{id}', 'App\Http\Controllers\PaymentMethodController@delete')->name('payment_method.delete');
-//    Route::put('payment_method/{id}', 'App\Http\Controllers\PurchaseController@restore')->name('payment_method.restore');
     Route::resource('payment_method', 'App\Http\Controllers\PaymentMethodController')->parameters('payment_method', 'id');
     Route::post('payment_method/update', 'App\Http\Controllers\PaymentMethodController@update')->name('payment_method.update');
 
@@ -193,9 +137,7 @@ Route::group(['middleware' => ['auth']], function(){
 //    Route::get('menu/{id}/{menu}', 'App\Http\Controllers\MenuController@edit')->name('menu.edit');
     Route::post('purchase/{id}/update', 'App\Http\Controllers\PurchaseController@update')->name('purchase.update');
 
-//    Route::get('/waste', [App\Http\Controllers\WasteController::class, 'waste'])->name('waste.index');
-//    Route::get('/waste/add', [App\Http\Controllers\WasteController::class, 'wasteAdd'])->name('waste.add');
-//    Route::get('/waste/edit', [App\Http\Controllers\WasteController::class, 'wasteEdit'])->name('waste.edit');
+
     Route::resource('waste', 'App\Http\Controllers\WasteController')->parameters('waste', 'id');
     Route::post('waste/{id}/update', 'App\Http\Controllers\WasteController@update')->name('waste.update');
     Route::get('menu-info', ['App\Http\Controllers\WasteController', 'showMenuInfo'])->name('menu.info');
