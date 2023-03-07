@@ -8,15 +8,6 @@ NOTE:
 ------
 PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
-.table thead th,
-.table tbody td {
-	text-align: center;
-	vertical-align: middle;
-}
-
-.select2-container {
-	width: 100% !important;
-}
 
 .logo {
 	width: 107px;
@@ -38,18 +29,14 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
     height: 32px;
 }
 
-td .input-group {
-	min-width: 200px !important;
+#order_table thead th,
+#order_table tbody td {
+	/* text-align: center; */
+	vertical-align: middle;
 }
-
-.notice {
-	border: 2px solid #ff7588;
-	padding: 10px 15px;
-}
-
-.notice2 {
-	border: 2px solid #38d1ff;
-	padding: 10px 15px;
+.thead-bordered th{
+    border: 1px solid #aaa;
+    padding: 10px;
 }
 
 .phone::-webkit-inner-spin-button,
