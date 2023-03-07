@@ -127,15 +127,17 @@
                             <div class="col-md-5">
                                 <select name="waiter_list" id="waiter_list" class="form-control select2" required>
                                     <option value="" selected>Select</option>
-                                    <option value="">Waiter1</option>
-                                    <option value="">Waiter2</option>
+                                    @foreach ($waiters as $type)
+                                        <option value="{{$type->id}}" >{{$type->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-5">
                                 <select name="customer_list" id="customer_list" class="form-control select2" required>
                                     <option value="" selected>Select</option>
-                                    <option value="">Customer1</option>
-                                    <option value="">Customer1</option>
+                                    @foreach ($customers as $type)
+                                        <option value="{{$type->id}}" >{{$type->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-2 px-0">
@@ -238,44 +240,29 @@
                                     <div class="px-0 mb-1">
                                         <a class="btn bg-light-grey-blue btn-block">All</a>
                                     </div>
-                                    <div class="px-0 mb-1">
-                                        <a class="btn bg-light-grey-blue btn-block">Chinese</a>
-                                    </div>
-                                    <div class="px-0 mb-1">
-                                        <a class="btn bg-light-grey-blue btn-block">Italian</a>
-                                    </div>
-                                    <div class="px-0 mb-1">
-                                        <a class="btn bg-light-grey-blue btn-block">Fast Food</a>
-                                    </div>
-                                    <div class="px-0 mb-1">
-                                        <a class="btn bg-light-grey-blue btn-block">Bevarage</a>
-                                    </div>
-                                    <div class="px-0 mb-1">
-                                        <a class="btn bg-light-grey-blue btn-block">Mexican</a>
-                                    </div>
-                                    <div class="px-0 mb-1">
-                                        <a class="btn bg-light-grey-blue btn-block">Indian</a>
-                                    </div>
+                                    @foreach ($menu_categories as $type)
+                                        <div class="px-0 mb-1">
+                                            <a class="btn bg-light-grey-blue btn-block" href="">{{$type->name}}</a>
+                                        </div>
+                                    @endforeach
                                 </div>
 
 
                                 <div class="col-md-10 pos-scroll-item">
                                     <div class="row">
-                                        <div class="col-md-3 ">
-                                            <div class="card ">
-                                                <div class="card-content box-shadow-1 rounded">
-                                                    <img class="food-item-img img-fluid" src="public\app-assets\images\banner\banner-23.jpg" alt="Card image cap">
-                                                    <div class="card-body p-0 text-center">
-                                                        <h6 class="">Hot & Sour Soup <br>Price: 1200 </h6>
+                                        @foreach ($menus as $type)
+                                            <div class="col-md-3 ">
+                                                <div class="card ">
+                                                    <div class="card-content box-shadow-1 rounded">
+                                                        <img class="food-item-img img-fluid" src="" alt="Card image cap">
+                                                        <div class="card-body p-0 text-center">
+                                                            <h6 class="">{{$type->name}} <br>Price: {{$type->price}} </h6>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
+                                        @endforeach
                                     </div>
-
-
-
                                 </div>
 
                             </div>
