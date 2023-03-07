@@ -127,10 +127,10 @@
                                 </select>
                             </div>
                             <div class="col-md-2 px-0">
-                                <a href="" class="btn btn-secondary">
+                                <a href="#" data-toggle="modal" data-target="#edit_customer" class="btn btn-secondary">
                                     <i class="feather icon-edit"></i>
                                 </a>
-                                <a href="" class="btn btn-secondary">
+                                <a href="#" data-toggle="modal" data-target="#add_customer" class="btn btn-secondary">
                                     <i class="feather icon-plus"></i>
                                 </a>
                             </div>
@@ -163,7 +163,7 @@
                     <div class="card-footer ">
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="" class="font-size-large col-md-12 btn btn-secondary">
+                                <a href="" data-toggle="modal" data-target="#total_payable" class="font-size-large col-md-12 btn btn-secondary">
                                     <i class="feather icon-eye"></i>
                                     Total Payable:
                                     4535.00
@@ -171,16 +171,13 @@
                             </div>
                             <div class="col-md-12 mt-1">
                                 <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-md-4">
                                         <button class="btn w-100 bg-danger mb-1 ml-auto text-white font-weight-bold">Cancel</button>
                                     </div>
-                                    <div class="col-3">
-                                        <button class="btn w-100 bg-purple mb-1 mx-auto text-white font-weight-bold">Draft</button>
-                                    </div>
-                                    <div class="col-3">
+                                    <div class="col-md-4">
                                         <button class="btn w-100 bg-primary mb-1 mx-auto text-white font-weight-bold">Quick Invoice</button>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-md-4">
                                         <button class="btn w-100 bg-success mb-1 mx-auto text-white font-weight-bold">Place Order</button>
                                     </div>
                                 </div>
@@ -226,6 +223,149 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+
+{{--            Modal Views Starts From Here--}}
+
+{{--            Add Customer Modal--}}
+
+            <div class="modal fade text-left" id="add_customer" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel35" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="myModalLabel35">Add Customer Info</h3>
+                            <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{route('customer.store')}}" method="POST"  class="clearForm form" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="row">
+                                    <fieldset class="form-group col-md-6 floating-label-form-group">
+                                        <label for="name">Name<span class="text-danger">*</span></label>
+                                        <input type="text" name="name" class="form-control" id="name" placeholder="Rahim Miya" value="" >
+                                    </fieldset>
+                                    <fieldset class="form-group col-md-6 floating-label-form-group">
+                                        <label for="phone">Phone<span class="text-danger">*</span></label>
+                                        <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" value="" >
+                                    </fieldset>
+                                    <fieldset class="form-group col-md-6 floating-label-form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" class="form-control" id="email" placeholder="example@.com" value="" >
+                                    </fieldset>
+                                    <fieldset class="form-group col-md-6 floating-label-form-group">
+                                        <label for="date_of_birth">Date Of Birth</label>
+                                        <input type="date" name="date_of_birth" class="form-control" id="date_of_birth" placeholder="" value="" >
+                                    </fieldset>
+                                    <fieldset class="form-group col-md-6 floating-label-form-group">
+                                        <label for="date_of_anniversary">Date Of Anniversary</label>
+                                        <input type="date" name="date_of_anniversary" class="form-control" id="date_of_anniversary" placeholder="" value="" >
+                                    </fieldset>
+                                    <fieldset class="form-group col-md-6 floating-label-form-group">
+                                        <label for="address">Address</label>
+                                        <input type="text" name="address" class="form-control" id="address" placeholder="House-1, Road-2" value="" >
+                                    </fieldset>
+                                    <fieldset class="form-group col-md-6 floating-label-form-group">
+                                        <label for="gst_number">Gst Number</label>
+                                        <input type="text" name="gst_number" class="form-control" id="gst_number" placeholder="UYH3436" value="" >
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
+                                <input type="submit" id="submitBtn" class="btn btn-outline-primary" value="Save">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+{{--            Edit Customer Modal--}}
+
+
+
+            <div class="modal fade text-left" id="edit_customer" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel35" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="myModalLabel35">Edit Customer Info</h3>
+                            <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{ route('customer.update') }}" method="POST"  class="clearForm form" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="row">
+                                    <input type="hidden" name="id" id="id">
+                                    <fieldset class="form-group col-md-6 floating-label-form-group">
+                                        <label for="name">Name<span class="text-danger">*</span></label>
+                                        <input type="text" name="name" class="form-control" id="edit_name" placeholder="" value="" >
+                                    </fieldset>
+                                    <fieldset class="form-group col-md-6 floating-label-form-group">
+                                        <label for="phone">Phone<span class="text-danger">*</span></label>
+                                        <input type="text" name="phone" class="form-control" id="edit_phone" placeholder="" value="" >
+                                    </fieldset>
+                                    <fieldset class="form-group col-md-6 floating-label-form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" class="form-control" id="edit_email" placeholder="" value="" >
+                                    </fieldset>
+                                    <fieldset class="form-group col-md-6 floating-label-form-group">
+                                        <label for="date_of_birth">Date Of Birth</label>
+                                        <input type="date" name="date_of_birth" class="form-control" id="edit_date_of_birth" placeholder="" value="" >
+                                    </fieldset>
+                                    <fieldset class="form-group col-md-6 floating-label-form-group">
+                                        <label for="date_of_anniversary">Date Of Anniversary</label>
+                                        <input type="date" name="date_of_anniversary" class="form-control" id="edit_date_of_anniversary" placeholder="" value="" >
+                                    </fieldset>
+                                    <fieldset class="form-group col-md-6 floating-label-form-group">
+                                        <label for="address">Address</label>
+                                        <input type="text" name="address" class="form-control" id="edit_address" placeholder="" value="" >
+                                    </fieldset>
+                                    <fieldset class="form-group col-md-6 floating-label-form-group">
+                                        <label for="gst_number">Gst Number</label>
+                                        <input type="text" name="gst_number" class="form-control" id="edit_gst_number" placeholder="" value="" >
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
+                                <input type="submit" id="submitBtn" class="btn btn-outline-primary" value="Update">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+{{--            Total Payable Modal--}}
+
+            <div class="modal fade text-left" id="total_payable" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel35" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="myModalLabel35">Total Payable Amount</h3>
+                            <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                            <div class="modal-body">
+                                <div>
+                                    <p><span class="font-weight-bold">Total Item:</span> 4</p>
+                                    <p><span class="font-weight-bold">Total Discount:</span> 20</p>
+                                    <p><span class="font-weight-bold">Tax:</span> 12</p>
+                                    <p><span class="font-weight-bold">Charge:</span> 35</p>
+                                    <p><span class="font-weight-bold">Tip:</span> 50</p>
+                                    <p><span class="font-weight-bold">Total:</span> 1200</p>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>

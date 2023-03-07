@@ -25,14 +25,12 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/loadMenuByCategory/{id}', [App\Http\Controllers\POSController::class, 'loadMenuByCategory'])->name('loadMenuByCategory');
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 
-    Route::get('/pos', [App\Http\Controllers\POSController::class, 'pos'])->name('pos');
-    Route::get('/setting', [App\Http\Controllers\POSController::class, 'setting'])->name('setting');
-
     Route::get('/stock', [App\Http\Controllers\HomeController::class, 'stock'])->name('stock.index');
     Route::get('/stock_adjustment', [App\Http\Controllers\HomeController::class, 'stockAdjustment'])->name('stock_adjustment.index');
     Route::get('/stock_adjustment/add', [App\Http\Controllers\HomeController::class, 'stockAdjustmentAdd'])->name('stock_adjustment.add');
     Route::get('/stock_adjustment/edit', [App\Http\Controllers\HomeController::class, 'stockAdjustmentEdit'])->name('stock_adjustment.edit');
 
+    Route::get('/pos', [App\Http\Controllers\POSController::class, 'pos'])->name('pos');
     Route::match(['get', 'post'], 'profile/{name}', 'App\Http\Controllers\AdminController@profileUpdate')->name('profileUpdate');
     Route::match(['get', 'post'], 'change-password/{name}', 'App\Http\Controllers\AdminController@passwordUpdate')->name('changePassword');
     Route::match(['get', 'post'], 'managepos', 'App\Http\Controllers\POSController@posUpdate')->name('managePOS');
@@ -40,6 +38,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::match(['get', 'post'], 'apiSetup', 'App\Http\Controllers\POSController@emailSetup')->name('apiSetup');
     Route::match(['get', 'post'], 'outlet_setting', 'App\Http\Controllers\OutletSettingController@setup')->name('outlet_setting');
     Route::match(['get', 'post'], 'setting', 'App\Http\Controllers\SettingController@manage')->name('setting');
+    Route::match(['get', 'post'], 'printer_setup', 'App\Http\Controllers\SettingController@printer_setup')->name('printer_setup');
 
 
     Route::delete('menuCategory/{id}', 'App\Http\Controllers\MenuCategoryController@delete')->name('menuCategory.delete');
