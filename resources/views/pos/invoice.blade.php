@@ -1,0 +1,57 @@
+<table width="100%" style="background-color: #f7f6f4; padding-bottom: 5vh">
+    <tr>
+        <td>
+            <h3 style="font-weight: bold; text-align: center; padding: 10px 0">Order Confirmation</h3>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table align="center" style="background-color: #ffffff; border-radius:10px; width: fit-content">
+                <tr>
+                    <td style=" padding: 32px">
+                        <h3 style="font-weight: bold">Thank You Sir For Choosing our Restaurant</h3>
+                        <p>Your Order Has Been Confirmed</p>
+
+                        <p style="margin-bottom:20px;"><strong>Order Details</strong></p>
+                        <p><Strong>Name : </Strong></p>
+                        <p><Strong>Phone : {{$emailData['phone']}}</Strong></p>
+                        <p><Strong>Email : {{$emailData['email']}}</Strong></p>
+                        <p><Strong>No. of Guest : {{$emailData['no_of_guest']}}</Strong></p>
+                        <p><Strong>Your prefered time : {{date('d M, Y', strtotime($emailData['date']))}} {{date('h:ia', strtotime($emailData['preferred_time']))}}</Strong></p>
+                        <table align="center" width="100%">
+                            <thead>
+                            <tr>
+                                <th>Sl</th>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Sub Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align:right;"></td>
+                                        <td style="text-align:right;"></td>
+                                        <td style="text-align:right;"></td>
+                                    </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td style="text-align:right; font-weight:bold;">Total</td>
+                                    <td style="text-align:right; font-weight:bold;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p><span style="font-weight: bold">Your Special Request:</span> {{$emailData['special_request']}}</p>
+                        <p style="font-style: italic;">Note: If you have any feedback you can reach us via email: {{$emailData['restaurantInfo']['email']}},
+                            @if ($emailData['restaurantInfo']['contact_number']) or phone: {{$emailData['restaurantInfo']['contact_number']}} @endif </p>
+                        <p style="">Have A Good Day</p>
+                        <h3>Regards,</h3>
+                        <p> <strong>{{$emailData['restaurantInfo']['name']}}</strong> <br> {{$emailData['restaurantInfo']['address']}}</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
