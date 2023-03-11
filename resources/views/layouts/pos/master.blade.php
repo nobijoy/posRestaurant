@@ -24,10 +24,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/backend/vendors/css/forms/selects/select2.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/backend/vendors/css/forms/toggle/switchery.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/backend/vendors/css/extensions/toastr.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/vendors/css/charts/morris.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/vendors/css/extensions/unslider.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/vendors/css/weather-icons/climacons.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset ('public/backend/vendors/css/tables/datatable/datatables.min.css')}}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('public/backend/vendors/css/charts/morris.css')}}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('public/backend/vendors/css/extensions/unslider.css')}}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('public/backend/vendors/css/weather-icons/climacons.min.css')}}"> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset ('public/backend/vendors/css/tables/datatable/datatables.min.css')}}"> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css') }}">
     <!-- END: Vendor CSS-->
 
@@ -45,7 +45,7 @@
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style.css?v1.3')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style.css?v1.4')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/css/admin-styles.css')}}">
     <!-- END: Custom CSS-->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
@@ -56,9 +56,9 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu 2-columns vh-100 fixed-navbar" data-open="click" data-menu="vertical-menu"
+<body class="vertical-layout vertical-menu 2-columns vh-100 fixed-navbar menu-collapsed" id="body" data-open="click" data-menu="vertical-menu"
       data-col="2-columns">
-<input type="hidden" id="csrfToken" value="{{ csrf_token() }}">
+    <input type="hidden" id="csrfToken" value="{{ csrf_token() }}">
 <!-- BEGIN: Header-->
 
 
@@ -68,7 +68,7 @@
 
 
 <!-- BEGIN: Main Menu-->
-{{--@include('master.admin.sidebar')--}}
+@include('layouts.pos.sidebar')
 <!-- END: Main Menu-->
 
 <!-- BEGIN: Content-->
@@ -98,9 +98,9 @@
 <script src="{{ asset ('public/backend/vendors/js/forms/toggle/bootstrap-checkbox.min.js')}}"></script>
 <script src="{{ asset ('public/backend/vendors/js/forms/toggle/switchery.min.js')}}"></script>
 <script src="{{ asset ('public/backend/vendors/js/tables/datatable/datatables.min.js')}}"></script>
-<script src="{{asset('public/backend/data/jvector/visitor-data.js')}}"></script>
-<script src="{{asset('public/backend/vendors/js/charts/chart.min.js')}}"></script>
-<script src="{{asset('public/backend/vendors/js/charts/jquery.sparkline.min.js')}}"></script>
+{{-- <script src="{{asset('public/backend/data/jvector/visitor-data.js')}}"></script> --}}
+{{-- <script src="{{asset('public/backend/vendors/js/charts/chart.min.js')}}"></script> --}}
+{{-- <script src="{{asset('public/backend/vendors/js/charts/jquery.sparkline.min.js')}}"></script> --}}
 <script src="{{asset('public/backend/vendors/js/extensions/unslider-min.js')}}"></script>
 <link rel="stylesheet" type="text/css" href="{{asset('public/backend/css/core/colors/palette-climacon.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('public/backend/fonts/simple-line-icons/style.min.css')}}">
@@ -119,7 +119,6 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-
         $(".form").submit( function (){
             $("#submitBtn").attr("disabled", true);
             return true;
@@ -132,6 +131,19 @@
         );
         $(".select2").select2();
     });
+</script>
+<script>
+    $('#pos_menu_show').click(function(){
+        if($("#pos_menu_show").hasClass('is-active')){
+            $('#pos_menu_show').removeClass('is-active');
+            $('#pos_sidebar').addClass('d-none');
+            $('#body').removeClass('menu-expanded').addClass('menu-collapsed');
+        }else{
+            $('#pos_menu_show').addClass('is-active');
+            $('#pos_sidebar').removeClass('d-none');
+            $('#body').removeClass('menu-expanded').addClass('menu-collapsed');
+        }
+    })
 </script>
 @yield('script')
 </body>

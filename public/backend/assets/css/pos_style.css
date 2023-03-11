@@ -8,7 +8,13 @@ NOTE:
 ------
 PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+#pos_menu_show {
+    padding: 1.1rem 0.8rem 1rem 1rem;
+}
 
+#pos_menu_show i{
+    font-size: 1.6rem;
+}
 .logo {
 	width: 107px;
 	height: 48px;
