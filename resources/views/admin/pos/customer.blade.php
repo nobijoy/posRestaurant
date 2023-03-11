@@ -127,11 +127,11 @@
                             <div class="row">
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
                                     <label for="name">Name<span class="text-danger">*</span></label>
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="Rahim Miya" value="" >
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Rahim Miya" value="" required>
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
                                     <label for="phone">Phone<span class="text-danger">*</span></label>
-                                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" value="" >
+                                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" value="" required>
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
                                     <label for="email">Email</label>
