@@ -110,4 +110,37 @@ class POSController extends Controller
         ]);
     }
 
+    public function getMenuWithSearch(Request $request){
+        $query = Menu::query();
+
+        $query->when(request('search') == '' || request('search') == NULL, function ($q) {
+            return $q->where('is_active', 1);
+        });
+
+        $query->when(request('search') == 'VEG', function ($q) {
+            return $q->where('is_veg', 1)->where('is_active', 1);
+        });
+
+        $query->when(request('search') == 'BAR', function ($q) {
+            return $q->where('is_bev', 1)->where('is_active', 1);
+        });
+
+        $query->when(request('search') == 'BEV', function ($q) {
+            return $q->where('is_bar', 1)->where('is_active', 1);
+        });
+
+        $query->when(request('search') != '', function ($q) {
+            return  $q->where('name', 'like', '%'.request('search').'%')
+            ->orWhereHas('category', function ($subq) {
+                $subq->where('name', 'like', '%'.request('search').'%');
+            })
+            ->where('is_active', 1);
+        });
+
+        $menus = $query->orderBY('name')->get();
+        return response()->json([
+            'view' => view('pos.menus', compact('menus'))->render(),
+        ]);
+    }
+
 }
