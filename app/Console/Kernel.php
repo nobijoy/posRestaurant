@@ -16,6 +16,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('backup:clean')->daily()->at('01:00')->appendOutputTo(storage_path('logs/laravel.log'));
+        $schedule->command('backup:run --only-db')->daily()->at('01:30')->appendOutputTo(storage_path('logs/laravel.log'));
     }
 
     /**
