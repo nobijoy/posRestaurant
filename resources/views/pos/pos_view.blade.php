@@ -193,7 +193,8 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col-md-12">
-                                <input class="mb-1 rounded form-control" type="text" name="search" id="search" placeholder="Name or Code or Category or VEG or BEV or BAR">
+                                <input class="mb-1 rounded form-control" type="text" id="search" onkeyup="getMenuWithSearch(this)"
+                                placeholder="Name or Code or Category or VEG or BEV or BAR">
                             </div>
                         </div>
                     </div>
@@ -382,6 +383,27 @@
         function loadMenuByCategory(url) {
             $.ajax({
                 url : url,
+                dataType : 'json',
+
+                success: function (data) {
+                    $("#menu-section").empty().html(data.view);
+                },
+
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+            $('#search').val('');
+        }
+
+        function getMenuWithSearch(tar) {
+            let search = $(tar).val();
+            let url = "{{ route ('getMenuWithSearch') }}";
+            $.ajax({
+                url : url,
+                data : {
+                    'search': search,
+                },
                 dataType : 'json',
 
                 success: function (data) {
