@@ -27,7 +27,7 @@
                 <ul class="nav navbar-nav mr-auto float-left">
                     <li class="nav-item d-none d-md-block">
                         <a class="nav-link" id="pos_menu_show"
-                            href="#"><i class="feather icon-menu"></i>
+                            href="javascript:"><i class="feather icon-menu"></i>
                         </a>
                     </li>
                 </ul>
