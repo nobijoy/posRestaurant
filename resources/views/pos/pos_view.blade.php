@@ -112,24 +112,16 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <select name="waiter_list" id="waiter_list" class="form-control select2" required>
-                                    <option value="" selected>Select</option>
+                                    <option value="" selected>Select Waiter</option>
                                     @foreach ($waiters as $type)
                                         <option value="{{$type->id}}" >{{$type->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-5">
-                                <select name="customer_list" id="customer_list" class="form-control select2" required>
-                                    <option value="" selected>Select</option>
-                                    @foreach ($customers as $type)
-                                        <option value="{{$type->id}}" >{{$type->name}}</option>
-                                    @endforeach
-                                </select>
+                            <div class="col-md-6" id="customer_area">
+                                @include('pos.partials.customer')
                             </div>
-                            <div class="col-md-2 px-0">
-                                <a href="#" data-toggle="modal" data-target="#edit_customer" class="btn btn-secondary">
-                                    <i class="feather icon-edit"></i>
-                                </a>
+                            <div class="col-md-1 px-0">
                                 <a href="#" data-toggle="modal" data-target="#add_customer" class="btn btn-secondary">
                                     <i class="feather icon-plus"></i>
                                 </a>
@@ -242,107 +234,36 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="{{route('customer.store')}}" method="POST"  class="clearForm form" enctype="multipart/form-data">
+                        <form action="javascript:" method="POST" id="customer_add_submit" class="clearForm form" enctype="multipart/form-data">
                             @csrf
                             <div class="modal-body">
                                 <div class="row">
                                     <fieldset class="form-group col-md-6 floating-label-form-group">
                                         <label for="name">Name<span class="text-danger">*</span></label>
-                                        <input type="text" name="name" class="form-control" id="name" placeholder="Rahim Miya" value="" >
+                                        <input type="text" name="name" class="form-control" id="name" placeholder="Rahim Miya" value="" required>
                                     </fieldset>
                                     <fieldset class="form-group col-md-6 floating-label-form-group">
                                         <label for="phone">Phone<span class="text-danger">*</span></label>
-                                        <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" value="" >
+                                        <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" value="" required>
                                     </fieldset>
                                     <fieldset class="form-group col-md-6 floating-label-form-group">
                                         <label for="email">Email</label>
                                         <input type="email" name="email" class="form-control" id="email" placeholder="example@.com" value="" >
                                     </fieldset>
                                     <fieldset class="form-group col-md-6 floating-label-form-group">
-                                        <label for="date_of_birth">Date Of Birth</label>
-                                        <input type="date" name="date_of_birth" class="form-control" id="date_of_birth" placeholder="" value="" >
-                                    </fieldset>
-                                    <fieldset class="form-group col-md-6 floating-label-form-group">
-                                        <label for="date_of_anniversary">Date Of Anniversary</label>
-                                        <input type="date" name="date_of_anniversary" class="form-control" id="date_of_anniversary" placeholder="" value="" >
-                                    </fieldset>
-                                    <fieldset class="form-group col-md-6 floating-label-form-group">
                                         <label for="address">Address</label>
                                         <input type="text" name="address" class="form-control" id="address" placeholder="House-1, Road-2" value="" >
                                     </fieldset>
-                                    <fieldset class="form-group col-md-6 floating-label-form-group">
-                                        <label for="gst_number">Gst Number</label>
-                                        <input type="text" name="gst_number" class="form-control" id="gst_number" placeholder="UYH3436" value="" >
-                                    </fieldset>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
-                                <input type="submit" id="submitBtn" class="btn btn-outline-primary" value="Save">
+                                <input type="button" id="customer_add_form" class="btn btn-outline-primary" value="Save">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
-{{--            Edit Customer Modal--}}
-
-
-
-            <div class="modal fade text-left" id="edit_customer" tabindex="-1" role="dialog"
-                 aria-labelledby="myModalLabel35" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="myModalLabel35">Edit Customer Info</h3>
-                            <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="{{ route('customer.update') }}" method="POST"  class="clearForm form" enctype="multipart/form-data">
-                            @csrf
-                            <div class="modal-body">
-                                <div class="row">
-                                    <input type="hidden" name="id" id="id">
-                                    <fieldset class="form-group col-md-6 floating-label-form-group">
-                                        <label for="name">Name<span class="text-danger">*</span></label>
-                                        <input type="text" name="name" class="form-control" id="edit_name" placeholder="" value="" >
-                                    </fieldset>
-                                    <fieldset class="form-group col-md-6 floating-label-form-group">
-                                        <label for="phone">Phone<span class="text-danger">*</span></label>
-                                        <input type="text" name="phone" class="form-control" id="edit_phone" placeholder="" value="" >
-                                    </fieldset>
-                                    <fieldset class="form-group col-md-6 floating-label-form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" name="email" class="form-control" id="edit_email" placeholder="" value="" >
-                                    </fieldset>
-                                    <fieldset class="form-group col-md-6 floating-label-form-group">
-                                        <label for="date_of_birth">Date Of Birth</label>
-                                        <input type="date" name="date_of_birth" class="form-control" id="edit_date_of_birth" placeholder="" value="" >
-                                    </fieldset>
-                                    <fieldset class="form-group col-md-6 floating-label-form-group">
-                                        <label for="date_of_anniversary">Date Of Anniversary</label>
-                                        <input type="date" name="date_of_anniversary" class="form-control" id="edit_date_of_anniversary" placeholder="" value="" >
-                                    </fieldset>
-                                    <fieldset class="form-group col-md-6 floating-label-form-group">
-                                        <label for="address">Address</label>
-                                        <input type="text" name="address" class="form-control" id="edit_address" placeholder="" value="" >
-                                    </fieldset>
-                                    <fieldset class="form-group col-md-6 floating-label-form-group">
-                                        <label for="gst_number">Gst Number</label>
-                                        <input type="text" name="gst_number" class="form-control" id="edit_gst_number" placeholder="" value="" >
-                                    </fieldset>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
-                                <input type="submit" id="submitBtn" class="btn btn-outline-primary" value="Update">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
 
 {{--            Total Payable Modal--}}
 
@@ -378,6 +299,55 @@
 @section('script')
     <script src="{{ asset ('public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js') }}"></script>
     <script src="{{ asset ('public/app-assets/js/scripts/forms/input-groups.js') }}"></script>
+    <script>
+        $("#customer_add_form").click(function(event) {
+            event.preventDefault();
+            let name = $('#name').val();
+            let email = $('#email').val();
+            let phone = $('#phone').val();
+            let address = $('#address').val();
+            var url = ("{{route('customer.ajaxStore')}}");
+            $.ajax({
+                type: "POST",
+                url: url,
+                    data:{
+                        "_token": "{{ csrf_token() }}",
+                        name:name,
+                        email:email,
+                        phone:phone,
+                        address:address,
+                    },
+                success: function(data) {
+                    if(data.status == 1){
+                        $('#customer_area').empty().html(data.view);
+                        $(".select2").select2();
+                        Swal.fire({
+                            type: "success",
+                            text: data.msg,
+                            confirmButtonClass: "btn btn-primary",
+                            buttonsStyling: false
+                        });
+                    }else{
+                        Swal.fire({
+                            type: "error",
+                            text: data.msg,
+                            confirmButtonClass: "btn btn-primary",
+                            buttonsStyling: false
+                        });
+                    }
+                },
+                error: function(e) {
+                    console.log(e)
+                }
+
+            });
+            $('#name').val('');
+            $('#email').val('');
+            $('#phone').val('');
+            $('#address').val('');
+            $("#add_customer").modal('hide');
+        });
+    </script>
     <script>
         function loadMenuByCategory(url) {
             $.ajax({

@@ -102,6 +102,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::put('customer/{id}', 'App\Http\Controllers\CustomerController@restore')->name('customer.restore');
     Route::resource('customer', 'App\Http\Controllers\CustomerController')->parameters('customer', 'id');
     Route::post('customer/update', 'App\Http\Controllers\CustomerController@update')->name('customer.update');
+    Route::post('customer/ajaxStore', 'App\Http\Controllers\CustomerController@ajaxStore')->name('customer.ajaxStore');
 
     Route::delete('expense/{id}', 'App\Http\Controllers\ExpenseController@delete')->name('expense.delete');
     Route::put('expense/{id}', 'App\Http\Controllers\ExpenseController@restore')->name('expense.restore');

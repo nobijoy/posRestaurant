@@ -72,6 +72,41 @@ class CustomerController extends Controller
             }
 
     }
+    public function ajaxStore(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            $data = new Customer;
+            $data->name = $request->name;
+            $data->phone = $request->phone;
+            $data->email = $request->email;
+            $data->date_of_birth = $request->date_of_birth;
+            $data->date_of_anniversary = $request->date_of_anniversary;
+            $data->address = $request->address;
+            $data->gst_number = $request->gst_number;
+            $data->is_active = 1;
+
+            $data->created_by = Auth()->user()->id;
+            $data->save();
+            DB::commit();
+
+            $customers = Customer::where('is_active','1')->get();
+            return response()->json([
+                'view' => view('pos.partials.customer', compact('customers'))->render(),
+                'status'=> 1,
+                'msg'=> 'Customer Created Successfully',
+            ]);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'view' => '',
+                'msg' => 'Somethings went wrong. Try Again',
+                'status'=> 0,
+            ]);
+        }
+
+    }
 
     /**
      * Display the specified resource.
