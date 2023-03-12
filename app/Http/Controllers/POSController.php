@@ -143,6 +143,10 @@ class POSController extends Controller
         ]);
     }
 
+    public function posOrder(Request $request){
+        dd($request->all());
+    }
+
     public function thirdPartySetup(Request $request){
         return view('admin.pos_setting.email', compact('data'));
     }

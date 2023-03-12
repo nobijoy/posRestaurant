@@ -5,6 +5,7 @@
 @section('body')
 
     <section class="mt-1">
+        <form action="{{ route('posOrder') }}" method="post">@csrf
         <div class="row ">
            {{-- running order card start --}}
             <div class="col-md-2 pos-section">
@@ -97,13 +98,31 @@
                     <div class="card-header pb-0">
                         <div class="row d-flex justify-content-around text-center">
                             <div class="col-3">
-                                <button class="btn w-100 bg-light-grey-blue mb-1 ml-auto font-weight-bold">Dine In <i class="feather icon-grid"></i></button>
+                                <input type="radio" id="dinein" value="dinein" name="type" hidden checked>
+                                <label for="dinein">
+                                    <span class="btn w-100 bg-light-grey-blue mb-1 ml-auto font-weight-bold">
+                                        Dine In
+                                        <i class="feather icon-grid"></i>
+                                    </span>
+                                </label>
                             </div>
                             <div class="col-3">
-                                <button class="btn w-100 bg-light-grey-blue mb-1 mx-auto font-weight-bold">Takeaway <i class="feather icon-shopping-bag"></i></button>
+                                <input type="radio" id="takeaway" value="takeaway" name="type" hidden>
+                                <label for="takeaway">
+                                    <span class="btn w-100 bg-light-grey-blue mb-1 ml-auto font-weight-bold">
+                                        Takeaway
+                                    <i class="feather icon-shopping-bag"></i>
+                                    </span>
+                                </label>
                             </div>
                             <div class="col-3">
-                                <button class="btn w-100 bg-light-grey-blue mb-1 mx-auto font-weight-bold">Delivery <i class="feather icon-truck"></i></button>
+                                <input type="radio" id="delivery" value="delivery" name="type" hidden>
+                                <label for="delivery">
+                                    <span class="btn w-100 bg-light-grey-blue mb-1 ml-auto font-weight-bold">
+                                        Delivery
+                                    <i class="feather icon-truck"></i>
+                                    </span>
+                                </label>
                             </div>
                             <div class="col-3">
                                 <button class="btn w-100 bg-light-grey-blue mb-1 mx-auto font-weight-bold">Table <i class="feather icon-grid"></i></button>
@@ -170,14 +189,14 @@
                                         <button class="btn w-100 bg-primary mb-1 mx-auto text-white font-weight-bold">Quick Invoice</button>
                                     </div>
                                     <div class="col-md-4">
-                                        <button class="btn w-100 bg-success mb-1 mx-auto text-white font-weight-bold">Place Order</button>
+                                        <button type="submit" class="btn w-100 bg-success mb-1 mx-auto text-white font-weight-bold">Place Order</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div></form>
 
 
             <div class="col-md-5 pl-0">
@@ -219,80 +238,77 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        {{-- Modal Views Starts From Here--}}
 
-{{--            Modal Views Starts From Here--}}
+        {{-- Add Customer Modal--}}
 
-{{--            Add Customer Modal--}}
-
-            <div class="modal fade text-left" id="add_customer" tabindex="-1" role="dialog"
-                 aria-labelledby="myModalLabel35" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="myModalLabel35">Add Customer Info</h3>
-                            <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form action="javascript:" method="POST" id="customer_add_submit" class="clearForm form" enctype="multipart/form-data">
-                            @csrf
-                            <div class="modal-body">
-                                <div class="row">
-                                    <fieldset class="form-group col-md-6 floating-label-form-group">
-                                        <label for="name">Name<span class="text-danger">*</span></label>
-                                        <input type="text" name="name" class="form-control" id="name" placeholder="Rahim Miya" value="" required>
-                                    </fieldset>
-                                    <fieldset class="form-group col-md-6 floating-label-form-group">
-                                        <label for="phone">Phone<span class="text-danger">*</span></label>
-                                        <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" value="" required>
-                                    </fieldset>
-                                    <fieldset class="form-group col-md-6 floating-label-form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" name="email" class="form-control" id="email" placeholder="example@.com" value="" >
-                                    </fieldset>
-                                    <fieldset class="form-group col-md-6 floating-label-form-group">
-                                        <label for="address">Address</label>
-                                        <input type="text" name="address" class="form-control" id="address" placeholder="House-1, Road-2" value="" >
-                                    </fieldset>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
-                                <input type="button" id="customer_add_form" class="btn btn-outline-primary" value="Save">
-                            </div>
-                        </form>
+        <div class="modal fade text-left" id="add_customer" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel35" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel35">Add Customer Info</h3>
+                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+                    <form action="javascript:" method="POST" id="customer_add_submit" class="clearForm form" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="name">Name<span class="text-danger">*</span></label>
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Rahim Miya" value="" required>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="phone">Phone<span class="text-danger">*</span></label>
+                                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" value="" required>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="example@.com" value="" >
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" name="address" class="form-control" id="address" placeholder="House-1, Road-2" value="" >
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
+                            <input type="button" id="customer_add_form" class="btn btn-outline-primary" value="Save">
+                        </div>
+                    </form>
                 </div>
             </div>
+        </div>
 
-{{--            Total Payable Modal--}}
+        {{-- Total Payable Modal--}}
 
-            <div class="modal fade text-left" id="total_payable" tabindex="-1" role="dialog"
-                 aria-labelledby="myModalLabel35" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="myModalLabel35">Total Payable Amount</h3>
-                            <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                            <div class="modal-body">
-                                <div>
-                                    <p><span class="font-weight-bold">Total Item:</span> 4</p>
-                                    <p><span class="font-weight-bold">Total Discount:</span> 20</p>
-                                    <p><span class="font-weight-bold">Tax:</span> 12</p>
-                                    <p><span class="font-weight-bold">Charge:</span> 35</p>
-                                    <p><span class="font-weight-bold">Tip:</span> 50</p>
-                                    <p><span class="font-weight-bold">Total:</span> 1200</p>
-                                </div>
-                            </div>
+        <div class="modal fade text-left" id="total_payable" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel35" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel35">Total Payable Amount</h3>
+                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+                        <div class="modal-body">
+                            <div>
+                                <p><span class="font-weight-bold">Total Item:</span> 4</p>
+                                <p><span class="font-weight-bold">Total Discount:</span> 20</p>
+                                <p><span class="font-weight-bold">Tax:</span> 12</p>
+                                <p><span class="font-weight-bold">Charge:</span> 35</p>
+                                <p><span class="font-weight-bold">Tip:</span> 50</p>
+                                <p><span class="font-weight-bold">Total:</span> 1200</p>
+                            </div>
+                        </div>
                 </div>
             </div>
-
-
         </div>
     </section>
 @endsection
