@@ -477,7 +477,7 @@
                 '<input type="hidden" class="total-amount" id="cmenu_total_price_'+item_details[0] + '" name="cmenu_total_price[]" value="'+price+ '">' +
                 '<span class="" id="cmenu_total_price_text_'+item_details[0]+ '">'+price+ '</span>' +
                 '</td>' +
-                '<td class="border-0">' +
+                '<td class="border-0 text-center">' +
                     '<button type="button" title="Delete" class="btn btn-danger btn-sm" onclick="deleteItem(this)" data-count="'+item_details[0] + '"> <i class="fa fa-trash"></i></button>' +
                 '</td>' +
 
