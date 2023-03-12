@@ -147,4 +147,8 @@ class POSController extends Controller
         dd($request->all());
     }
 
+    public function thirdPartySetup(Request $request){
+        return view('admin.pos_setting.email', compact('data'));
+    }
+
 }
