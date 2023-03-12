@@ -148,38 +148,72 @@
                         </div>
                     </div>
 
-                    <div class="card-body pos-left-items ">
+                    <div class="card-body">
                         <div class="row">
-                           {{-- <input type="hidden" id="ingredient_count" value="0"> --}}
-                           {{-- <input type="hidden" id="ingredient_sl" value="0"> --}}
-                            <div class="form-group col-md-12 pos-left-items">
-                                <table class="w-100" id="order_table" >
-                                    <thead class="thead-bordered  text-center">
+                            <div class="col-md-12 pos-left-items">
+                                <table class="table" id="order_table" >
+                                    <thead class="thead-bordered text-center">
                                         <tr>
-                                            <th width="10%">Sl</th>
+                                            <th width="5%">Sl</th>
                                             <th width="40%">Item</th>
-                                            <th width="15%">Price</th>
-                                            <th width="20%">Quantity</th>
-                                            {{-- <th width="15%">Discount</th> --}}
-                                            <th width="15%">Sub Total</th>
+                                            <th width="10%">Price</th>
+                                            <th width="30%">Quantity</th>
+                                            <th width="15%">Amount</th>
                                         </tr>
                                     </thead>
                                     <tbody id="order_items" >
+
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card-footer ">
+                    <div class="card-footer pt-1">
                         <div class="row">
                             <div class="col-md-12">
+                                <table class="table text-right" id="" >
+                                    <tbody id="order_footer" >
+                                        <tr>
+                                            <td class="border-0" width="50%">Subtotal</td>
+                                            <td class="border-0" width="50%">BDT
+                                                <input type="text" class="phone text-right border-0" width="150px" readonly value="0.00">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-0" width="50%">VAT</td>
+                                            <td class="border-0" width="50%">BDT
+                                                <input type="text" class="phone text-right border-0" width="150px" readonly value="15">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-0" width="50%">Discount</td>
+                                            <td class="border-0" width="50%">BDT
+                                                <input type="number" class="phone text-right">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-0" width="50%">Charge</td>
+                                            <td class="border-0" width="50%">BDT
+                                                <input type="text" class="phone text-right border-0" width="150px" readonly value="45">
+                                            </td>
+                                        </tr>
+                                        <tr class="font-weight-bold">
+                                            <td class="border-0" width="50%">Total</td>
+                                            <td class="border-0" width="50%">BDT
+                                                <input type="number" class="phone text-right border-0 font-weight-bold" value="0.00">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            {{-- <div class="col-md-12">
                                 <a href="" data-toggle="modal" data-target="#total_payable" class="font-size-large col-md-12 btn btn-secondary">
                                     <i class="feather icon-eye"></i>
                                     Total Payable:
                                     4535.00
                                 </a>
-                            </div>
+                            </div> --}}
                             <div class="col-md-12 mt-1">
                                 <div class="row">
                                     <div class="col-md-4">
