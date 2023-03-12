@@ -102,6 +102,20 @@ input[type="radio"]:checked + label span {
     overflow-y: auto;
     height: 500px !important;
 }
+#order_table td {
+    padding: 0.15rem 2rem !important;
+}
+#order_footer td {
+    padding: 0.05rem 2rem !important;
+}
+#order_footer td  input{
+    width: 40%;
+}
+.pos-cart-items {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 400px !important;
+}
 .pos-scroll-item{
     overflow-x: hidden;
     overflow-y: auto;
