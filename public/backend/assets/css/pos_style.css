@@ -103,7 +103,7 @@ input[type="radio"]:checked + label span {
     height: 500px !important;
 }
 #order_table td {
-    padding: 0.15rem 2rem !important;
+    padding: 0.15rem !important;
 }
 #order_footer td {
     padding: 0.05rem 2rem !important;
