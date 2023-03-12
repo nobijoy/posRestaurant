@@ -105,6 +105,20 @@ input[type="radio"]:checked + label span {
 #order_table td {
     padding: 0.15rem !important;
 }
+
+#order_table td .input-group,
+#order_table td .input-group .input-group-btn{
+    height: 30px !important;
+}
+
+#order_table td .input-group .input-group-btn .btn{
+    padding: 0px 10px;
+}
+#order_table td .input-group input{
+    height: 30px;
+    padding: 0px;
+}
+
 #order_footer td {
     padding: 0.05rem 2rem !important;
 }
