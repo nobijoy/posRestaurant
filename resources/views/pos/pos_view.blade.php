@@ -150,9 +150,9 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-12 pos-left-items">
+                            <div class="col-md-12 tableWrap">
                                 <table class="table" id="order_table" >
-                                    <thead class="thead-bordered text-center">
+                                    <thead class="text-center">
                                         <tr>
                                             <th width="5%">Sl</th>
                                             <th width="48%">Item</th>
@@ -162,7 +162,7 @@
                                             <th width="3%"></th>
                                         </tr>
                                     </thead>
-                                    <tbody id="order_items" >
+                                    <tbody id="order_items">
 
                                     </tbody>
                                 </table>
