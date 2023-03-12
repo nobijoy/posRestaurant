@@ -401,6 +401,7 @@
                 }
             });
         }
+
     </script>
     <script type="text/javascript">
         let addItemToCart = [];
