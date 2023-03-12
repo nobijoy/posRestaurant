@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::match(['get', 'post'], 'change-password/{name}', 'App\Http\Controllers\AdminController@passwordUpdate')->name('changePassword');
     Route::match(['get', 'post'], 'managepos', 'App\Http\Controllers\POSController@posUpdate')->name('managePOS');
     Route::match(['get', 'post'], 'email-setup', 'App\Http\Controllers\POSController@emailSetup')->name('emailSetup');
-    Route::match(['get', 'post'], 'apiSetup', 'App\Http\Controllers\POSController@emailSetup')->name('apiSetup');
+    Route::match(['get', 'post'], 'thirdPartySetup', 'App\Http\Controllers\POSController@thirdPartySetup')->name('thirdPartySetup');
     Route::match(['get', 'post'], 'outlet_setting', 'App\Http\Controllers\OutletSettingController@setup')->name('outlet_setting');
     Route::match(['get', 'post'], 'setting', 'App\Http\Controllers\SettingController@manage')->name('setting');
     Route::match(['get', 'post'], 'printer_setup', 'App\Http\Controllers\SettingController@printer_setup')->name('printer_setup');

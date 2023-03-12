@@ -40,28 +40,17 @@
                     <li @if($url == 'emailSetup') class="active"  @endif>
                         <a href="{{route('emailSetup')}}" data-i18n="Email Setup">Email Setup</a>
                     </li>
-                    <li @if($url == 'apiSetup') class="active"  @endif>
-                        <a href="{{route('apiSetup')}}" data-i18n="Email Setup">3rd Party Setup</a>
+                    <li @if($url == 'thirdPartySetup') class="active"  @endif>
+                        <a href="{{route('thirdPartySetup')}}" data-i18n="Email Setup">3rd Party Setup</a>
                     </li>
                 </ul>
             </li>
-
-
-{{--            <li  class="nav-item @if($url == 'outlet_setting') active @endif"  >--}}
-{{--                <a href="{{route('outlet_setting')}}" data-i18n="outlet_setting">--}}
-{{--                    <i class="feather icon-shopping-bag"></i><span class="menu-title" data-i18n="outlet_setting">Outlet Setting</span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
 
             <li class="nav-item">
                 <a href="#">
                     <i class="feather icon-file-text"></i><span class="menu-title" data-i18n="Setup">Food Menu Setup</span>
                 </a>
                 <ul class="menu-content">
-{{--                    <li @if($url == 'setting') class="active"  @endif>--}}
-{{--                        <a href="{{route('setting')}}" data-i18n="Setting">POS Setting</a>--}}
-{{--                    </li>--}}
-
                     <li @if($url == 'ingredient_category.index') class="active"  @endif>
                         <a href="{{route('ingredient_category.index')}}" data-i18n="Setting">Ingredient Category</a>
                     </li>
@@ -77,12 +66,6 @@
                     <li @if($url == 'menu.index' || $url == "menu.create" || $url == "menu.edit") class="active"  @endif>
                         <a href="{{route('menu.index')}}" data-i18n="Food Menu">Food Menu</a>
                     </li>
-{{--                    <li @if($url == 'expense_item.index') class="active"  @endif>--}}
-{{--                        <a href="{{route('expense_item.index')}}" data-i18n="Food Menu">Expense Item</a>--}}
-{{--                    </li>--}}
-{{--                    <li @if($url == 'modifiers') class="active"  @endif>--}}
-{{--                        <a href="{{route('modifiers')}}" data-i18n="Food Menu">Modifier</a>--}}
-{{--                    </li>--}}
                     <li @if($url == 'payment_method.index') class="active"  @endif>
                         <a href="{{route('payment_method.index')}}" data-i18n="Food Menu">Payment Method</a>
                     </li>
@@ -103,15 +86,9 @@
                     <li @if($url == 'stock.index') class="active"  @endif>
                         <a href="{{route('stock.index')}}" data-i18n="">Stock</a>
                     </li>
-{{--                    <li @if($url == 'stock_adjustment.index') class="active"  @endif>--}}
-{{--                        <a href="{{route('stock_adjustment.index')}}" data-i18n="">Stock Adjustment</a>--}}
-{{--                    </li>--}}
                     <li @if($url == 'waste.index'|| $url == 'waste.create' || $url == 'waste.edit') class="active"  @endif>
                         <a href="{{route('waste.index')}}" data-i18n="">Waste</a>
                     </li>
-{{--                    <li @if($url == 'expense.index') class="active"  @endif>--}}
-{{--                        <a href="{{route('expense.index')}}" data-i18n="">Expense</a>--}}
-{{--                    </li>--}}
                 </ul>
             </li>
 
@@ -149,12 +126,6 @@
                 </ul>
             </li>
 
-{{--            <li  class="nav-item @if($url == 'attendence.index') active @endif"  >--}}
-{{--                <a href="{{route('attendence.index')}}" data-i18n="Attendance">--}}
-{{--                    <i class="feather icon-clock"></i><span class="menu-title" data-i18n="Inventory">Attendance</span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
-
             <li class=" nav-item">
                 <a href="">
                     <i class="feather icon-users"></i><span class="menu-title" data-i18n="Supplier">Manage Customers</span>
@@ -163,9 +134,6 @@
                     <li @if($url == 'customer.index') class="active"  @endif>
                         <a href="{{route('customer.index')}}" data-i18n="Food Menu">Customers</a>
                     </li>
-{{--                    <li @if($url == 'customer_payment.index') class="active"  @endif>--}}
-{{--                        <a href="{{route('customer_payment.index')}}" data-i18n="Payment">Payment</a>--}}
-{{--                    </li>--}}
                 </ul>
             </li>
 
