@@ -157,8 +157,9 @@
                                             <th width="5%">Sl</th>
                                             <th width="40%">Item</th>
                                             <th width="10%">Price</th>
-                                            <th width="30%">Quantity</th>
-                                            <th width="15%">Amount</th>
+                                            <th width="28%">Quantity</th>
+                                            <th width="14%">Amount</th>
+                                            <th width="3%"></th>
                                         </tr>
                                     </thead>
                                     <tbody id="order_items" >
@@ -475,6 +476,9 @@
                 '<input type="hidden" class="total-amount" id="cmenu_total_price_'+item_details[0] + '" name="cmenu_total_price[]" value="'+item_details[2]+ '">' +
                 '<span class="" id="cmenu_total_price_text_'+item_details[0]+ '">'+item_details[2]+ '</span>' +
                 '</td>' +
+                '<td>' +
+                    '<button type="button" title="Delete" class="btn btn-danger btn-sm" onclick="deleteItem(this)" data-count="'+item_details[0] + '"> <i class="fa fa-trash"></i></button>' +
+                '</td>' +
 
                 '</tr>';
 
@@ -484,21 +488,21 @@
             updateRowNo();
             calculateSubtotal();
         }
-        function deleteConsumptionRow(cr){
-            Swal.fire({
-                title: "Are you sure?",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!",
-                confirmButtonClass: "btn btn-warning mr-10",
-                cancelButtonClass: "btn btn-danger ml-1",
-                buttonsStyling: false,
-            }).then(function (result) {
-                if (result.value) {
+        function deleteItem(cr){
+            // Swal.fire({
+            //     title: "Are you sure?",
+            //     type: "warning",
+            //     showCancelButton: true,
+            //     confirmButtonColor: "#3085d6",
+            //     cancelButtonColor: "#d33",
+            //     confirmButtonText: "Yes, delete it!",
+            //     confirmButtonClass: "btn btn-warning mr-10",
+            //     cancelButtonClass: "btn btn-danger ml-1",
+            //     buttonsStyling: false,
+            // }).then(function (result) {
+            //     if (result.value) {
                     var rowId = $(cr).attr('data-count');
-                    var el = document.getElementById("ingredient_row_"+rowId);
+                    var el = document.getElementById("menu-details"+rowId);
                     el.remove();
                     let ingredient_id_container_new = [];
 
@@ -509,9 +513,10 @@
                     }
                     addItemToCart = ingredient_id_container_new;
                     updateRowNo();
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                }
-            });
+                    calculateSubtotal();
+            //     } else if (result.dismiss === Swal.DismissReason.cancel) {
+            //     }
+            // });
 
         }
 
