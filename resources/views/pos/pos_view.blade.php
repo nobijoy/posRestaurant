@@ -152,9 +152,9 @@
                         <div class="row">
                            {{-- <input type="hidden" id="ingredient_count" value="0"> --}}
                            {{-- <input type="hidden" id="ingredient_sl" value="0"> --}}
-                            <div class="form-group col-md-12 pos-left-items">
+                            <div class="form-group col-md-12">
                                 <table class="w-100" id="order_table" >
-                                    <thead class="thead-bordered  text-center">
+                                    <thead class="thead-bordered text-center">
                                         <tr>
                                             <th width="10%">Sl</th>
                                             <th width="40%">Item</th>
