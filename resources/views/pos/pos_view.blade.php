@@ -155,9 +155,9 @@
                                     <thead class="thead-bordered text-center">
                                         <tr>
                                             <th width="5%">Sl</th>
-                                            <th width="40%">Item</th>
+                                            <th width="48%">Item</th>
                                             <th width="10%">Price</th>
-                                            <th width="28%">Quantity</th>
+                                            <th width="20%">Quantity</th>
                                             <th width="14%">Amount</th>
                                             <th width="3%"></th>
                                         </tr>
@@ -447,13 +447,14 @@
             let index = addItemToCart.indexOf(item_details[0]);
 
             if (index > -1) {
-                console.log(item_details[0]);
                 let qty = $('#cmenu_qty_'+item_details[0]).val();
                 let uqty = parseInt(qty) + 1;
                 $('#cmenu_qty_'+item_details[0]).val(uqty);
                 calculateAmount(item_details[0])
                 return false;
             }
+
+            let price = parseFloat(item_details[2]).toFixed(2);
 
             cartItemSl++;
             var newRow = '<tr id="menu-details'+item_details[0] + '">' +
@@ -463,8 +464,8 @@
                 '<span id="cmenu_name_'+item_details[0]+ '">'+item_details[1]+ '</span>' +
                 '</td>' +
                 '<td class="border-0 text-center">' +
-                '<input type="hidden" id="cmenu_price_'+item_details[0] + '" name="cmenu_price[]" value="'+item_details[2]+ '">' +
-                '<span class="" id="cmenu_price_text_'+item_details[0]+ '">'+item_details[2]+ '</span>' +
+                '<input type="hidden" id="cmenu_price_'+item_details[0] + '" name="cmenu_price[]" value="'+price+ '">' +
+                '<span class="" id="cmenu_price_text_'+item_details[0]+ '">'+price+ '</span>' +
                 '</td>' +
                 '<td class="border-0">'+
                     '<input type="text" class="touchspin text-center" onchange="calculateAmount('+item_details[0]+')"  onkeyup="calculateAmount('+item_details[0]+')" id="cmenu_qty_'+item_details[0] + '" name="cmenu_qty[]" value="1" data-bts-min="1" data-bts-max="100" />'+
@@ -473,10 +474,10 @@
                 //     '<input type="text" class="form-control text-center phone" id="cmenu_discount_'+item_details[0] + '" onkeyup="calculateAmount('+item_details[0]+')" name="cmenu_discount[]" value="0" />'+
                 // '</td>'+
                 '<td class="border-0 text-center">' +
-                '<input type="hidden" class="total-amount" id="cmenu_total_price_'+item_details[0] + '" name="cmenu_total_price[]" value="'+item_details[2]+ '">' +
-                '<span class="" id="cmenu_total_price_text_'+item_details[0]+ '">'+item_details[2]+ '</span>' +
+                '<input type="hidden" class="total-amount" id="cmenu_total_price_'+item_details[0] + '" name="cmenu_total_price[]" value="'+price+ '">' +
+                '<span class="" id="cmenu_total_price_text_'+item_details[0]+ '">'+price+ '</span>' +
                 '</td>' +
-                '<td>' +
+                '<td class="border-0">' +
                     '<button type="button" title="Delete" class="btn btn-danger btn-sm" onclick="deleteItem(this)" data-count="'+item_details[0] + '"> <i class="fa fa-trash"></i></button>' +
                 '</td>' +
 
