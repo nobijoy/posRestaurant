@@ -37,8 +37,8 @@
                     <li @if ($url == 'emailSetup') class="active" @endif>
                         <a href="{{ route('emailSetup') }}" data-i18n="Email Setup">Email Setup</a>
                     </li>
-                    <li @if ($url == 'apiSetup') class="active" @endif>
-                        <a href="{{ route('apiSetup') }}" data-i18n="Email Setup">3rd Party Setup</a>
+                    <li @if ($url == 'thirdPartySetup') class="active" @endif>
+                        <a href="{{ route('thirdPartySetup') }}" data-i18n="Email Setup">3rd Party Setup</a>
                     </li>
                 </ul>
             </li>
