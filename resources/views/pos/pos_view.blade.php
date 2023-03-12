@@ -155,10 +155,11 @@
                                     <thead class="text-center">
                                         <tr>
                                             <th width="5%">Sl</th>
-                                            <th width="40%">Item</th>
+                                            <th width="48%">Item</th>
                                             <th width="10%">Price</th>
-                                            <th width="30%">Quantity</th>
-                                            <th width="15%">Amount</th>
+                                            <th width="20%">Quantity</th>
+                                            <th width="14%">Amount</th>
+                                            <th width="3%"></th>
                                         </tr>
                                     </thead>
                                     <tbody id="order_items">
@@ -177,31 +178,31 @@
                                         <tr>
                                             <td class="border-0" width="50%">Subtotal</td>
                                             <td class="border-0" width="50%">BDT
-                                                <input type="text" class="phone text-right border-0" width="150px" readonly value="0.00">
+                                                <input type="text" class="phone text-right border-0" id="sub_total_amount" readonly value="0.00">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="border-0" width="50%">VAT</td>
                                             <td class="border-0" width="50%">BDT
-                                                <input type="text" class="phone text-right border-0" width="150px" readonly value="15">
+                                                <input type="text" class="phone text-right border-0" id="vat" readonly value="15">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="border-0" width="50%">Discount</td>
                                             <td class="border-0" width="50%">BDT
-                                                <input type="number" class="phone text-right">
+                                                <input type="number" class="phone text-right" id="discount" value="0.00" onkeyup="grandTotal()">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="border-0" width="50%">Charge</td>
                                             <td class="border-0" width="50%">BDT
-                                                <input type="text" class="phone text-right border-0" width="150px" readonly value="45">
+                                                <input type="text" class="phone text-right border-0" id="charge" readonly value="45">
                                             </td>
                                         </tr>
                                         <tr class="font-weight-bold">
                                             <td class="border-0" width="50%">Total</td>
                                             <td class="border-0" width="50%">BDT
-                                                <input type="number" class="phone text-right border-0 font-weight-bold" value="0.00">
+                                                <input type="number" class="phone text-right border-0 font-weight-bold" id="grand_total" value="0.00" readonly>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -446,13 +447,14 @@
             let index = addItemToCart.indexOf(item_details[0]);
 
             if (index > -1) {
-                console.log(item_details[0]);
                 let qty = $('#cmenu_qty_'+item_details[0]).val();
                 let uqty = parseInt(qty) + 1;
                 $('#cmenu_qty_'+item_details[0]).val(uqty);
-                calculateSubtotal(item_details[0])
+                calculateAmount(item_details[0])
                 return false;
             }
+
+            let price = parseFloat(item_details[2]).toFixed(2);
 
             cartItemSl++;
             var newRow = '<tr id="menu-details'+item_details[0] + '">' +
@@ -462,18 +464,21 @@
                 '<span id="cmenu_name_'+item_details[0]+ '">'+item_details[1]+ '</span>' +
                 '</td>' +
                 '<td class="border-0 text-center">' +
-                '<input type="hidden" id="cmenu_price_'+item_details[0] + '" name="cmenu_price[]" value="'+item_details[2]+ '">' +
-                '<span class="" id="cmenu_price_text_'+item_details[0]+ '">'+item_details[2]+ '</span>' +
+                '<input type="hidden" id="cmenu_price_'+item_details[0] + '" name="cmenu_price[]" value="'+price+ '">' +
+                '<span class="" id="cmenu_price_text_'+item_details[0]+ '">'+price+ '</span>' +
                 '</td>' +
                 '<td class="border-0">'+
-                    '<input type="text" class="touchspin text-center" onchange="calculateSubtotal('+item_details[0]+')"  onkeyup="calculateSubtotal('+item_details[0]+')" id="cmenu_qty_'+item_details[0] + '" name="cmenu_qty[]" value="1" data-bts-min="1" data-bts-max="100" />'+
+                    '<input type="text" class="touchspin text-center" onchange="calculateAmount('+item_details[0]+')"  onkeyup="calculateAmount('+item_details[0]+')" id="cmenu_qty_'+item_details[0] + '" name="cmenu_qty[]" value="1" data-bts-min="1" data-bts-max="100" />'+
                 '</td>'+
                 // '<td class="border-0">'+
-                //     '<input type="text" class="form-control text-center phone" id="cmenu_discount_'+item_details[0] + '" onkeyup="calculateSubtotal('+item_details[0]+')" name="cmenu_discount[]" value="0" />'+
+                //     '<input type="text" class="form-control text-center phone" id="cmenu_discount_'+item_details[0] + '" onkeyup="calculateAmount('+item_details[0]+')" name="cmenu_discount[]" value="0" />'+
                 // '</td>'+
                 '<td class="border-0 text-center">' +
-                '<input type="hidden" id="cmenu_total_price_'+item_details[0] + '" name="cmenu_total_price[]" value="'+item_details[2]+ '">' +
-                '<span class="" id="cmenu_total_price_text_'+item_details[0]+ '">'+item_details[2]+ '</span>' +
+                '<input type="hidden" class="total-amount" id="cmenu_total_price_'+item_details[0] + '" name="cmenu_total_price[]" value="'+price+ '">' +
+                '<span class="" id="cmenu_total_price_text_'+item_details[0]+ '">'+price+ '</span>' +
+                '</td>' +
+                '<td class="border-0">' +
+                    '<button type="button" title="Delete" class="btn btn-danger btn-sm" onclick="deleteItem(this)" data-count="'+item_details[0] + '"> <i class="fa fa-trash"></i></button>' +
                 '</td>' +
 
                 '</tr>';
@@ -482,22 +487,23 @@
             $('.touchspin').TouchSpin();
             addItemToCart.push(item_details[0])
             updateRowNo();
+            calculateSubtotal();
         }
-        function deleteConsumptionRow(cr){
-            Swal.fire({
-                title: "Are you sure?",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!",
-                confirmButtonClass: "btn btn-warning mr-10",
-                cancelButtonClass: "btn btn-danger ml-1",
-                buttonsStyling: false,
-            }).then(function (result) {
-                if (result.value) {
+        function deleteItem(cr){
+            // Swal.fire({
+            //     title: "Are you sure?",
+            //     type: "warning",
+            //     showCancelButton: true,
+            //     confirmButtonColor: "#3085d6",
+            //     cancelButtonColor: "#d33",
+            //     confirmButtonText: "Yes, delete it!",
+            //     confirmButtonClass: "btn btn-warning mr-10",
+            //     cancelButtonClass: "btn btn-danger ml-1",
+            //     buttonsStyling: false,
+            // }).then(function (result) {
+            //     if (result.value) {
                     var rowId = $(cr).attr('data-count');
-                    var el = document.getElementById("ingredient_row_"+rowId);
+                    var el = document.getElementById("menu-details"+rowId);
                     el.remove();
                     let ingredient_id_container_new = [];
 
@@ -508,9 +514,10 @@
                     }
                     addItemToCart = ingredient_id_container_new;
                     updateRowNo();
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                }
-            });
+                    calculateSubtotal();
+            //     } else if (result.dismiss === Swal.DismissReason.cancel) {
+            //     }
+            // });
 
         }
 
@@ -521,29 +528,53 @@
             }
         }
 
-        function calculateSubtotal(target){
+        function calculateAmount(target){
             var price = $("#cmenu_price_"+target).val();
             var qty = $("#cmenu_qty_"+target).val();
 
-            let subTotal = 0;
-            subTotal = parseFloat(price) * parseFloat(qty);
-            subTotal = subTotal.toFixed(2);
-            if (subTotal == 'NaN') {
+            let amount = 0;
+            amount = parseFloat(price) * parseFloat(qty);
+            amount = amount.toFixed(2);
+            if (amount == 'NaN') {
                 $("#cmenu_total_price_"+target).val(0.00);
                 $("#cmenu_total_price_text_"+target).html(0.00);
 
             }else{
-                $("#cmenu_total_price_"+target).val(subTotal);
-                $("#cmenu_total_price_text_"+target).html(subTotal);
+                $("#cmenu_total_price_"+target).val(amount);
+                $("#cmenu_total_price_text_"+target).html(amount);
             }
+            calculateSubtotal();
+        }
+
+        function calculateSubtotal() {
+            let subtotal = 0.00;
+            $('.total-amount').each(function (index, element) {
+                subtotal = subtotal + parseFloat($(element).val());
+            });
+            $("#sub_total_amount").val(subtotal.toFixed(2));
+            grandTotal();
         }
 
         function grandTotal() {
-            var total = 0;
-            $('.total-price').each(function (index, element) {
-                total = total + parseFloat($(element).val());
-            });
-            $("#total_loss").val(total.toFixed(2));
+            let gtotal = 0.00;
+            let subtotal = 0.00;
+            let vat = 0.00;
+            let charge = 0.00;
+            let discount = 0.00;
+
+            subtotal = parseFloat(subtotal) + parseFloat($("#sub_total_amount").val());
+            vat = parseFloat(vat) + parseFloat($("#vat").val());
+            charge = parseFloat(charge) + parseFloat($("#charge").val());
+            discount = parseFloat(discount) + parseFloat($("#discount").val());
+            if (discount == 'NaN') {
+                gtotal = parseFloat(subtotal) + parseFloat(vat) + parseFloat(charge);
+                $("#grand_total").val(gtotal.toFixed(2));
+                console.log('1');
+
+            }else{
+                gtotal = parseFloat(subtotal) + parseFloat(vat) + parseFloat(charge) - parseFloat(discount);
+                $("#grand_total").val(gtotal.toFixed(2));
+            }
         }
     </script>
 @endsection
