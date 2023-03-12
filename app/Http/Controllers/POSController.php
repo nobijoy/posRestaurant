@@ -143,4 +143,8 @@ class POSController extends Controller
         ]);
     }
 
+    public function posOrder(Request $request){
+        dd($request->all());
+    }
+
 }

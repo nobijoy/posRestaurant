@@ -25,6 +25,23 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
     justify-content: center;
 }
 
+.ma-0{
+    margin: 0px !important;
+}
+.order-type{
+    border: 1px solid #aaa;
+}
+
+/* .order-type:active,
+.order-type:hover,
+.order-type:focus {
+    background: #404e67;
+    color: #fff;
+} */
+input[type="radio"]:checked + label span {
+    background: #404e67;
+    color: #fff;
+}
 .menu-collapsed .logo {
     width: 42px;
     height: 32px;
