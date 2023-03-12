@@ -143,4 +143,8 @@ class POSController extends Controller
         ]);
     }
 
+    public function thirdPartySetup(Request $request){
+        return view('admin.pos_setting.email', compact('data'));
+    }
+
 }
