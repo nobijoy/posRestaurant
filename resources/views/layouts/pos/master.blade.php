@@ -50,6 +50,14 @@
     <!-- END: Custom CSS-->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 
+    <style>
+        @media print {
+            #quick_invoice {
+                size: 56mm 150mm;
+            }
+        }
+    </style>
+
 
 </head>
 <!-- END: Head-->
@@ -90,7 +98,6 @@
 <!-- BEGIN: Vendor JS-->
 <script src="{{asset('public/backend/vendors/js/vendors.min.js')}}"></script>
 <!-- BEGIN Vendor JS-->
-
 <!-- BEGIN: Page Vendor JS-->
 <script src="{{ asset ('public/backend/vendors/js/forms/select/select2.full.min.js')}}"></script>
 <script src="{{ asset ('public/backend/vendors/js/extensions/toastr.min.js')}}"></script>
