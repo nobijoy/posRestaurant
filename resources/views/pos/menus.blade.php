@@ -1,6 +1,6 @@
 @if (sizeof($menus) > 0)
 @foreach ($menus as $menu)
-    <div class="col-md-3 ">
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
         <a href="javascript:" title="{{ $menu->name }}" onclick="addToCart(this)"
             data-details="{{$menu->id . '|' .$menu->name . '|' .$menu->price}}">
             <div class="card">

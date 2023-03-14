@@ -14,72 +14,25 @@
                         <h4 class="text-center mb-0 font-weight-bold">Running Orders<span class="btn text-primary"><i class="feather icon-repeat"></i></span></h4>
                         <input type="text" name="" id="" class="mb-1 rounded form-control" placeholder="Search here">
                     </div>
-                    <div class="card-body pos-left-items mb-1">
-                        <div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded">
-                            <span>Cust: Walk-in Customer</span><br>
-                            <span>Order: rKK230305-001</span><br>
-                            <span>Order Type: Dine In</span><br>
-                            <span>Table: None</span><br>
-                            <span>Waiter: Rakesh</span>
-                        </div>
-                        <div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded">
-                            <span>Cust: Walk-in Customer</span><br>
-                            <span>Order: rKK230305-001</span><br>
-                            <span>Order Type: Dine In</span><br>
-                            <span>Table: None</span><br>
-                            <span>Waiter: Rakesh</span>
-                        </div>
-                        <div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded">
-                            <span>Cust: Walk-in Customer</span><br>
-                            <span>Order: rKK230305-001</span><br>
-                            <span>Order Type: Dine In</span><br>
-                            <span>Table: None</span><br>
-                            <span>Waiter: Rakesh</span>
-                        </div>
-                        <div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded">
-                            <span>Cust: Walk-in Customer</span><br>
-                            <span>Order: rKK230305-001</span><br>
-                            <span>Order Type: Dine In</span><br>
-                            <span>Table: None</span><br>
-                            <span>Waiter: Rakesh</span>
-                        </div>
-                        <div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded">
-                            <span>Cust: Walk-in Customer</span><br>
-                            <span>Order: rKK230305-001</span><br>
-                            <span>Order Type: Dine In</span><br>
-                            <span>Table: None</span><br>
-                            <span>Waiter: Rakesh</span>
-                        </div>
-                        <div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded">
-                            <span>Cust: Walk-in Customer</span><br>
-                            <span>Order: rKK230305-001</span><br>
-                            <span>Order Type: Dine In</span><br>
-                            <span>Table: None</span><br>
-                            <span>Waiter: Rakesh</span>
-                        </div>
+                    <div class="card-body pos-left-items mb-1" id="running_orders">
+
                     </div>
                 </div>
                 <div class="row ml-1 card rounded mb-1">
-                    <div class="card-body">
+                    <div class="card-body h-100">
                         <div class="row btn-group mx-auto text-center">
-                            <div class="col-12 ">
-                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Modify Order<i class="feather icon-edit"></i></button>
-                            </div>
+{{--                            <div class="col-12 ">--}}
+{{--                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Modify Order<i class="feather icon-edit"></i></button>--}}
+{{--                            </div>--}}
                             <div class="col-12">
                                 <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Order Details<i class="feather icon-info"></i></button>
                             </div>
-                            <div class="col-6">
-                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">All Item</button>
-                            </div>
-                            <div class="col-6">
-                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">New Item</button>
-                            </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Invoice</button>
                             </div>
-                            <div class="col-6">
-                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Bill</button>
-                            </div>
+{{--                            <div class="col-6">--}}
+{{--                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Bill</button>--}}
+{{--                            </div>--}}
                             <div class="col-12">
                                 <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Reprint KOT<i class="feather icon-printer"></i></button>
                             </div>
@@ -217,17 +170,16 @@
                             </div> --}}
                             <div class="col-md-12 mt-1">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <button class="btn w-100 bg-danger mb-1 ml-auto text-white font-weight-bold">Cancel</button>
                                     </div>
-                                    <div class="col-md-4">
-                                        <a href="" data-toggle="modal" data-target="#quick_invoice" class="w-100 btn bg-primary mb-1 mx-auto text-white font-weight-bold">
-                                            Quick Invoice
-                                        </a>
-{{--                                        <button class="btn w-100 bg-primary mb-1 mx-auto text-white font-weight-bold">Quick Invoice</button>--}}
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button type="submit" class="btn w-100 bg-success mb-1 mx-auto text-white font-weight-bold">Place Order</button>
+{{--                                    <div class="col-md-4">--}}
+{{--                                        <a href="" data-toggle="modal" data-target="#quick_invoice" class="w-100 btn bg-primary mb-1 mx-auto text-white font-weight-bold">--}}
+{{--                                            Quick Invoice--}}
+{{--                                        </a>--}}
+{{--                                    </div>--}}
+                                    <div class="col-md-6">
+                                        <button type="submit" onclick="orderPlace()" class="btn w-100 bg-success mb-1 mx-auto text-white font-weight-bold">Place Order</button>
                                     </div>
                                 </div>
                             </div>
@@ -476,14 +428,8 @@
 
             window.print();
             document.body.innerHTML = originalContents;
-            console.log(window);
+        }
 
-            // setTimeout(function(){ $('#quick_invoice').modal('hide'); }, 1000);
-        }
-        function myFunction() {
-            document.getElementById("quick_invoice").style.display = "hidden";
-            console.log('ok');
-        }
     </script>
     <script>
         $("#customer_add_form").click(function(event) {
@@ -571,6 +517,75 @@
             });
         }
 
+    </script>
+    <script type="text/javascript">
+        function orderPlace() {
+            var order_number = '';
+            var order_type = $("input[name='type']:checked").val();
+            var customer = $( "#customer_list" ).val();
+            var waiter = $('#waiter_list').val();
+            var table = '';
+            var subTotal = $("#sub_total_amount").val();
+            var vat = $("#vat").val();
+            var charge = $("#charge").val();
+            var discount = $("#discount").val();
+            var grandTotal = $("#grand_total").val();
+
+            var newOrderCard = `<div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded" >
+                                    <span>Cust: ${customer}</span><br>
+                                    <span>Order Id: 001</span><br>
+                                    <span>Order Type: ${order_type}</span><br>
+                                    <span>Table: None</span><br>
+                                    <span>Waiter: ${waiter}</span>
+                                </div>`;
+
+            {{--var url = ("{{route('customer.ajaxStore')}}");--}}
+            {{--$.ajax({--}}
+            {{--    type: "POST",--}}
+            {{--    url: url,--}}
+            {{--    data:{--}}
+            {{--        "_token": "{{ csrf_token() }}",--}}
+            {{--        name:name,--}}
+            {{--        email:email,--}}
+            {{--        phone:phone,--}}
+            {{--        address:address,--}}
+            {{--    },--}}
+            {{--    success: function(data) {--}}
+            {{--        if(data.status == 1){--}}
+            {{--            $('#customer_area').empty().html(data.view);--}}
+            {{--            $(".select2").select2();--}}
+            {{--            Swal.fire({--}}
+            {{--                type: "success",--}}
+            {{--                text: data.msg,--}}
+            {{--                confirmButtonClass: "btn btn-primary",--}}
+            {{--                buttonsStyling: false--}}
+            {{--            });--}}
+            {{--        }else{--}}
+            {{--            Swal.fire({--}}
+            {{--                type: "error",--}}
+            {{--                text: data.msg,--}}
+            {{--                confirmButtonClass: "btn btn-primary",--}}
+            {{--                buttonsStyling: false--}}
+            {{--            });--}}
+            {{--        }--}}
+            {{--    },--}}
+            {{--    error: function(e) {--}}
+            {{--        console.log(e)--}}
+            {{--    }--}}
+
+            {{--});--}}
+
+            $('#running_orders').append(newOrderCard);
+            $('#order_items').empty();
+            updateRowNo();
+
+            $("#sub_total_amount").val('0.00');
+            $("#vat").val('0.00');
+            $("#charge").val('0.00');
+            $("#discount").val('0.00');
+            $("#grand_total").val('0.00');
+
+        }
     </script>
     <script type="text/javascript">
         let addItemToCart = [];
