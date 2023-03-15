@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
+use DB;
 
 class OrderController extends Controller
 {
@@ -80,5 +82,46 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function orderPost(Request $request){
+        dd($request->all());
+        DB::beginTransaction();
+
+        try {
+            $data = new Order;
+            $data->reference_no = 001;
+            $data->order_type = $request->order_type;
+            $data->order_details = $request->order_details;
+            $data->email = $request->customer;
+            $data->waiter = $request->waiter;
+            $data->customer = $request->customer;
+            $data->table = $request->table;
+            $data->subtotal = $request->subTotal;
+            $data->vat = $request->vat;
+            $data->charge = $request->charge;
+            $data->discount = $request->discount;
+            $data->total = $request->grandTotal;
+            $data->status = "running";
+            $data->created_by = Auth()->user()->id;
+
+
+//            $data->save();
+//            DB::commit();
+
+            $orders = Order::where('is_active','1')->get();
+            return response()->json([
+                'view' => view('', compact('customers'))->render(),
+                'status'=> 1,
+                'msg'=> 'Order Created Successfully',
+            ]);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'view' => '',
+                'msg' => 'Somethings went wrong. Try Again',
+                'status'=> 0,
+            ]);
+        }
     }
 }
