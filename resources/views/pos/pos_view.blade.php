@@ -8,7 +8,7 @@
 {{--        <form action="{{ route('posOrder') }}" method="post">@csrf--}}
         <div class="row ">
            {{-- running order card start --}}
-            <div class="col-md-2 pos-section">
+            <div class="col-md-2 vh-100 pos-section">
                 <div class="row ml-1 card rounded">
                     <div class="card-header py-0 mx-auto">
                         <h4 class="text-center mb-0 font-weight-bold">Running Orders<span class="btn text-primary"><i class="feather icon-repeat"></i></span></h4>
@@ -46,7 +46,7 @@
             {{-- Running order card end --}}
 
 
-            <div class="col-md-5">
+            <div class="col-md-5 vh-100">
                 <div class="card rounded pos-section">
                     <div class="card-header pb-0">
                         <div class="row d-flex justify-content-around text-center">
@@ -190,7 +190,7 @@
         </form>
 
 
-            <div class="col-md-5 pl-0">
+            <div class="col-md-5 vh-100 pl-0">
                 <div class="mr-1 card rounded pos-section">
                     <div class="card-header pb-0">
                         <div class="row">
@@ -519,80 +519,12 @@
 
     </script>
     <script type="text/javascript">
-        function orderPlace() {
-            var order_number = '';
-            var order_type = $("input[name='type']:checked").val();
-            var customer = $( "#customer_list" ).val();
-            var waiter = $('#waiter_list').val();
-            var table = '';
-            var subTotal = $("#sub_total_amount").val();
-            var vat = $("#vat").val();
-            var charge = $("#charge").val();
-            var discount = $("#discount").val();
-            var grandTotal = $("#grand_total").val();
-
-            var newOrderCard = `<div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded" >
-                                    <span>Cust: ${customer}</span><br>
-                                    <span>Order Id: 001</span><br>
-                                    <span>Order Type: ${order_type}</span><br>
-                                    <span>Table: None</span><br>
-                                    <span>Waiter: ${waiter}</span>
-                                </div>`;
-
-            {{--var url = ("{{route('customer.ajaxStore')}}");--}}
-            {{--$.ajax({--}}
-            {{--    type: "POST",--}}
-            {{--    url: url,--}}
-            {{--    data:{--}}
-            {{--        "_token": "{{ csrf_token() }}",--}}
-            {{--        name:name,--}}
-            {{--        email:email,--}}
-            {{--        phone:phone,--}}
-            {{--        address:address,--}}
-            {{--    },--}}
-            {{--    success: function(data) {--}}
-            {{--        if(data.status == 1){--}}
-            {{--            $('#customer_area').empty().html(data.view);--}}
-            {{--            $(".select2").select2();--}}
-            {{--            Swal.fire({--}}
-            {{--                type: "success",--}}
-            {{--                text: data.msg,--}}
-            {{--                confirmButtonClass: "btn btn-primary",--}}
-            {{--                buttonsStyling: false--}}
-            {{--            });--}}
-            {{--        }else{--}}
-            {{--            Swal.fire({--}}
-            {{--                type: "error",--}}
-            {{--                text: data.msg,--}}
-            {{--                confirmButtonClass: "btn btn-primary",--}}
-            {{--                buttonsStyling: false--}}
-            {{--            });--}}
-            {{--        }--}}
-            {{--    },--}}
-            {{--    error: function(e) {--}}
-            {{--        console.log(e)--}}
-            {{--    }--}}
-
-            {{--});--}}
-
-            $('#running_orders').append(newOrderCard);
-            $('#order_items').empty();
-            updateRowNo();
-
-            $("#sub_total_amount").val('0.00');
-            $("#vat").val('0.00');
-            $("#charge").val('0.00');
-            $("#discount").val('0.00');
-            $("#grand_total").val('0.00');
-
-        }
-    </script>
-    <script type="text/javascript">
-        let addItemToCart = [];
-        let cartItemSl = 0;
+        var addItemToCart = [];
+        var cartItemSl = 0;
+        var item_details = [];
 
         function addToCart(item){
-            var item_details = $(item).attr('data-details').split('|');
+            item_details = $(item).attr('data-details').split('|');
             let index = addItemToCart.indexOf(item_details[0]);
 
             if (index > -1) {
@@ -611,6 +543,7 @@
                 '<td class="border-0">' +
                 '<input type="hidden" id="cmenu_id_'+item_details[0] + '" name="cmenu_id[]" value="'+item_details[0]+ '">' +
                 '<span id="cmenu_name_'+item_details[0]+ '">'+item_details[1]+ '</span>' +
+                '<input type="hidden" id="cmenu_name_'+item_details[0] + '" name="cmenu_name[]" value="'+item_details[1]+ '">' +
                 '</td>' +
                 '<td class="border-0 text-center">' +
                 '<input type="hidden" id="cmenu_price_'+item_details[0] + '" name="cmenu_price[]" value="'+price+ '">' +
@@ -724,6 +657,100 @@
                 gtotal = parseFloat(subtotal) + parseFloat(vat) + parseFloat(charge) - parseFloat(discount);
                 $("#grand_total").val(gtotal.toFixed(2));
             }
+        }
+    </script>
+    <script type="text/javascript">
+        function orderPlace() {
+            let menu_name = $("input[name='cmenu_name[]']")
+                .map(function(){return $(this).val();}).get();
+            var id = [];
+            var price = [];
+            var item_qty = [];
+            var total_price = [];
+
+            var order_details = [];
+            if (addItemToCart != null){
+                for (let i=0; i < addItemToCart.length; i++) {
+                    id[i] = addItemToCart[i];
+                    price[i] = document.getElementsByName('cmenu_price[]')[i].value;
+                    item_qty[i] = document.getElementsByName('cmenu_qty[]')[i].value;
+                    total_price[i] = document.getElementsByName('cmenu_total_price[]')[i].value;
+
+                }
+            }
+            order_details = [id,menu_name, price,item_qty, total_price];
+            console.log(order_details);
+            var order_type = $("input[name='type']:checked").val();
+            var customer = $( "#customer_list" ).val();
+            var waiter = $('#waiter_list').val();
+            var table = '';
+            var subTotal = $("#sub_total_amount").val();
+            var vat = $("#vat").val();
+            var charge = $("#charge").val();
+            var discount = $("#discount").val();
+            var grandTotal = $("#grand_total").val();
+            // console.log(menuIds);
+
+            // var newOrderCard = `<div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded" >
+            //                         <span>Cust: ${customer}</span><br>
+            //                         <span>Order Id: 001</span><br>
+            //                         <span>Order Type: ${order_type}</span><br>
+            //                         <span>Table: None</span><br>
+            //                         <span>Waiter: ${waiter}</span>
+            //                     </div>`;
+
+            var url = ("{{route('orderPost')}}");
+            $.ajax({
+                type: "POST",
+                url: url,
+                data:{
+                    "_token": "{{ csrf_token() }}",
+                    order_type:order_type,
+                    order_details: order_details,
+                    customer:customer,
+                    waiter:waiter,
+                    table:table,
+                    subTotal:subTotal,
+                    vat:vat,
+                    charge:charge,
+                    discount:discount,
+                    grandTotal:grandTotal,
+                },
+                success: function(data) {
+                    if(data.status == 1){
+                        Swal.fire({
+                            type: "success",
+                            text: data.msg,
+                            confirmButtonClass: "btn btn-primary",
+                            buttonsStyling: false
+                        });
+                    }else{
+                        Swal.fire({
+                            type: "error",
+                            text: data.msg,
+                            confirmButtonClass: "btn btn-primary",
+                            buttonsStyling: false
+                        });
+                    }
+                },
+                error: function(e) {
+                    console.log(e)
+                }
+
+            });
+
+            // $('#running_orders').append(newOrderCard);
+            $('#order_items').empty();
+            updateRowNo();
+
+            $("#sub_total_amount").val('0.00');
+            $("#vat").val('0.00');
+            $("#charge").val('0.00');
+            $("#discount").val('0.00');
+            $("#grand_total").val('0.00');
+        }
+        function getMenuIds(items, value) {
+            return value;
         }
     </script>
 @endsection

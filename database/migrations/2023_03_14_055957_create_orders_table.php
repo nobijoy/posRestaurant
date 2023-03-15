@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->integer('reference_no')->nullable();
             $table->longText('order_details')->nullable();
+            $table->string('order_type')->nullable();
             $table->double('subtotal')->nullable();
             $table->double('vat')->nullable();
             $table->double('discount')->nullable();
@@ -26,11 +27,13 @@ class CreateOrdersTable extends Migration
             $table->string('status')->nullable();
             $table->UnsignedBigInteger('waiter')->Unsigned()->nullable();
             $table->UnsignedBigInteger('customer')->Unsigned()->nullable();
+            $table->UnsignedBigInteger('table')->Unsigned()->nullable();
             $table->UnsignedBigInteger('created_by')->Unsigned()->nullable();
             $table->UnsignedBigInteger('updated_by')->Unsigned()->nullable();
             $table->UnsignedBigInteger('deleted_by')->Unsigned()->nullable();
             $table->foreign('waiter')->references('id')->on('employees')->onDelete('restrict');
             $table->foreign('customer')->references('id')->on('customers')->onDelete('restrict');
+            $table->foreign('table')->references('id')->on('tables')->onDelete('restrict');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('restrict');
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('restrict');
             $table->foreign('deleted_by')->references('id')->on('users')->onDelete('restrict');

@@ -147,6 +147,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::delete('waste/{id}/delete', 'App\Http\Controllers\WasteController@delete')->name('waste.delete');
 
 
+    Route::post('orderPost','App\Http\Controllers\OrderController@orderPost')->name('orderPost');
+
 
 
 });
