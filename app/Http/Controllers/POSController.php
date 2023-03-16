@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use DB;
 use Image;
 use App\Models\Employee;
@@ -92,7 +93,8 @@ class POSController extends Controller
         $customers = Customer::where('is_active','1')->get();
         $menuCategories = MenuCategory::where('is_active', 1)->orderBY('name')->get();
         $menus = Menu::where('is_active', 1)->orderBY('name')->get();
-        return view('pos.pos_view', compact('customers', 'waiters', 'menuCategories', 'menus'));
+        $orders = Order::with(['customerInfo','waiterInfo'])->where('status', 'running')->latest()->get();
+        return view('pos.pos_view', compact('customers', 'waiters', 'menuCategories', 'menus', 'orders'));
     }
     public function setting()
     {

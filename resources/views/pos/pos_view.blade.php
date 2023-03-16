@@ -15,7 +15,7 @@
                         <input type="text" name="" id="" class="mb-1 rounded form-control" placeholder="Search here">
                     </div>
                     <div class="card-body pos-left-items mb-1" id="running_orders">
-
+                        @include('pos.partials.order')
                     </div>
                 </div>
                 <div class="row ml-1 card rounded mb-1">
@@ -661,25 +661,12 @@
     </script>
     <script type="text/javascript">
         function orderPlace() {
-            let menu_name = $("input[name='cmenu_name[]']")
-                .map(function(){return $(this).val();}).get();
-            var id = [];
-            var price = [];
-            var item_qty = [];
-            var total_price = [];
+            let menu_name = $("input[name='cmenu_name[]']").map(function(){return $(this).val();}).get();
+            let cmenu_id = $("input[name='cmenu_id[]']").map(function(){return $(this).val();}).get();
+            let cmenu_price = $("input[name='cmenu_price[]']").map(function(){return $(this).val();}).get();
+            let cmenu_qty = $("input[name='cmenu_qty[]']").map(function(){return $(this).val();}).get();
+            let cmenu_total_price = $("input[name='cmenu_total_price[]']").map(function(){return $(this).val();}).get();
 
-            var order_details = [];
-            if (addItemToCart != null){
-                for (let i=0; i < addItemToCart.length; i++) {
-                    id[i] = addItemToCart[i];
-                    price[i] = document.getElementsByName('cmenu_price[]')[i].value;
-                    item_qty[i] = document.getElementsByName('cmenu_qty[]')[i].value;
-                    total_price[i] = document.getElementsByName('cmenu_total_price[]')[i].value;
-
-                }
-            }
-            order_details = [id,menu_name, price,item_qty, total_price];
-            console.log(order_details);
             var order_type = $("input[name='type']:checked").val();
             var customer = $( "#customer_list" ).val();
             var waiter = $('#waiter_list').val();
@@ -689,15 +676,6 @@
             var charge = $("#charge").val();
             var discount = $("#discount").val();
             var grandTotal = $("#grand_total").val();
-            // console.log(menuIds);
-
-            // var newOrderCard = `<div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded" >
-            //                         <span>Cust: ${customer}</span><br>
-            //                         <span>Order Id: 001</span><br>
-            //                         <span>Order Type: ${order_type}</span><br>
-            //                         <span>Table: None</span><br>
-            //                         <span>Waiter: ${waiter}</span>
-            //                     </div>`;
 
             var url = ("{{route('orderPost')}}");
             $.ajax({
@@ -706,7 +684,11 @@
                 data:{
                     "_token": "{{ csrf_token() }}",
                     order_type:order_type,
-                    order_details: order_details,
+                    menu_name:menu_name,
+                    cmenu_id:cmenu_id,
+                    cmenu_price:cmenu_price,
+                    cmenu_qty:cmenu_qty,
+                    cmenu_total_price:cmenu_total_price,
                     customer:customer,
                     waiter:waiter,
                     table:table,
@@ -724,6 +706,7 @@
                             confirmButtonClass: "btn btn-primary",
                             buttonsStyling: false
                         });
+
                     }else{
                         Swal.fire({
                             type: "error",
@@ -732,25 +715,38 @@
                             buttonsStyling: false
                         });
                     }
+                    $("#running_orders").empty().html(data.view);
+                    // getRunningOrders();
                 },
                 error: function(e) {
                     console.log(e)
                 }
 
             });
-
-            // $('#running_orders').append(newOrderCard);
             $('#order_items').empty();
             updateRowNo();
 
             $("#sub_total_amount").val('0.00');
-            $("#vat").val('0.00');
-            $("#charge").val('0.00');
+            $("#vat").val(15);
+            $("#charge").val(45);
             $("#discount").val('0.00');
             $("#grand_total").val('0.00');
+            $( "#customer_list" ).val("").change();
+            $('#waiter_list').val("").change();
+            cartItemSl =0;
+            let len = addItemToCart.length;
+            for (let i=0; i < len; i++) {
+                addItemToCart.pop();
+                menu_name.pop();
+                cmenu_id.pop();
+                cmenu_price.pop();
+                cmenu_qty.pop();
+                cmenu_total_price.pop();
+            }
         }
         function getMenuIds(items, value) {
             return value;
         }
+
     </script>
 @endsection

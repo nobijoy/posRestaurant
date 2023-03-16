@@ -8,6 +8,7 @@ use DB;
 
 class OrderController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -83,17 +84,28 @@ class OrderController extends Controller
     {
         //
     }
-
     public function orderPost(Request $request){
-        dd($request->all());
         DB::beginTransaction();
 
         try {
+            $orderDestails = [];
+            if (sizeof($request->cmenu_id)> 0){
+                foreach($request->cmenu_id as $key => $menuId){
+                    $orderDestails [] = [
+                        'id'=>$menuId,
+                        'menu'=>$request->menu_name[$key],
+                        'price'=>$request->cmenu_price[$key],
+                        'qty'=>$request->cmenu_qty[$key],
+                        'amount'=>$request->cmenu_total_price[$key]
+                    ];
+                }
+            }
+            $orderNo = 1001 + Order::count();
+
             $data = new Order;
-            $data->reference_no = 001;
+            $data->reference_no = $orderNo;
             $data->order_type = $request->order_type;
-            $data->order_details = $request->order_details;
-            $data->email = $request->customer;
+            $data->order_details = json_encode($orderDestails);
             $data->waiter = $request->waiter;
             $data->customer = $request->customer;
             $data->table = $request->table;
@@ -104,14 +116,12 @@ class OrderController extends Controller
             $data->total = $request->grandTotal;
             $data->status = "running";
             $data->created_by = Auth()->user()->id;
+            $data->save();
+            DB::commit();
 
-
-//            $data->save();
-//            DB::commit();
-
-            $orders = Order::where('is_active','1')->get();
+            $orders = Order::with(['customerInfo','waiterInfo'])->where('status', 'running')->latest()->get();
             return response()->json([
-                'view' => view('', compact('customers'))->render(),
+                'view' => view('pos.partials.order', compact('orders'))->render(),
                 'status'=> 1,
                 'msg'=> 'Order Created Successfully',
             ]);
@@ -119,9 +129,11 @@ class OrderController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'view' => '',
-                'msg' => 'Somethings went wrong. Try Again',
+                'msg' => $th->getMessage(),
                 'status'=> 0,
             ]);
         }
     }
+
+   
 }

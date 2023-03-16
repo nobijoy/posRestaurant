@@ -22,4 +22,5 @@ class PosSetting extends Model
         return $this->setResource($key, $query);
 
     }
+
 }
