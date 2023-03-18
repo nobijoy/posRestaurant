@@ -148,6 +148,8 @@ Route::group(['middleware' => ['auth']], function(){
 
 
     Route::post('orderPost','App\Http\Controllers\OrderController@orderPost')->name('orderPost');
+    Route::get('/loadOrdersByStatus/{status}','App\Http\Controllers\OrderController@loadOrdersByStatus')->name('loadOrdersByStatus');
+
 
 
 

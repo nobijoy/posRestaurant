@@ -129,11 +129,37 @@ class OrderController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'view' => '',
-                'msg' => $th->getMessage(),
+                'msg' => '',
                 'status'=> 0,
             ]);
         }
     }
 
-   
+    public function loadOrdersByStatus($status){
+        if ($status == 'running'){
+            $orders = Order::with(['customerInfo','waiterInfo'])->where('status', 'running')->latest()->get();
+            return response()->json([
+                'view' => view('pos.partials.order', compact('orders'))->render(),
+                'status'=> 1,
+                'msg'=> '',
+            ]);
+        }
+        else if($status == 'draft'){
+            $orders = Order::with(['customerInfo','waiterInfo'])->where('status', 'draft')->latest()->get();
+            return response()->json([
+                'view' => view('pos.partials.order', compact('orders'))->render(),
+                'status'=> 1,
+                'msg'=> '',
+            ]);
+        }
+        else{
+            return response()->json([
+                'view' => '',
+                'status'=> 2,
+                'msg'=> '',
+            ]);
+        }
+    }
+
+
 }

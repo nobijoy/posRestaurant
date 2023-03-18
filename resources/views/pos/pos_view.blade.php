@@ -11,10 +11,23 @@
             <div class="col-md-2 vh-100 pos-section">
                 <div class="row ml-1 card rounded">
                     <div class="card-header py-0 mx-auto">
-                        <h4 class="text-center mb-0 font-weight-bold">Running Orders<span class="btn text-primary"><i class="feather icon-repeat"></i></span></h4>
+                        <div class="row my-1">
+                            <div class="col-6 mx-auto">
+                                <a href="#" class="btn w-100 btn-secondary" onclick="loadOrdersByStatus('{{route('loadOrdersByStatus', ['running'])}}')">
+                                    Running
+                                    <span><i class="feather icon-repeat"></i></span>
+                                </a>
+                            </div>
+                            <div class="col-6 mx-auto">
+                                <a href="#"  class="btn w-100 btn-secondary" onclick="loadOrdersByStatus('{{route('loadOrdersByStatus', ['draft'])}}')">
+                                    Draft
+                                    <span><i class="feather icon-save"></i></span>
+                                </a>
+                            </div>
+                        </div>
                         <input type="text" name="" id="" class="mb-1 rounded form-control" placeholder="Search here">
                     </div>
-                    <div class="card-body pos-left-items mb-1" id="running_orders">
+                    <div class="card-body pos-left-items mb-1" id="order-list-by-status">
                         @include('pos.partials.order')
                     </div>
                 </div>
@@ -78,6 +91,10 @@
                                 </label>
                             </div>
                             <div class="col-3">
+                                <a href="#"  class="btn w-100 bg-light-grey-blue mb-1 mx-auto font-weight-bold">
+                                    Draft
+                                    <span><i class="feather icon-save"></i></span>
+                                </a>
                                 <button class="btn w-100 bg-light-grey-blue mb-1 mx-auto font-weight-bold">Table <i class="feather icon-grid"></i></button>
                             </div>
                         </div>
@@ -204,10 +221,10 @@
                     <div class="card-body">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-2 pos-scroll-item pl-0 pr-1">
+                                <div class="col-md-2 pos-scroll-item pl-0 pr-1" id="menu-div">
                                     @if(sizeof($menuCategories) > 0)
                                         <div class="px-0 mb-1">
-                                            <button class="btn bg-light-grey-blue btn-block pos-btn-active"
+                                            <button class="btn bg-light-grey-blue btn-block"
                                             onclick="loadMenuByCategory('{{ route ('loadMenuByCategory', ['All'])}}')">All</button>
                                         </div>
                                         @foreach ($menuCategories as $cat)
@@ -389,29 +406,29 @@
 
         {{-- Total Payable Modal--}}
 
-        <div class="modal fade text-left" id="total_payable" tabindex="-1" role="dialog"
-                aria-labelledby="myModalLabel35" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="myModalLabel35">Total Payable Amount</h3>
-                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                        <div class="modal-body">
-                            <div>
-                                <p><span class="font-weight-bold">Total Item:</span> 4</p>
-                                <p><span class="font-weight-bold">Total Discount:</span> 20</p>
-                                <p><span class="font-weight-bold">Tax:</span> 12</p>
-                                <p><span class="font-weight-bold">Charge:</span> 35</p>
-                                <p><span class="font-weight-bold">Tip:</span> 50</p>
-                                <p><span class="font-weight-bold">Total:</span> 1200</p>
-                            </div>
-                        </div>
-                </div>
-            </div>
-        </div>
+{{--        <div class="modal fade text-left" id="total_payable" tabindex="-1" role="dialog"--}}
+{{--                aria-labelledby="myModalLabel35" aria-hidden="true">--}}
+{{--            <div class="modal-dialog modal-lg" role="document">--}}
+{{--                <div class="modal-content">--}}
+{{--                    <div class="modal-header">--}}
+{{--                        <h3 class="modal-title" id="myModalLabel35">Total Payable Amount</h3>--}}
+{{--                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">--}}
+{{--                            <span aria-hidden="true">&times;</span>--}}
+{{--                        </button>--}}
+{{--                    </div>--}}
+{{--                        <div class="modal-body">--}}
+{{--                            <div>--}}
+{{--                                <p><span class="font-weight-bold">Total Item:</span> 4</p>--}}
+{{--                                <p><span class="font-weight-bold">Total Discount:</span> 20</p>--}}
+{{--                                <p><span class="font-weight-bold">Tax:</span> 12</p>--}}
+{{--                                <p><span class="font-weight-bold">Charge:</span> 35</p>--}}
+{{--                                <p><span class="font-weight-bold">Tip:</span> 50</p>--}}
+{{--                                <p><span class="font-weight-bold">Total:</span> 1200</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
     </section>
 @endsection
@@ -715,7 +732,7 @@
                             buttonsStyling: false
                         });
                     }
-                    $("#running_orders").empty().html(data.view);
+                    $("#order-list-by-status").empty().html(data.view);
                     // getRunningOrders();
                 },
                 error: function(e) {
@@ -746,6 +763,21 @@
         }
         function getMenuIds(items, value) {
             return value;
+        }
+        function loadOrdersByStatus(url) {
+            $.ajax({
+                url : url,
+                dataType : 'json',
+
+                success: function (data) {
+                    console.log(data);
+                    $("#order-list-by-status").empty().html(data.view);
+                },
+
+                error: function (error) {
+                    console.log(error);
+                }
+            });
         }
 
     </script>
