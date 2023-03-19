@@ -54,7 +54,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Sl</th>
-                                                <th>Table Name</th>
+                                                <th>Table No</th>
                                                 <th>Seat Capacity</th>
                                                 <th>Position</th>
                                                 <th>Description</th>
@@ -126,12 +126,12 @@
                         <div class="modal-body">
                             <div class="row">
                                 <fieldset class="col-md-6 form-group floating-label-form-group">
-                                    <label for="name">Table Name<span class="text-danger">*</span></label>
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="Name" required>
+                                    <label for="name">Table No<span class="text-danger">*</span></label>
+                                    <input type="number" name="name" class="form-control" id="name" placeholder="Name" required>
                                 </fieldset>
                                 <fieldset class="col-md-6 form-group floating-label-form-group">
                                     <label for="seat_capacity">Seat Capacity<span class="text-danger">*</span></label>
-                                    <input type="text" name="seat_capacity" class="form-control" id="seat_capacity" placeholder="Enter number of seat">
+                                    <input type="number" name="seat_capacity" class="form-control" id="seat_capacity" placeholder="Enter number of seat">
                                 </fieldset>
                                 <fieldset class="col-md-6 form-group floating-label-form-group">
                                     <label for="position">Position<span class="text-danger">*</span></label>
@@ -179,12 +179,12 @@
                             <input type="hidden" name="id" id="id">
                             <div class="row">
                                 <fieldset class="col-md-6 form-group floating-label-form-group">
-                                    <label for="name">Table Name<span class="text-danger">*</span></label>
-                                    <input type="text" name="name" class="form-control" id="edit_name" placeholder="Name" required>
+                                    <label for="name">Table No<span class="text-danger">*</span></label>
+                                    <input type="number" name="name" class="form-control" id="edit_name" placeholder="Name" required>
                                 </fieldset>
                                 <fieldset class="col-md-6 form-group floating-label-form-group">
                                     <label for="seat_capacity">Seat Capacity<span class="text-danger">*</span></label>
-                                    <input type="text" name="seat_capacity" class="form-control" id="edit_seat_capacity" placeholder="Enter number of seat">
+                                    <input type="number" name="seat_capacity" class="form-control" id="edit_seat_capacity" placeholder="Enter number of seat">
                                 </fieldset>
                                 <fieldset class="col-md-6 form-group floating-label-form-group">
                                     <label for="position">Position<span class="text-danger">*</span></label>

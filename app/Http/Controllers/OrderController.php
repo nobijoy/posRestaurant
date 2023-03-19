@@ -108,7 +108,7 @@ class OrderController extends Controller
             $data->order_details = json_encode($orderDestails);
             $data->waiter = $request->waiter;
             $data->customer = $request->customer;
-            $data->table = $request->table;
+            $data->table = json_encode($request->table);
             $data->subtotal = $request->subTotal;
             $data->vat = $request->vat;
             $data->charge = $request->charge;
@@ -117,6 +117,7 @@ class OrderController extends Controller
             $data->status = "running";
             $data->created_by = Auth()->user()->id;
             $data->save();
+
             DB::commit();
 
             $orders = Order::with(['customerInfo','waiterInfo'])->where('status', 'running')->latest()->get();
