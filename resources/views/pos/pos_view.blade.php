@@ -91,11 +91,16 @@
                                 </label>
                             </div>
                             <div class="col-3">
-                                <a href="#"  class="btn w-100 bg-light-grey-blue mb-1 mx-auto font-weight-bold">
-                                    Draft
-                                    <span><i class="feather icon-save"></i></span>
+                                <a href="#" data-toggle="modal" data-target="#table_modal" class="btn w-100 bg-light-grey-blue mb-1 ml-auto font-weight-bold">
+                                    Table
+                                    <i class="feather icon-grid"></i>
                                 </a>
-                                <button class="btn w-100 bg-light-grey-blue mb-1 mx-auto font-weight-bold">Table <i class="feather icon-grid"></i></button>
+{{--                                <select name="table_list" id="table_list" class="form-control select2" multiple>--}}
+{{--                                    <option value="" selected>Select Table</option>--}}
+{{--                                    @foreach ($tables as $type)--}}
+{{--                                        <option value="{{$type->id}}" >Table: {{$type->name}}, Capacity: ({{$type->seat_capacity}})</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
                             </div>
                         </div>
                         <div class="row">
@@ -110,7 +115,8 @@
                             <div class="col-md-6" id="customer_area">
                                 @include('pos.partials.customer')
                             </div>
-                            <div class="col-md-1 px-0">
+                            <input type="hidden" id="table_id">
+                            <div class="col-md-1">
                                 <a href="#" data-toggle="modal" data-target="#add_customer" class="btn btn-secondary">
                                     <i class="feather icon-plus"></i>
                                 </a>
@@ -430,6 +436,57 @@
 {{--            </div>--}}
 {{--        </div>--}}
 
+{{--        Tables Modal--}}
+
+        <div class="modal fade text-left" id="table_modal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel35" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel35">Table List</h3>
+                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            @foreach($tables as $table)
+                                <div class="col-md-3 ">
+                                    <div class="card">
+                                        <div class="card-content box-shadow-1 rounded">
+                                            <img class="img-fluid" alt="reserved"
+                                                 src="{{ asset ('public/uploads/image/no_booked.png') }}" >
+                                            <div class="card-body p-0 text-center">
+                                                <p class="mb-0">Table No: {{$table->name}}</p>
+                                                <p class="mb-0">Seat Capacity: {{$table->seat_capacity}}</p>
+                                                <div class="row justify-content-center mb-1">
+                                                    <div class="col-md-6 mx-auto">
+                                                        <a href="#" class="btn btn-secondary" onclick="loadTableData(this)" data-table_id="{{$table->id}}">
+                                                            Reserve
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-md-6 mx-auto">
+                                                        <a href="#" class="btn btn-secondary">
+                                                            Clear
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
+                        <input type="button" id="table_list" onclick="loadTableDetails()" class="btn btn-outline-primary" value="Save">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </section>
 @endsection
 
@@ -677,6 +734,7 @@
         }
     </script>
     <script type="text/javascript">
+        var tableDetails = [];
         function orderPlace() {
             let menu_name = $("input[name='cmenu_name[]']").map(function(){return $(this).val();}).get();
             let cmenu_id = $("input[name='cmenu_id[]']").map(function(){return $(this).val();}).get();
@@ -687,7 +745,7 @@
             var order_type = $("input[name='type']:checked").val();
             var customer = $( "#customer_list" ).val();
             var waiter = $('#waiter_list').val();
-            var table = '';
+            var table = $('#table_id').val();
             var subTotal = $("#sub_total_amount").val();
             var vat = $("#vat").val();
             var charge = $("#charge").val();
@@ -778,6 +836,18 @@
                     console.log(error);
                 }
             });
+        }
+        function loadTableData(id) {
+            let table_id = $(id).attr('data-table_id');
+            tableDetails.push(table_id);
+        }
+        function loadTableDetails() {
+            $('#table_id').val(tableDetails);
+            $('#table_modal').modal('hide');
+            let len = tableDetails.length;
+            for(let i=0; i<len; i++){
+                tableDetails.pop();
+            }
         }
 
     </script>
