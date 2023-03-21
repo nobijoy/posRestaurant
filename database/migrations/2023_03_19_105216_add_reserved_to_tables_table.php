@@ -14,7 +14,7 @@ class AddReservedToTablesTable extends Migration
     public function up()
     {
         Schema::table('tables', function (Blueprint $table) {
-            $table->tinyInteger('reserved')->default(1)->nullable();
+            $table->tinyInteger('reserved')->default(0)->nullable();
         });
     }
 

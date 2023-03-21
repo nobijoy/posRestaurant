@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use Illuminate\Http\Request;
 use DB;
+use App\Models\Order;
+use App\Models\Table;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -117,6 +118,7 @@ class OrderController extends Controller
             $data->status = "running";
             $data->created_by = Auth()->user()->id;
             $data->save();
+            Table::whereIn('id', [$request->table])->update(['reserved'=>1]);
 
             DB::commit();
 
@@ -130,7 +132,7 @@ class OrderController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'view' => '',
-                'msg' => '',
+                'msg' => $th->getMessage(),
                 'status'=> 0,
             ]);
         }

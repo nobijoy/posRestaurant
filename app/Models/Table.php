@@ -10,6 +10,10 @@ class Table extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'reserved'
+    ];
+
     public function createdBy(){
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
