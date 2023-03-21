@@ -95,12 +95,6 @@
                                     Table
                                     <i class="feather icon-grid"></i>
                                 </a>
-{{--                                <select name="table_list" id="table_list" class="form-control select2" multiple>--}}
-{{--                                    <option value="" selected>Select Table</option>--}}
-{{--                                    @foreach ($tables as $type)--}}
-{{--                                        <option value="{{$type->id}}" >Table: {{$type->name}}, Capacity: ({{$type->seat_capacity}})</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
                             </div>
                         </div>
                         <div class="row">
@@ -115,7 +109,7 @@
                             <div class="col-md-6" id="customer_area">
                                 @include('pos.partials.customer')
                             </div>
-                            <input type="hidden" id="table_id">
+                            <input type="hidden" name="table_id[]" id="table_id">
                             <div class="col-md-1">
                                 <a href="#" data-toggle="modal" data-target="#add_customer" class="btn btn-secondary">
                                     <i class="feather icon-plus"></i>
@@ -409,33 +403,6 @@
             </div>
         </div>
 
-
-        {{-- Total Payable Modal--}}
-
-{{--        <div class="modal fade text-left" id="total_payable" tabindex="-1" role="dialog"--}}
-{{--                aria-labelledby="myModalLabel35" aria-hidden="true">--}}
-{{--            <div class="modal-dialog modal-lg" role="document">--}}
-{{--                <div class="modal-content">--}}
-{{--                    <div class="modal-header">--}}
-{{--                        <h3 class="modal-title" id="myModalLabel35">Total Payable Amount</h3>--}}
-{{--                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">--}}
-{{--                            <span aria-hidden="true">&times;</span>--}}
-{{--                        </button>--}}
-{{--                    </div>--}}
-{{--                        <div class="modal-body">--}}
-{{--                            <div>--}}
-{{--                                <p><span class="font-weight-bold">Total Item:</span> 4</p>--}}
-{{--                                <p><span class="font-weight-bold">Total Discount:</span> 20</p>--}}
-{{--                                <p><span class="font-weight-bold">Tax:</span> 12</p>--}}
-{{--                                <p><span class="font-weight-bold">Charge:</span> 35</p>--}}
-{{--                                <p><span class="font-weight-bold">Tip:</span> 50</p>--}}
-{{--                                <p><span class="font-weight-bold">Total:</span> 1200</p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-
 {{--        Tables Modal--}}
 
         <div class="modal fade text-left" id="table_modal" tabindex="-1" role="dialog"
@@ -448,39 +415,12 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            @foreach($tables as $table)
-                                <div class="col-md-3 ">
-                                    <div class="card">
-                                        <div class="card-content box-shadow-1 rounded">
-                                            <img class="img-fluid" alt="reserved"
-                                                 src="{{ asset ('public/uploads/image/no_booked.png') }}" >
-                                            <div class="card-body p-0 text-center">
-                                                <p class="mb-0">Table No: {{$table->name}}</p>
-                                                <p class="mb-0">Seat Capacity: {{$table->seat_capacity}}</p>
-                                                <div class="row justify-content-center mb-1">
-                                                    <div class="col-md-6 mx-auto">
-                                                        <a href="#" class="btn btn-secondary" onclick="loadTableData(this)" data-table_id="{{$table->id}}">
-                                                            Reserve
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-md-6 mx-auto">
-                                                        <a href="#" class="btn btn-secondary">
-                                                            Clear
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
+                    <div class="modal-body" id="table_body">
+                        @include('pos.partials.tables')
                     </div>
                     <div class="modal-footer">
                         <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
-                        <input type="button" id="table_list" onclick="loadTableDetails()" class="btn btn-outline-primary" value="Save">
+{{--                        <input type="button" id="table_list" onclick="loadTableDetails()" class="btn btn-outline-primary" value="Save">--}}
                     </div>
                 </div>
             </div>
@@ -512,7 +452,7 @@
             let email = $('#email').val();
             let phone = $('#phone').val();
             let address = $('#address').val();
-            var url = ("{{route('customer.ajaxStore')}}");
+            let url = ("{{route('customer.ajaxStore')}}");
             $.ajax({
                 type: "POST",
                 url: url,
@@ -741,18 +681,20 @@
             let cmenu_price = $("input[name='cmenu_price[]']").map(function(){return $(this).val();}).get();
             let cmenu_qty = $("input[name='cmenu_qty[]']").map(function(){return $(this).val();}).get();
             let cmenu_total_price = $("input[name='cmenu_total_price[]']").map(function(){return $(this).val();}).get();
+            let table = $("input[name='table_id[]']").map(function(){return $(this).val();}).get();
+            // var table = $('#table_id').val();
 
             var order_type = $("input[name='type']:checked").val();
             var customer = $( "#customer_list" ).val();
             var waiter = $('#waiter_list').val();
-            var table = $('#table_id').val();
+
             var subTotal = $("#sub_total_amount").val();
             var vat = $("#vat").val();
             var charge = $("#charge").val();
             var discount = $("#discount").val();
             var grandTotal = $("#grand_total").val();
 
-            var url = ("{{route('orderPost')}}");
+            let url = ("{{route('orderPost')}}");
             $.ajax({
                 type: "POST",
                 url: url,
@@ -791,7 +733,6 @@
                         });
                     }
                     $("#order-list-by-status").empty().html(data.view);
-                    // getRunningOrders();
                 },
                 error: function(e) {
                     console.log(e)
@@ -818,6 +759,9 @@
                 cmenu_qty.pop();
                 cmenu_total_price.pop();
             }
+            let len2 = tableDetails.length;
+            for (let i = 0; i<len2; i++){
+                tableDetails.pop();            }
         }
         function getMenuIds(items, value) {
             return value;
@@ -828,7 +772,6 @@
                 dataType : 'json',
 
                 success: function (data) {
-                    console.log(data);
                     $("#order-list-by-status").empty().html(data.view);
                 },
 
@@ -838,16 +781,33 @@
             });
         }
         function loadTableData(id) {
-            let table_id = $(id).attr('data-table_id');
+            let table_id = $(id).attr('data-reserve_table_id');
             tableDetails.push(table_id);
-        }
-        function loadTableDetails() {
             $('#table_id').val(tableDetails);
-            $('#table_modal').modal('hide');
-            let len = tableDetails.length;
-            for(let i=0; i<len; i++){
-                tableDetails.pop();
-            }
+
+            // console.log($('#table_id').val());
+        }
+        // function loadTableDetails() {
+        //     $('#table_id').val(tableDetails);
+        //     $('#table_modal').modal('hide');
+        //     let len = tableDetails.length;
+        //     for(let i=0; i<len; i++){
+        //         tableDetails.pop();
+        //     }
+        // }
+
+        function changeTableStatus(url) {
+            // let table_id = $(id).attr('data-clear_table_id');
+            $.ajax({
+                url : url,
+                success: function (data) {
+                    $("#table_body").empty().html(data.view);
+                },
+
+                error: function (error) {
+                    console.log(error);
+                }
+            });
         }
 
     </script>

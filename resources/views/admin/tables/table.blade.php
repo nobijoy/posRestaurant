@@ -188,7 +188,7 @@
                                 </fieldset>
                                 <fieldset class="col-md-6 form-group floating-label-form-group">
                                     <label for="position">Position<span class="text-danger">*</span></label>
-                                    <input type="text" name="position" class="form-control" id="edit_position" placeholder="" required>
+                                    <input type="text" name="position" class="form-control" id="edit_position" placeholder="South" required>
                                 </fieldset>
                                 <fieldset class="col-md-6 form-group floating-label-form-group">
                                     <label for="outlet_id">Outlet<span class="text-danger">*</span></label>
@@ -199,7 +199,7 @@
                                     </select>
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group">
-                                    <label for="description">Description<span class="text-danger">*</span></label>
+                                    <label for="description">Description</label>
                                     <textarea name="description" class="form-control" id="edit_description" placeholder="Enter description" value=""></textarea>
                                 </fieldset>
                             </div>
