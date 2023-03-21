@@ -5,7 +5,7 @@
                 <span>Cust: {{$order->customer ?  $order->customerInfo->name : ''}}</span><br>
                 <span>Order Id: {{$order->reference_no}}</span><br>
                 <span>Order Type: {{$order->order_type}}</span><br>
-                <span>Table: {{$order->table}}</span><br>
+                <span>Table: {{json_decode($order->table)}}</span><br>
                 <span>Waiter: {{$order->waiter ?  $order->waiterInfo->name : ''}}</span>
             </div>
         @endforeach
