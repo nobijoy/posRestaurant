@@ -149,6 +149,7 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::post('orderPost','App\Http\Controllers\OrderController@orderPost')->name('orderPost');
     Route::get('/loadOrdersByStatus/{status}','App\Http\Controllers\OrderController@loadOrdersByStatus')->name('loadOrdersByStatus');
+    Route::get('/changeReservedTableStatus/{id}','App\Http\Controllers\OrderController@reserveStatus')->name('changeReservedTableStatus');
 
 
 

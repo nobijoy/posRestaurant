@@ -96,6 +96,7 @@ class POSController extends Controller
         $menus = Menu::where('is_active', 1)->orderBY('name')->get();
         $tables = Table::where('is_active', 1)->get();
         $orders = Order::with(['customerInfo','waiterInfo'])->where('status', 'running')->latest()->get();
+//        dd($orders);
         return view('pos.pos_view', compact('customers', 'waiters', 'menuCategories', 'menus', 'orders', 'tables'));
     }
     public function setting()
