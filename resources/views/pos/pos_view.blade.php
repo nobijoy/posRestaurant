@@ -13,13 +13,13 @@
                     <div class="card-header py-0 mx-auto">
                         <div class="row my-1">
                             <div class="col-6 mx-auto">
-                                <a href="#" class="btn w-100 btn-secondary" onclick="loadOrdersByStatus('{{route('loadOrdersByStatus', ['running'])}}')">
+                                <a href="Javascript:void(0)" class="btn w-100 bg-light-grey-blue btn-success" id="running_order_button" onclick="loadOrdersByStatus('{{route('loadOrdersByStatus', ['running'])}}')">
                                     Running
                                     <span><i class="feather icon-repeat"></i></span>
                                 </a>
                             </div>
                             <div class="col-6 mx-auto">
-                                <a href="#"  class="btn w-100 btn-secondary" onclick="loadOrdersByStatus('{{route('loadOrdersByStatus', ['draft'])}}')">
+                                <a href="Javascript:void(0)"  class="btn w-100 bg-light-grey-blue" id="draft_order_button" onclick="loadOrdersByStatus('{{route('loadOrdersByStatus', ['draft'])}}')">
                                     Draft
                                     <span><i class="feather icon-save"></i></span>
                                 </a>
@@ -41,7 +41,7 @@
                                 <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Order Details<i class="feather icon-info"></i></button>
                             </div>
                             <div class="col-12">
-                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Invoice</button>
+                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold" data-toggle="modal" data-target="#quick_invoice">Invoice</button>
                             </div>
 {{--                            <div class="col-6">--}}
 {{--                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Bill</button>--}}
@@ -91,10 +91,7 @@
                                 </label>
                             </div>
                             <div class="col-3">
-                                <a href="#" data-toggle="modal" data-target="#table_modal" class="btn w-100 bg-light-grey-blue mb-1 ml-auto font-weight-bold">
-                                    Table
-                                    <i class="feather icon-grid"></i>
-                                </a>
+                                <button type="button" id="table_modal_button" data-toggle="modal" data-target="#table_modal" class="btn w-100 bg-light-grey-blue mb-1 ml-auto font-weight-bold">Table<i class="feather icon-grid"></i></button>
                             </div>
                         </div>
                         <div class="row">
@@ -396,7 +393,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="reset" class="btn btn-outline-secondary" onclick="myFunction()" data-dismiss="modal" value="Close">
+                        <input type="reset" class="btn btn-outline-secondary" id="closeInvoiceButton" data-dismiss="modal" value="Close">
                         <input type="button" id="printBtn" onclick="printDiv('printInvoice')" data-dismiss="modal" class="btn btn-outline-primary" value="Print">
                     </div>
                 </div>
@@ -426,13 +423,24 @@
             </div>
         </div>
 
-
     </section>
 @endsection
 
 @section('script')
     <script src="{{ asset ('public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js') }}"></script>
     <script src="{{ asset ('public/app-assets/js/scripts/forms/input-groups.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('input[type=radio][name=type]').change(function () {
+                if (this.value == 'dinein') {
+                    $('#table_modal_button').removeAttr('disabled');
+                } else {
+                    $('#table_modal_button').attr('disabled', true);
+                }
+            });
+
+        })
+    </script>
     <script type="text/javascript">
         function printDiv(divName) {
             var printContents = document.getElementById(divName).innerHTML;
@@ -441,6 +449,7 @@
             document.body.innerHTML = printContents;
 
             window.print();
+            $('#quick_invoice').modal('hide');
             document.body.innerHTML = originalContents;
         }
 
@@ -681,8 +690,7 @@
             let cmenu_price = $("input[name='cmenu_price[]']").map(function(){return $(this).val();}).get();
             let cmenu_qty = $("input[name='cmenu_qty[]']").map(function(){return $(this).val();}).get();
             let cmenu_total_price = $("input[name='cmenu_total_price[]']").map(function(){return $(this).val();}).get();
-            let table = $("input[name='table_id[]']").map(function(){return $(this).val();}).get();
-            // var table = $('#table_id').val();
+            var table = tableDetails;
 
             var order_type = $("input[name='type']:checked").val();
             var customer = $( "#customer_list" ).val();
@@ -759,14 +767,25 @@
                 cmenu_qty.pop();
                 cmenu_total_price.pop();
             }
-            let len2 = tableDetails.length;
-            for (let i = 0; i<len2; i++){
-                tableDetails.pop();            }
+            tableDetails = [] ;
+            // let len2 = tableDetails.length;
+            // for (let i = 0; i<len2; i++){
+            //     tableDetails.pop();
+            // }
         }
         function getMenuIds(items, value) {
             return value;
         }
         function loadOrdersByStatus(url) {
+
+            if (url.search(/running/i) > 0){
+                $('#draft_order_button').removeClass('btn-success');
+                $('#running_order_button').addClass('btn-success');
+            }
+            else{
+                $('#running_order_button').removeClass('btn-success');
+                $('#draft_order_button').addClass('btn-success');
+            }
             $.ajax({
                 url : url,
                 dataType : 'json',
@@ -780,24 +799,30 @@
                 }
             });
         }
-        function loadTableData(id) {
+        function loadTableData(url, id) {
             let table_id = $(id).attr('data-reserve_table_id');
-            tableDetails.push(table_id);
-            $('#table_id').val(tableDetails);
+            tableDetails.push(parseInt(table_id));
+            $.ajax({
+                url : url,
+                success: function (data) {
+                    $("#table_body").empty().html(data.view);
+                },
 
-            // console.log($('#table_id').val());
+                error: function (error) {
+                    console.log(error);
+                }
+            });
         }
-        // function loadTableDetails() {
-        //     $('#table_id').val(tableDetails);
-        //     $('#table_modal').modal('hide');
-        //     let len = tableDetails.length;
-        //     for(let i=0; i<len; i++){
-        //         tableDetails.pop();
-        //     }
-        // }
 
-        function changeTableStatus(url) {
-            // let table_id = $(id).attr('data-clear_table_id');
+        function changeTableStatus(url, id) {
+            let table_id = $(id).attr('data-clear_table_id');
+            let len2 = tableDetails.length;
+            for (let i = 0; i<len2; i++){
+                if (table_id ==tableDetails[i] ){
+                    tableDetails.splice(i,1);
+                }
+            }
+            console.log(tableDetails);
             $.ajax({
                 url : url,
                 success: function (data) {

@@ -14,14 +14,11 @@
                         <div class="row justify-content-center mb-1">
                             <div class="col-md-6 mx-auto">
                                 <button type="btn" class="btn btn-success" {{$table->reserved == 1 ? 'disabled' : '' }}
-                                onclick="loadTableData(this)" data-reserve_table_id="{{$table->id}}">Reserve</button>
+                                onclick="loadTableData('{{ route('reserveTable', [$table->id]) }}', this)" data-reserve_table_id="{{$table->id}}">Reserve</button>
                             </div>
                             <div class="col-md-6 mx-auto">
                                 <button type="btn" class="btn btn-danger" {{$table->reserved == 0 ? 'disabled' : '' }}
-                                onclick="changeTableStatus('{{ route('changeReservedTableStatus', [$table->id]) }}')" data-clear_table_id="{{$table->id}}">Clear</button>
-{{--                                <a href="javascript:void(0)"  class="btn btn-danger" {{$table->reserved == 0 ? 'disabled' : '' }}  >--}}
-{{--                                    Clear--}}
-{{--                                </a>--}}
+                                onclick="changeTableStatus('{{ route('clearTable', [$table->id]) }}', this)" data-clear_table_id="{{$table->id}}">Clear</button>
                             </div>
                         </div>
                     </div>
