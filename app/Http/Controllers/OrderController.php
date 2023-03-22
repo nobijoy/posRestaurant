@@ -86,10 +86,12 @@ class OrderController extends Controller
         //
     }
     public function orderPost(Request $request){
+//        dd($request->all());
         DB::beginTransaction();
 
         try {
             $orderDestails = [];
+            $tableDetails = [];
             if (sizeof($request->cmenu_id)> 0){
                 foreach($request->cmenu_id as $key => $menuId){
                     $orderDestails [] = [
@@ -101,15 +103,16 @@ class OrderController extends Controller
                     ];
                 }
             }
+
             $orderNo = 1001 + Order::count();
-            dd($request->table);
+
             $data = new Order;
             $data->reference_no = $orderNo;
             $data->order_type = $request->order_type;
             $data->order_details = json_encode($orderDestails);
             $data->waiter = $request->waiter;
             $data->customer = $request->customer;
-            $data->table = json_encode($request->table) ;
+            $data->table = implode(', ' ,$request->table)  ;
             $data->subtotal = $request->subTotal;
             $data->vat = $request->vat;
             $data->charge = $request->charge;
@@ -164,7 +167,7 @@ class OrderController extends Controller
         }
     }
 
-    public function reserveStatus($id)
+    public function clearTable($id)
     {
         try {
             Table::where('id', $id)->update(['reserved' => 0]);
@@ -181,8 +184,26 @@ class OrderController extends Controller
                 'status'=> 0,
             ]);
         }
-
     }
 
+    public function reserveTable($id)
+    {
+        try {
+            Table::where('id', $id)->update(['reserved' => 1]);
+            $tables = Table::where('is_active', 1)->get();
+            return response()->json([
+                'view' => view('pos.partials.tables', compact('tables'))->render(),
+                'status'=> 1,
+                'msg'=> 'Successful',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'view' => '',
+                'msg' => $th->getMessage(),
+                'status'=> 0,
+            ]);
+        }
+
+    }
 
 }
