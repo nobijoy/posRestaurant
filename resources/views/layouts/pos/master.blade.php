@@ -53,7 +53,10 @@
     <style>
         @media print {
             #quick_invoice {
-                size: 56mm 150mm;
+                size: 50mm 100mm;
+            }
+            p {
+                margin-bottom: 0;
             }
         }
     </style>
