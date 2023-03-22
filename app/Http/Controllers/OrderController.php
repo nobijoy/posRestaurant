@@ -112,7 +112,7 @@ class OrderController extends Controller
             $data->order_details = json_encode($orderDestails);
             $data->waiter = $request->waiter;
             $data->customer = $request->customer;
-            $data->table = implode(', ' ,$request->table)  ;
+            $data->table = $request->table;
             $data->subtotal = $request->subTotal;
             $data->vat = $request->vat;
             $data->charge = $request->charge;
@@ -120,8 +120,12 @@ class OrderController extends Controller
             $data->total = $request->grandTotal;
             $data->status = "running";
             $data->created_by = Auth()->user()->id;
+            if ($request->table != ''){
+                $data->table = implode(', ' ,$request->table);
+                Table::whereIn('id', $request->table)->update(['reserved'=>1]);
+            }
             $data->save();
-            Table::whereIn('id', $request->table)->update(['reserved'=>1]);
+
 
             DB::commit();
 

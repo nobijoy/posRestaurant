@@ -64,7 +64,7 @@
                     <div class="card-header pb-0">
                         <div class="row d-flex justify-content-around text-center">
                             <div class="col-3">
-                                <input type="radio" id="dinein" value="dinein" name="type" hidden checked>
+                                <input type="radio" id="dinein" value="Dine In" name="type" hidden checked>
                                 <label for="dinein">
                                     <span class="btn w-100 bg-light-grey-blue mb-1 ml-auto font-weight-bold">
                                         Dine In
@@ -73,7 +73,7 @@
                                 </label>
                             </div>
                             <div class="col-3">
-                                <input type="radio" id="takeaway" value="takeaway" name="type" hidden>
+                                <input type="radio" id="takeaway" value="Takeaway" name="type" hidden>
                                 <label for="takeaway">
                                     <span class="btn w-100 bg-light-grey-blue mb-1 ml-auto font-weight-bold">
                                         Takeaway
@@ -82,7 +82,7 @@
                                 </label>
                             </div>
                             <div class="col-3">
-                                <input type="radio" id="delivery" value="delivery" name="type" hidden>
+                                <input type="radio" id="delivery" value="Delivery" name="type" hidden>
                                 <label for="delivery">
                                     <span class="btn w-100 bg-light-grey-blue mb-1 ml-auto font-weight-bold">
                                         Delivery
@@ -233,7 +233,7 @@
                                     @endif
                                 </div>
 
-                                <div class="col-md-10 pos-scroll-item">
+                                <div class="col-md-10 vh-100 pos-scroll-item">
                                     <div class="row" id="menu-section">
                                         @include('pos.menus')
                                     </div>
@@ -306,7 +306,7 @@
 {{--                    </div>--}}
                     <div class="modal-body" id="printInvoice">
                         <div>
-                            <table align="center" style="font-size: 10px; width: fit-content">
+                            <table align="center" style="font-size: 12px; width: fit-content">
                                 <tr>
                                     <td>
                                         <div style="display: flex; justify-content: center">
@@ -331,38 +331,23 @@
 
                                         <p style="margin-bottom:20px;"><strong>Order Details</strong></p>
                                         <hr>
-                                        <table align="center" style="font-size: 10px; width: 100%; margin: 0;">
+                                        <table style="font-size: 12px; width: 100%; margin: 0; font-weight: bold">
                                             <thead>
-                                            <tr>
-                                                <th>Sl</th>
-                                                <th>Item</th>
-                                                <th>Quantity</th>
-                                                <th>Price</th>
-                                                <th>Amount</th>
-                                            </tr>
+                                                <tr align="justify">
+                                                    <th align="left">Item</th>
+                                                    <th align="center">Quantity</th>
+                                                    <th align="center">Price</th>
+                                                    <th align="right">Amount</th>
+                                                </tr>
                                             </thead>
                                             <tbody align="center">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Beef Burger</td>
-                                                <td>2</td>
-                                                <td>220</td>
-                                                <td>440</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Beef Burger</td>
-                                                <td>2</td>
-                                                <td>220</td>
-                                                <td>440</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Beef Burger</td>
-                                                <td>2</td>
-                                                <td>220</td>
-                                                <td>440</td>
-                                            </tr>
+                                                <tr>
+                                                    <td align="left">Beef Burger</td>
+                                                    <td align="center">2</td>
+                                                    <td align="center">220</td>
+                                                    <td align="right">440</td>
+                                                </tr>
+
                                             </tbody>
                                         </table>
                                         <hr>
@@ -449,8 +434,10 @@
             document.body.innerHTML = printContents;
 
             window.print();
-            $('#quick_invoice').modal('hide');
             document.body.innerHTML = originalContents;
+            setTimeout(function() {
+                location.reload();
+            }, 500);
         }
 
     </script>
@@ -703,50 +690,61 @@
             var grandTotal = $("#grand_total").val();
 
             let url = ("{{route('orderPost')}}");
-            $.ajax({
-                type: "POST",
-                url: url,
-                data:{
-                    "_token": "{{ csrf_token() }}",
-                    order_type:order_type,
-                    menu_name:menu_name,
-                    cmenu_id:cmenu_id,
-                    cmenu_price:cmenu_price,
-                    cmenu_qty:cmenu_qty,
-                    cmenu_total_price:cmenu_total_price,
-                    customer:customer,
-                    waiter:waiter,
-                    table:table,
-                    subTotal:subTotal,
-                    vat:vat,
-                    charge:charge,
-                    discount:discount,
-                    grandTotal:grandTotal,
-                },
-                success: function(data) {
-                    if(data.status == 1){
-                        Swal.fire({
-                            type: "success",
-                            text: data.msg,
-                            confirmButtonClass: "btn btn-primary",
-                            buttonsStyling: false
-                        });
+            if (customer == ''){
+                Swal.fire({
+                    type: "error",
+                    text: "Please, Select Customer Before Placing Order",
+                    confirmButtonClass: "btn btn-primary",
+                    buttonsStyling: false
+                });
+            }
+            else{
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data:{
+                        "_token": "{{ csrf_token() }}",
+                        order_type:order_type,
+                        menu_name:menu_name,
+                        cmenu_id:cmenu_id,
+                        cmenu_price:cmenu_price,
+                        cmenu_qty:cmenu_qty,
+                        cmenu_total_price:cmenu_total_price,
+                        customer:customer,
+                        waiter:waiter,
+                        table:table,
+                        subTotal:subTotal,
+                        vat:vat,
+                        charge:charge,
+                        discount:discount,
+                        grandTotal:grandTotal,
+                    },
+                    success: function(data) {
+                        if(data.status == 1){
+                            Swal.fire({
+                                type: "success",
+                                text: data.msg,
+                                confirmButtonClass: "btn btn-primary",
+                                buttonsStyling: false
+                            });
 
-                    }else{
-                        Swal.fire({
-                            type: "error",
-                            text: data.msg,
-                            confirmButtonClass: "btn btn-primary",
-                            buttonsStyling: false
-                        });
+                        }else{
+                            Swal.fire({
+                                type: "error",
+                                text: data.msg,
+                                confirmButtonClass: "btn btn-primary",
+                                buttonsStyling: false
+                            });
+                        }
+                        $("#order-list-by-status").empty().html(data.view);
+                    },
+                    error: function(e) {
+                        console.log(e)
                     }
-                    $("#order-list-by-status").empty().html(data.view);
-                },
-                error: function(e) {
-                    console.log(e)
-                }
 
-            });
+                });
+            }
+
             $('#order_items').empty();
             updateRowNo();
 
