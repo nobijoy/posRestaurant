@@ -417,13 +417,12 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('input[type=radio][name=type]').change(function () {
-                if (this.value == 'dinein') {
+                if (this.value == 'Dine In') {
                     $('#table_modal_button').removeAttr('disabled');
                 } else {
                     $('#table_modal_button').attr('disabled', true);
                 }
             });
-
         })
     </script>
     <script type="text/javascript">
@@ -833,5 +832,9 @@
             });
         }
 
+        function getOrderInfo() {
+            let orderInfoId = $(this).attr("data-order_id");
+            console.log(orderInfoId);
+        }
     </script>
 @endsection
