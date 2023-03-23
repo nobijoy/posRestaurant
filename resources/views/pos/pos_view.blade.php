@@ -124,7 +124,7 @@
                                             <th width="5%">Sl</th>
                                             <th width="48%">Item</th>
                                             <th width="10%">Price</th>
-                                            <th width="20%">Quantity</th>
+                                            <th style="z-index:1" width="20%">Quantity</th>
                                             <th width="14%">Amount</th>
                                             <th width="3%"></th>
                                         </tr>
@@ -233,8 +233,8 @@
                                     @endif
                                 </div>
 
-                                <div class="col-md-10 vh-100 pos-scroll-item">
-                                    <div class="row" id="menu-section">
+                                <div class="col-md-10 vh-100">
+                                    <div class="row pos-menu-div" id="menu-section">
                                         @include('pos.menus')
                                     </div>
                                 </div>
