@@ -38,10 +38,10 @@
 {{--                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Modify Order<i class="feather icon-edit"></i></button>--}}
 {{--                            </div>--}}
                             <div class="col-12">
-                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Order Details<i class="feather icon-info"></i></button>
+                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold" data-target="#order_details_modal" onclick="getOrderDetails()">Order Details<i class="feather icon-info"></i></button>
                             </div>
                             <div class="col-12">
-                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold" data-toggle="modal" data-target="#quick_invoice">Invoice</button>
+                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold" data-toggle="modal" onclick="openInvoice()">Invoice</button>
                             </div>
 {{--                            <div class="col-6">--}}
 {{--                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Bill</button>--}}
@@ -305,77 +305,7 @@
 {{--                        </button>--}}
 {{--                    </div>--}}
                     <div class="modal-body" id="printInvoice">
-                        <div>
-                            <table align="center" style="font-size: 12px; width: fit-content">
-                                <tr>
-                                    <td>
-                                        <div style="display: flex; justify-content: center">
-                                            <img src="{{asset('public/uploads/image/1678164462logo.png')}}" height="30px" width="30px">
-                                        </div>
 
-                                        <p style="text-align: center; margin: 0; font-weight: bold">Bangladesh Parjatan Corporation</p>
-                                        <p style="text-align: center; margin: 0;">E-5, C, 1 W Agargaon, Dhaka 1207</p>
-                                        <p style="text-align: center; margin: 0;">TIN: 423424234</p>
-                                        <p style="text-align: center; margin: 0;">Mobile: 0193453453</p>
-                                        <p>Bill No: 4678679789</p>
-
-                                        <hr>
-                                        <div style="float: left; width: 50%;">
-                                            <p>Name : Jane Doe</p>
-                                            <p>Phone : +88014645665</p>
-                                        </div>
-                                        <div style="float: right; width: 50%;">
-                                            <p>Date : 12/03/2023</p>
-                                            <p>Payment Type : Cash</p>
-                                        </div>
-
-                                        <p style="margin-bottom:20px;"><strong>Order Details</strong></p>
-                                        <hr>
-                                        <table style="font-size: 12px; width: 100%; margin: 0; font-weight: bold">
-                                            <thead>
-                                                <tr align="justify">
-                                                    <th align="left">Item</th>
-                                                    <th align="center">Quantity</th>
-                                                    <th align="center">Price</th>
-                                                    <th align="right">Amount</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody align="center">
-                                                <tr>
-                                                    <td align="left">Beef Burger</td>
-                                                    <td align="center">2</td>
-                                                    <td align="center">220</td>
-                                                    <td align="right">440</td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                        <hr>
-
-                                        <div style="margin: 3px 3px;">
-                                            <div style="float: left; width: 50%;">
-                                                <p>Sub Total:</p>
-                                                <p>VAT: </p>
-                                                <p>Charge: </p>
-                                                <p>Grand Total: </p>
-                                                <p>Rounded: </p>
-                                            </div>
-                                            <div style="float: right; width: 50%; text-align: right">
-                                                <p>1200.00</p>
-                                                <p>85.59</p>
-                                                <p>60.00</p>
-                                                <p>1425.59</p>
-                                                <p>1425.00</p>
-                                            </div>
-                                        </div>
-                                        <p><span style="font-weight: bold">Your Special Request:</span> </p>
-                                        <p style="font-style: italic;">Note: If you have any feedback you can reach us via email: ,
-                                            or phone:   </p>
-                                        <p style="">Thank You For Visiting</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <input type="reset" class="btn btn-outline-secondary" id="closeInvoiceButton" data-dismiss="modal" value="Close">
@@ -407,6 +337,30 @@
                 </div>
             </div>
         </div>
+
+{{--        Order Details Modal--}}
+
+
+        <div class="modal fade text-left" id="order_details_modal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel35" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel35">Order Details</h3>
+                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="order_detail_body">
+                    </div>
+                    <div class="modal-footer">
+                        <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
+                        {{--                        <input type="button" id="table_list" onclick="loadTableDetails()" class="btn btn-outline-primary" value="Save">--}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </section>
 @endsection
@@ -670,6 +624,7 @@
     </script>
     <script type="text/javascript">
         var tableDetails = [];
+        var orderInfoId = 0;
         function orderPlace() {
             let menu_name = $("input[name='cmenu_name[]']").map(function(){return $(this).val();}).get();
             let cmenu_id = $("input[name='cmenu_id[]']").map(function(){return $(this).val();}).get();
@@ -832,9 +787,61 @@
             });
         }
 
-        function getOrderInfo() {
-            let orderInfoId = $(this).attr("data-order_id");
-            console.log(orderInfoId);
+        function getOrderInfo(id) {
+            orderInfoId = id;
+        }
+
+        function getOrderDetails() {
+            let url = "{{ route ('loadOrderDetails', ['-a']) }}";
+            url = url.replace('-a', orderInfoId);
+            if (orderInfoId != 0){
+                $.ajax({
+                    url : url,
+                    success: function (data) {
+                        $("#order_detail_body").empty().html(data.view);
+                        $("#order_details_modal").modal('show');
+                    },
+
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+                orderInfoId = 0;
+            }
+            else {
+                Swal.fire({
+                    type: "error",
+                    text: "Select An Order First",
+                    confirmButtonClass: "btn btn-danger",
+                    buttonsStyling: false
+                });
+            }
+        }
+        function openInvoice() {
+            let url = "{{ route ('invoicePrint', ['-a']) }}";
+            url = url.replace('-a', orderInfoId);
+            if (orderInfoId != 0){
+                $.ajax({
+                    url : url,
+                    success: function (data) {
+                        $("#printInvoice").empty().html(data.view);
+                        $("#quick_invoice").modal('show');
+                    },
+
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+                orderInfoId = 0;
+            }
+            else {
+                Swal.fire({
+                    type: "error",
+                    text: "Select An Order First",
+                    confirmButtonClass: "btn btn-danger",
+                    buttonsStyling: false
+                });
+            }
         }
     </script>
 @endsection

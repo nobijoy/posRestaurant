@@ -1,7 +1,7 @@
 
     @if(sizeof($orders) > 0)
         @foreach ($orders as $order)
-            <div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded" data-order_id="{{ $order->id }}" onclick="getOrderInfo()">
+            <div class="border-black bg-light-grey-blue mb-1 p-1 line-height-1 rounded" onclick="getOrderInfo({{ $order->id }})">
                     <span>Cust: {{$order->customer ?  $order->customerInfo->name : ''}}</span><br>
                     <span>Order Id: {{$order->reference_no}}</span><br>
                     <span>Order Type: {{$order->order_type}}</span><br>

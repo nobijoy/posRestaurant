@@ -207,7 +207,40 @@ class OrderController extends Controller
                 'status'=> 0,
             ]);
         }
+    }
 
+    public function loadOrderDetails($id){
+        try {
+            $order = Order::find($id);
+            return response()->json([
+                'view' => view('pos.partials.orderDetail', compact('order'))->render(),
+                'status'=> 1,
+                'msg'=> 'Successful',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'view' => '',
+                'msg' => $th->getMessage(),
+                'status'=> 0,
+            ]);
+        }
+    }
+
+    public function invoicePrint($id){
+        try {
+            $order = Order::find($id);
+            return response()->json([
+                'view' => view('pos.partials.invoice', compact('order'))->render(),
+                'status'=> 1,
+                'msg'=> 'Successful',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'view' => '',
+                'msg' => $th->getMessage(),
+                'status'=> 0,
+            ]);
+        }
     }
 
 }

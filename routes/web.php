@@ -151,6 +151,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/loadOrdersByStatus/{status}','App\Http\Controllers\OrderController@loadOrdersByStatus')->name('loadOrdersByStatus');
     Route::get('/clearTable/{id}','App\Http\Controllers\OrderController@clearTable')->name('clearTable');
     Route::get('/reserveTable/{id}','App\Http\Controllers\OrderController@reserveTable')->name('reserveTable');
+    Route::get('/loadOrderDetails/{id}','App\Http\Controllers\OrderController@loadOrderDetails')->name('loadOrderDetails');
+    Route::get('/invoicePrint/{id}','App\Http\Controllers\OrderController@invoicePrint')->name('invoicePrint');
 
 
 
