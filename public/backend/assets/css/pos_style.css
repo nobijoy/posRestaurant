@@ -101,6 +101,8 @@ input[type="radio"]:checked + label span {
     overflow-x: hidden;
     overflow-y: auto;
     height: 500px !important;
+    scrollbar-width: thin;
+    scrollbar-color: #aaa #fff;
 }
 #order_table td {
     padding: 0.15rem !important;
@@ -109,6 +111,7 @@ input[type="radio"]:checked + label span {
 #order_table td .input-group,
 #order_table td .input-group .input-group-btn{
     height: 30px !important;
+    z-index: 0;
 }
 
 #order_table td .input-group .input-group-btn .btn{
@@ -157,6 +160,8 @@ input[type="radio"]:checked + label span {
 .tableWrap {
     height: 50vh !important;
     overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #aaa #fff;
 }
 
 #order_table thead tr th {
@@ -178,4 +183,24 @@ input[type="radio"]:checked + label span {
 }
 .btn:disabled{
     cursor: not-allowed !important;
+}
+
+.pos-menu-div{
+    height: 750px;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #aaa #fff;
+}
+
+.pos-menu-div::-webkit-scrollbar,
+.pos-left-items::-webkit-scrollbar,
+.tableWrap::-webkit-scrollbar {
+    width: 4px;
+}
+
+.pos-menu-div::-webkit-scrollbar-thumb,
+.pos-left-items::-webkit-scrollbar-thumb,
+.tableWrap::-webkit-scrollbar-thumb {
+    background-color: #aaa;
+    border-radius: 4px;
 }
