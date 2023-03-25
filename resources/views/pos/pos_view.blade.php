@@ -38,10 +38,10 @@
 {{--                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Modify Order<i class="feather icon-edit"></i></button>--}}
 {{--                            </div>--}}
                             <div class="col-12">
-                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Order Details<i class="feather icon-info"></i></button>
+                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold" data-target="#order_details_modal" onclick="getOrderDetails()">Order Details<i class="feather icon-info"></i></button>
                             </div>
                             <div class="col-12">
-                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold" data-toggle="modal" data-target="#quick_invoice">Invoice</button>
+                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold" data-toggle="modal" onclick="openInvoice()">Invoice</button>
                             </div>
 {{--                            <div class="col-6">--}}
 {{--                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Bill</button>--}}
@@ -184,16 +184,16 @@
                             </div> --}}
                             <div class="col-md-12 mt-1">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <button class="btn w-100 bg-danger mb-1 ml-auto text-white font-weight-bold">Cancel</button>
                                     </div>
-{{--                                    <div class="col-md-4">--}}
-{{--                                        <a href="" data-toggle="modal" data-target="#quick_invoice" class="w-100 btn bg-primary mb-1 mx-auto text-white font-weight-bold">--}}
-{{--                                            Quick Invoice--}}
-{{--                                        </a>--}}
-{{--                                    </div>--}}
-                                    <div class="col-md-6">
-                                        <button type="submit" onclick="orderPlace()" class="btn w-100 bg-success mb-1 mx-auto text-white font-weight-bold">Place Order</button>
+                                    <div class="col-md-4">
+                                        <button type="submit" onclick="orderPlace()" class="btn w-100 bg-primary mb-1 mx-auto text-white font-weight-bold">Place Order</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" onclick="openPaymentModal()" data-target="#payment_modal" class="w-100 btn bg-success mb-1 mx-auto text-white font-weight-bold">
+                                            Pay & Place Order
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -201,8 +201,6 @@
                     </div>
                 </div>
             </div>
-        </form>
-
 
             <div class="col-md-5 vh-100 pl-0">
                 <div class="mr-1 card rounded pos-section">
@@ -290,9 +288,7 @@
             </div>
         </div>
 
-
 {{--        Invoice Modal--}}
-
 
         <div class="modal fade text-left" id="quick_invoice" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel35" aria-hidden="true">
@@ -305,77 +301,7 @@
 {{--                        </button>--}}
 {{--                    </div>--}}
                     <div class="modal-body" id="printInvoice">
-                        <div>
-                            <table align="center" style="font-size: 12px; width: fit-content">
-                                <tr>
-                                    <td>
-                                        <div style="display: flex; justify-content: center">
-                                            <img src="{{asset('public/uploads/image/1678164462logo.png')}}" height="30px" width="30px">
-                                        </div>
 
-                                        <p style="text-align: center; margin: 0; font-weight: bold">Bangladesh Parjatan Corporation</p>
-                                        <p style="text-align: center; margin: 0;">E-5, C, 1 W Agargaon, Dhaka 1207</p>
-                                        <p style="text-align: center; margin: 0;">TIN: 423424234</p>
-                                        <p style="text-align: center; margin: 0;">Mobile: 0193453453</p>
-                                        <p>Bill No: 4678679789</p>
-
-                                        <hr>
-                                        <div style="float: left; width: 50%;">
-                                            <p>Name : Jane Doe</p>
-                                            <p>Phone : +88014645665</p>
-                                        </div>
-                                        <div style="float: right; width: 50%;">
-                                            <p>Date : 12/03/2023</p>
-                                            <p>Payment Type : Cash</p>
-                                        </div>
-
-                                        <p style="margin-bottom:20px;"><strong>Order Details</strong></p>
-                                        <hr>
-                                        <table style="font-size: 12px; width: 100%; margin: 0; font-weight: bold">
-                                            <thead>
-                                                <tr align="justify">
-                                                    <th align="left">Item</th>
-                                                    <th align="center">Quantity</th>
-                                                    <th align="center">Price</th>
-                                                    <th align="right">Amount</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody align="center">
-                                                <tr>
-                                                    <td align="left">Beef Burger</td>
-                                                    <td align="center">2</td>
-                                                    <td align="center">220</td>
-                                                    <td align="right">440</td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                        <hr>
-
-                                        <div style="margin: 3px 3px;">
-                                            <div style="float: left; width: 50%;">
-                                                <p>Sub Total:</p>
-                                                <p>VAT: </p>
-                                                <p>Charge: </p>
-                                                <p>Grand Total: </p>
-                                                <p>Rounded: </p>
-                                            </div>
-                                            <div style="float: right; width: 50%; text-align: right">
-                                                <p>1200.00</p>
-                                                <p>85.59</p>
-                                                <p>60.00</p>
-                                                <p>1425.59</p>
-                                                <p>1425.00</p>
-                                            </div>
-                                        </div>
-                                        <p><span style="font-weight: bold">Your Special Request:</span> </p>
-                                        <p style="font-style: italic;">Note: If you have any feedback you can reach us via email: ,
-                                            or phone:   </p>
-                                        <p style="">Thank You For Visiting</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <input type="reset" class="btn btn-outline-secondary" id="closeInvoiceButton" data-dismiss="modal" value="Close">
@@ -408,6 +334,89 @@
             </div>
         </div>
 
+{{--        Order Details Modal--}}
+
+        <div class="modal fade text-left" id="order_details_modal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel35" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel35">Order Details</h3>
+                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="order_detail_body">
+                    </div>
+                    <div class="modal-footer">
+                        <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
+                        {{--                        <input type="button" id="table_list" onclick="loadTableDetails()" class="btn btn-outline-primary" value="Save">--}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{{--        Payment Modal --}}
+
+        <div class="modal fade text-left" id="payment_modal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel35" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel35">Payment Details</h3>
+                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="javascript:" method="POST" id="" class="clearForm form" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-4 mt-1">
+                                    <label for="payment_list" class="font-weight-bold">Payment Method<span class="text-danger">*</span> :</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select name="payment_list" id="payment_list" class="form-control select2" required>
+                                        @foreach ($payments as $type)
+                                            <option value="{{$type->id}}" >{{$type->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-md-4 mt-1">
+                                    <label for="total_amount" class="font-weight-bold">Total Amount : </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="total_amount" class="form-control" id="total_amount" placeholder="" value="" readonly>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-md-4 mt-1">
+                                    <label for="paid_amount" class="font-weight-bold">Paid: </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="number" name="paid_amount" onkeyup="calculationPaid()" class="form-control" id="paid_amount" placeholder="" value="" >
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-md-4 mt-1">
+                                    <label for="change_amount" class="font-weight-bold">Change : </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="change_amount" class="form-control" id="change_amount" placeholder="" value="0.00" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
+                            <input type="button" id="" class="btn btn-outline-primary" onclick="orderPaid()" value="Confirm">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </section>
 @endsection
 
@@ -417,14 +426,16 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('input[type=radio][name=type]').change(function () {
-                if (this.value == 'dinein') {
+                if (this.value == 'Dine In') {
                     $('#table_modal_button').removeAttr('disabled');
                 } else {
                     $('#table_modal_button').attr('disabled', true);
                 }
             });
-
         })
+        // $("#payment_modal").on("show.bs.modal", function (e) {
+        //     $('#payment_list').select2()({ width: '100%' });
+        // })
     </script>
     <script type="text/javascript">
         function printDiv(divName) {
@@ -671,6 +682,7 @@
     </script>
     <script type="text/javascript">
         var tableDetails = [];
+        var orderInfoId = 0;
         function orderPlace() {
             let menu_name = $("input[name='cmenu_name[]']").map(function(){return $(this).val();}).get();
             let cmenu_id = $("input[name='cmenu_id[]']").map(function(){return $(this).val();}).get();
@@ -688,6 +700,7 @@
             var charge = $("#charge").val();
             var discount = $("#discount").val();
             var grandTotal = $("#grand_total").val();
+            let payment_status = "Unpaid";
 
             let url = ("{{route('orderPost')}}");
             if (customer == ''){
@@ -713,6 +726,7 @@
                         customer:customer,
                         waiter:waiter,
                         table:table,
+                        payment_status:	payment_status,
                         subTotal:subTotal,
                         vat:vat,
                         charge:charge,
@@ -741,7 +755,6 @@
                     error: function(e) {
                         console.log(e)
                     }
-
                 });
             }
 
@@ -766,10 +779,7 @@
                 cmenu_total_price.pop();
             }
             tableDetails = [] ;
-            // let len2 = tableDetails.length;
-            // for (let i = 0; i<len2; i++){
-            //     tableDetails.pop();
-            // }
+
         }
         function getMenuIds(items, value) {
             return value;
@@ -820,7 +830,6 @@
                     tableDetails.splice(i,1);
                 }
             }
-            console.log(tableDetails);
             $.ajax({
                 url : url,
                 success: function (data) {
@@ -833,5 +842,225 @@
             });
         }
 
+        function getOrderInfo(id) {
+            orderInfoId = id;
+        }
+        $(".order").click(function () {
+            $(this).toggleClass('bg-white').siblings().removeClass("bg-white");
+        });
+
+        function getOrderDetails() {
+            let url = "{{ route ('loadOrderDetails', ['-a']) }}";
+            url = url.replace('-a', orderInfoId);
+            if (orderInfoId != 0){
+                $.ajax({
+                    url : url,
+                    success: function (data) {
+                        $("#order_detail_body").empty().html(data.view);
+                        $("#order_details_modal").modal('show');
+                    },
+
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+                orderInfoId = 0;
+            }
+            else {
+                Swal.fire({
+                    type: "error",
+                    text: "Select An Order First",
+                    confirmButtonClass: "btn btn-danger",
+                    buttonsStyling: false
+                });
+            }
+        }
+        function openInvoice() {
+            let url = "{{ route ('invoicePrint', ['-a']) }}";
+            url = url.replace('-a', orderInfoId);
+            if (orderInfoId != 0){
+                $.ajax({
+                    url : url,
+                    success: function (data) {
+                        $("#printInvoice").empty().html(data.view);
+                        $("#quick_invoice").modal('show');
+                    },
+
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+                orderInfoId = 0;
+            }
+            else {
+                Swal.fire({
+                    type: "error",
+                    text: "Select An Order First",
+                    confirmButtonClass: "btn btn-danger",
+                    buttonsStyling: false
+                });
+            }
+        }
+        function openPaymentModal() {
+            $('#payment_modal').modal('show');
+            let amount =  $('#grand_total').val();
+            $('#total_amount').val(amount) ;
+        }
+        function calculationPaid() {
+            let amount = $('#total_amount').val() ;
+            let paid = $('#paid_amount').val();
+            let change = 0;
+            change = parseInt(paid) - parseInt(amount);
+            $('#change_amount').val(change.toFixed(2));
+        }
+
+        function orderPaid() {
+            alert($('#paid_amount').val());
+            alert($('#total_amount').val());
+            if ($('#paid_amount').val() >= $('#total_amount').val()) {
+                let menu_name = $("input[name='cmenu_name[]']").map(function () {
+                    return $(this).val();
+                }).get();
+                let cmenu_id = $("input[name='cmenu_id[]']").map(function () {
+                    return $(this).val();
+                }).get();
+                let cmenu_price = $("input[name='cmenu_price[]']").map(function () {
+                    return $(this).val();
+                }).get();
+                let cmenu_qty = $("input[name='cmenu_qty[]']").map(function () {
+                    return $(this).val();
+                }).get();
+                let cmenu_total_price = $("input[name='cmenu_total_price[]']").map(function () {
+                    return $(this).val();
+                }).get();
+                var table = tableDetails;
+
+                var order_type = $("input[name='type']:checked").val();
+                var customer = $("#customer_list").val();
+                var waiter = $('#waiter_list').val();
+
+                var subTotal = $("#sub_total_amount").val();
+                var vat = $("#vat").val();
+                var charge = $("#charge").val();
+                var discount = $("#discount").val();
+                var grandTotal = $("#grand_total").val();
+                var payment_method = $("#payment_list").val();
+                let payment_status = "Paid";
+
+                let url = ("{{route('orderPost')}}");
+                if (customer == '') {
+                    Swal.fire({
+                        type: "error",
+                        text: "Please, Select Customer Before Placing Order",
+                        confirmButtonClass: "btn btn-primary",
+                        buttonsStyling: false
+                    });
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            order_type: order_type,
+                            menu_name: menu_name,
+                            cmenu_id: cmenu_id,
+                            cmenu_price: cmenu_price,
+                            cmenu_qty: cmenu_qty,
+                            cmenu_total_price: cmenu_total_price,
+                            customer: customer,
+                            waiter: waiter,
+                            table: table,
+                            payment_method: payment_method,
+                            payment_status: payment_status,
+                            subTotal: subTotal,
+                            vat: vat,
+                            charge: charge,
+                            discount: discount,
+                            grandTotal: grandTotal,
+                        },
+                        success: function (data) {
+                            if (data.status == 1) {
+                                Swal.fire({
+                                    type: "success",
+                                    text: data.msg,
+                                    confirmButtonClass: "btn btn-primary",
+                                    buttonsStyling: false
+                                });
+
+                            } else {
+                                Swal.fire({
+                                    type: "error",
+                                    text: data.msg,
+                                    confirmButtonClass: "btn btn-primary",
+                                    buttonsStyling: false
+                                });
+                            }
+                            $("#order-list-by-status").empty().html(data.view);
+                            $("#paid_amount").val('');
+                            $("#total_amount").val('');
+                            console.log('this')
+                        },
+                        error: function (e) {
+                            console.log(e)
+                        }
+                    });
+                }
+
+                $('#order_items').empty();
+                updateRowNo();
+
+                $("#sub_total_amount").val('0.00');
+                $("#vat").val(15);
+                $("#charge").val(45);
+                $('#paid_amount').val('');
+                $('#change_amount').val(0.00);
+                $("#discount").val('0.00');
+                $("#grand_total").val('0.00');
+                $("#customer_list").val("").change();
+                $('#waiter_list').val("").change();
+                cartItemSl = 0;
+                let len = addItemToCart.length;
+                for (let i = 0; i < len; i++) {
+                    addItemToCart.pop();
+                    menu_name.pop();
+                    cmenu_id.pop();
+                    cmenu_price.pop();
+                    cmenu_qty.pop();
+                    cmenu_total_price.pop();
+                }
+                tableDetails = [];
+            } else {
+                Swal.fire({
+                    type: "error",
+                    text: 'Paid Amount should be more than Total Amount',
+                    confirmButtonClass: "btn btn-primary",
+                    buttonsStyling: false
+                });
+                // $('#payment_modal').modal('hide');
+                // $('#order_items').empty();
+                // updateRowNo();
+                // $("#sub_total_amount").val('0.00');
+                // $("#vat").val(15);
+                // $("#charge").val(45);
+                // $("#discount").val('0.00');
+                // $('#change_amount').val(0.00);
+                // $('#paid_amount').val('');
+                // $("#grand_total").val('0.00');
+                // $("#customer_list").val("").change();
+                // $('#waiter_list').val("").change();
+                // cartItemSl = 0;
+                // let len = addItemToCart.length;
+                // for (let i = 0; i < len; i++) {
+                //     addItemToCart.pop();
+                //     menu_name.pop();
+                //     cmenu_id.pop();
+                //     cmenu_price.pop();
+                //     cmenu_qty.pop();
+                //     cmenu_total_price.pop();
+                // }
+                // tableDetails = [];
+
+            }
+        }
     </script>
 @endsection
