@@ -184,16 +184,16 @@
                             </div> --}}
                             <div class="col-md-12 mt-1">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <button class="btn w-100 bg-danger mb-1 ml-auto text-white font-weight-bold">Cancel</button>
                                     </div>
-{{--                                    <div class="col-md-4">--}}
-{{--                                        <a href="" data-toggle="modal" data-target="#quick_invoice" class="w-100 btn bg-primary mb-1 mx-auto text-white font-weight-bold">--}}
-{{--                                            Quick Invoice--}}
-{{--                                        </a>--}}
-{{--                                    </div>--}}
-                                    <div class="col-md-6">
-                                        <button type="submit" onclick="orderPlace()" class="btn w-100 bg-success mb-1 mx-auto text-white font-weight-bold">Place Order</button>
+                                    <div class="col-md-4">
+                                        <button type="submit" onclick="orderPlace()" class="btn w-100 bg-primary mb-1 mx-auto text-white font-weight-bold">Place Order</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" onclick="openPaymentModal()" data-target="#payment_modal" class="w-100 btn bg-success mb-1 mx-auto text-white font-weight-bold">
+                                            Pay & Place Order
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -201,8 +201,6 @@
                     </div>
                 </div>
             </div>
-        </form>
-
 
             <div class="col-md-5 vh-100 pl-0">
                 <div class="mr-1 card rounded pos-section">
@@ -290,9 +288,7 @@
             </div>
         </div>
 
-
 {{--        Invoice Modal--}}
-
 
         <div class="modal fade text-left" id="quick_invoice" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel35" aria-hidden="true">
@@ -340,7 +336,6 @@
 
 {{--        Order Details Modal--}}
 
-
         <div class="modal fade text-left" id="order_details_modal" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel35" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -361,6 +356,66 @@
             </div>
         </div>
 
+{{--        Payment Modal --}}
+
+        <div class="modal fade text-left" id="payment_modal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel35" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel35">Payment Details</h3>
+                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="javascript:" method="POST" id="" class="clearForm form" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-4 mt-1">
+                                    <label for="payment_list" class="font-weight-bold">Payment Method<span class="text-danger">*</span> :</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select name="payment_list" id="payment_list" class="form-control select2" required>
+                                        @foreach ($payments as $type)
+                                            <option value="{{$type->id}}" >{{$type->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-md-4 mt-1">
+                                    <label for="total_amount" class="font-weight-bold">Total Amount : </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="total_amount" class="form-control" id="total_amount" placeholder="" value="" readonly>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-md-4 mt-1">
+                                    <label for="paid_amount" class="font-weight-bold">Paid: </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="number" name="paid_amount" onkeyup="calculationPaid()" class="form-control" id="paid_amount" placeholder="" value="" >
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-md-4 mt-1">
+                                    <label for="change_amount" class="font-weight-bold">Change : </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="change_amount" class="form-control" id="change_amount" placeholder="" value="0.00" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
+                            <input type="button" id="" class="btn btn-outline-primary" onclick="orderPaid()" value="Confirm">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     </section>
 @endsection
@@ -378,6 +433,9 @@
                 }
             });
         })
+        // $("#payment_modal").on("show.bs.modal", function (e) {
+        //     $('#payment_list').select2()({ width: '100%' });
+        // })
     </script>
     <script type="text/javascript">
         function printDiv(divName) {
@@ -642,6 +700,7 @@
             var charge = $("#charge").val();
             var discount = $("#discount").val();
             var grandTotal = $("#grand_total").val();
+            let payment_status = "Unpaid";
 
             let url = ("{{route('orderPost')}}");
             if (customer == ''){
@@ -667,6 +726,7 @@
                         customer:customer,
                         waiter:waiter,
                         table:table,
+                        payment_status:	payment_status,
                         subTotal:subTotal,
                         vat:vat,
                         charge:charge,
@@ -695,7 +755,6 @@
                     error: function(e) {
                         console.log(e)
                     }
-
                 });
             }
 
@@ -720,10 +779,7 @@
                 cmenu_total_price.pop();
             }
             tableDetails = [] ;
-            // let len2 = tableDetails.length;
-            // for (let i = 0; i<len2; i++){
-            //     tableDetails.pop();
-            // }
+
         }
         function getMenuIds(items, value) {
             return value;
@@ -774,7 +830,6 @@
                     tableDetails.splice(i,1);
                 }
             }
-            console.log(tableDetails);
             $.ajax({
                 url : url,
                 success: function (data) {
@@ -790,6 +845,9 @@
         function getOrderInfo(id) {
             orderInfoId = id;
         }
+        $(".order").click(function () {
+            $(this).toggleClass('bg-white').siblings().removeClass("bg-white");
+        });
 
         function getOrderDetails() {
             let url = "{{ route ('loadOrderDetails', ['-a']) }}";
@@ -841,6 +899,167 @@
                     confirmButtonClass: "btn btn-danger",
                     buttonsStyling: false
                 });
+            }
+        }
+        function openPaymentModal() {
+            $('#payment_modal').modal('show');
+            let amount =  $('#grand_total').val();
+            $('#total_amount').val(amount) ;
+        }
+        function calculationPaid() {
+            let amount = $('#total_amount').val() ;
+            let paid = $('#paid_amount').val();
+            let change = 0;
+            change = parseInt(paid) - parseInt(amount);
+            $('#change_amount').val(change.toFixed(2));
+        }
+
+        function orderPaid() {
+            alert($('#paid_amount').val());
+            alert($('#total_amount').val());
+            if ($('#paid_amount').val() >= $('#total_amount').val()) {
+                let menu_name = $("input[name='cmenu_name[]']").map(function () {
+                    return $(this).val();
+                }).get();
+                let cmenu_id = $("input[name='cmenu_id[]']").map(function () {
+                    return $(this).val();
+                }).get();
+                let cmenu_price = $("input[name='cmenu_price[]']").map(function () {
+                    return $(this).val();
+                }).get();
+                let cmenu_qty = $("input[name='cmenu_qty[]']").map(function () {
+                    return $(this).val();
+                }).get();
+                let cmenu_total_price = $("input[name='cmenu_total_price[]']").map(function () {
+                    return $(this).val();
+                }).get();
+                var table = tableDetails;
+
+                var order_type = $("input[name='type']:checked").val();
+                var customer = $("#customer_list").val();
+                var waiter = $('#waiter_list').val();
+
+                var subTotal = $("#sub_total_amount").val();
+                var vat = $("#vat").val();
+                var charge = $("#charge").val();
+                var discount = $("#discount").val();
+                var grandTotal = $("#grand_total").val();
+                var payment_method = $("#payment_list").val();
+                let payment_status = "Paid";
+
+                let url = ("{{route('orderPost')}}");
+                if (customer == '') {
+                    Swal.fire({
+                        type: "error",
+                        text: "Please, Select Customer Before Placing Order",
+                        confirmButtonClass: "btn btn-primary",
+                        buttonsStyling: false
+                    });
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            order_type: order_type,
+                            menu_name: menu_name,
+                            cmenu_id: cmenu_id,
+                            cmenu_price: cmenu_price,
+                            cmenu_qty: cmenu_qty,
+                            cmenu_total_price: cmenu_total_price,
+                            customer: customer,
+                            waiter: waiter,
+                            table: table,
+                            payment_method: payment_method,
+                            payment_status: payment_status,
+                            subTotal: subTotal,
+                            vat: vat,
+                            charge: charge,
+                            discount: discount,
+                            grandTotal: grandTotal,
+                        },
+                        success: function (data) {
+                            if (data.status == 1) {
+                                Swal.fire({
+                                    type: "success",
+                                    text: data.msg,
+                                    confirmButtonClass: "btn btn-primary",
+                                    buttonsStyling: false
+                                });
+
+                            } else {
+                                Swal.fire({
+                                    type: "error",
+                                    text: data.msg,
+                                    confirmButtonClass: "btn btn-primary",
+                                    buttonsStyling: false
+                                });
+                            }
+                            $("#order-list-by-status").empty().html(data.view);
+                            $("#paid_amount").val('');
+                            $("#total_amount").val('');
+                            console.log('this')
+                        },
+                        error: function (e) {
+                            console.log(e)
+                        }
+                    });
+                }
+
+                $('#order_items').empty();
+                updateRowNo();
+
+                $("#sub_total_amount").val('0.00');
+                $("#vat").val(15);
+                $("#charge").val(45);
+                $('#paid_amount').val('');
+                $('#change_amount').val(0.00);
+                $("#discount").val('0.00');
+                $("#grand_total").val('0.00');
+                $("#customer_list").val("").change();
+                $('#waiter_list').val("").change();
+                cartItemSl = 0;
+                let len = addItemToCart.length;
+                for (let i = 0; i < len; i++) {
+                    addItemToCart.pop();
+                    menu_name.pop();
+                    cmenu_id.pop();
+                    cmenu_price.pop();
+                    cmenu_qty.pop();
+                    cmenu_total_price.pop();
+                }
+                tableDetails = [];
+            } else {
+                Swal.fire({
+                    type: "error",
+                    text: 'Paid Amount should be more than Total Amount',
+                    confirmButtonClass: "btn btn-primary",
+                    buttonsStyling: false
+                });
+                // $('#payment_modal').modal('hide');
+                // $('#order_items').empty();
+                // updateRowNo();
+                // $("#sub_total_amount").val('0.00');
+                // $("#vat").val(15);
+                // $("#charge").val(45);
+                // $("#discount").val('0.00');
+                // $('#change_amount').val(0.00);
+                // $('#paid_amount').val('');
+                // $("#grand_total").val('0.00');
+                // $("#customer_list").val("").change();
+                // $('#waiter_list').val("").change();
+                // cartItemSl = 0;
+                // let len = addItemToCart.length;
+                // for (let i = 0; i < len; i++) {
+                //     addItemToCart.pop();
+                //     menu_name.pop();
+                //     cmenu_id.pop();
+                //     cmenu_price.pop();
+                //     cmenu_qty.pop();
+                //     cmenu_total_price.pop();
+                // }
+                // tableDetails = [];
+
             }
         }
     </script>

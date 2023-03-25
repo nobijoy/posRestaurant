@@ -184,7 +184,9 @@ input[type="radio"]:checked + label span {
 .btn:disabled{
     cursor: not-allowed !important;
 }
+.order{
 
+}
 .pos-menu-div{
     height: 750px;
     overflow: auto;
@@ -203,4 +205,8 @@ input[type="radio"]:checked + label span {
 .tableWrap::-webkit-scrollbar-thumb {
     background-color: #aaa;
     border-radius: 4px;
+}
+
+.select2{
+    width: 100% !important;
 }

@@ -113,6 +113,8 @@ class OrderController extends Controller
             $data->waiter = $request->waiter;
             $data->customer = $request->customer;
             $data->table = $request->table;
+            $data->payment_status = $request->payment_status;
+            $data->payment_method = $request->payment_method;
             $data->subtotal = $request->subTotal;
             $data->vat = $request->vat;
             $data->charge = $request->charge;

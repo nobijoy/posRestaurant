@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\PaymentMethod;
 use App\Models\Table;
 use DB;
 use Image;
@@ -95,8 +96,9 @@ class POSController extends Controller
         $menuCategories = MenuCategory::where('is_active', 1)->orderBY('name')->get();
         $menus = Menu::where('is_active', 1)->orderBY('name')->get();
         $tables = Table::where('is_active', 1)->get();
+        $payments = PaymentMethod::where('is_active', 1)->orderBy('id', 'desc')->get();
         $orders = Order::with(['customerInfo','waiterInfo'])->where('status', 'running')->latest()->get();
-        return view('pos.pos_view', compact('customers', 'waiters', 'menuCategories', 'menus', 'orders', 'tables'));
+        return view('pos.pos_view', compact('customers', 'waiters', 'menuCategories', 'menus', 'orders', 'tables','payments'));
     }
     public function setting()
     {
