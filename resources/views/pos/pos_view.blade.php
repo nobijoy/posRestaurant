@@ -328,7 +328,7 @@
                     </div>
                     <div class="modal-footer">
                         <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
-{{--                        <input type="button" id="table_list" onclick="loadTableDetails()" class="btn btn-outline-primary" value="Save">--}}
+                        <input type="button" id="table_list" onclick="loadTableDetails()" class="btn btn-outline-primary" value="Save">
                     </div>
                 </div>
             </div>
@@ -336,8 +336,7 @@
 
 {{--        Order Details Modal--}}
 
-        <div class="modal fade text-left" id="order_details_modal" tabindex="-1" role="dialog"
-             aria-labelledby="myModalLabel35" aria-hidden="true">
+        <div class="modal fade text-left" id="order_details_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -350,7 +349,6 @@
                     </div>
                     <div class="modal-footer">
                         <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
-                        {{--                        <input type="button" id="table_list" onclick="loadTableDetails()" class="btn btn-outline-primary" value="Save">--}}
                     </div>
                 </div>
             </div>
@@ -404,7 +402,7 @@
                                     <label for="change_amount" class="font-weight-bold">Change : </label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input type="text" name="change_amount" class="form-control" id="change_amount" placeholder="" value="0.00" readonly>
+                                    <input type="text" name="change_amount" class="form-control" id="change_amount" placeholder="" value="" readonly>
                                 </div>
                             </div>
                         </div>
@@ -416,6 +414,70 @@
                 </div>
             </div>
         </div>
+
+
+{{--        Unpaid Modal Payment--}}
+
+        <div class="modal fade text-left" id="unpaid_payment_modal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel35" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel35">Payment Details</h3>
+                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="javascript:" method="POST" id="" class="clearForm form" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-4 mt-1">
+                                    <label for="unpaid_payment_list" class="font-weight-bold">Payment Method<span class="text-danger">*</span> :</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select name="unpaid_payment_list" id="unpaid_payment_list" class="form-control select2" required>
+                                        @foreach ($payments as $type)
+                                            <option value="{{$type->id}}" >{{$type->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-md-4 mt-1">
+                                    <label for="unpaid_total_amount" class="font-weight-bold">Total Amount : </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="unpaid_total_amount" class="form-control" id="unpaid_total_amount" placeholder="" value="" readonly>
+                                </div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-md-4 mt-1">
+                                    <label for="now_paid_amount" class="font-weight-bold">Paid: </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="number" name="now_paid_amount" onkeyup="calculationUnpaid()" class="form-control" id="now_paid_amount" placeholder="" value="" >
+                                </div>
+                            </div>
+                            <input type="hidden" name="unpaid_order_id" id="unpaid_order_id">
+                            <div class="row mt-1">
+                                <div class="col-md-4 mt-1">
+                                    <label for="unpaid_change_amount" class="font-weight-bold">Change : </label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="unpaid_change_amount" class="form-control" id="unpaid_change_amount" placeholder="" value="" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
+                            <input type="button" id="" class="btn btn-outline-primary" onclick="changeStatusToPaid()" value="Confirm">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
 
     </section>
 @endsection
@@ -913,11 +975,18 @@
             change = parseInt(paid) - parseInt(amount);
             $('#change_amount').val(change.toFixed(2));
         }
+        function calculationUnpaid() {
+            let paid = $('#now_paid_amount').val();
+            let amount = $('#unpaid_total_amount').val() ;
+            let change = 0;
+            change = parseInt(paid) - parseInt(amount);
+            $('#unpaid_change_amount').val(change.toFixed(2));
+        }
 
         function orderPaid() {
-            alert($('#paid_amount').val());
-            alert($('#total_amount').val());
-            if ($('#paid_amount').val() >= $('#total_amount').val()) {
+            let amount = $('#total_amount').val() ;
+            let paid = $('#paid_amount').val();
+            if (parseInt(paid) >= parseInt(amount)) {
                 let menu_name = $("input[name='cmenu_name[]']").map(function () {
                     return $(this).val();
                 }).get();
@@ -1029,7 +1098,9 @@
                     cmenu_total_price.pop();
                 }
                 tableDetails = [];
+                $('#payment_modal').modal('hide');
             } else {
+                console.log('not true');
                 Swal.fire({
                     type: "error",
                     text: 'Paid Amount should be more than Total Amount',
@@ -1059,8 +1130,69 @@
                 //     cmenu_total_price.pop();
                 // }
                 // tableDetails = [];
-
             }
         }
+
+        function payOrder(id, total) {
+            $('#unpaid_payment_modal').modal('show');
+            $('#unpaid_total_amount').val(total.toFixed(2)) ;
+            $('#unpaid_order_id').val(id);
+        }
+
+        function changeStatusToPaid() {
+            let id = $('#unpaid_order_id').val();
+            var paymentMethod = $("#unpaid_payment_list").val();
+            let payment_status = "Paid";
+            let change = $("#unpaid_change_amount").val();
+            let url = "{{ route ('orderPaidStatus', ['-a']) }}";
+            url = url.replace('-a', id);
+
+            if (change != '' && change >= 0){
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    data:{
+                        "_token": "{{ csrf_token() }}",
+                        payment_method : paymentMethod,
+                        payment_status : payment_status,
+                    },
+                    success: function(data) {
+                        if(data.status == 1){
+                            Swal.fire({
+                                type: "success",
+                                text: data.msg,
+                                confirmButtonClass: "btn btn-primary",
+                                buttonsStyling: false
+                            });
+
+                        }else{
+                            Swal.fire({
+                                type: "error",
+                                text: data.msg,
+                                confirmButtonClass: "btn btn-primary",
+                                buttonsStyling: false
+                            });
+                        }
+                        $("#order-list-by-status").empty().html(data.view);
+                    },
+                    error: function(e) {
+                        console.log(e)
+                    }
+                });
+                $('#unpaid_payment_modal').modal('hide');
+                $("#unpaid_change_amount").val('');
+                $('#now_paid_amount').val('');
+            }
+            else{
+                Swal.fire({
+                    type: "error",
+                    text: "Payment Amount is smaller or null",
+                    confirmButtonClass: "btn btn-primary",
+                    buttonsStyling: false
+                });
+            }
+
+        }
+
     </script>
 @endsection

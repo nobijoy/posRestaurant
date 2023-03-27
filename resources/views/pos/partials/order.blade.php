@@ -8,6 +8,9 @@
                 <span>Order Type: {{$order->order_type}}</span><br>
                 <span>Table: {{$order->table}}</span><br>
                 <span>Waiter: {{$order->waiter ?  $order->waiterInfo->name : ''}}</span>
+                @if($order->payment_status == "Unpaid")
+                <button class="btn btn-sm btn-success d-block" onclick="payOrder({{$order->id}},{{$order->total}})">Pay Now</button>
+                @endif
             </div>
         @endforeach
     @endif
