@@ -23,14 +23,15 @@ class CreateOrdersTable extends Migration
             $table->double('discount')->nullable();
             $table->double('charge')->nullable();
             $table->double('total')->nullable();
-            $table->string('payment_method')->nullable();
-            $table->string('status')->nullable();
             $table->longText('table')->nullable();
+            $table->string('status')->nullable();
+            $table->UnsignedBigInteger('payment_method')->Unsigned()->nullable();
             $table->UnsignedBigInteger('waiter')->Unsigned()->nullable();
             $table->UnsignedBigInteger('customer')->Unsigned()->nullable();
             $table->UnsignedBigInteger('created_by')->Unsigned()->nullable();
             $table->UnsignedBigInteger('updated_by')->Unsigned()->nullable();
             $table->UnsignedBigInteger('deleted_by')->Unsigned()->nullable();
+            $table->foreign('payment_method')->references('id')->on('payment_methods')->onDelete('restrict');
             $table->foreign('waiter')->references('id')->on('employees')->onDelete('restrict');
             $table->foreign('customer')->references('id')->on('customers')->onDelete('restrict');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('restrict');

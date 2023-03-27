@@ -245,4 +245,23 @@ class OrderController extends Controller
         }
     }
 
+    public function orderPaidStatus(Request $request ,$id){
+        try {
+            Order::where('id', $id)->update(['payment_status' => $request->payment_status  , 'payment_method' => $request->payment_method]);
+
+            $orders = Order::with(['customerInfo','waiterInfo'])->where('status', 'running')->latest()->get();
+            return response()->json([
+                'view' => view('pos.partials.order', compact('orders'))->render(),
+                'status'=> 1,
+                'msg'=> 'Payment Completed Successfully',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'view' => '',
+                'msg' => $th->getMessage(),
+                'status'=> 0,
+            ]);
+        }
+    }
+
 }
