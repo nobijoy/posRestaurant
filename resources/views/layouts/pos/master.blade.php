@@ -83,7 +83,7 @@
 <!-- END: Main Menu-->
 
 <!-- BEGIN: Content-->
-<div class="app-content h-100 overflow-hidden">
+<div class="app-content vh-100 overflow-hidden">
     <div class="content-overlay"></div>
     @yield('body')
 </div>

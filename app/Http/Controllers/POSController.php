@@ -157,4 +157,18 @@ class POSController extends Controller
         return view('admin.pos_setting.email', compact('data'));
     }
 
+    public function searchOrder(Request $request){
+//        $query = Order::query();
+//        $query->when(request('search') == '' || request('search') == NULL, function ($q) {
+//            return $q->where('is_active', 1);
+//        });
+//        $query->when(request('search') != '', function ($q) {
+//            return  $q->where('reference_no', '%'.request('search').'%');
+//        });
+//        $orders = $query->orderBY('id')->get();
+//        return response()->json([
+//            'view' => view('pos.partials.order', compact('orders'))->render(),
+//        ]);
+    }
+
 }
