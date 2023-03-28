@@ -4,48 +4,45 @@
 
 @section('body')
 
-    <section class="mt-1">
+    <section class="">
 {{--        <form action="{{ route('posOrder') }}" method="post">@csrf--}}
         <div class="row ">
            {{-- running order card start --}}
-            <div class="col-md-2 vh-100 pos-section">
-                <div class="row ml-1 card rounded">
-                    <div class="card-header py-0 mx-auto">
+            <div class="col-md-2 vh-100 item_card main-left-p1">
+                <div class="row card rounded">
+                    <div class="card-header py-0">
                         <div class="row my-1">
                             <div class="col-6 mx-auto">
                                 <a href="Javascript:void(0)" class="btn w-100 bg-light-grey-blue btn-success" id="running_order_button" onclick="loadOrdersByStatus('{{route('loadOrdersByStatus', ['running'])}}')">
                                     Running
-                                    <span><i class="feather icon-repeat"></i></span>
                                 </a>
                             </div>
                             <div class="col-6 mx-auto">
                                 <a href="Javascript:void(0)"  class="btn w-100 bg-light-grey-blue" id="draft_order_button" onclick="loadOrdersByStatus('{{route('loadOrdersByStatus', ['draft'])}}')">
                                     Draft
-                                    <span><i class="feather icon-save"></i></span>
                                 </a>
                             </div>
                         </div>
-                        <input type="text" name="" id="" class="mb-1 rounded form-control" placeholder="Search here">
+                        <input type="text" name="" id="searchOrder" onkeyup="getOrderWithSearch(this)" class="rounded form-control w-100" placeholder="Search here">
                     </div>
-                    <div class="card-body pos-left-items mb-1" id="order-list-by-status">
+                    <div class="card-body pos-left-items" id="order-list-by-status">
                         @include('pos.partials.order')
                     </div>
-                </div>
-                <div class="row ml-1 card rounded mb-1">
-                    <div class="card-body h-100">
+
+                    <div class="card-footer p-0 main-left-p1">
                         <div class="row btn-group mx-auto text-center">
-{{--                            <div class="col-12 ">--}}
-{{--                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Modify Order<i class="feather icon-edit"></i></button>--}}
-{{--                            </div>--}}
+                            {{--                            <div class="col-12 ">--}}
+                            {{--                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Modify Order<i class="feather icon-edit"></i></button>--}}
+                            {{--                            </div>--}}
                             <div class="col-12">
                                 <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold" data-target="#order_details_modal" onclick="getOrderDetails()">Order Details<i class="feather icon-info"></i></button>
                             </div>
                             <div class="col-12">
                                 <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold" data-toggle="modal" onclick="openInvoice()">Invoice</button>
                             </div>
-{{--                            <div class="col-6">--}}
-{{--                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Bill</button>--}}
-{{--                            </div>--}}
+                            {{--                            <div class="col-6">--}}
+                            {{--                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Bill</button>--}}
+                            {{--                            </div>--}}
                             <div class="col-12">
                                 <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Reprint KOT<i class="feather icon-printer"></i></button>
                             </div>
@@ -55,18 +52,23 @@
                         </div>
                     </div>
                 </div>
+{{--                <div class="row card rounded">--}}
+{{--                    <div class="card-body">--}}
+{{--                        --}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
             {{-- Running order card end --}}
 
 
-            <div class="col-md-5 vh-100">
-                <div class="card rounded pos-section">
+            <div class="col-md-5 vh-100 item_card main-left-p1">
+                <div class="card rounded">
                     <div class="card-header pb-0">
                         <div class="row d-flex justify-content-around text-center">
                             <div class="col-3">
                                 <input type="radio" id="dinein" value="Dine In" name="type" hidden checked>
                                 <label for="dinein">
-                                    <span class="btn w-100 bg-light-grey-blue mb-1 ml-auto font-weight-bold">
+                                    <span class="btn w-100 bg-light-grey-blue ml-auto font-weight-bold">
                                         Dine In
                                         <i class="feather icon-grid"></i>
                                     </span>
@@ -75,7 +77,7 @@
                             <div class="col-3">
                                 <input type="radio" id="takeaway" value="Takeaway" name="type" hidden>
                                 <label for="takeaway">
-                                    <span class="btn w-100 bg-light-grey-blue mb-1 ml-auto font-weight-bold">
+                                    <span class="btn w-100 bg-light-grey-blue ml-auto font-weight-bold">
                                         Takeaway
                                     <i class="feather icon-shopping-bag"></i>
                                     </span>
@@ -84,18 +86,18 @@
                             <div class="col-3">
                                 <input type="radio" id="delivery" value="Delivery" name="type" hidden>
                                 <label for="delivery">
-                                    <span class="btn w-100 bg-light-grey-blue mb-1 ml-auto font-weight-bold">
+                                    <span class="btn w-100 bg-light-grey-blue ml-auto font-weight-bold">
                                         Delivery
                                     <i class="feather icon-truck"></i>
                                     </span>
                                 </label>
                             </div>
                             <div class="col-3">
-                                <button type="button" id="table_modal_button" data-toggle="modal" data-target="#table_modal" class="btn w-100 bg-light-grey-blue mb-1 ml-auto font-weight-bold">Table<i class="feather icon-grid"></i></button>
+                                <button type="button" id="table_modal_button" data-toggle="modal" data-target="#table_modal" class="btn w-100 bg-light-grey-blue ml-auto font-weight-bold">Table<i class="feather icon-grid"></i></button>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-5 px-0">
                                 <select name="waiter_list" id="waiter_list" class="form-control select2" required>
                                     <option value="" selected>Select Waiter</option>
                                     @foreach ($waiters as $type)
@@ -107,18 +109,18 @@
                                 @include('pos.partials.customer')
                             </div>
                             <input type="hidden" name="table_id[]" id="table_id">
-                            <div class="col-md-1">
-                                <a href="#" data-toggle="modal" data-target="#add_customer" class="btn btn-secondary">
+                            <div class="col-md-1 px-0">
+                                <button href="#" data-toggle="modal" data-target="#add_customer" class="mt-1 btn-secondary">
                                     <i class="feather icon-plus"></i>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body item-table">
                         <div class="row">
                             <div class="col-md-12 tableWrap">
-                                <table class="table" id="order_table" >
+                                <table class="table" id="order_table">
                                     <thead class="text-center">
                                         <tr>
                                             <th width="5%">Sl</th>
@@ -202,18 +204,18 @@
                 </div>
             </div>
 
-            <div class="col-md-5 vh-100 pl-0">
-                <div class="mr-1 card rounded pos-section">
-                    <div class="card-header pb-0">
+            <div class="col-md-5 vh-100 item_card main-pl0">
+                <div class="card rounded">
+                    <div class="card-header pb-0 main-left-p1">
                         <div class="row">
                             <div class="col-md-12">
-                                <input class="mb-1 rounded form-control" type="text" id="search" onkeyup="getMenuWithSearch(this)"
+                                <input class="rounded form-control" type="text" id="search" onkeyup="getMenuWithSearch(this)"
                                 placeholder="Name or Code or Category or VEG or BEV or BAR">
                             </div>
                         </div>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body main-left-p1">
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-2 pos-scroll-item pl-0 pr-1" id="menu-div">
@@ -231,7 +233,7 @@
                                     @endif
                                 </div>
 
-                                <div class="col-md-10 vh-100">
+                                <div class="col-md-10">
                                     <div class="row pos-menu-div" id="menu-section">
                                         @include('pos.menus')
                                     </div>
@@ -678,6 +680,7 @@
                         }
                     }
                     addItemToCart = ingredient_id_container_new;
+                    cartItemSl--;
                     updateRowNo();
                     calculateSubtotal();
             //     } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -1194,5 +1197,26 @@
 
         }
 
+    </script>
+    <script type="text/javascript">
+        function getOrderWithSearch(tar) {
+            let search = $(tar).val();
+            let url = "{{ route ('searchOrder') }}";
+            $.ajax({
+                url : url,
+                data : {
+                    'search': search,
+                },
+                dataType : 'json',
+
+                success: function (data) {
+                    $("#order-list-by-status").empty().html(data.view);
+                },
+
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
     </script>
 @endsection

@@ -8,6 +8,38 @@ NOTE:
 ------
 PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+body{
+    font-size: 10px !important;
+    overflow-y : hidden !important;
+}
+p{
+    margin-bottom: 0 !important;
+}
+.btn{
+    font-size: 10px !important;
+    padding: 3px !important;
+}
+input{
+    font-size: 10px !important;
+    padding: 3px !important;
+}
+.item_card {
+    padding: 5px !important;
+}
+.main-left-p1{
+    padding-left: 15px !important;
+}
+.item-table{
+    padding: 10px !important;
+}
+.main-pl0{
+    padding-left: 0 !important;
+}
+
+
+
+
 #pos_menu_show {
     padding: 1.1rem 0.8rem 1rem 1rem;
 }
@@ -100,7 +132,7 @@ input[type="radio"]:checked + label span {
 .pos-left-items {
     overflow-x: hidden;
     overflow-y: auto;
-    height: 500px !important;
+    height: 65vh !important;
     scrollbar-width: thin;
     scrollbar-color: #aaa #fff;
 }
@@ -141,7 +173,7 @@ input[type="radio"]:checked + label span {
 .food-item-img{
     height: 100px;
     width: 100%;
-    object-fit: cover;
+    /*object-fit: cover;*/
 }
 
 .pos-section{
@@ -188,7 +220,7 @@ input[type="radio"]:checked + label span {
 
 }
 .pos-menu-div{
-    height: 750px;
+    max-height: 750px;
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: #aaa #fff;

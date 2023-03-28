@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/pos', [App\Http\Controllers\POSController::class, 'pos'])->name('pos');
     Route::post('/pos/order', [App\Http\Controllers\POSController::class, 'posOrder'])->name('posOrder');
     Route::get('/getMenuWithSearch', [App\Http\Controllers\POSController::class, 'getMenuWithSearch'])->name('getMenuWithSearch');
+    Route::get('/searchOrder', [App\Http\Controllers\POSController::class, 'searchOrder'])->name('searchOrder');
     Route::get('/pos_invoice', [App\Http\Controllers\POSController::class, 'pos_invoice'])->name('pos_invoice');
     Route::match(['get', 'post'], 'profile/{name}', 'App\Http\Controllers\AdminController@profileUpdate')->name('profileUpdate');
     Route::match(['get', 'post'], 'change-password/{name}', 'App\Http\Controllers\AdminController@passwordUpdate')->name('changePassword');
