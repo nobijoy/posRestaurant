@@ -11,7 +11,13 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 
 body{
     font-size: 10px !important;
-    overflow-y : hidden !important;
+    height: 100% !important;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.main-card{
+    flex-grow: 1 !important;
 }
 p{
     margin-bottom: 0 !important;
@@ -36,8 +42,24 @@ input{
 .main-pl0{
     padding-left: 0 !important;
 }
-
-
+.form-control{
+    height: 2rem !important;
+}
+.text-ellipse{
+    text-overflow: ellipsis !important;
+}
+.select2-container--default{
+}
+.select2-container--classic .select2-selection--single, .select2-container--default .select2-selection--single {
+    height: 25px !important;
+    padding: 0 !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+    line-height: 20px !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+    top: 0 !important;
+}
 
 
 #pos_menu_show {
@@ -132,7 +154,7 @@ input[type="radio"]:checked + label span {
 .pos-left-items {
     overflow-x: hidden;
     overflow-y: auto;
-    height: 65vh !important;
+    min-height: 65vh !important;
     scrollbar-width: thin;
     scrollbar-color: #aaa #fff;
 }
@@ -168,10 +190,10 @@ input[type="radio"]:checked + label span {
 .pos-scroll-item{
     overflow-x: hidden;
     overflow-y: auto;
-    height: 100vh;
+    min-height: 80vh;
 }
 .food-item-img{
-    height: 100px;
+    height: 80px;
     width: 100%;
     /*object-fit: cover;*/
 }
@@ -190,7 +212,7 @@ input[type="radio"]:checked + label span {
 }
 
 .tableWrap {
-    height: 50vh !important;
+    min-height: 57vh !important;
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: #aaa #fff;
@@ -241,4 +263,12 @@ input[type="radio"]:checked + label span {
 
 .select2{
     width: 100% !important;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .food-item-img{
+        height: 60px;
+
+    }
 }
