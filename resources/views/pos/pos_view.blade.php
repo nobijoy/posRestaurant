@@ -8,8 +8,8 @@
 {{--        <form action="{{ route('posOrder') }}" method="post">@csrf--}}
         <div class="row ">
            {{-- running order card start --}}
-            <div class="col-md-2 vh-100 item_card main-left-p1">
-                <div class="row card rounded">
+            <div class="col-md-2 item_card main-left-p1 main-card">
+                <div class="row card ">
                     <div class="card-header py-0">
                         <div class="row my-1">
                             <div class="col-6 mx-auto">
@@ -23,7 +23,7 @@
                                 </a>
                             </div>
                         </div>
-                        <input type="text" name="" id="searchOrder" onkeyup="getOrderWithSearch(this)" class="rounded form-control w-100" placeholder="Search here">
+                        <input type="text" name="" id="searchOrder" onkeyup="getOrderWithSearch(this)" class="form-control w-100" placeholder="Search here">
                     </div>
                     <div class="card-body pos-left-items" id="order-list-by-status">
                         @include('pos.partials.order')
@@ -61,8 +61,8 @@
             {{-- Running order card end --}}
 
 
-            <div class="col-md-5 vh-100 item_card main-left-p1">
-                <div class="card rounded">
+            <div class="col-md-5 item_card main-left-p1 main-card">
+                <div class="card">
                     <div class="card-header pb-0">
                         <div class="row d-flex justify-content-around text-center">
                             <div class="col-3">
@@ -98,7 +98,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-5 px-0">
-                                <select name="waiter_list" id="waiter_list" class="form-control select2" required>
+                                <select name="waiter_list" id="waiter_list" class="form-control select2-container--default select2" required>
                                     <option value="" selected>Select Waiter</option>
                                     @foreach ($waiters as $type)
                                         <option value="{{$type->id}}" >{{$type->name}}</option>
@@ -110,7 +110,7 @@
                             </div>
                             <input type="hidden" name="table_id[]" id="table_id">
                             <div class="col-md-1 px-0">
-                                <button href="#" data-toggle="modal" data-target="#add_customer" class="mt-1 btn-secondary">
+                                <button href="#" data-toggle="modal" data-target="#add_customer" class=" btn-secondary">
                                     <i class="feather icon-plus"></i>
                                 </button>
                             </div>
@@ -139,10 +139,10 @@
                         </div>
                     </div>
 
-                    <div class="card-footer pt-1">
+                    <div class="card-footer pt-1 pb-0">
                         <div class="row">
                             <div class="col-md-12">
-                                <table class="table text-right" id="" >
+                                <table class="table text-right mb-0" id="" >
                                     <tbody id="order_footer" >
                                         <tr>
                                             <td class="border-0" width="50%">Subtotal</td>
@@ -204,21 +204,21 @@
                 </div>
             </div>
 
-            <div class="col-md-5 vh-100 item_card main-pl0">
-                <div class="card rounded">
+            <div class="col-md-5 item_card main-pl0 main-card">
+                <div class="card ">
                     <div class="card-header pb-0 main-left-p1">
                         <div class="row">
                             <div class="col-md-12">
-                                <input class="rounded form-control" type="text" id="search" onkeyup="getMenuWithSearch(this)"
+                                <input class=" form-control" type="text" id="search" onkeyup="getMenuWithSearch(this)"
                                 placeholder="Name or Code or Category or VEG or BEV or BAR">
                             </div>
                         </div>
                     </div>
 
-                    <div class="card-body main-left-p1">
+                    <div class="card-body main-left-p1 pt-1">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-2 pos-scroll-item pl-0 pr-1" id="menu-div">
+                                <div class="col-md-2 pl-0 pr-0" id="menu-div">
                                     @if(sizeof($menuCategories) > 0)
                                         <div class="px-0 mb-1">
                                             <button class="btn bg-light-grey-blue btn-block"
@@ -233,7 +233,7 @@
                                     @endif
                                 </div>
 
-                                <div class="col-md-10">
+                                <div class="col-md-10 pos-scroll-item">
                                     <div class="row pos-menu-div" id="menu-section">
                                         @include('pos.menus')
                                     </div>

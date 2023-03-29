@@ -158,17 +158,21 @@ class POSController extends Controller
     }
 
     public function searchOrder(Request $request){
-//        $query = Order::query();
+        $query = Order::query();
 //        $query->when(request('search') == '' || request('search') == NULL, function ($q) {
-//            return $q->where('is_active', 1);
+//            return $q->where('status', 'running');
 //        });
-//        $query->when(request('search') != '', function ($q) {
-//            return  $q->where('reference_no', '%'.request('search').'%');
-//        });
-//        $orders = $query->orderBY('id')->get();
-//        return response()->json([
-//            'view' => view('pos.partials.order', compact('orders'))->render(),
-//        ]);
+        $query->when(request('search') != '', function ($q) {
+            return  $q->where('reference_no', 'like', '%'.request('search').'%')
+                ->orWhereHas('customerInfo', function ($subq) {
+                    $subq->where('name', 'like', '%'.request('search').'%');
+                })
+                ->where('status', 'running');
+        });
+        $orders = $query->orderBY('id', 'desc')->get();
+        return response()->json([
+            'view' => view('pos.partials.order', compact('orders'))->render(),
+        ]);
     }
 
 }
