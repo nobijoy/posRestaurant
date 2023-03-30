@@ -1,6 +1,6 @@
 <div class="row">
     @foreach($tables as $table)
-        <div class="col-md-3 ">
+        <div class="col-md-2">
             <div class="card">
                 <div class="card-content box-shadow-1 rounded">
                     @if($table->reserved == 0)
