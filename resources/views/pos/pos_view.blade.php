@@ -153,7 +153,7 @@
                                         <tr>
                                             <td class="border-0" width="50%">VAT</td>
                                             <td class="border-0" width="50%">BDT
-                                                <input type="text" class="phone text-right border-0" id="vat" readonly value="15">
+                                                <input type="text" class="phone text-right border-0" id="vat" readonly value="0">
                                             </td>
                                         </tr>
                                         <tr>
@@ -251,7 +251,7 @@
 
         <div class="modal fade text-left" id="add_customer" tabindex="-1" role="dialog"
                 aria-labelledby="myModalLabel35" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog " role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="myModalLabel35">Add Customer Info</h3>
@@ -317,7 +317,7 @@
 
         <div class="modal fade text-left" id="table_modal" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel35" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="myModalLabel35">Table List</h3>
@@ -497,6 +497,7 @@
                 }
             });
         })
+
         // $("#payment_modal").on("show.bs.modal", function (e) {
         //     $('#payment_list').select2()({ width: '100%' });
         // })
@@ -719,7 +720,9 @@
             $('.total-amount').each(function (index, element) {
                 subtotal = subtotal + parseFloat($(element).val());
             });
+            let vat = ((subtotal * 5)/ 100);
             $("#sub_total_amount").val(subtotal.toFixed(2));
+            $("#vat").val(vat.toFixed(2));
             grandTotal();
         }
 
@@ -909,6 +912,7 @@
 
         function getOrderInfo(id) {
             orderInfoId = id;
+            // console.log(orderInfoId);
         }
         $(".order").click(function () {
             $(this).toggleClass('bg-white').siblings().removeClass("bg-white");
