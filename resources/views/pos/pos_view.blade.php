@@ -1,6 +1,6 @@
 @extends('layouts.pos.master')
 
-@section('title', 'POS')
+@section('title', 'Order')
 
 @section('body')
 
@@ -498,9 +498,20 @@
             });
         })
 
-        // $("#payment_modal").on("show.bs.modal", function (e) {
-        //     $('#payment_list').select2()({ width: '100%' });
-        // })
+        var concernedElement = document.querySelectorAll(".order");
+
+        document.addEventListener("mousedown", (event) => {
+            for (let i =0; i < concernedElement.length; i++){
+                if (concernedElement[i].contains(event.target)) {
+                    break;
+                } else {
+                    $('.order').removeClass("bg-white");
+                }
+            }
+
+        });
+
+
     </script>
     <script type="text/javascript">
         function printDiv(divName) {
@@ -912,7 +923,7 @@
 
         function getOrderInfo(id) {
             orderInfoId = id;
-            // console.log(orderInfoId);
+            console.log(orderInfoId);
         }
         $(".order").click(function () {
             $(this).toggleClass('bg-white').siblings().removeClass("bg-white");
