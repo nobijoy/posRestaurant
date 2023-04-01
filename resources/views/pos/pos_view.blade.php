@@ -218,7 +218,7 @@
                     <div class="card-body main-left-p1 pt-1">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-2 pl-0 pr-0" id="menu-div">
+                                <div class="col-md-2 pl-0 pr-0 pos-scroll-item" id="menu-div">
                                     @if(sizeof($menuCategories) > 0)
                                         <div class="px-0 mb-1">
                                             <button class="btn bg-light-grey-blue btn-block"
