@@ -45,7 +45,7 @@
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style.css?v2.6')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style.css?v2.7')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/css/admin-styles.css')}}">
     <!-- END: Custom CSS-->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
@@ -67,19 +67,19 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu 2-columns vh-100 fixed-navbar menu-collapsed" id="body" data-open="click" data-menu="vertical-menu"
+<body class="vertical-layout vertical-menu 2-columns vh-100 menu-collapsed" id="body" data-open="click" data-menu="vertical-menu"
       data-col="2-columns">
     <input type="hidden" id="csrfToken" value="{{ csrf_token() }}">
 <!-- BEGIN: Header-->
 
 
-@include('layouts.pos.header')
+{{--@include('layouts.pos.header')--}}
 
 <!-- END: Header-->
 
 
 <!-- BEGIN: Main Menu-->
-@include('layouts.pos.sidebar')
+{{--@include('layouts.pos.sidebar')--}}
 <!-- END: Main Menu-->
 
 <!-- BEGIN: Content-->

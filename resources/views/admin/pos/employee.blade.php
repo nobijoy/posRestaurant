@@ -185,8 +185,8 @@
                                     <div style="margin-top: 7px;" id="wrong_pass_alert"></div>
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group hidden" id="hidden_role">
-                                    <label for="department">Select Department<span class="text-danger">*</span></label>
-                                    <select name="department" id="department" class="select2 form-control" required>
+                                    <label for="user_role">Select Department<span class="text-danger">*</span></label>
+                                    <select name="user_role" id="user_role" class="select2 form-control">
                                         <option value="" >Select</option>
                                         @foreach ($roles as $role)
                                             <option value="{{$role->id}}">{{$role->name}}</option>
@@ -337,6 +337,8 @@
                 $('#hidden_pass').toggleClass('hidden');
                 $('#confirm_hidden_pass').toggleClass('hidden');
                 $('#hidden_role').toggleClass('hidden');
+                $("#new_password").val('');
+                $("#confirm_password").val('');
             }
         });
 
