@@ -10,7 +10,7 @@ PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
 
 body{
-    font-size: 10px !important;
+    font-size: 11px !important;
     height: 100% !important;
     display: flex;
     flex-direction: column;
@@ -18,13 +18,13 @@ body{
 }
 .main-card{
     flex-grow: 1 !important;
-    height: calc(100vh - 60px) !important;
+    /*height: calc(100vh - 60px) !important;*/
 }
 p{
     margin-bottom: 0 !important;
 }
 .btn{
-    font-size: 10px !important;
+    font-size: 11px !important;
     padding: 3px !important;
 }
 input{
@@ -158,7 +158,7 @@ input[type="radio"]:checked + label span {
 .pos-left-items {
     overflow-x: hidden;
     overflow-y: auto;
-    height: calc(100vh - 270px) !important;
+    height: calc(100vh - 215px) !important;
     scrollbar-width: thin;
     scrollbar-color: #aaa #fff;
 }
@@ -194,7 +194,7 @@ input[type="radio"]:checked + label span {
 .pos-scroll-item{
     overflow-x: hidden;
     overflow-y: auto;
-    height: calc(100vh - 130px) !important;
+    height: calc(100vh - 70px) !important;
 }
 .food-item-img{
     height: 80px;
@@ -216,7 +216,7 @@ input[type="radio"]:checked + label span {
 }
 
 .tableWrap {
-    height: calc(100vh - 330px) !important;
+    height: calc(100vh - 275px) !important;
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: #aaa #fff;
@@ -243,7 +243,8 @@ input[type="radio"]:checked + label span {
     cursor: not-allowed !important;
 }
 .order{
-
+    line-height: 1rem;
+    margin-bottom: 2px;
 }
 .pos-menu-div{
     overflow: auto;

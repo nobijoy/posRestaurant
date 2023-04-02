@@ -8,7 +8,7 @@
                     <img class="food-item-img img-fluid" alt="{{ $menu->name }}"
                     src="{{ $menu->image ? asset ('public/uploads/image/'.$menu->image) : asset('public/image/no-image-icon.png') }}" >
                     <div class="card-body p-0 text-center">
-                        <p class="text-dark text-ellipse">{{ Str::limit($menu->name, 10) }}</span> <br>BDT {{ $menu->price }} </p>
+                        <p class="text-dark text-ellipse">{{ Str::limit($menu->name, 8) }}</span> <br>BDT {{ $menu->price }} </p>
                     </div>
                 </div>
             </div>

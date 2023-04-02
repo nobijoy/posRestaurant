@@ -31,18 +31,12 @@
 
                     <div class="card-footer p-0 main-left-p1">
                         <div class="row btn-group mx-auto text-center">
-                            {{--                            <div class="col-12 ">--}}
-                            {{--                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Modify Order<i class="feather icon-edit"></i></button>--}}
-                            {{--                            </div>--}}
                             <div class="col-12">
                                 <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold" data-target="#order_details_modal" onclick="getOrderDetails()">Order Details<i class="feather icon-info"></i></button>
                             </div>
                             <div class="col-12">
                                 <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold" data-toggle="modal" onclick="openInvoice()">Invoice</button>
                             </div>
-                            {{--                            <div class="col-6">--}}
-                            {{--                                <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Bill</button>--}}
-                            {{--                            </div>--}}
                             <div class="col-12">
                                 <button class="btn w-100 bg-light-grey-blue btn-sm mb-1 font-weight-bold">Reprint KOT<i class="feather icon-printer"></i></button>
                             </div>
@@ -52,11 +46,7 @@
                         </div>
                     </div>
                 </div>
-{{--                <div class="row card rounded">--}}
-{{--                    <div class="card-body">--}}
-{{--                        --}}
-{{--                    </div>--}}
-{{--                </div>--}}
+
             </div>
             {{-- Running order card end --}}
 
@@ -187,7 +177,10 @@
                             <div class="col-md-12 mt-1">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <button class="btn w-100 bg-danger mb-1 ml-auto text-white font-weight-bold">Cancel</button>
+                                        <a href="{{route('home')}}" class="btn w-100 bg-danger mb-1 ml-auto text-white font-weight-bold">
+                                            Close
+                                        </a>
+{{--                                        <button class="btn w-100 bg-danger mb-1 ml-auto text-white font-weight-bold">Close</button>--}}
                                     </div>
                                     <div class="col-md-4">
                                         <button type="submit" onclick="orderPlace()" class="btn w-100 bg-primary mb-1 mx-auto text-white font-weight-bold">Place Order</button>
@@ -220,13 +213,13 @@
                             <div class="row">
                                 <div class="col-md-2 pl-0 pr-0 pos-scroll-item" id="menu-div">
                                     @if(sizeof($menuCategories) > 0)
-                                        <div class="px-0 mb-1">
-                                            <button class="btn bg-light-grey-blue btn-block"
+                                        <div class="px-0">
+                                            <button class="btn bg-primary text-white font-weight-bold btn-block"
                                             onclick="loadMenuByCategory('{{ route ('loadMenuByCategory', ['All'])}}')">All</button>
                                         </div>
                                         @foreach ($menuCategories as $cat)
-                                            <div class="px-0 mb-1">
-                                                <button type="button" class="btn bg-light-grey-blue btn-block"
+                                            <div class="px-0">
+                                                <button type="button" class="btn bg-primary text-white font-weight-bold btn-block"
                                                 onclick="loadMenuByCategory('{{ route ('loadMenuByCategory', [$cat->id])}}')">{{$cat->name}}</button>
                                             </div>
                                         @endforeach
