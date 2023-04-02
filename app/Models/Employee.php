@@ -15,6 +15,9 @@ class Employee extends Model
     public function deptInfo(){
         return $this->belongsTo(Department::class, 'department', 'id');
     }
+    public function userRole(){
+        return $this->belongsTo(Role::class, 'role', 'id');
+    }
     public function createdBy(){
         return $this->belongsTo(User::class, 'created_by', 'id');
     }

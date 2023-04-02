@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PaymentMethod;
+use App\Models\Role;
 use Illuminate\Http\Request;
-use Auth;
 use DB;
 
-class PaymentMethodController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,9 @@ class PaymentMethodController extends Controller
      */
     public function index()
     {
-        $datas = PaymentMethod::where('is_active', 1)->get()->reverse();
+        $datas = Role::where('is_active', 1)->get()->reverse();
         $sl = 0;
-        return view('admin.pos.payment_method', compact('datas', 'sl'));
+        return view('admin.department.roles', compact('datas', 'sl'));
     }
 
     /**
@@ -39,23 +38,16 @@ class PaymentMethodController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => ['required', 'string', 'unique:payment_methods'],
-        ]);
-
         DB::beginTransaction();
 
         try {
-            $data = new PaymentMethod;
+            $data = new Role;
             $data->name = $request->name;
-            $data->description = $request->description;
             $data->is_active = 1;
-
-            $data->created_by = Auth()->user()->id;
             $data->save();
             DB::commit();
 
-            return back()->with('success', 'New Payment Method Created Successfully');
+            return back()->with('success', 'New User Role Created Successfully');
 
         } catch (\Throwable $th) {
             DB::rollback();
@@ -94,24 +86,18 @@ class PaymentMethodController extends Controller
      */
     public function update(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => ['required', 'unique:payment_methods,name,' . $request->id],
-        ]);
 
         DB::beginTransaction();
 
         try {
-            $data = PaymentMethod::find($request->id);
+            $data = Role::find($request->id);
             $data->name = $request->name;
-            $data->description = $request->description;
-
             $data->is_active = 1;
-            $data->updated_by = Auth()->user()->id;
 
             $data->save();
             DB::commit();
 
-            return back()->with('success', 'Payment Method Updated Successfully');
+            return back()->with('success', 'User Role Updated Successfully');
 
         } catch (\Throwable $th) {
             DB::rollback();
@@ -129,19 +115,20 @@ class PaymentMethodController extends Controller
     {
         //
     }
+
     public function delete($id)
     {
         DB::beginTransaction();
         try {
-            $data = PaymentMethod::findorFail($id);
+            $data = Role::findorFail($id);
             $data->is_active = 0;
-            $data->deleted_by = Auth()->user()->id;
             $data->save();
             DB::commit();
-            return 'Payment Method Inactive Successfully!';
+            return 'User Role Inactive Successfully!';
         } catch (\Throwable $th) {
             DB::rollback();
             return 'Somethings Went Wrong!';
         }
     }
+
 }

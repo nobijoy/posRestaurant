@@ -120,6 +120,9 @@
                     <li @if($url == 'designation.index') class="active"  @endif>
                         <a href="{{route('designation.index')}}" data-i18n="Designation">Designation</a>
                     </li>
+                    <li @if($url == 'user_roles.index') class="active"  @endif>
+                        <a href="{{route('user_roles.index')}}" data-i18n="Designation">User Roles</a>
+                    </li>
                     <li @if($url == 'attendence.index') class="active"  @endif>
                         <a href="{{route('attendence.index')}}" data-i18n="Attendence">Attendence</a>
                     </li>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Employee;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
@@ -21,8 +22,9 @@ class EmployeeController extends Controller
         $datas = Employee::with(['designationInfo','deptInfo'])->where('is_active', 1)->get()->reverse();
         $departments = Department::where('is_active', 1)->get()->reverse();
         $designations = Designation::where('is_active', 1)->get()->reverse();
+        $roles = Role::where('is_active', 1)->get()->reverse();
         $sl = 0;
-        return view('admin.pos.employee',compact('datas', 'sl', 'departments', 'designations'));
+        return view('admin.pos.employee',compact('datas', 'sl', 'departments', 'designations','roles'));
     }
 
     /**
