@@ -162,6 +162,37 @@
                                     <label for="address">Address<span class="text-danger">*</span></label>
                                     <input type="text" name="address" class="form-control" id="address" placeholder="House-1, Road-2" value="" >
                                 </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <div class="col-md-12 mt-2">
+                                        <label class="font-weight-bold">Can Use Login System :<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="form-check form-check-inline ml-3">
+                                        <input class="form-check-input" type="radio" name="login_access" id="inlineRadio1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="login_access" id="inlineRadio2" value="0" checked>
+                                        <label class="form-check-label" for="inlineRadio2">No</label>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group hidden" id="hidden_pass">
+                                    <label for="new_password">New Password<span class="text-danger">*</span></label>
+                                    <input type="password" id="new_password" class="form-control" placeholder="" name="password" value="">
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group hidden" id="confirm_hidden_pass">
+                                    <label for="confirm_password">Confirm New Password<span class="text-danger">*</span></label>
+                                    <input type="password" id="confirm_password" class="form-control" placeholder="" name="confirm_password" value="">
+                                    <div style="margin-top: 7px;" id="wrong_pass_alert"></div>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group hidden" id="hidden_role">
+                                    <label for="department">Select Department<span class="text-danger">*</span></label>
+                                    <select name="department" id="department" class="select2 form-control" required>
+                                        <option value="" >Select</option>
+                                        @foreach ($roles as $role)
+                                            <option value="{{$role->id}}">{{$role->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </fieldset>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -292,6 +323,30 @@
                 }
             });
             $('.select2').select2();
+        });
+    </script>
+    <script type="text/javascript">
+        $("input[type='radio']").click(function(){
+            var radioValue = $("input[name='login_access']:checked").val();
+            if(radioValue == 1){
+                $('#hidden_pass').removeClass('hidden');
+                $('#confirm_hidden_pass').removeClass('hidden');
+                $('#hidden_role').removeClass('hidden');
+            }
+            else{
+                $('#hidden_pass').toggleClass('hidden');
+                $('#confirm_hidden_pass').toggleClass('hidden');
+                $('#hidden_role').toggleClass('hidden');
+            }
+        });
+
+        $("#confirm_password").on('keyup', function(){
+            var password = $("#new_password").val();
+            var confirmPassword = $("#confirm_password").val();
+            if (password != confirmPassword)
+                $("#wrong_pass_alert").html("Password does not match !").css("color","red");
+            else
+                $("#wrong_pass_alert").html("Password match !").css("color","green");
         });
     </script>
 @endsection

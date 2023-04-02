@@ -132,6 +132,10 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('payment_method', 'App\Http\Controllers\PaymentMethodController')->parameters('payment_method', 'id');
     Route::post('payment_method/update', 'App\Http\Controllers\PaymentMethodController@update')->name('payment_method.update');
 
+    Route::delete('user_roles/{id}', 'App\Http\Controllers\RoleController@delete')->name('user_roles.delete');
+    Route::resource('user_roles', 'App\Http\Controllers\RoleController')->parameters('user_roles', 'id');
+    Route::post('user_roles/update', 'App\Http\Controllers\RoleController@update')->name('user_roles.update');
+
     // purchase
 
     Route::delete('delete-purchase-ingredient/{id}', 'App\Http\Controllers\PurchaseController@deletePurchaseIngredient')->name('deletePurchaseIngredient');
