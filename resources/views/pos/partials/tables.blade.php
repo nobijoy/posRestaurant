@@ -1,12 +1,12 @@
 <div class="row">
     @foreach($tables as $table)
-        <div class="col-md-2">
-            <div class="card">
-                <div class="card-content box-shadow-1 rounded">
+        <div class="col-md-2 px-0">
+            <div class="card mb-0 mmt-5 ppx-5">
+                <div class="card-content box-shadow-1 rounded item_card">
                     @if($table->reserved == 0)
-                        <img class="img-fluid" alt="not booked" src="{{ asset ('public/uploads/image/no_booked.png') }}" >
+                        <img class="img-fluid food-item-img" alt="not booked" src="{{ asset ('public/uploads/image/no_booked.png') }}" >
                     @else
-                        <img class="img-fluid" alt="reserved" src="{{ asset ('public/uploads/image/reserved.png') }}" >
+                        <img class="img-fluid food-item-img1" alt="reserved" src="{{ asset ('public/uploads/image/reserved.png') }}" >
                     @endif
                     <div class="card-body p-0 text-center">
                         <p class="mb-0">Table No: {{$table->name}}</p>

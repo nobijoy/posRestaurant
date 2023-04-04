@@ -1,9 +1,13 @@
+@extends('layouts.pos.master')
 
+@section('title', 'Order')
+
+@section('body')
 
     <section class="">
-{{--        <form action="{{ route('posOrder') }}" method="post">@csrf--}}
+        {{--        <form action="{{ route('posOrder') }}" method="post">@csrf--}}
         <div class="row ">
-           {{-- running order card start --}}
+            {{-- running order card start --}}
             <div class="col-md-2 item_card main-left-p1 main-card">
                 <div class="row card ">
                     <div class="card-header py-0 ">
@@ -108,14 +112,14 @@
                             <div class="col-md-12 tableWrap">
                                 <table class="table" id="order_table">
                                     <thead class="text-center">
-                                        <tr>
-                                            <th width="5%">Sl</th>
-                                            <th width="48%">Item</th>
-                                            <th width="10%">Price</th>
-                                            <th style="z-index:1" width="20%">Quantity</th>
-                                            <th width="14%">Amount</th>
-                                            <th width="3%"></th>
-                                        </tr>
+                                    <tr>
+                                        <th width="5%">Sl</th>
+                                        <th width="48%">Item</th>
+                                        <th width="10%">Price</th>
+                                        <th style="z-index:1" width="20%">Quantity</th>
+                                        <th width="14%">Amount</th>
+                                        <th width="3%"></th>
+                                    </tr>
                                     </thead>
                                     <tbody id="order_items">
 
@@ -130,36 +134,36 @@
                             <div class="col-md-12">
                                 <table class="table text-right mb-0" id="" >
                                     <tbody id="order_footer" >
-                                        <tr>
-                                            <td class="border-0" width="50%">Subtotal</td>
-                                            <td class="border-0" width="50%">BDT
-                                                <input type="text" class="phone text-right border-0" id="sub_total_amount" readonly value="0.00">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border-0" width="50%">VAT</td>
-                                            <td class="border-0" width="50%">BDT
-                                                <input type="text" class="phone text-right border-0" id="vat" readonly value="0">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border-0" width="50%">Discount</td>
-                                            <td class="border-0" width="50%">BDT
-                                                <input type="number" class="phone text-right" id="discount" value="0.00" onkeyup="grandTotal()">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="border-0" width="50%">Charge</td>
-                                            <td class="border-0" width="50%">BDT
-                                                <input type="text" class="phone text-right border-0" id="charge" readonly value="45">
-                                            </td>
-                                        </tr>
-                                        <tr class="font-weight-bold">
-                                            <td class="border-0" width="50%">Total</td>
-                                            <td class="border-0" width="50%">BDT
-                                                <input type="number" class="phone text-right border-0 font-weight-bold" id="grand_total" value="0.00" readonly>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td class="border-0" width="50%">Subtotal</td>
+                                        <td class="border-0" width="50%">BDT
+                                            <input type="text" class="phone text-right border-0" id="sub_total_amount" readonly value="0.00">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border-0" width="50%">VAT</td>
+                                        <td class="border-0" width="50%">BDT
+                                            <input type="text" class="phone text-right border-0" id="vat" readonly value="0">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border-0" width="50%">Discount</td>
+                                        <td class="border-0" width="50%">BDT
+                                            <input type="number" class="phone text-right" id="discount" value="0.00" onkeyup="grandTotal()">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border-0" width="50%">Charge</td>
+                                        <td class="border-0" width="50%">BDT
+                                            <input type="text" class="phone text-right border-0" id="charge" readonly value="45">
+                                        </td>
+                                    </tr>
+                                    <tr class="font-weight-bold">
+                                        <td class="border-0" width="50%">Total</td>
+                                        <td class="border-0" width="50%">BDT
+                                            <input type="number" class="phone text-right border-0 font-weight-bold" id="grand_total" value="0.00" readonly>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -176,7 +180,7 @@
                                         <a href="{{route('home')}}" class="btn w-100 bg-danger mb-1 ml-auto text-white font-weight-bold">
                                             Close
                                         </a>
-{{--                                        <button class="btn w-100 bg-danger mb-1 ml-auto text-white font-weight-bold">Close</button>--}}
+                                        {{--                                        <button class="btn w-100 bg-danger mb-1 ml-auto text-white font-weight-bold">Close</button>--}}
                                     </div>
                                     <div class="col-md-4">
                                         <button type="submit" onclick="orderPlace()" class="btn w-100 bg-primary mb-1 mx-auto text-white font-weight-bold">Place Order</button>
@@ -199,7 +203,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <input class=" form-control" type="text" id="search" onkeyup="getMenuWithSearch(this)"
-                                placeholder="Name or Code or Category or VEG or BEV or BAR">
+                                       placeholder="Name or Code or Category or VEG or BEV or BAR">
                             </div>
                         </div>
                     </div>
@@ -211,12 +215,12 @@
                                     @if(sizeof($menuCategories) > 0)
                                         <div class="px-0">
                                             <button class="btn bg-primary text-white font-weight-bold btn-block vertical-btn-tab"
-                                            onclick="loadMenuByCategory('{{ route ('loadMenuByCategory', ['All'])}}')">All</button>
+                                                    onclick="loadMenuByCategory('{{ route ('loadMenuByCategory', ['All'])}}')">All</button>
                                         </div>
                                         @foreach ($menuCategories as $cat)
                                             <div class="px-0">
                                                 <button type="button" class="btn bg-primary text-white font-weight-bold btn-block vertical-btn-tab"
-                                                onclick="loadMenuByCategory('{{ route ('loadMenuByCategory', [$cat->id])}}')">{{$cat->name}}</button>
+                                                        onclick="loadMenuByCategory('{{ route ('loadMenuByCategory', [$cat->id])}}')">{{$cat->name}}</button>
                                             </div>
                                         @endforeach
                                     @endif
@@ -239,7 +243,7 @@
         {{-- Add Customer Modal--}}
 
         <div class="modal fade text-left" id="add_customer" tabindex="-1" role="dialog"
-                aria-labelledby="myModalLabel35" aria-hidden="true">
+             aria-labelledby="myModalLabel35" aria-hidden="true">
             <div class="modal-dialog " role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -279,18 +283,18 @@
             </div>
         </div>
 
-{{--        Invoice Modal--}}
+        {{--        Invoice Modal--}}
 
         <div class="modal fade text-left" id="quick_invoice" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel35" aria-hidden="true">
             <div class="modal-dialog modal-content" role="document">
                 <div class="modal-content">
-{{--                    <div class="modal-header">--}}
-{{--                        <h3 class="modal-title" id="myModalLabel35">Quick Invoice</h3>--}}
-{{--                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">--}}
-{{--                            <span aria-hidden="true">&times;</span>--}}
-{{--                        </button>--}}
-{{--                    </div>--}}
+                    {{--                    <div class="modal-header">--}}
+                    {{--                        <h3 class="modal-title" id="myModalLabel35">Quick Invoice</h3>--}}
+                    {{--                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">--}}
+                    {{--                            <span aria-hidden="true">&times;</span>--}}
+                    {{--                        </button>--}}
+                    {{--                    </div>--}}
                     <div class="modal-body" id="printInvoice">
 
                     </div>
@@ -302,7 +306,7 @@
             </div>
         </div>
 
-{{--        Tables Modal--}}
+        {{--        Tables Modal--}}
 
         <div class="modal fade text-left" id="table_modal" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel35" aria-hidden="true">
@@ -325,7 +329,7 @@
             </div>
         </div>
 
-{{--        Order Details Modal--}}
+        {{--        Order Details Modal--}}
 
         <div class="modal fade text-left" id="order_details_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -345,7 +349,7 @@
             </div>
         </div>
 
-{{--        Payment Modal --}}
+        {{--        Payment Modal --}}
 
         <div class="modal fade text-left" id="payment_modal" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel35" aria-hidden="true">
@@ -407,7 +411,7 @@
         </div>
 
 
-{{--        Unpaid Modal Payment--}}
+        {{--        Unpaid Modal Payment--}}
 
         <div class="modal fade text-left" id="unpaid_payment_modal" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel35" aria-hidden="true">
@@ -471,6 +475,9 @@
 
 
     </section>
+@endsection
+
+@section('script')
     <script src="{{ asset ('public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js') }}"></script>
     <script src="{{ asset ('public/app-assets/js/scripts/forms/input-groups.js') }}"></script>
     <script type="text/javascript">
@@ -524,13 +531,13 @@
             $.ajax({
                 type: "POST",
                 url: url,
-                    data:{
-                        "_token": "{{ csrf_token() }}",
-                        name:name,
-                        email:email,
-                        phone:phone,
-                        address:address,
-                    },
+                data:{
+                    "_token": "{{ csrf_token() }}",
+                    name:name,
+                    email:email,
+                    phone:phone,
+                    address:address,
+                },
                 success: function(data) {
                     if(data.status == 1){
                         $('#customer_area').empty().html(data.view);
@@ -631,7 +638,7 @@
                 '<span class="" id="cmenu_price_text_'+item_details[0]+ '">'+price+ '</span>' +
                 '</td>' +
                 '<td class="border-0">'+
-                    '<input type="text" class="touchspin text-center" onchange="calculateAmount('+item_details[0]+')"  onkeyup="calculateAmount('+item_details[0]+')" id="cmenu_qty_'+item_details[0] + '" name="cmenu_qty[]" value="1" data-bts-min="1" data-bts-max="100" />'+
+                '<input type="text" class="touchspin text-center" onchange="calculateAmount('+item_details[0]+')"  onkeyup="calculateAmount('+item_details[0]+')" id="cmenu_qty_'+item_details[0] + '" name="cmenu_qty[]" value="1" data-bts-min="1" data-bts-max="100" />'+
                 '</td>'+
                 // '<td class="border-0">'+
                 //     '<input type="text" class="form-control text-center phone" id="cmenu_discount_'+item_details[0] + '" onkeyup="calculateAmount('+item_details[0]+')" name="cmenu_discount[]" value="0" />'+
@@ -641,7 +648,7 @@
                 '<span class="" id="cmenu_total_price_text_'+item_details[0]+ '">'+price+ '</span>' +
                 '</td>' +
                 '<td class="border-0 text-center">' +
-                    '<button type="button" title="Delete" class="btn btn-danger btn-sm" onclick="deleteItem(this)" data-count="'+item_details[0] + '"> <i class="fa fa-trash"></i></button>' +
+                '<button type="button" title="Delete" class="btn btn-danger btn-sm" onclick="deleteItem(this)" data-count="'+item_details[0] + '"> <i class="fa fa-trash"></i></button>' +
                 '</td>' +
 
                 '</tr>';
@@ -665,20 +672,20 @@
             //     buttonsStyling: false,
             // }).then(function (result) {
             //     if (result.value) {
-                    var rowId = $(cr).attr('data-count');
-                    var el = document.getElementById("menu-details"+rowId);
-                    el.remove();
-                    let ingredient_id_container_new = [];
+            var rowId = $(cr).attr('data-count');
+            var el = document.getElementById("menu-details"+rowId);
+            el.remove();
+            let ingredient_id_container_new = [];
 
-                    for (let i = 0; i < addItemToCart.length; i++) {
-                        if (addItemToCart[i] != rowId) {
-                            ingredient_id_container_new.push(addItemToCart[i]);
-                        }
-                    }
-                    addItemToCart = ingredient_id_container_new;
-                    cartItemSl--;
-                    updateRowNo();
-                    calculateSubtotal();
+            for (let i = 0; i < addItemToCart.length; i++) {
+                if (addItemToCart[i] != rowId) {
+                    ingredient_id_container_new.push(addItemToCart[i]);
+                }
+            }
+            addItemToCart = ingredient_id_container_new;
+            cartItemSl--;
+            updateRowNo();
+            calculateSubtotal();
             //     } else if (result.dismiss === Swal.DismissReason.cancel) {
             //     }
             // });
@@ -1218,3 +1225,5 @@
             });
         }
     </script>
+@endsection
+
