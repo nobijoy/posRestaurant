@@ -46,8 +46,10 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/style.css?v1.2')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/css/admin-styles.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style.css?v2.7')}}">
     <!-- END: Custom CSS-->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    @yield('css')
 
 
 </head>
@@ -68,6 +70,7 @@
 
     <!-- BEGIN: Main Menu-->
     @include('master.admin.sidebar')
+    @include('master.admin.sidebar')
     <!-- END: Main Menu-->
 
     <!-- BEGIN: Content-->
@@ -84,6 +87,16 @@
     <!-- BEGIN: Footer-->
     @include('master.admin.footer')
     <!-- END: Footer-->
+
+    <div class="modal fade" id="pos_window" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel35" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-body" id="pos_html">
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- BEGIN: Vendor JS-->
@@ -131,6 +144,18 @@
             );
             $(".select2").select2();
         });
+
+        function openPosWindow(pos){
+            $.ajax({
+                url : "{{ route('pos') }}",
+                dataType: "json",
+
+                success:function (data) {
+                    $('#pos_html').empty().html(data.view);
+                    $("#pos_window").modal('show');
+                }
+            })
+        }
     </script>
     @yield('script')
 </body>

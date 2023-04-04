@@ -1,8 +1,4 @@
-@extends('layouts.pos.master')
 
-@section('title', 'Order')
-
-@section('body')
 
     <section class="">
 {{--        <form action="{{ route('posOrder') }}" method="post">@csrf--}}
@@ -475,9 +471,6 @@
 
 
     </section>
-@endsection
-
-@section('script')
     <script src="{{ asset ('public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js') }}"></script>
     <script src="{{ asset ('public/app-assets/js/scripts/forms/input-groups.js') }}"></script>
     <script type="text/javascript">
@@ -1227,4 +1220,3 @@
             });
         }
     </script>
-@endsection

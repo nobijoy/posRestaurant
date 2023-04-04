@@ -98,6 +98,9 @@ class POSController extends Controller
         $tables = Table::where('is_active', 1)->get();
         $payments = PaymentMethod::where('is_active', 1)->orderBy('id', 'desc')->get();
         $orders = Order::with(['customerInfo','waiterInfo','paymentMethod'])->where('status', 'running')->latest()->get();
+        return response()->json([
+            'view' => view('pos.pos_view', compact('customers', 'waiters', 'menuCategories', 'menus', 'orders', 'tables','payments'))->render(),
+        ]);
         return view('pos.pos_view', compact('customers', 'waiters', 'menuCategories', 'menus', 'orders', 'tables','payments'));
     }
     public function setting()
