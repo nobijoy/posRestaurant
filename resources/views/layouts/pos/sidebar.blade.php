@@ -15,7 +15,7 @@
             </li>
 
             <li class="nav-item @if ($url == 'pos') active @endif">
-                <a href="{{ route('pos') }}" data-i18n="pos">
+                <a href="{{ route('pos') }}" target="_blank" rel="noopener noreferrer">
                     <i class="feather icon-pocket"></i><span class="menu-title" data-i18n="pos">POS</span>
                 </a>
             </li>

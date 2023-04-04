@@ -15,7 +15,7 @@
             </li>
 
             <li  class="nav-item @if($url == 'pos') active @endif"  >
-                <a href="{{route('pos')}}" data-i18n="pos">
+                <a href="{{route('pos')}}" data-i18n="pos" data-toggle="modal" data-target="#modal">
                     <i class="feather icon-pocket"></i><span class="menu-title" data-i18n="pos">POS</span>
                 </a>
             </li>
@@ -153,6 +153,9 @@
                     </li>
                 </ul>
             </li>
+
+            <div>
+
 
 
             {{-------------------- project url end -----------------}}
@@ -366,6 +369,8 @@
 {{--                    </li>--}}
 {{--                </ul>--}}
 {{--            </li>--}}
+            </div>
+
 
 
         </ul>

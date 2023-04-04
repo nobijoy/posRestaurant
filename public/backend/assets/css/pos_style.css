@@ -15,6 +15,7 @@ body{
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    line-height: 1.1;
 }
 .main-card{
     flex-grow: 1 !important;
@@ -24,8 +25,8 @@ p{
     margin-bottom: 0 !important;
 }
 .btn{
-    font-size: 11px !important;
-    padding: 3px !important;
+    font-size: 12px !important;
+    padding: 5px 3px !important;
 }
 input{
     font-size: 10px !important;
@@ -45,11 +46,6 @@ input{
 }
 .form-control{
     height: 2rem !important;
-}
-.text-ellipse{
-    text-overflow: ellipsis !important;
-}
-.select2-container--default{
 }
 .select2-container--classic .select2-selection--single, .select2-container--default .select2-selection--single {
     height: 25px !important;
@@ -77,6 +73,9 @@ input{
 	width: 107px;
 	height: 48px;
 }
+.ppx-5{
+    margin: 0px 5px;
+}
 
 .menu-expanded .navbar-nav {
     display: flex;
@@ -96,6 +95,7 @@ input{
     background: #404e67;
     color: #fff;
 } */
+
 input[type="radio"]:checked + label span {
     background: #404e67;
     color: #fff;
@@ -158,22 +158,26 @@ input[type="radio"]:checked + label span {
 .pos-left-items {
     overflow-x: hidden;
     overflow-y: auto;
-    height: calc(100vh - 215px) !important;
+    height: calc(100vh - 190px) !important;
     scrollbar-width: thin;
     scrollbar-color: #aaa #fff;
 }
 #order_table td {
     padding: 0.15rem !important;
 }
-
+.vertical-btn-tab{
+    margin-bottom: 5px !important;
+}
 #order_table td .input-group,
 #order_table td .input-group .input-group-btn{
-    height: 30px !important;
+    height: 28px !important;
     z-index: 0;
 }
-
+.py-10{
+    padding: 10px !important;
+}
 #order_table td .input-group .input-group-btn .btn{
-    padding: 0px 10px;
+    padding: 0px 7px !important;
 }
 #order_table td .input-group input{
     height: 30px;
@@ -214,9 +218,14 @@ input[type="radio"]:checked + label span {
    width: 150px !important;
    height: 30px !important;
 }
-
+.pt-5{
+    padding-top: 5px!important;
+}
+.mmt-5{
+    margin-top: 5px !important;
+}
 .tableWrap {
-    height: calc(100vh - 275px) !important;
+    height: calc(100vh - 248px) !important;
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: #aaa #fff;
@@ -236,8 +245,9 @@ input[type="radio"]:checked + label span {
     border-left: 1px dotted rgba(200, 209, 224, 0.6);
     border-bottom: 1px solid #e8e8e8;
     text-align: left;
-    background-color: #dddfe3;
+    background-color: #00B5B8;
     box-shadow: 0px 0px 0 2px #e8e8e8;
+    color: white;
 }
 .btn:disabled{
     cursor: not-allowed !important;
@@ -272,7 +282,7 @@ input[type="radio"]:checked + label span {
 
 @media screen and (max-width: 1024px) {
     .food-item-img{
-        height: 60px;
+        height: 50px;
 
     }
 }
