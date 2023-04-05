@@ -86,7 +86,7 @@ function getDegAgainstDept(id, url, view) {
         success: function (data) {
 
             if (data.length > 0) {
-                var output = '<option value="">Select Department</option>';
+                var output = '<option value="">Select</option>';
                 $.each(data, function (index, value) {
                     output += '<option value="' + value['id'] + '">' + value['name'] + '</option>';
                 });

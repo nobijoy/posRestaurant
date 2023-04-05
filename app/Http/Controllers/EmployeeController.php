@@ -6,9 +6,11 @@ use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
@@ -45,11 +47,11 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
+        dd($request->all());
         $validatedData = $request->validate([
             'name' => ['required'],
             'phone' => ['required','unique:employees,phone'],
-            'email' => ['required','unique:employees,email'],
+//            'email' => ['required','unique:employees,email'],
         ]);
 //        dd($request->all());
         DB::beginTransaction();
@@ -63,11 +65,21 @@ class EmployeeController extends Controller
             $data->department = $request->department;
             $data->designation = $request->designation;
             $data->address = $request->address;
+            $data->login_access = $request->login_access;
             $data->is_active = 1;
             $data->created_by = Auth()->user()->id;
-//            dd($data);
             $data->save();
 
+            if ($request->login_access == 1){
+                $user = new User;
+                $user->employee_id = $data->id;
+                $user->name = $request->name;
+                $user->phone = $request->phone;
+                $user->email = $request->email;
+                $user->user_role = $request->user_role;
+                $user->password = Hash::make($request->password);
+                $user->save();
+            }
 
             DB::commit();
 
@@ -163,7 +175,7 @@ class EmployeeController extends Controller
             $data->deleted_by = Auth()->user()->id;
             $data->save();
             DB::commit();
-            return 'Supplier Inactive Successfully!';
+            return 'Employee Inactive Successfully!';
         } catch (\Throwable $th) {
             DB::rollback();
             return 'Somethings Went Wrong!';
@@ -178,10 +190,11 @@ class EmployeeController extends Controller
             $data->is_active = 1;
             $data->save();
             DB::commit();
-            return 'MenuCategory Activated Successfully!';
+            return 'Employee Activated Successfully!';
         } catch (\Throwable $th) {
             DB::rollback();
             return 'Somethings Went Wrong!';
         }
     }
+
 }

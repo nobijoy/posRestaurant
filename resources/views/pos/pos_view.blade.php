@@ -1,11 +1,11 @@
 
 
-    <section class="">
+{{--    <section class="">--}}
 {{--        <form action="{{ route('posOrder') }}" method="post">@csrf--}}
         <div class="row ">
            {{-- running order card start --}}
             <div class="col-md-2 item_card main-left-p1 main-card">
-                <div class="row card ">
+                <div class="row card mb-0">
                     <div class="card-header py-0 ">
                         <div class="row pt-5 ">
                             <div class="col-6 mx-auto">
@@ -48,7 +48,7 @@
 
 
             <div class="col-md-5 item_card main-left-p1 main-card">
-                <div class="card">
+                <div class="card mb-0">
                     <div class="card-header py-0 pt-5">
                         <div class="row d-flex justify-content-around text-center">
                             <div class="col-3">
@@ -110,11 +110,11 @@
                                     <thead class="text-center">
                                         <tr>
                                             <th width="5%">Sl</th>
-                                            <th width="48%">Item</th>
+                                            <th width="40%">Item</th>
                                             <th width="10%">Price</th>
                                             <th style="z-index:1" width="20%">Quantity</th>
-                                            <th width="14%">Amount</th>
-                                            <th width="3%"></th>
+                                            <th width="20%">Amount</th>
+                                            <th width="5%"></th>
                                         </tr>
                                     </thead>
                                     <tbody id="order_items">
@@ -194,7 +194,7 @@
             </div>
 
             <div class="col-md-5 item_card main-pl0 main-card">
-                <div class="card ">
+                <div class="card mb-0">
                     <div class="card-header py-0 pt-5 main-left-p1">
                         <div class="row">
                             <div class="col-md-12">
@@ -244,9 +244,9 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="myModalLabel35">Add Customer Info</h3>
-                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+{{--                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">--}}
+{{--                            <span aria-hidden="true">&times;</span>--}}
+{{--                        </button>--}}
                     </div>
                     <form action="javascript:" method="POST" id="customer_add_submit" class="clearForm form" enctype="multipart/form-data">
                         @csrf
@@ -271,7 +271,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
+                            <input type="button" class="btn btn-outline-secondary" id="closeCustomerModal" value="Close">
                             <input type="button" id="customer_add_form" class="btn btn-outline-primary" value="Save">
                         </div>
                     </form>
@@ -295,7 +295,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <input type="reset" class="btn btn-outline-secondary" id="closeInvoiceButton" data-dismiss="modal" value="Close">
+                        <input type="reset" class="btn btn-outline-secondary" id="closeInvoiceButton" value="Close">
                         <input type="button" id="printBtn" onclick="printDiv('printInvoice')" data-dismiss="modal" class="btn btn-outline-primary" value="Print">
                     </div>
                 </div>
@@ -310,16 +310,15 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="myModalLabel35">Table List</h3>
-                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close text-danger" onclick="$('#table_modal').modal('hide')" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body" id="table_body">
+                    <div class="modal-body overflow-x-hidden" id="table_body">
                         @include('pos.partials.tables')
                     </div>
                     <div class="modal-footer">
-                        <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
-                        <input type="button" id="table_list" onclick="loadTableDetails()" class="btn btn-outline-primary" value="Save">
+                        <input type="reset" class="btn btn-outline-secondary" id="closeTableModal" value="Close">
                     </div>
                 </div>
             </div>
@@ -328,18 +327,15 @@
 {{--        Order Details Modal--}}
 
         <div class="modal fade text-left" id="order_details_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="myModalLabel35">Order Details</h3>
-                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
                     </div>
                     <div class="modal-body" id="order_detail_body">
                     </div>
                     <div class="modal-footer">
-                        <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
+                        <input type="reset" class="btn btn-outline-secondary" id="closeOrderDetails" value="Close">
                     </div>
                 </div>
             </div>
@@ -353,9 +349,6 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="myModalLabel35">Payment Details</h3>
-                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
                     </div>
                     <form action="javascript:" method="POST" id="" class="clearForm form" enctype="multipart/form-data">
                         @csrf
@@ -398,7 +391,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
+                            <input type="reset" class="btn btn-outline-secondary" id="closePaymentModal" value="Close">
                             <input type="button" id="" class="btn btn-outline-primary" onclick="orderPaid()" value="Confirm">
                         </div>
                     </form>
@@ -415,9 +408,6 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="myModalLabel35">Payment Details</h3>
-                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
                     </div>
                     <form action="javascript:" method="POST" id="" class="clearForm form" enctype="multipart/form-data">
                         @csrf
@@ -461,7 +451,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
+                            <input type="reset" class="btn btn-outline-secondary" id="closeUnpaidModal" value="Close">
                             <input type="button" id="" class="btn btn-outline-primary" onclick="changeStatusToPaid()" value="Confirm">
                         </div>
                     </form>
@@ -470,9 +460,29 @@
         </div>
 
 
-    </section>
+{{--    </section>--}}
     <script src="{{ asset ('public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js') }}"></script>
     <script src="{{ asset ('public/app-assets/js/scripts/forms/input-groups.js') }}"></script>
+    <script type="text/javascript">
+        $("#closeInvoiceButton").click(function () {
+            $("#quick_invoice").hide();
+        });
+        $("#closeCustomerModal").click(function () {
+            $("#add_customer").hide();
+        });
+        $("#closeTableModal").click(function () {
+            $("#table_modal").hide();
+        });
+        $("#closeOrderDetails").click(function () {
+            $("#order_details_modal").hide();
+        });
+        $("#closePaymentModal").click(function () {
+            $("#payment_modal").hide();
+        });
+        $("#closeUnpaidModal").click(function () {
+            $("#unpaid_payment_modal").hide();
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('input[type=radio][name=type]').change(function () {
@@ -631,7 +641,7 @@
                 '<span class="" id="cmenu_price_text_'+item_details[0]+ '">'+price+ '</span>' +
                 '</td>' +
                 '<td class="border-0">'+
-                    '<input type="text" class="touchspin text-center" onchange="calculateAmount('+item_details[0]+')"  onkeyup="calculateAmount('+item_details[0]+')" id="cmenu_qty_'+item_details[0] + '" name="cmenu_qty[]" value="1" data-bts-min="1" data-bts-max="100" />'+
+                    '<input type="text" class="touchspin text-center amount-input" onchange="calculateAmount('+item_details[0]+')"  onkeyup="calculateAmount('+item_details[0]+')" id="cmenu_qty_'+item_details[0] + '" name="cmenu_qty[]" value="1" data-bts-min="1" data-bts-max="100" />'+
                 '</td>'+
                 // '<td class="border-0">'+
                 //     '<input type="text" class="form-control text-center phone" id="cmenu_discount_'+item_details[0] + '" onkeyup="calculateAmount('+item_details[0]+')" name="cmenu_discount[]" value="0" />'+
@@ -1218,3 +1228,4 @@
             });
         }
     </script>
+

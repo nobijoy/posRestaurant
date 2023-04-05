@@ -113,7 +113,7 @@
                                             @csrf
                                             <fieldset class="form-group position-relative has-icon-left mb-0">
                                                 <input type="text" class="form-control form-control-lg" name="email"
-                                                    id="user-name" placeholder="Your Username" required>
+                                                    id="user-name" placeholder="Your Email" required>
                                                 <div class="form-control-position">
                                                     <i class="feather icon-user"></i>
                                                 </div>

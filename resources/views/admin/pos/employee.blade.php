@@ -79,7 +79,7 @@
                                                                 <a data-toggle="modal" data-target="#edit_employee" data-target-id="{{$data->id}}"
                                                                    data-name="{{$data->name}}" data-address="{{$data->address}}" data-date_of_birth="{{$data->date_of_birth}}"
                                                                    data-phone="{{$data->phone}}" data-email="{{$data->email}}" data-department="{{$data->department}}"
-                                                                   data-designation="{{$data->designation}}" >
+                                                                   data-designation="{{$data->designation}}" data-access="{{$data->login_access}}">
                                                                     <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
                                                                         <i class="fa fa-pencil-square"></i></button>
                                                                 </a>
@@ -185,7 +185,7 @@
                                     <div style="margin-top: 7px;" id="wrong_pass_alert"></div>
                                 </fieldset>
                                 <fieldset class="form-group col-md-6 floating-label-form-group hidden" id="hidden_role">
-                                    <label for="user_role">Select Department<span class="text-danger">*</span></label>
+                                    <label for="user_role">Select User Role<span class="text-danger">*</span></label>
                                     <select name="user_role" id="user_role" class="select2 form-control">
                                         <option value="" >Select</option>
                                         @foreach ($roles as $role)
@@ -260,6 +260,37 @@
                                     <label for="address">Address<span class="text-danger">*</span></label>
                                     <input type="text" name="address" class="form-control" id="edit_address" placeholder="" value="" >
                                 </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <div class="col-md-12 mt-2">
+                                        <label class="font-weight-bold text-left">Can Use Login System :<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="form-check form-check-inline ml-3">
+                                        <input class="form-check-input" type="radio" name="edit_login_access" id="edit_inlineRadio1" value="1">
+                                        <label class="form-check-label" for="edit_inlineRadio1">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="edit_login_access" id="edit_inlineRadio2" value="0" >
+                                        <label class="form-check-label" for="edit_inlineRadio2">No</label>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group hidden" id="hidden_pass">
+                                    <label for="edit_new_password">New Password<span class="text-danger">*</span></label>
+                                    <input type="password" id="edit_new_password" class="form-control" placeholder="" name="password" value="">
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group hidden" id="confirm_hidden_pass">
+                                    <label for="edit_confirm_password">Confirm New Password<span class="text-danger">*</span></label>
+                                    <input type="password" id="edit_confirm_password" class="form-control" placeholder="" name="confirm_password" value="">
+                                    <div style="margin-top: 7px;" id="wrong_pass_alert"></div>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group hidden" id="hidden_role">
+                                    <label for="user_role">Select User Role<span class="text-danger">*</span></label>
+                                    <select name="user_role" id="user_role" class="select2 form-control">
+                                        <option value="" >Select</option>
+                                        @foreach ($roles as $role)
+                                            <option value="{{$role->id}}">{{$role->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </fieldset>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -284,6 +315,7 @@
             var email = $(e.relatedTarget).data('email');
             var department = $(e.relatedTarget).data('department');
             var designation = $(e.relatedTarget).data('designation');
+            var login_access = $(e.relatedTarget).data('access');
 
             $('.modal-body #id').val(id);
             $('.modal-body #edit_name').val(name);
@@ -293,6 +325,7 @@
             $('.modal-body #edit_date_of_birth').val(date_of_birth);
             $('.modal-body #edit_phone').val(phone);
             $('.modal-body #edit_email').val(email);
+            $("[name='edit_login_access']").val(login_access).change();
             $('#edit_department').on('change', function () {
                 var id = $(this).val();
                 var url = "{{route('getDegAgainstDept')}}";
@@ -332,11 +365,12 @@
                 $('#hidden_pass').removeClass('hidden');
                 $('#confirm_hidden_pass').removeClass('hidden');
                 $('#hidden_role').removeClass('hidden');
+                $('#user_role').attr("required", true);
             }
             else{
-                $('#hidden_pass').toggleClass('hidden');
-                $('#confirm_hidden_pass').toggleClass('hidden');
-                $('#hidden_role').toggleClass('hidden');
+                $('#hidden_pass').addClass('hidden');
+                $('#confirm_hidden_pass').addClass('hidden');
+                $('#hidden_role').addClass('hidden');
                 $("#new_password").val('');
                 $("#confirm_password").val('');
             }

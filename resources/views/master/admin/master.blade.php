@@ -46,7 +46,7 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/style.css?v1.2')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/css/admin-styles.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style.css?v2.7')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style.css?v2.1.9')}}">
     <!-- END: Custom CSS-->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     @yield('css')
@@ -57,7 +57,7 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu 2-columns   fixed-navbar" data-open="click" data-menu="vertical-menu"
+<body class="vertical-layout vertical-menu 2-columns fixed-navbar" data-open="click" data-menu="vertical-menu"
     data-col="2-columns">
         <input type="hidden" id="csrfToken" value="{{ csrf_token() }}">
     <!-- BEGIN: Header-->
@@ -70,7 +70,7 @@
 
     <!-- BEGIN: Main Menu-->
     @include('master.admin.sidebar')
-    @include('master.admin.sidebar')
+{{--    @include('master.admin.sidebar')--}}
     <!-- END: Main Menu-->
 
     <!-- BEGIN: Content-->
@@ -88,11 +88,10 @@
     @include('master.admin.footer')
     <!-- END: Footer-->
 
-    <div class="modal fade" id="pos_window" tabindex="-1" role="dialog"
-    aria-labelledby="myModalLabel35" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+    <div class="modal fade overflow-hidden" id="pos_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
+        <div class="modal-dialog modal-xl m-0" role="document">
             <div class="modal-content">
-                <div class="modal-body" id="pos_html">
+                <div class="modal-body p-0" id="pos_html">
                 </div>
             </div>
         </div>
@@ -122,7 +121,7 @@
     <script src="{{asset('public/backend/js/core/app-menu.js')}}"></script>
     <script src="{{asset('public/backend/js/core/app.js')}}"></script>
     <script src="{{asset('public/backend/assets/js/datatable.js')}}"></script>
-    <script src="{{asset('public/backend/assets/js/common.js?v1.2')}}"></script>
+    <script src="{{asset('public/backend/assets/js/common.js?v1.2.0')}}"></script>
     <script src="{{asset('public/backend/assets/js/scripts.js')}}"></script>
     <script src="{{asset('public/app-assets/js/scripts/forms/form-login-register.js')}}"></script>
 
