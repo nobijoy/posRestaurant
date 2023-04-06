@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Models\User;
 use DB;
@@ -36,6 +37,13 @@ class AdminController extends Controller
                 $data->phone = $request->phone;
                 $data->email = $request->email;
                 $data->save();
+
+                $employee = Employee::find($data->id);
+                $employee->name = $request->name;
+                $employee->phone = $request->phone;
+                $employee->email = $request->email;
+                $employee->save();
+
                 DB::commit();
                 return back()->with('success', 'Data updated successfully!');
             } catch (Throwable $th) {

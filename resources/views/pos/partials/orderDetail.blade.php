@@ -18,7 +18,7 @@
 
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-12 tableWrap">
+                    <div class="col-md-12 ">
                         <table class="table" >
                             <thead class="text-center">
                             <tr>

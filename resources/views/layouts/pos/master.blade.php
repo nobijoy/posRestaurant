@@ -24,10 +24,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/backend/vendors/css/forms/selects/select2.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/backend/vendors/css/forms/toggle/switchery.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/backend/vendors/css/extensions/toastr.css')}}">
-    {{-- <link rel="stylesheet" type="text/css" href="{{asset('public/backend/vendors/css/charts/morris.css')}}"> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{asset('public/backend/vendors/css/extensions/unslider.css')}}"> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{asset('public/backend/vendors/css/weather-icons/climacons.min.css')}}"> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset ('public/backend/vendors/css/tables/datatable/datatables.min.css')}}"> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css') }}">
     <!-- END: Vendor CSS-->
 
@@ -45,7 +41,8 @@
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style.css?v2.1.7')}}">
+{{--    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style.css?v2.1.7')}}">--}}
+    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style_copy.css?v1.0.0')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/css/admin-styles.css')}}">
     <!-- END: Custom CSS-->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
@@ -73,19 +70,19 @@
 <!-- BEGIN: Header-->
 
 
-{{--@include('layouts.pos.header')--}}
+@include('layouts.pos.header')
 
 <!-- END: Header-->
 
 
 <!-- BEGIN: Main Menu-->
-{{--@include('layouts.pos.sidebar')--}}
+@include('layouts.pos.sidebar')
 <!-- END: Main Menu-->
 
 <!-- BEGIN: Content-->
 <div class="app-content overflow-hidden">
-    <div class="content-overlay">
-    @yield('body')
+    <div class="content-overlay ">
+        @yield('body')
     </div>
 </div>
 

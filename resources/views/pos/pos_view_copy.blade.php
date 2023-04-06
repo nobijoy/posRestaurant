@@ -1,6 +1,6 @@
 @extends('layouts.pos.master')
 
-@section('title', 'Order')
+@section('title', 'POS')
 
 @section('body')
 
