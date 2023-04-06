@@ -9,63 +9,63 @@ NOTE:
 PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
 
-#pos_window .modal-body{
+body{
     font-size: 11px !important;
     height: 100% !important;
     display: flex;
     flex-direction: column;
-    /*overflow: hidden;*/
+    overflow: hidden;
     line-height: 1.1;
 }
-#pos_window .main-card{
+.main-card{
     flex-grow: 1 !important;
     /*height: calc(100vh - 60px) !important;*/
 }
-#pos_window p{
+p{
     margin-bottom: 0 !important;
 }
-#pos_window .btn{
+.btn{
     font-size: 11px !important;
     padding: 5px 3px !important;
 }
-#pos_window input{
+input{
     font-size: 10px !important;
     padding: 3px !important;
 }
-#pos_window .item_card {
+.item_card {
     padding: 5px !important;
 }
-#pos_window .main-left-p1{
+.main-left-p1{
     padding-left: 15px !important;
 }
-#pos_window .item-table{
+.item-table{
     padding: 10px !important;
 }
-#pos_window .main-pl0{
+.main-pl0{
     padding-left: 0 !important;
 }
 #order_table td .input-group, #order_table td .input-group .input-group-btn{
     min-width: 0 !important;
 }
-#pos_window .form-control{
+.form-control{
     height: 2rem !important;
     font-size: 11px !important;
 }
-#pos_window .select2-container--classic .select2-selection--single {
+.select2-container--classic .select2-selection--single {
     height: 25px !important;
     padding: 0 !important;
 }
-#pos_window .select2-container--default .select2-selection--single .select2-selection__rendered{
+.select2-container--default .select2-selection--single .select2-selection__rendered{
     line-height: 20px !important;
 }
-#pos_window .select2-container--default .select2-selection--single .select2-selection__arrow{
+.select2-container--default .select2-selection--single .select2-selection__arrow{
     top: 0 !important;
 }
 
 /*.order:focus {*/
 /*    background-color: ghostwhite;*/
 /*}*/
-#pos_window .modal-xl{
+.modal-xl{
     max-width: 100% !important;
 }
 #pos_menu_show {
@@ -75,88 +75,88 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 #pos_menu_show i{
     font-size: 1.6rem;
 }
-#pos_window .logo {
-	width: 107px;
-	height: 48px;
+.logo {
+    width: 107px;
+    height: 48px;
 }
-#pos_window .ppx-5{
+.ppx-5{
     margin: 0px 5px;
 }
 
-#pos_window .menu-expanded .navbar-nav {
+.menu-expanded .navbar-nav {
     display: flex;
     justify-content: center;
 }
-#pos_window .overflow-x-hidden{
+.overflow-x-hidden{
     overflow-x: hidden;;
 }
-#pos_window .ma-0{
+.ma-0{
     margin: 0px !important;
 }
-#pos_window .order-type{
+.order-type{
     border: 1px solid #aaa;
 }
 
-#pos_window input[type="radio"]:checked + label span {
+input[type="radio"]:checked + label span {
     background: #404e67;
     color: #fff;
 }
-#pos_window .menu-collapsed .logo {
+.menu-collapsed .logo {
     width: 42px;
     height: 32px;
 }
 
-#pos_window .fav {
+.fav {
     width: 32px;
     height: 32px;
 }
 
 #order_table thead th,
 #order_table tbody td {
-	/* text-align: center; */
-	vertical-align: middle;
+    /* text-align: center; */
+    vertical-align: middle;
 }
-#pos_window .thead-bordered th{
+.thead-bordered th{
     border: 1px solid #aaa;
     padding: 10px;
 }
 
-#pos_window .phone::-webkit-inner-spin-button,
-#pos_window .phone::-webkit-outer-spin-button {
-	-webkit-appearance: none !important;
-	margin: 0 !important;
+.phone::-webkit-inner-spin-button,
+.phone::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
 }
 
-#pos_window .phone {
-	-moz-appearance: textfield !important;
+.phone {
+    -moz-appearance: textfield !important;
 }
 
-#pos_window .select {
-	background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc);
-	background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
-	background-size: 5px 5px, 5px 5px, 0px 1.5em;
-	background-repeat: no-repeat;
+.select {
+    background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc);
+    background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+    background-size: 5px 5px, 5px 5px, 0px 1.5em;
+    background-repeat: no-repeat;
 }
 
-#pos_window .select:focus {
-	background-image:
-		linear-gradient(45deg, green 50%, transparent 50%),
-		linear-gradient(135deg, transparent 50%, green 50%),
-		linear-gradient(to right, #ccc, #ccc);
-	background-position:
-		calc(100% - 15px) 1em,
-		calc(100% - 20px) 1em,
-		calc(100% - 2.5em) 0.5em;
-	background-size:
-		5px 5px,
-		5px 5px,
-		0px 1.5em;
-	background-repeat: no-repeat;
-	border-color: #000;
-	outline: 0;
+.select:focus {
+    background-image:
+        linear-gradient(45deg, green 50%, transparent 50%),
+        linear-gradient(135deg, transparent 50%, green 50%),
+        linear-gradient(to right, #ccc, #ccc);
+    background-position:
+        calc(100% - 15px) 1em,
+        calc(100% - 20px) 1em,
+        calc(100% - 2.5em) 0.5em;
+    background-size:
+        5px 5px,
+        5px 5px,
+        0px 1.5em;
+    background-repeat: no-repeat;
+    border-color: #000;
+    outline: 0;
 }
 
-#pos_window .pos-left-items {
+.pos-left-items {
     overflow-x: hidden;
     overflow-y: auto;
     height: calc(100vh - 196px) !important;
@@ -166,7 +166,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 #order_table td {
     padding: 0.15rem !important;
 }
-#pos_window .vertical-btn-tab{
+.vertical-btn-tab{
     margin-bottom: 5px !important;
 }
 #order_table td .input-group,
@@ -174,7 +174,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
     height: 28px !important;
     z-index: 0;
 }
-#pos_window .py-10{
+.py-10{
     padding: 10px !important;
 }
 #order_table td .input-group .input-group-btn .btn{
@@ -191,41 +191,41 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 #order_footer td  input{
     width: 40%;
 }
-#pos_window .pos-cart-items {
+.pos-cart-items {
     overflow-x: hidden;
     overflow-y: auto;
     height: 400px !important;
 }
-#pos_window .pos-scroll-item{
+.pos-scroll-item{
     overflow-x: hidden;
     overflow-y: auto;
     height: calc(100vh - 68px) !important;
 }
-#pos_window .food-item-img{
+.food-item-img{
     height: 80px;
     width: 100%;
     /*object-fit: cover;*/
 }
 
-#pos_window .pos-section{
+.pos-section{
     height: 890px;
 }
 
-#pos_window .pos-btn-active {
+.pos-btn-active {
     background: #00b5b8 !important;
     color: #fff !important;
 }
-#pos_window .qty-change-css {
-   width: 150px !important;
-   height: 30px !important;
+.qty-change-css {
+    width: 150px !important;
+    height: 30px !important;
 }
-#pos_window .pt-5{
+.pt-5{
     padding-top: 5px!important;
 }
-#pos_window .mmt-5{
+.mmt-5{
     margin-top: 5px !important;
 }
-#pos_window .tableWrap {
+.tableWrap {
     height: calc(100vh - 248px) !important;
     overflow: auto;
     scrollbar-width: thin;
@@ -250,39 +250,39 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
     box-shadow: 0px 0px 0 2px #e8e8e8;
     color: white;
 }
-#pos_window .btn:disabled{
+.btn:disabled{
     cursor: not-allowed !important;
 }
-#pos_window .order{
+.order{
     line-height: 1rem;
     margin-bottom: 2px;
 }
-#pos_window .pos-menu-div{
+.pos-menu-div{
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: #aaa #fff;
 }
 
-#pos_window .pos-menu-div::-webkit-scrollbar,
+.pos-menu-div::-webkit-scrollbar,
 .pos-left-items::-webkit-scrollbar,
 .tableWrap::-webkit-scrollbar {
     width: 4px;
 }
 
-#pos_window .pos-menu-div::-webkit-scrollbar-thumb,
+.pos-menu-div::-webkit-scrollbar-thumb,
 .pos-left-items::-webkit-scrollbar-thumb,
 .tableWrap::-webkit-scrollbar-thumb {
     background-color: #aaa;
     border-radius: 4px;
 }
 
-#pos_window .select2{
+.select2{
     width: 100% !important;
 }
 
 
 @media screen and (max-width: 1024px) {
-    #pos_window .food-item-img{
+    .food-item-img{
         height: 50px;
 
     }

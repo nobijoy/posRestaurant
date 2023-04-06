@@ -197,7 +197,7 @@
                         </div>
                         <div class="modal-footer">
                             <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
-                            <input type="submit" id="submitBtn" class="btn btn-outline-primary" value="Save">
+                            <input type="submit" class="btn btn-outline-primary" value="Save">
                         </div>
                     </form>
                 </div>
@@ -273,18 +273,18 @@
                                         <label class="form-check-label" for="edit_inlineRadio2">No</label>
                                     </div>
                                 </fieldset>
-                                <fieldset class="form-group col-md-6 floating-label-form-group hidden" id="hidden_pass">
+                                <fieldset class="form-group col-md-6 floating-label-form-group hidden" id="edit_hidden_pass">
                                     <label for="edit_new_password">New Password<span class="text-danger">*</span></label>
                                     <input type="password" id="edit_new_password" class="form-control" placeholder="" name="password" value="">
                                 </fieldset>
-                                <fieldset class="form-group col-md-6 floating-label-form-group hidden" id="confirm_hidden_pass">
+                                <fieldset class="form-group col-md-6 floating-label-form-group hidden" id="edit_confirm_hidden_pass">
                                     <label for="edit_confirm_password">Confirm New Password<span class="text-danger">*</span></label>
                                     <input type="password" id="edit_confirm_password" class="form-control" placeholder="" name="confirm_password" value="">
-                                    <div style="margin-top: 7px;" id="wrong_pass_alert"></div>
+                                    <div style="margin-top: 7px;" id="edit_wrong_pass_alert"></div>
                                 </fieldset>
-                                <fieldset class="form-group col-md-6 floating-label-form-group hidden" id="hidden_role">
-                                    <label for="user_role">Select User Role<span class="text-danger">*</span></label>
-                                    <select name="user_role" id="user_role" class="select2 form-control">
+                                <fieldset class="form-group col-md-6 floating-label-form-group hidden" id="edit_hidden_role">
+                                    <label for="edit_user_role">Select User Role<span class="text-danger">*</span></label>
+                                    <select name="user_role" id="edit_user_role" class="select2 form-control">
                                         <option value="" >Select</option>
                                         @foreach ($roles as $role)
                                             <option value="{{$role->id}}">{{$role->name}}</option>
@@ -295,7 +295,7 @@
                         </div>
                         <div class="modal-footer">
                             <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
-                            <input type="submit" id="submitBtn" class="btn btn-outline-primary" value="Update">
+                            <input type="submit"  class="btn btn-outline-primary" value="Update">
                         </div>
                     </form>
                 </div>
@@ -325,7 +325,19 @@
             $('.modal-body #edit_date_of_birth').val(date_of_birth);
             $('.modal-body #edit_phone').val(phone);
             $('.modal-body #edit_email').val(email);
-            $("[name='edit_login_access']").val(login_access).change();
+            // $("[name='edit_login_access']").val(login_access).change();
+            if (login_access == 0){
+                $("#edit_inlineRadio2").prop('checked', true);
+            }
+            else{
+                $("#edit_inlineRadio1").prop('checked', true);
+                $('#edit_hidden_pass').removeClass('hidden');
+                $('#edit_confirm_hidden_pass').removeClass('hidden');
+                $('#edit_hidden_role').removeClass('hidden');
+                $('#edit_user_role').attr("required", true);
+                $('#edit_new_password').attr("required", true);
+                $('#edit_confirm_password').attr("required", true);
+            }
             $('#edit_department').on('change', function () {
                 var id = $(this).val();
                 var url = "{{route('getDegAgainstDept')}}";
@@ -366,6 +378,8 @@
                 $('#confirm_hidden_pass').removeClass('hidden');
                 $('#hidden_role').removeClass('hidden');
                 $('#user_role').attr("required", true);
+                $('#new_password').attr("required", true);
+                $('#confirm_password').attr("required", true);
             }
             else{
                 $('#hidden_pass').addClass('hidden');
@@ -373,6 +387,24 @@
                 $('#hidden_role').addClass('hidden');
                 $("#new_password").val('');
                 $("#confirm_password").val('');
+            }
+        });
+        $("input[type='radio']").click(function(){
+            var radioValue = $("input[name='edit_login_access']:checked").val();
+            if(radioValue == 1){
+                $('#edit_hidden_pass').removeClass('hidden');
+                $('#edit_confirm_hidden_pass').removeClass('hidden');
+                $('#edit_hidden_role').removeClass('hidden');
+                $('#edit_user_role').attr("required", true);
+                $('#edit_new_password').attr("required", true);
+                $('#edit_confirm_password').attr("required", true);
+            }
+            else{
+                $('#edit_hidden_pass').addClass('hidden');
+                $('#edit_confirm_hidden_pass').addClass('hidden');
+                $('#edit_hidden_role').addClass('hidden');
+                $("#edit_new_password").val('');
+                $("#edit_confirm_password").val('');
             }
         });
 
@@ -383,6 +415,16 @@
                 $("#wrong_pass_alert").html("Password does not match !").css("color","red");
             else
                 $("#wrong_pass_alert").html("Password match !").css("color","green");
+        });
+
+        $("#edit_confirm_password").on('keyup', function(){
+            var password = $("#edit_new_password").val();
+            var confirmPassword = $("#edit_confirm_password").val();
+            console.log(password, confirmPassword);
+            if (password != confirmPassword)
+                $("#edit_wrong_pass_alert").html("Password does not match !").css("color","red");
+            else
+                $("#edit_wrong_pass_alert").html("Password match !").css("color","green");
         });
     </script>
 @endsection

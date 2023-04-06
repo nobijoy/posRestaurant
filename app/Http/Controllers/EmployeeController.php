@@ -47,13 +47,12 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $validatedData = $request->validate([
             'name' => ['required'],
             'phone' => ['required','unique:employees,phone'],
-//            'email' => ['required','unique:employees,email'],
+            'password' => 'required_with:confirm_password|same:confirm_password',
         ]);
-//        dd($request->all());
+
         DB::beginTransaction();
 
         try {
@@ -73,6 +72,7 @@ class EmployeeController extends Controller
             if ($request->login_access == 1){
                 $user = new User;
                 $user->employee_id = $data->id;
+                $user->login_access = $request->login_access;
                 $user->name = $request->name;
                 $user->phone = $request->phone;
                 $user->email = $request->email;
@@ -125,7 +125,7 @@ class EmployeeController extends Controller
         $validatedData = $request->validate([
             'name' => ['required'],
             'phone' => ['required','unique:employees,phone,'.$request->id. ',id'],
-            'email' => ['required','unique:employees,email,'.$request->id. ',id'],
+            'password' => 'required_with:confirm_password|same:confirm_password',
         ]);
 
         DB::beginTransaction();
@@ -139,10 +139,27 @@ class EmployeeController extends Controller
             $data->department = $request->department;
             $data->designation = $request->designation;
             $data->address = $request->address;
+            $data->login_access = $request->login_access;
             $data->is_active = 1;
             $data->created_by = Auth()->user()->id;
-//            dd($data);
             $data->save();
+
+            if ($request->login_access == 1){
+                $user = User::find($request->id);
+                $user->employee_id = $request->id;
+                $user->login_access = $request->login_access;
+                $user->name = $request->name;
+                $user->phone = $request->phone;
+                $user->email = $request->email;
+                $user->user_role = $request->user_role;
+                $user->password = Hash::make($request->password);
+                $user->save();
+            }
+            else{
+                $user = User::find($request->id);
+                $user->employee_id = $request->id;
+                $user->save();
+            }
 
 
             DB::commit();

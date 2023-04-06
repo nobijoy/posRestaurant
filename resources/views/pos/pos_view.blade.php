@@ -283,7 +283,7 @@
 
         <div class="modal fade text-left" id="quick_invoice" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel35" aria-hidden="true">
-            <div class="modal-dialog modal-content" role="document">
+            <div class="modal-dialog modal-dialog-scrollable modal-content" role="document">
                 <div class="modal-content">
 {{--                    <div class="modal-header">--}}
 {{--                        <h3 class="modal-title" id="myModalLabel35">Quick Invoice</h3>--}}
@@ -686,7 +686,7 @@
                         }
                     }
                     addItemToCart = ingredient_id_container_new;
-                    cartItemSl--;
+                    // cartItemSl--;
                     updateRowNo();
                     calculateSubtotal();
             //     } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -698,7 +698,7 @@
         function updateRowNo() {
             let numRows = $("#order_table tbody tr").length;
             for (let r = 0; r < numRows; r++) {
-                $("#order_table tbody tr").eq(r).find("td:first p").text(r + 1);
+                $("#order_table tbody tr").eq(r).find("td:first span").text(r + 1);
             }
         }
 

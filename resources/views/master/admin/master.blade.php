@@ -46,7 +46,7 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/style.css?v1.2')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/css/admin-styles.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style.css?v2.1.9')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style.css?v2.2.2')}}">
     <!-- END: Custom CSS-->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     @yield('css')
@@ -88,7 +88,7 @@
     @include('master.admin.footer')
     <!-- END: Footer-->
 
-    <div class="modal fade overflow-hidden" id="pos_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
+    <div class="modal fade " id="pos_window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
         <div class="modal-dialog modal-xl m-0" role="document">
             <div class="modal-content">
                 <div class="modal-body p-0" id="pos_html">

@@ -14,11 +14,17 @@
                 </a>
             </li>
 
-            <li  class="nav-item @if($url == 'pos') active @endif"  >
-                <a href="javascript:" onclick="openPosWindow(this)">
+            <li @if($url == 'pos') class="active" @else class="nav-item" @endif>
+                <a  href="{{route('pos')}}">
                     <i class="feather icon-pocket"></i><span class="menu-title">POS</span>
                 </a>
             </li>
+
+{{--            <li  class="nav-item @if($url == 'pos') active @endif"  >--}}
+{{--                <a href="javascript:" onclick="openPosWindow(this)">--}}
+{{--                    <i class="feather icon-pocket"></i><span class="menu-title">POS</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
             <li class=" nav-item">
                 <a href="">
