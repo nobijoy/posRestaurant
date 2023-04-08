@@ -55,8 +55,12 @@ input{
     height: 25px !important;
     padding: 0 !important;
 }
-.select2-container--default .select2-selection--single .select2-selection__rendered{
-    line-height: 20px !important;
+.select2-container--classic .select2-selection--single, .select2-container--default .select2-selection--single .select2-selection__rendered{
+    line-height: 15px !important;
+    /*height : 28px !important ;*/
+}
+.select2-container--classic .select2-selection--single, .select2-container--default .select2-selection--single{
+    height : 28px !important ;
 }
 .select2-container--default .select2-selection--single .select2-selection__arrow{
     top: 0 !important;
@@ -159,7 +163,7 @@ input[type="radio"]:checked + label span {
 .pos-left-items {
     overflow-x: hidden;
     overflow-y: auto;
-    height: calc(100vh - 196px) !important;
+    height: calc(100vh - 246px) !important;
     scrollbar-width: thin;
     scrollbar-color: #aaa #fff;
 }
@@ -199,7 +203,7 @@ input[type="radio"]:checked + label span {
 .pos-scroll-item{
     overflow-x: hidden;
     overflow-y: auto;
-    height: calc(100vh - 68px) !important;
+    height: calc(100vh - 100px) !important;
 }
 .food-item-img{
     height: 80px;
@@ -226,10 +230,13 @@ input[type="radio"]:checked + label span {
     margin-top: 5px !important;
 }
 .tableWrap {
-    height: calc(100vh - 248px) !important;
+    height: calc(100vh - 290px) !important;
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: #aaa #fff;
+}
+#customerBtn{
+    height: 100% !important;
 }
 
 #order_table thead tr th {

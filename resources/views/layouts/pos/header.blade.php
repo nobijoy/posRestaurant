@@ -30,6 +30,11 @@
                             href="javascript:"><i class="feather icon-menu"></i>
                         </a>
                     </li>
+                    <li class="nav-item d-none d-md-block">
+                        <a class="nav-link" id="pos_menu_show" href="javascript:"
+                           data-toggle="modal" data-target="#register_modal" title="Register"><i class="fa fa-registered"></i>
+                        </a>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav float-right">
                     <li class="dropdown dropdown-user nav-item">

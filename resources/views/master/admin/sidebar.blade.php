@@ -14,6 +14,12 @@
                 </a>
             </li>
 
+            <li @if($url == 'cashRegister') class="active" @else class="nav-item" @endif>
+                <a  href="{{route('cashRegister')}}">
+                    <i class="feather icon-credit-card"></i><span class="menu-title">Register Details</span>
+                </a>
+            </li>
+
             <li @if($url == 'pos') class="active" @else class="nav-item" @endif>
                 <a  href="{{route('pos')}}">
                     <i class="feather icon-pocket"></i><span class="menu-title">POS</span>

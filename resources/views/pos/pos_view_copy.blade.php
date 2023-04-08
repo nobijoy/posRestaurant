@@ -100,7 +100,7 @@
                             </div>
                             <input type="hidden" name="table_id[]" id="table_id">
                             <div class="col-md-1 px-0">
-                                <button href="#" data-toggle="modal" data-target="#add_customer" class=" btn-secondary">
+                                <button data-toggle="modal" data-target="#add_customer" id="customerBtn" class=" btn-secondary">
                                     <i class="feather icon-plus"></i>
                                 </button>
                             </div>
@@ -289,18 +289,59 @@
              aria-labelledby="myModalLabel35" aria-hidden="true">
             <div class="modal-dialog modal-content" role="document">
                 <div class="modal-content">
-                    {{--                    <div class="modal-header">--}}
-                    {{--                        <h3 class="modal-title" id="myModalLabel35">Quick Invoice</h3>--}}
-                    {{--                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">--}}
-                    {{--                            <span aria-hidden="true">&times;</span>--}}
-                    {{--                        </button>--}}
-                    {{--                    </div>--}}
                     <div class="modal-body" id="printInvoice">
 
                     </div>
                     <div class="modal-footer">
                         <input type="reset" class="btn btn-outline-secondary" id="closeInvoiceButton" data-dismiss="modal" value="Close">
                         <input type="button" id="printBtn" onclick="printDiv('printInvoice')" data-dismiss="modal" class="btn btn-outline-primary" value="Print">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+{{--        Register Modal--}}
+
+        <div class="modal fade text-left" id="register_modal" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel35" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable overflow-x-hidden modal-content" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel35">Register Details</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row justify-content-end">
+                            <div class="col-md-1 px-0">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Print</button>
+                            </div>
+                            <div class="col-md-1 px-0">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Excel</button>
+                            </div>
+                            <div class="col-md-1 px-0">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">CSV</button>
+                            </div>
+                            <div class="col-md-1 px-0">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">PDF</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h5 class="font-weight-bold">User:</h5>
+                                <h5 class="font-weight-bold">Time Range :</h5>
+                            </div>
+                            <div class="col-md-9">
+                                <h5 class="font-weight-bold">{{ Auth()->user()->name }}</h5>
+                                <h5 class="font-weight-bold">2023-04-07 03:04:37 PM to 2023-04-08 01:32:05 PM</h5>
+                            </div>
+                        </div>
+                        <div class="row px-1" id="registerDetails">
+                            @include('pos.partials.registerDetails')
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="reset" class="btn btn-outline-secondary" id="closeInvoiceButton" data-dismiss="modal" value="Cancel">
+                        <input type="button" id="printBtn" data-dismiss="modal" class="btn btn-outline-primary" value="Close Register">
                     </div>
                 </div>
             </div>
