@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/getMenuWithSearch', [App\Http\Controllers\POSController::class, 'getMenuWithSearch'])->name('getMenuWithSearch');
     Route::get('/searchOrder', [App\Http\Controllers\POSController::class, 'searchOrder'])->name('searchOrder');
     Route::get('/pos_invoice', [App\Http\Controllers\POSController::class, 'pos_invoice'])->name('pos_invoice');
+    Route::match(['get', 'post'], 'cashRegister', 'App\Http\Controllers\POSRegisterController@cashRegister')->name('cashRegister');
     Route::match(['get', 'post'], 'profile/{name}', 'App\Http\Controllers\AdminController@profileUpdate')->name('profileUpdate');
     Route::match(['get', 'post'], 'change-password/{name}', 'App\Http\Controllers\AdminController@passwordUpdate')->name('changePassword');
     Route::match(['get', 'post'], 'managepos', 'App\Http\Controllers\POSController@posUpdate')->name('managePOS');

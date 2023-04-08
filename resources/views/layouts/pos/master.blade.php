@@ -42,7 +42,7 @@
 
     <!-- BEGIN: Custom CSS-->
 {{--    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style.css?v2.1.7')}}">--}}
-    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style_copy.css?v1.0.0')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style_copy.css?v1.0.1')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/css/admin-styles.css')}}">
     <!-- END: Custom CSS-->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
@@ -64,9 +64,9 @@
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu 2-columns vh-100 menu-collapsed" id="body" data-open="click" data-menu="vertical-menu"
+<body class="vertical-layout vertical-menu 2-columns vh-100 fixed-navbar menu-collapsed" id="body" data-open="click" data-menu="vertical-menu"
       data-col="2-columns">
-    <input type="hidden" id="csrfToken" value="{{ csrf_token() }}">
+<input type="hidden" id="csrfToken" value="{{ csrf_token() }}">
 <!-- BEGIN: Header-->
 
 
@@ -80,8 +80,8 @@
 <!-- END: Main Menu-->
 
 <!-- BEGIN: Content-->
-<div class="app-content overflow-hidden">
-    <div class="content-overlay ">
+<div class="app-content h-100 overflow-hidden">
+    <div class="content-overlay">
         @yield('body')
     </div>
 </div>
