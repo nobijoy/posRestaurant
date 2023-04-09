@@ -55,6 +55,7 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Company Name</th>
+                                                <th>Payment Method</th>
                                                 <th>Receipt No</th>
                                                 <th>Payment Amount</th>
                                                 <th>Payment Time</th>
@@ -68,6 +69,7 @@
                                                     <tr>
                                                         <td>{{++$sl}}</td>
                                                         <td>{{$data->name ? $data->supplierInfo->name: ''}}</td>
+                                                        <td>{{$data->payment_method ? $data->paymentInfo->name: ''}}</td>
                                                         <td>{{$data->receipt_number}}</td>
                                                         <td>{{$data->amount}}</td>
                                                         <td>{{$data->payment_time}}</td>
@@ -76,7 +78,7 @@
                                                             @if($data->is_active == 1)
                                                                 <a data-toggle="modal" data-target="#edit_payment" data-target-id="{{$data->id}}"
                                                                    data-name="{{$data->name}}" data-receipt_number="{{$data->receipt_number}}" data-amount="{{$data->amount}}"
-                                                                   data-payment_time="{{$data->payment_time}}" >
+                                                                   data-payment_time="{{$data->payment_time}}" data-payment="{{ $data->payment_method }}">
                                                                     <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
                                                                         <i class="fa fa-pencil-square"></i></button>
                                                                 </a>
@@ -130,8 +132,17 @@
                                 </select>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
+                                <label for="payment_method">Payment Method<span class="text-danger">*</span></label>
+                                <select name="payment_method" id="payment_method" class="select2 form-control" required>
+                                    <option value="" >Select</option>
+                                    @foreach ($payment_methods as $method)
+                                        <option value="{{$method->id}}">{{$method->name}}</option>
+                                    @endforeach
+                                </select>
+                            </fieldset>
+                            <fieldset class="form-group floating-label-form-group">
                                 <label for="receipt_number">Receipt Number<span class="text-danger">*</span></label>
-                                <input type="text" name="receipt_number" class="form-control" id="receipt_number" placeholder="" value="" required>
+                                <input type="number" name="receipt_number" class="form-control" id="receipt_number" placeholder="" value="" required>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
                                 <label for="amount">Amount<span class="text-danger">*</span></label>
@@ -168,12 +179,26 @@
                         <div class="modal-body">
                             <input type="hidden" name="id" id="id">
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="name">Supplier Name<span class="text-danger">*</span></label>
-                                <input type="text" name="name" class="form-control" id="edit_name" placeholder="" value="" required>
+                                <label for="edit_name">Supplier Name<span class="text-danger">*</span></label>
+                                <select name="name" id="edit_name" class="select2 form-control" required>
+                                    <option value="" >Select</option>
+                                    @foreach ($suppliers as $supplier)
+                                        <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                                    @endforeach
+                                </select>
+                            </fieldset>
+                            <fieldset class="form-group floating-label-form-group">
+                                <label for="edit_payment_method">Payment Method<span class="text-danger">*</span></label>
+                                <select name="payment_method" id="edit_payment_method" class="select2 form-control" required>
+                                    <option value="" >Select</option>
+                                    @foreach ($payment_methods as $method)
+                                        <option value="{{$method->id}}">{{$method->name}}</option>
+                                    @endforeach
+                                </select>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
                                 <label for="receipt_number">Receipt Number<span class="text-danger">*</span></label>
-                                <input type="text" name="receipt_number" class="form-control" id="edit_receipt_number" placeholder="" value="" required>
+                                <input type="number" name="receipt_number" class="form-control" id="edit_receipt_number" placeholder="" value="" required>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
                                 <label for="amount">Amount<span class="text-danger">*</span></label>
@@ -203,13 +228,16 @@
             var receipt_number = $(e.relatedTarget).data('receipt_number');
             var amount = $(e.relatedTarget).data('amount');
             var payment_time = $(e.relatedTarget).data('payment_time');
+            var payment = $(e.relatedTarget).data('payment');
 
 
             $('.modal-body #id').val(id);
-            $('.modal-body #edit_name').val(name);
+            $('.modal-body #edit_name').val(name).change();
             $('.modal-body #edit_receipt_number').val(receipt_number);
             $('.modal-body #edit_amount').val(amount);
             $('.modal-body #edit_payment_time').val(payment_time);
+            $('.modal-body #edit_payment_time').val(payment_time);
+            $('.modal-body #edit_payment_method').val(payment).change();
         });
 
         $("#edit_payment").on("hide.bs.modal", function (e) {

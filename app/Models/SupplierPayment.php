@@ -12,6 +12,9 @@ class SupplierPayment extends Model
     public function supplierInfo() {
         return $this->belongsTo(Supplier::class, 'name', 'id');
     }
+    public function paymentInfo() {
+        return $this->belongsTo(PaymentMethod::class, 'payment_method', 'id');
+    }
     public function createdBy(){
         return $this->belongsTo(User::class, 'created_by', 'id');
     }
