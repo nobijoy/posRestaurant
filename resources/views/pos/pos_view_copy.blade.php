@@ -313,26 +313,26 @@
                     <div class="modal-body">
                         <div class="row justify-content-end">
                             <div class="col-md-1 px-0">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Print</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Print</button>
                             </div>
                             <div class="col-md-1 px-0">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Excel</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Excel</button>
                             </div>
                             <div class="col-md-1 px-0">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">CSV</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">CSV</button>
                             </div>
                             <div class="col-md-1 px-0">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">PDF</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">PDF</button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">
                                 <h5 class="font-weight-bold">User:</h5>
-                                <h5 class="font-weight-bold">Time Range :</h5>
+                                <h5 class="font-weight-bold">Opening Time :</h5>
                             </div>
                             <div class="col-md-9">
                                 <h5 class="font-weight-bold">{{ Auth()->user()->name }}</h5>
-                                <h5 class="font-weight-bold">2023-04-07 03:04:37 PM to 2023-04-08 01:32:05 PM</h5>
+                                <h5 class="font-weight-bold">{{$register->created_at}}</h5>
                             </div>
                         </div>
                         <div class="row px-1" id="registerDetails">
@@ -340,8 +340,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="reset" class="btn btn-outline-secondary" id="closeInvoiceButton" data-dismiss="modal" value="Cancel">
-                        <input type="button" id="printBtn" data-dismiss="modal" class="btn btn-outline-primary" value="Close Register">
+                        <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel">
+                        <a type="button" href="{{route('closeRegister', $register->id)}}" class="btn btn-outline-primary">
+                            Close Register
+                        </a>
                     </div>
                 </div>
             </div>
@@ -609,6 +611,7 @@
             $('#address').val('');
             $("#add_customer").modal('hide');
         });
+
     </script>
     <script>
         function loadMenuByCategory(url) {

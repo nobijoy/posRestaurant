@@ -12,6 +12,9 @@ class Purchase extends Model
     public function supplierInfo(){
         return $this->belongsTo(Supplier::class, 'supplier', 'id');
     }
+    public function paymentInfo(){
+        return $this->belongsTo(PaymentMethod::class, 'payment_method', 'id');
+    }
 
     public function totalPurchaseCost(){
         return $this->hasMany(PurchaseIngredient::class, 'purchase_id', 'id')->where('is_active', 1)->sum('total');

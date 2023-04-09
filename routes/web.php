@@ -35,7 +35,6 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/getMenuWithSearch', [App\Http\Controllers\POSController::class, 'getMenuWithSearch'])->name('getMenuWithSearch');
     Route::get('/searchOrder', [App\Http\Controllers\POSController::class, 'searchOrder'])->name('searchOrder');
     Route::get('/pos_invoice', [App\Http\Controllers\POSController::class, 'pos_invoice'])->name('pos_invoice');
-    Route::match(['get', 'post'], 'cashRegister', 'App\Http\Controllers\POSRegisterController@cashRegister')->name('cashRegister');
     Route::match(['get', 'post'], 'profile/{name}', 'App\Http\Controllers\AdminController@profileUpdate')->name('profileUpdate');
     Route::match(['get', 'post'], 'change-password/{name}', 'App\Http\Controllers\AdminController@passwordUpdate')->name('changePassword');
     Route::match(['get', 'post'], 'managepos', 'App\Http\Controllers\POSController@posUpdate')->name('managePOS');
@@ -44,7 +43,6 @@ Route::group(['middleware' => ['auth']], function(){
     Route::match(['get', 'post'], 'outlet_setting', 'App\Http\Controllers\OutletSettingController@setup')->name('outlet_setting');
     Route::match(['get', 'post'], 'setting', 'App\Http\Controllers\SettingController@manage')->name('setting');
     Route::match(['get', 'post'], 'printer_setup', 'App\Http\Controllers\SettingController@printer_setup')->name('printer_setup');
-
 
     Route::delete('menuCategory/{id}', 'App\Http\Controllers\MenuCategoryController@delete')->name('menuCategory.delete');
     Route::put('menuCategory/{id}', 'App\Http\Controllers\MenuCategoryController@restore')->name('menuCategory.restore');
@@ -160,6 +158,12 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/loadOrderDetails/{id}','App\Http\Controllers\OrderController@loadOrderDetails')->name('loadOrderDetails');
     Route::get('/invoicePrint/{id}','App\Http\Controllers\OrderController@invoicePrint')->name('invoicePrint');
     Route::get('/orderPaidStatus/{id}','App\Http\Controllers\OrderController@orderPaidStatus')->name('orderPaidStatus');
+
+
+    Route::get('cashRegister', 'App\Http\Controllers\POSRegisterController@cashRegister')->name('cashRegister');
+    Route::post('openRegister', 'App\Http\Controllers\POSRegisterController@openRegister')->name('openRegister');
+    Route::get('closeRegister/{id}', 'App\Http\Controllers\POSRegisterController@closeRegister')->name('closeRegister');
+
 
 
 

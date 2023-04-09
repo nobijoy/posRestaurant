@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PaymentMethod;
+use App\Models\Purchase;
 use App\Models\Supplier;
 use App\Models\SupplierPayment;
 use Illuminate\Http\Request;
@@ -20,8 +22,9 @@ class SupplierPaymentController extends Controller
     {
         $datas = SupplierPayment::with(['supplierInfo','createdBy'])->where('is_active', 1)-> get()->reverse();
         $suppliers = Supplier::where('is_active', 1)-> get()->reverse();
+        $payment_methods = PaymentMethod::where('is_active', 1)-> get()->reverse();
         $sl = 0;
-        return view('admin.supplier.payment', compact('datas', 'sl', 'suppliers'));
+        return view('admin.supplier.payment', compact('datas', 'sl', 'suppliers', 'payment_methods'));
     }
 
     /**
@@ -44,7 +47,6 @@ class SupplierPaymentController extends Controller
     {
         $validatedData = $request->validate([
             'name' => ['required'],
-            'receipt_number' => ['required', 'unique:supplier_payments,receipt_number'],
             'amount' => ['required'],
         ]);
 
@@ -56,9 +58,16 @@ class SupplierPaymentController extends Controller
             $data->receipt_number = $request->receipt_number;
             $data->amount = $request->amount;
             $data->payment_time = $request->payment_time;
+            $data->payment_method = $request->payment_method;
             $data->is_active = 1;
             $data->created_by = Auth()->user()->id;
             $data->save();
+
+            $purchase = Purchase::where('reference_no', $data->receipt_number)->firstOrFail();
+            $purchase->due = $purchase->due + $data->amount;
+            $purchase->total = $purchase->total - $data->amount;
+            $purchase->save();
+
             DB::commit();
 
             return back()->with('success', 'Payment Created Successfully');
@@ -102,7 +111,6 @@ class SupplierPaymentController extends Controller
     {
         $validatedData = $request->validate([
             'name' => ['required'],
-            'receipt_number' => ['required', 'unique:supplier_payments,receipt_number,' .$request->id. ',id'],
             'amount' => ['required'],
         ]);
         DB::beginTransaction();

@@ -8,12 +8,12 @@
                 <th class="text-right">Amount</th>
             </tr>
             </thead>
-            <tbody align="center ">
+            <tbody align="center">
                 <tr>
                     <td align="left">1</td>
                     <td align="center">Cash</td>
                     <td align="center">Opening Balance(+)</td>
-                    <td align="right">0.00</td>
+                    <td align="right">{{$register->cash}}</td>
                 </tr>
                 <tr>
                     <td align="left"></td>

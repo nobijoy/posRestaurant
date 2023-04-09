@@ -50,7 +50,7 @@
                         <div class="card">
                             <div class="card-content collpase show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="{{ route ('setting') }}" enctype="multipart/form-data">
+                                    <form class="form" method="post" action="{{ route ('openRegister') }}" enctype="multipart/form-data">
                                         @csrf
                                         <div class=" align-items-center d-block">
                                             <div class="row form-group col-md-12 mb-2 mx-auto">

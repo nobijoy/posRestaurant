@@ -2,7 +2,7 @@
 
     <div class="form-group col-md-4 ">
         <label for="reference_no">Reference No <span class="text-danger">*</span></label>
-        <input type="text" id="reference_no" class="form-control" placeholder="" name="reference_no"
+        <input type="number" id="reference_no" class="form-control" placeholder="" name="reference_no"
                @if($url == 'purchase.edit') value="{{$data->reference_no}}" @else value="{{old('reference_no')}}" @endif required>
     </div>
 
@@ -17,12 +17,22 @@
     </div>
 
     <div class="form-group col-md-4 ">
+        <label for="payment_method">Payment Methods <span class="text-danger">*</span></label>
+        <select name="payment_method" id="payment_method" class="form-control select2">
+            <option value="">Select</option>
+            @foreach($payment_methods as $type)
+                <option value="{{$type->id}}" @if(($url == 'purchase.edit') && ($data->payment_method == $type->id)) selected @endif">{{$type->name}}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="form-group col-md-4 ">
         <label for="date">Date <span class="text-danger">*</span></label>
         <input type="date" id="date" class="form-control" placeholder="" name="date"
                @if($url == 'purchase.edit') value="{{date('Y-m-d', strtotime($data->date))}}" @else value="{{old('date')}}" @endif  required>
     </div>
 
-    <div class="form-group col-md-6 ">
+    <div class="form-group col-md-4 ">
         <label for="ingredient">Ingredient <span class="text-danger">*</span></label>
         <select id="ingredient" class="form-control select2">
             <option value="">Select</option>
@@ -32,7 +42,7 @@
         </select>
     </div>
 
-    <div class="form-group col-md-6 pt-2">
+    <div class="form-group col-md-4 pt-2">
         <a href="#" data-toggle="modal" data-target="#read_me" class="btn btn-danger">Read Me First</a>
     </div>
 </div>
