@@ -53,6 +53,13 @@ class SupplierPaymentController extends Controller
         DB::beginTransaction();
 
         try {
+
+            $purchase = Purchase::where('reference_no', $request->receipt_number)->firstOrFail();
+            $purchase->due = $purchase->due - $request->amount;
+            $purchase->paid = $purchase->total + $request->amount;
+            $purchase->save();
+
+
             $data = new SupplierPayment;
             $data->name = $request->name;
             $data->receipt_number = $request->receipt_number;
@@ -63,10 +70,6 @@ class SupplierPaymentController extends Controller
             $data->created_by = Auth()->user()->id;
             $data->save();
 
-            $purchase = Purchase::where('reference_no', $data->receipt_number)->firstOrFail();
-            $purchase->due = $purchase->due + $data->amount;
-            $purchase->total = $purchase->total - $data->amount;
-            $purchase->save();
 
             DB::commit();
 
@@ -74,7 +77,7 @@ class SupplierPaymentController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', 'Somethings went wrong. Try Again');
+            return back()->with('error', 'Somethings went wrong. Possibly Receipt Number did not match. Try Again');
         }
     }
 

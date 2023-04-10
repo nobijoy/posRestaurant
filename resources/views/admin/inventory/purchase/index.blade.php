@@ -55,7 +55,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Sl</th>
-                                                <th>Reference No</th>
+                                                <th>Receipt No</th>
                                                 <th>Date</th>
                                                 <th>Supplier</th>
                                                 <th>Payment Method</th>

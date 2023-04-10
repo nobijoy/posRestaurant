@@ -308,39 +308,15 @@
             <div class="modal-dialog modal-lg modal-dialog-scrollable overflow-x-hidden modal-content" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title" id="myModalLabel35">Register Details</h3>
+                        <h3 class="modal-title" id="">Register Details</h3>
                     </div>
                     <div class="modal-body">
-                        <div class="row justify-content-end">
-                            <div class="col-md-1 px-0">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Print</button>
-                            </div>
-                            <div class="col-md-1 px-0">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Excel</button>
-                            </div>
-                            <div class="col-md-1 px-0">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">CSV</button>
-                            </div>
-                            <div class="col-md-1 px-0">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">PDF</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <h5 class="font-weight-bold">User:</h5>
-                                <h5 class="font-weight-bold">Opening Time :</h5>
-                            </div>
-                            <div class="col-md-9">
-                                <h5 class="font-weight-bold">{{ Auth()->user()->name }}</h5>
-                                <h5 class="font-weight-bold">{{$register->created_at}}</h5>
-                            </div>
-                        </div>
-                        <div class="row px-1" id="registerDetails">
+                        <div class="row justify-content-end" id="register_detail">
                             @include('pos.partials.registerDetails')
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Cancel">
+                        <button class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
                         <a type="button" href="{{route('closeRegister', $register->id)}}" class="btn btn-outline-primary">
                             Close Register
                         </a>
@@ -1160,29 +1136,6 @@
                     confirmButtonClass: "btn btn-primary",
                     buttonsStyling: false
                 });
-                // $('#payment_modal').modal('hide');
-                // $('#order_items').empty();
-                // updateRowNo();
-                // $("#sub_total_amount").val('0.00');
-                // $("#vat").val(15);
-                // $("#charge").val(45);
-                // $("#discount").val('0.00');
-                // $('#change_amount').val(0.00);
-                // $('#paid_amount').val('');
-                // $("#grand_total").val('0.00');
-                // $("#customer_list").val("").change();
-                // $('#waiter_list').val("").change();
-                // cartItemSl = 0;
-                // let len = addItemToCart.length;
-                // for (let i = 0; i < len; i++) {
-                //     addItemToCart.pop();
-                //     menu_name.pop();
-                //     cmenu_id.pop();
-                //     cmenu_price.pop();
-                //     cmenu_qty.pop();
-                //     cmenu_total_price.pop();
-                // }
-                // tableDetails = [];
             }
         }
 
@@ -1268,6 +1221,21 @@
                 }
             });
         }
+    </script>
+    <script type="text/javascript">
+        $('#register_modal').on('show.bs.modal', function (e) {
+            let url = "{{ route ('getRegisterDetails') }}";
+            $.ajax({
+                url : url,
+                success: function (data) {
+                    $("#register_detail").empty().html(data.view);
+                },
+
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
     </script>
 @endsection
 

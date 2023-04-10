@@ -48,4 +48,6 @@ class POSRegisterController extends Controller
         }
     }
 
+
+
 }

@@ -14,11 +14,24 @@
                 </a>
             </li>
 
-            <li class="nav-item @if ($url == 'pos') active @endif">
-                <a href="{{ route('pos') }}" target="_blank" rel="noopener noreferrer">
-                    <i class="feather icon-pocket"></i><span class="menu-title" data-i18n="pos">POS</span>
+            <li @if($url == 'cashRegister') class="active" @else class="nav-item" @endif>
+                <a  href="{{route('cashRegister')}}">
+                    <i class="feather icon-credit-card"></i><span class="menu-title">Register Details</span>
                 </a>
             </li>
+
+            <li @if($url == 'pos') class="active" @else class="nav-item" @endif>
+                <a  href="{{route('pos')}}">
+                    <i class="feather icon-pocket"></i><span class="menu-title">POS</span>
+                </a>
+            </li>
+
+            {{--            <li  class="nav-item @if($url == 'pos') active @endif"  >--}}
+            {{--                <a href="javascript:" onclick="openPosWindow(this)">--}}
+            {{--                    <i class="feather icon-pocket"></i><span class="menu-title">POS</span>--}}
+            {{--                </a>--}}
+            {{--            </li>--}}
+
 
             <li class=" nav-item">
                 <a href="">
@@ -43,6 +56,22 @@
                 </ul>
             </li>
 
+
+            <li class=" nav-item">
+                <a href="">
+                    <i class="fa fa-table"></i><span class="menu-title" >Manage Restaurant</span>
+                </a>
+                <ul class="menu-content">
+                    <li @if ($url == 'payment_method.index') class="active" @endif>
+                        <a href="{{ route('payment_method.index') }}" >Payment Method</a>
+                    </li>
+                    <li @if ($url == 'table.index') class="active" @endif>
+                        <a href="{{ route('table.index') }}">Table</a>
+                    </li>
+                </ul>
+            </li>
+
+
             <li class="nav-item">
                 <a href="#">
                     <i class="feather icon-file-text"></i><span class="menu-title" data-i18n="Setup">Food Menu
@@ -65,12 +94,6 @@
                     </li>
                     <li @if ($url == 'menu.index' || $url == 'menu.create' || $url == 'menu.edit') class="active" @endif>
                         <a href="{{ route('menu.index') }}" data-i18n="Food Menu">Food Menu</a>
-                    </li>
-                    <li @if ($url == 'payment_method.index') class="active" @endif>
-                        <a href="{{ route('payment_method.index') }}" data-i18n="Food Menu">Payment Method</a>
-                    </li>
-                    <li @if ($url == 'table.index') class="active" @endif>
-                        <a href="{{ route('table.index') }}" data-i18n="Food Menu">Table</a>
                     </li>
                 </ul>
             </li>

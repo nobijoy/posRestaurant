@@ -58,6 +58,22 @@
                 </ul>
             </li>
 
+
+            <li class=" nav-item">
+                <a href="">
+                    <i class="fa fa-table"></i><span class="menu-title" >Manage Restaurant</span>
+                </a>
+                <ul class="menu-content">
+                    <li @if ($url == 'payment_method.index') class="active" @endif>
+                        <a href="{{ route('payment_method.index') }}" >Payment Method</a>
+                    </li>
+                    <li @if ($url == 'table.index') class="active" @endif>
+                        <a href="{{ route('table.index') }}">Table</a>
+                    </li>
+                </ul>
+            </li>
+
+
             <li class="nav-item">
                 <a href="#">
                     <i class="feather icon-file-text"></i><span class="menu-title">Food Menu Setup</span>

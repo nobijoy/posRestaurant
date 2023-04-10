@@ -42,7 +42,7 @@
 
     <!-- BEGIN: Custom CSS-->
 {{--    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style.css?v2.1.7')}}">--}}
-    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style_copy.css?v1.0.1')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('public/backend/assets/css/pos_style_copy.css?v1.0.6')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('public/css/admin-styles.css')}}">
     <!-- END: Custom CSS-->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
