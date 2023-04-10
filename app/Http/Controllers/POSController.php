@@ -12,6 +12,7 @@ use App\Models\Customer;
 use App\Models\Menu;
 use App\Models\PosSetting;
 use App\Models\MenuCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class POSController extends Controller
@@ -96,7 +97,7 @@ class POSController extends Controller
         $menuCategories = MenuCategory::where('is_active', 1)->orderBY('name')->get();
         $menus = Menu::where('is_active', 1)->orderBY('name')->get();
         $tables = Table::where('is_active', 1)->get();
-        $payments = PaymentMethod::where('is_active', 1)->orderBy('id', 'desc')->get();
+        $payments = PaymentMethod::where('is_active', 1)->orderBy('id')->get();
         $orders = Order::with(['customerInfo','waiterInfo','paymentMethod'])->where('status', 'running')->latest()->get();
         $register = DB::table('p_o_sregisters')->get()->last();
 //        return response()->json([
@@ -176,6 +177,20 @@ class POSController extends Controller
         $orders = $query->orderBY('id', 'desc')->get();
         return response()->json([
             'view' => view('pos.partials.order', compact('orders'))->render(),
+        ]);
+    }
+
+    public function getRegisterDetails(){
+        $time= DB::table('p_o_sregisters')->get()->last();
+        $start_time = $time->created_at;
+        $end_time = date('Y-m-d H:i:s');
+        dd($start_time , $end_time);
+        $results = Table::whereBetween('start_time', [$start_time, $end_time])
+            ->whereBetween('end_time', [$start_time, $end_time])
+            ->get();
+
+        return response()->json([
+            'view' => view('pos.menus', compact('menus'))->render(),
         ]);
     }
 

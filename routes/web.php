@@ -163,6 +163,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('cashRegister', 'App\Http\Controllers\POSRegisterController@cashRegister')->name('cashRegister');
     Route::post('openRegister', 'App\Http\Controllers\POSRegisterController@openRegister')->name('openRegister');
     Route::get('closeRegister/{id}', 'App\Http\Controllers\POSRegisterController@closeRegister')->name('closeRegister');
+    Route::get('getRegisterDetails', 'App\Http\Controllers\POSController@getRegisterDetails')->name('getRegisterDetails');
 
 
 
