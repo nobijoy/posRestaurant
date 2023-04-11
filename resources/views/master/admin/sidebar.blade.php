@@ -94,12 +94,6 @@
                     <li @if($url == 'menu.index' || $url == "menu.create" || $url == "menu.edit") class="active"  @endif>
                         <a href="{{route('menu.index')}}">Food Menu</a>
                     </li>
-                    <li @if($url == 'payment_method.index') class="active"  @endif>
-                        <a href="{{route('payment_method.index')}}">Payment Method</a>
-                    </li>
-                    <li @if($url == 'table.index') class="active"  @endif>
-                        <a href="{{route('table.index')}}">Table</a>
-                    </li>
                 </ul>
             </li>
 

@@ -22,7 +22,7 @@ class SupplierPaymentController extends Controller
     {
         $datas = SupplierPayment::with(['supplierInfo','createdBy'])->where('is_active', 1)-> get()->reverse();
         $suppliers = Supplier::where('is_active', 1)-> get()->reverse();
-        $payment_methods = PaymentMethod::where('is_active', 1)-> get()->reverse();
+        $payment_methods = PaymentMethod::where('is_active', 1)-> get();
         $sl = 0;
         return view('admin.supplier.payment', compact('datas', 'sl', 'suppliers', 'payment_methods'));
     }
@@ -53,16 +53,15 @@ class SupplierPaymentController extends Controller
         DB::beginTransaction();
 
         try {
-
-            $purchase = Purchase::where('reference_no', $request->receipt_number)->firstOrFail();
+//            dd($request->all());
+            $purchase = Purchase::where('id', $request->receipt_number)->firstOrFail();
             $purchase->due = $purchase->due - $request->amount;
-            $purchase->paid = $purchase->total + $request->amount;
             $purchase->save();
 
 
             $data = new SupplierPayment;
             $data->name = $request->name;
-            $data->receipt_number = $request->receipt_number;
+            $data->receipt_number = $purchase->reference_no;
             $data->amount = $request->amount;
             $data->payment_time = $request->payment_time;
             $data->payment_method = $request->payment_method;
@@ -77,7 +76,8 @@ class SupplierPaymentController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', 'Somethings went wrong. Possibly Receipt Number did not match. Try Again');
+            return back()->with('error', $th->getMessage());
+//            return back()->with('error', 'Somethings went wrong. Try Again');
         }
     }
 

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Expense;
 use App\Models\Order;
 use App\Models\PaymentMethod;
+use App\Models\POSregister;
+use App\Models\Purchase;
+use App\Models\SupplierPayment;
 use App\Models\Table;
 use DB;
 use Image;
@@ -181,16 +185,17 @@ class POSController extends Controller
     }
 
     public function getRegisterDetails(){
-        $time= DB::table('p_o_sregisters')->get()->last();
+        $time = POSregister::latest()->first();
         $start_time = $time->created_at;
         $end_time = date('Y-m-d H:i:s');
-        dd($start_time , $end_time);
-        $results = Table::whereBetween('start_time', [$start_time, $end_time])
-            ->whereBetween('end_time', [$start_time, $end_time])
-            ->get();
+        $purchases = Purchase::whereBetween('created_at', [$start_time, $end_time])->get(['paid',]);
+        $payments = SupplierPayment::whereBetween('created_at', [$start_time, $end_time])->where('payment_method', 1)->get(['amount',]);
+        $expenses = Expense::whereBetween('created_at', [$start_time, $end_time])->get(['amount',]);
+        $sales = Order::whereBetween('created_at', [$start_time, $end_time])->where('payment_status','Paid')->get(['total',]);
+        return json_encode(['payments'=>$payments, 'purchases'=>$purchases, 'expenses'=>$expenses, 'sales'=>$sales]);
 
         return response()->json([
-            'view' => view('pos.menus', compact('menus'))->render(),
+            'view' => view('pos.partials.registerDetails', compact('payments', 'purchases', 'expenses', 'sales'))->render(),
         ]);
     }
 
