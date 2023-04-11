@@ -5,7 +5,7 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-4 mb-1">
                 <h3 class="content-header-title">
-                    <a href="#" data-toggle="modal" data-target="#add_payment" class="btn btn-primary">Add Supplier Payment <i class="fa fa-plus"></i></a>
+                    <a href="#" data-toggle="modal" data-target="#add_payment" class="btn btn-primary">Supplier Due Payment <i class="fa fa-plus"></i></a>
                 </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
@@ -132,6 +132,13 @@
                                 </select>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
+                                <label for="receipt_number">Receipt Number<span class="text-danger">*</span></label>
+                                <select name="receipt_number" id="receipt_number" class="select2 form-control" required>
+                                    <option value="" >Select</option>
+
+                                </select>
+                            </fieldset>
+                            <fieldset class="form-group floating-label-form-group">
                                 <label for="payment_method">Payment Method<span class="text-danger">*</span></label>
                                 <select name="payment_method" id="payment_method" class="select2 form-control" required>
                                     <option value="" >Select</option>
@@ -139,10 +146,6 @@
                                         <option value="{{$method->id}}">{{$method->name}}</option>
                                     @endforeach
                                 </select>
-                            </fieldset>
-                            <fieldset class="form-group floating-label-form-group">
-                                <label for="receipt_number">Receipt Number<span class="text-danger">*</span></label>
-                                <input type="number" name="receipt_number" class="form-control" id="receipt_number" placeholder="" value="" required>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
                                 <label for="amount">Amount<span class="text-danger">*</span></label>
@@ -188,6 +191,13 @@
                                 </select>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
+                                <label for="edit_receipt_number">Receipt Number<span class="text-danger">*</span></label>
+                                <select name="receipt_number" id="edit_receipt_number" class="select2 form-control" required>
+                                    <option value="" >Select</option>
+
+                                </select>
+                            </fieldset>
+                            <fieldset class="form-group floating-label-form-group">
                                 <label for="edit_payment_method">Payment Method<span class="text-danger">*</span></label>
                                 <select name="payment_method" id="edit_payment_method" class="select2 form-control" required>
                                     <option value="" >Select</option>
@@ -195,10 +205,6 @@
                                         <option value="{{$method->id}}">{{$method->name}}</option>
                                     @endforeach
                                 </select>
-                            </fieldset>
-                            <fieldset class="form-group floating-label-form-group">
-                                <label for="receipt_number">Receipt Number<span class="text-danger">*</span></label>
-                                <input type="number" name="receipt_number" class="form-control" id="edit_receipt_number" placeholder="" value="" required>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
                                 <label for="amount">Amount<span class="text-danger">*</span></label>
@@ -233,12 +239,67 @@
 
             $('.modal-body #id').val(id);
             $('.modal-body #edit_name').val(name).change();
-            $('.modal-body #edit_receipt_number').val(receipt_number);
+            $('.modal-body #edit_receipt_number').val(receipt_number).change();
             $('.modal-body #edit_amount').val(amount);
             $('.modal-body #edit_payment_time').val(payment_time);
-            $('.modal-body #edit_payment_time').val(payment_time);
             $('.modal-body #edit_payment_method').val(payment).change();
+
+            $('#edit_name').on('change', function () {
+                var id = $(this).val();
+                var url = "{{route('getReceiptBySupplier')}}";
+                if(id != ''){
+                    getReceiptBySupplier(id, url, '#edit_receipt_number');
+                }else{
+                    var output = '<option value="">No data available</option>';
+                    $('#edit_designation').html(output) ;
+                }
+            });
+            $('.select2').select2();
         });
+
+        $("#add_payment").on("show.bs.modal", function (e) {
+            $('#name').on('change', function () {
+                var id = $(this).val();
+                var url = "{{route('getReceiptBySupplier')}}";
+                if(id != ''){
+                    getReceiptBySupplier(id, url, '#receipt_number');
+                }else{
+                    var output = '<option value="">No data available</option>';
+                    $('#designation').html(output) ;
+                }
+            });
+
+            $('.select2').select2();
+        });
+
+        function getReceiptBySupplier(id, url, view) {
+            $.ajax({
+                url: url,
+                type: "get",
+                data: {
+                    "id": id,
+                },
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (data) {
+
+                    if (data.length > 0) {
+                        var output = '<option value="">Select</option>';
+                        $.each(data, function (index, value) {
+                            console.log(value);
+                            output += '<option value="' + value['id'] + '">' + value['reference_no'] + '</option>';
+                        });
+                    } else {
+                        var output = '<option value="">No data available</option>';
+                    }
+                    $(view).html(output);
+                },
+
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        }
 
         $("#edit_payment").on("hide.bs.modal", function (e) {
             location.reload();

@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('getSubCatAgainstCat', 'App\Http\Controllers\CommonController@getSubCatAgainstCat')->name('getSubCatAgainstCat');
     Route::get('getDegAgainstDept', 'App\Http\Controllers\CommonController@getDegAgainstDept')->name('getDegAgainstDept');
     Route::get('getIngrerdientInfoById', 'App\Http\Controllers\CommonController@getIngrerdientInfoById')->name('getIngrerdientInfoById');
+    Route::get('getReceiptBySupplier', 'App\Http\Controllers\CommonController@getReceiptBySupplier')->name('getReceiptBySupplier');
 
 
     Route::delete('ingredient_category/{id}', 'App\Http\Controllers\IngredientCategoryController@delete')->name('ingredient_category.delete');

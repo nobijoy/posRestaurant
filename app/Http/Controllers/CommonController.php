@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Designation;
 use App\Models\Ingredient;
 use App\Models\MenuSubCategory;
+use App\Models\Purchase;
 use Illuminate\Http\Request;
 
 class CommonController extends Controller
@@ -22,5 +23,10 @@ class CommonController extends Controller
     public function getIngrerdientInfoById(Request $request){
         $data = Ingredient::find($request->id);
         return json_encode($data);
+    }
+
+    public function getReceiptBySupplier(Request $request){
+        $datas = Purchase::where('supplier', $request->id)->where('due','>', 0)->get();
+        return json_encode($datas);
     }
 }

@@ -17,6 +17,8 @@ class AddPaymentMethodColumnToSupplierPaymentsTable extends Migration
             $table->float('receipt_number')->change();
             $table->UnsignedBigInteger('payment_method')->Unsigned()->nullable()->after('name');
             $table->foreign('payment_method')->references('id')->on('payment_methods')->onDelete('restrict');
+
+            $table->string('payment_method', 30)->change();
         });
     }
 
