@@ -108,9 +108,16 @@
                     <li @if($url == 'stock.index') class="active"  @endif>
                         <a href="{{route('stock.index')}}">Stock</a>
                     </li>
+                    <li @if($url == 'warehousetype.index') class="active"  @endif>
+                        <a href="{{route('warehousetype.index')}}">Warehouse Category</a>
+                    </li>
+                    <li @if($url == 'warehouse.index') class="active"  @endif>
+                        <a href="{{route('warehouse.index')}}">Warehouse</a>
+                    </li>
                     <li @if($url == 'waste.index'|| $url == 'waste.create' || $url == 'waste.edit') class="active"  @endif>
                         <a href="{{route('waste.index')}}">Waste</a>
                     </li>
+
                 </ul>
             </li>
 

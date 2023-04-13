@@ -61,7 +61,6 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('getIngrerdientInfoById', 'App\Http\Controllers\CommonController@getIngrerdientInfoById')->name('getIngrerdientInfoById');
     Route::get('getReceiptBySupplier', 'App\Http\Controllers\CommonController@getReceiptBySupplier')->name('getReceiptBySupplier');
 
-
     Route::delete('ingredient_category/{id}', 'App\Http\Controllers\IngredientCategoryController@delete')->name('ingredient_category.delete');
     Route::put('ingredient_category/{id}', 'App\Http\Controllers\IngredientCategoryController@restore')->name('ingredient_category.restore');
     Route::resource('ingredient_category', 'App\Http\Controllers\IngredientCategoryController')->parameters('ingredient_category', 'id');
@@ -144,6 +143,16 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('purchase', 'App\Http\Controllers\PurchaseController')->parameters('purchase', 'id');
 //    Route::get('menu/{id}/{menu}', 'App\Http\Controllers\MenuController@edit')->name('menu.edit');
     Route::post('purchase/{id}/update', 'App\Http\Controllers\PurchaseController@update')->name('purchase.update');
+
+    //    Route::delete('table/{id}', 'App\Http\Controllers\TableController@delete')->name('table.delete');
+//    Route::put('table/{id}', 'App\Http\Controllers\TableController@restore')->name('table.restore');
+    Route::resource('warehousetype', 'App\Http\Controllers\WarehouseTypeController')->parameters('warehousetype', 'id');
+//    Route::post('table/update', 'App\Http\Controllers\TableController@update')->name('table.update');
+
+//    Route::delete('table/{id}', 'App\Http\Controllers\TableController@delete')->name('table.delete');
+//    Route::put('table/{id}', 'App\Http\Controllers\TableController@restore')->name('table.restore');
+    Route::resource('warehouse', 'App\Http\Controllers\WarehouseController')->parameters('warehouse', 'id');
+//    Route::post('table/update', 'App\Http\Controllers\TableController@update')->name('table.update');
 
 
     Route::resource('waste', 'App\Http\Controllers\WasteController')->parameters('waste', 'id');
