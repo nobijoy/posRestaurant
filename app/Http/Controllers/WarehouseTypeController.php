@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
-use App\Models\Designation;
 use Illuminate\Http\Request;
-use Auth;
-use DB;
 
-class DesignationController extends Controller
+class WarehouseTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +13,7 @@ class DesignationController extends Controller
      */
     public function index()
     {
-        $departments = Department::where('is_active', 1)->orderBy('name')->get();
-        $datas = Designation::with(['departmentInfo'])->where('is_active', 1)->get()->reverse();
-        $sl = 0;
-        return view('admin.department.designation', compact('departments','datas', 'sl'));
+        return view('admin.inventory.warehouse.warehousetype');
     }
 
     /**
@@ -41,23 +34,19 @@ class DesignationController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'department' => ['required'],
-            'name' => ['required', 'unique:designations,name,'],
-        ]);
-
         DB::beginTransaction();
 
         try {
-            $data = new Designation;
+            $data = new PaymentMethod;
             $data->name = $request->name;
-            $data->department = $request->department;
+            $data->description = $request->description;
             $data->is_active = 1;
+
             $data->created_by = Auth()->user()->id;
             $data->save();
             DB::commit();
 
-            return back()->with('success', 'New Designation Created Successfully');
+            return back()->with('success', 'New Category Created Successfully');
 
         } catch (\Throwable $th) {
             DB::rollback();
@@ -94,24 +83,21 @@ class DesignationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'department' => ['required'],
-            'name' => ['required', 'unique:designations,name,'.$request->id],
-        ]);
-
         DB::beginTransaction();
 
         try {
-            $data = Designation::find($request->id);
+            $data = new PaymentMethod;
             $data->name = $request->name;
-            $data->department = $request->department;
-            $data->updated_by = Auth()->user()->id;
+            $data->description = $request->description;
+            $data->is_active = 1;
+
+            $data->created_by = Auth()->user()->id;
             $data->save();
             DB::commit();
 
-            return back()->with('success', 'Designation Updated Successfully');
+            return back()->with('success', 'New Category Created Successfully');
 
         } catch (\Throwable $th) {
             DB::rollback();
@@ -134,31 +120,15 @@ class DesignationController extends Controller
     {
         DB::beginTransaction();
         try {
-            $data = Designation::findorFail($id);
+            $data = PaymentMethod::findorFail($id);
             $data->is_active = 0;
             $data->deleted_by = Auth()->user()->id;
             $data->save();
             DB::commit();
-            return 'Designation Inactive Successfully!';
+            return 'Payment Method Inactive Successfully!';
         } catch (\Throwable $th) {
             DB::rollback();
-            return 'Somrthings Went Wrong!';
+            return 'Somethings Went Wrong!';
         }
     }
-
-    public function restore($id)
-    {
-        DB::beginTransaction();
-        try {
-            $data = Designation::find($id);
-            $data->is_active = 1;
-            $data->save();
-            DB::commit();
-            return 'Designation Activated Successfully!';
-        } catch (\Throwable $th) {
-            DB::rollback();
-            return 'Somrthings Went Wrong!';
-        }
-    }
-
 }

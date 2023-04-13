@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
-use App\Models\Expense;
-use App\Models\ExpenseItem;
 use Illuminate\Http\Request;
-use Auth;
-use DB;
 
-class ExpenseController extends Controller
+class WarehouseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,12 +13,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $datas = Expense::where('is_active',1)->get()->reverse();
-        $res_persons = Employee::where('is_active',1)->get()->reverse();
-        $categories = ExpenseItem::where('is_active',1)->get()->reverse();
-        $sl = 0;
-//        dd($res_persons);
-        return view('admin.expense.expense',compact('res_persons', 'categories', 'sl','datas'));
+        return view('admin.inventory.warehouse.warehouse');
     }
 
     /**
@@ -33,7 +23,7 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -45,30 +35,27 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'date' => ['required'],
-            'amount' => ['required'],
+            'name' => ['required'],
+            'warehouse_type' => ['required'],
         ]);
 
         DB::beginTransaction();
 
         try {
-            $data = new Expense;
-            $data->date = $request->date;
-            $data->responsible_person = $request->responsible_person;
-            $data->amount = $request->amount;
-            $data->category = $request->category;
-            $data->note = $request->note;
+            $data = new Designation;
+            $data->name = $request->name;
+            $data->address = $request->address;
+            $data->warehouse_type = $request->warehouse_type;
             $data->is_active = 1;
-
             $data->created_by = Auth()->user()->id;
             $data->save();
             DB::commit();
 
-            return back()->with('success', 'Expense Added Successfully');
+            return back()->with('success', 'New Warehouse Added Successfully');
 
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', 'Something is wrong');
+            return back()->with('error', 'Somethings went wrong. Try Again');
         }
     }
 
@@ -101,33 +88,30 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'date' => ['required'],
-            'amount' => ['required'],
+            'name' => ['required'],
+            'warehouse_type' => ['required'],
         ]);
 
         DB::beginTransaction();
 
         try {
-            $data = Expense::find($request->id) ;
-            $data->date = $request->date;
-            $data->responsible_person = $request->responsible_person;
-            $data->amount = $request->amount;
-            $data->category = $request->category;
-            $data->note = $request->note;
+            $data = new Designation;
+            $data->name = $request->name;
+            $data->address = $request->address;
+            $data->warehouse_type = $request->warehouse_type;
             $data->is_active = 1;
-
-            $data->updated_by = Auth()->user()->id;
+            $data->created_by = Auth()->user()->id;
             $data->save();
             DB::commit();
 
-            return back()->with('success', 'Expense Updated Successfully');
+            return back()->with('success', 'Warehouse Updated Successfully');
 
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', 'Something is wrong');
+            return back()->with('error', 'Somethings went wrong. Try Again');
         }
     }
 
@@ -146,30 +130,15 @@ class ExpenseController extends Controller
     {
         DB::beginTransaction();
         try {
-            $data = Expense::findorFail($id);
+            $data = Designation::findorFail($id);
             $data->is_active = 0;
             $data->deleted_by = Auth()->user()->id;
             $data->save();
             DB::commit();
-            return 'Expense Inactive Successfully!';
+            return 'Warehouse Inactive Successfully!';
         } catch (\Throwable $th) {
             DB::rollback();
             return 'Somrthings Went Wrong!';
-        }
-    }
-
-    public function restore($id)
-    {
-        DB::beginTransaction();
-        try {
-            $data = Expense::find($id);
-            $data->is_active = 1;
-            $data->save();
-            DB::commit();
-            return 'Expense Activated Successfully!';
-        } catch (\Throwable $th) {
-            DB::rollback();
-            return 'Somethings Went Wrong!';
         }
     }
 }
