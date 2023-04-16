@@ -39,11 +39,36 @@ class POSRegisterController extends Controller
             return back()->with('error', 'Something is wrong');
         }
     }
-    public function closeRegister($id){
+    public function closeRegister(Request $request, $id){
+
+        DB::beginTransaction();
+
         try {
-            POSregister::where('id', $id)->update(['is_open' => 0, 'closing_time' => date('Y-m-d H:i:s')]);
-            return redirect()->route("cashRegister");
+
+            $data = POSregister::findorfail($id);
+            $data->cash_closing = $request->cash_closing ;
+            $data->bkash_closing = $request->bkash_closing ;
+            $data->check_closing = $request->check_closing ;
+            $data->nagad_closing = $request->nagad_closing ;
+            $data->rocket_closing = $request->rocket_closing ;
+            $data->credit_closing = $request->credit_closing ;
+            $data->debit_closing = $request->debit_closing ;
+            $data->bank_transfer_closing = $request->bank_closing ;
+            $data->total = $request->total ;
+            $data->closing_time =  date('Y-m-d H:i:s') ;
+            $data->is_open = 0;
+
+            $data->save();
+
+            DB::commit();
+
+            $redirectUrl = route('home');
+            $response = [
+                'redirect_url' => $redirectUrl,
+            ];
+            return response()->json($response);
         } catch (\Throwable $th) {
+            DB::rollback();
             return back()->with('error', 'Something is wrong');
         }
     }

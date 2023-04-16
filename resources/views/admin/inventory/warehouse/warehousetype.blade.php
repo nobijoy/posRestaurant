@@ -60,26 +60,26 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-{{--                                            @if (sizeof ($datas) > 0)--}}
-{{--                                                @foreach ($datas as $data)--}}
-{{--                                                    <tr>--}}
-{{--                                                        <td>{{++$sl}}</td>--}}
-{{--                                                        <td>{{$data->name}}</td>--}}
-{{--                                                        <td>{{$data->description}}</td>--}}
-{{--                                                        <td>--}}
-{{--                                                            <a data-toggle="modal" data-target="#edit_category" data-target-id="{{$data->id}}"--}}
-{{--                                                               data-name="{{$data->name}}" data-desc="{{$data->description}}">--}}
-{{--                                                                <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">--}}
-{{--                                                                    <i class="fa fa-pencil-square"></i></button>--}}
-{{--                                                            </a>--}}
-{{--                                                            <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive"--}}
-{{--                                                                    onclick="deleteData('{{ route('payment_method.delete', [$data->id]) }}')">--}}
-{{--                                                                <i class="fa fa-trash" aria-hidden="true"></i>--}}
-{{--                                                            </button>--}}
-{{--                                                        </td>--}}
-{{--                                                    </tr>--}}
-{{--                                                @endforeach--}}
-{{--                                            @endif--}}
+                                            @if (sizeof ($datas) > 0)
+                                                @foreach ($datas as $data)
+                                                    <tr>
+                                                        <td>{{++$sl}}</td>
+                                                        <td>{{$data->name}}</td>
+                                                        <td>{{$data->description}}</td>
+                                                        <td>
+                                                            <a data-toggle="modal" data-target="#edit_category" data-target-id="{{$data->id}}"
+                                                               data-name="{{$data->name}}" data-desc="{{$data->description}}">
+                                                                <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
+                                                                    <i class="fa fa-pencil-square"></i></button>
+                                                            </a>
+                                                            <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive"
+                                                                    onclick="deleteData('{{ route('warehousetype.delete', [$data->id]) }}')">
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
                                             </tbody>
                                             <tfoot class="display-hidden">
                                             </tfoot>
@@ -105,7 +105,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route ('payment_method.store')}}" method="post"  class="clearForm form"
+                    <form action="{{ route ('warehousetype.store')}}" method="post"  class="clearForm form"
                           enctype="multipart/form-data">@csrf
                         <div class="modal-body">
                             <fieldset class="form-group floating-label-form-group">
@@ -138,16 +138,16 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{route('payment_method.update')}}" method="post"  class="clearForm form" enctype="multipart/form-data">
+                    <form action="{{route('warehousetype.update')}}" method="post"  class="clearForm form" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                             <input type="hidden" name="id" id="id">
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="name">Category Name<span class="text-danger">*</span></label>
+                                <label for="edit_name">Category Name<span class="text-danger">*</span></label>
                                 <input type="text" name="name" class="form-control" id="edit_name" placeholder="" required>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="description">Description</label>
+                                <label for="edit_description">Description</label>
                                 <textarea name="description" class="form-control" id="edit_description" placeholder="" ></textarea>
                             </fieldset>
                         </div>

@@ -56,6 +56,7 @@
                                                 <th>Date</th>
                                                 <th>Responsible Person</th>
                                                 <th>Amount</th>
+                                                <th>Payment Method</th>
                                                 <th>Category</th>
                                                 <th>Note</th>
                                                 <th>Action</th>
@@ -69,6 +70,7 @@
                                                         <td>{{$data->date}}</td>
                                                         <td>{{$data->responsible_person ? $data->employeeinfo->name: ''}}</td>
                                                         <td>{{$data->amount}}</td>
+                                                        <td>{{$data->payment_method }}</td>
                                                         <td>{{$data->category ? $data->categoryInfo->name: ''}}</td>
                                                         <td>{{$data->note}}</td>
                                                         <td>
@@ -76,7 +78,7 @@
                                                                 <a data-toggle="modal" data-target="#editTable"
                                                                    data-target-id="{{$data->id}}" data-date="{{$data->date}}"
                                                                    data-responsible_person="{{$data->responsible_person}}" data-amount="{{$data->amount}}"
-                                                                   data-category="{{$data->category}}" data-note="{{$data->note}}">
+                                                                   data-category="{{$data->category}}" data-note="{{$data->note}}" data-payment="{{ $data->payment_method }}">
                                                                     <button type="button" title="Edit"
                                                                             class="btn btn-icon btn-outline-primary btn-sm">
                                                                         <i class="fa fa-pencil-square"></i></button>
@@ -144,6 +146,20 @@
                                     <input type="number" name="amount" class="form-control" id="amount" placeholder="Enter total amount">
                                 </fieldset>
                                 <fieldset class="col-md-6 form-group floating-label-form-group">
+                                    <label for="payment_method">Payment Method<span class="text-danger">*</span></label>
+                                    <select name="payment_method" id="payment_method" class="select2 form-control" required>
+                                        <option value="" >Select</option>
+                                        <option value="cash">Cash</option>
+                                        <option value="bkash">Bkash</option>
+                                        <option value="nagad">Nagad</option>
+                                        <option value="rocket">Rocket</option>
+                                        <option value="credit">Credit </option>
+                                        <option value="debit">Debit</option>
+                                        <option value="check">Check</option>
+                                        <option value="bank_transfer">Bank Transfer</option>
+                                    </select>
+                                </fieldset>
+                                <fieldset class="col-md-6 form-group floating-label-form-group">
                                     <label for="category">Category<span class="text-danger">*</span></label>
                                     <select name="category" id="category" class="form-control select2" required>
                                         <option value="">Select</option>
@@ -202,6 +218,20 @@
                                     <input type="number" name="amount" class="form-control" id="edit_amount" placeholder="Enter total amount">
                                 </fieldset>
                                 <fieldset class="col-md-6 form-group floating-label-form-group">
+                                    <label for="edit_payment_method">Payment Method<span class="text-danger">*</span></label>
+                                    <select name="payment_method" id="edit_payment_method" class="select2 form-control" required>
+                                        <option value="" >Select</option>
+                                        <option value="cash">Cash</option>
+                                        <option value="bkash">Bkash</option>
+                                        <option value="nagad">Nagad</option>
+                                        <option value="rocket">Rocket</option>
+                                        <option value="credit">Credit </option>
+                                        <option value="debit">Debit</option>
+                                        <option value="check">Check</option>
+                                        <option value="bank_transfer">Bank Transfer</option>
+                                    </select>
+                                </fieldset>
+                                <fieldset class="col-md-6 form-group floating-label-form-group">
                                     <label for="category">Category<span class="text-danger">*</span></label>
                                     <select name="category" id="edit_category" class="form-control select2" required>
                                         <option value="">Select</option>
@@ -236,6 +266,7 @@
             var category = $(e.relatedTarget).data('category');
             var amount = $(e.relatedTarget).data('amount');
             var note = $(e.relatedTarget).data('note');
+            var payment = $(e.relatedTarget).data('payment');
 
             $('.modal-body #id').val(id);
             $('.modal-body #edit_date').val(date);
@@ -243,7 +274,7 @@
             $('.modal-body #edit_amount').val(amount);
             $('.modal-body #edit_category').val(category).change();
             $('.modal-body #edit_note').val(note);
-
+            $('.modal-body #edit_payment_method').val(payment).change();
         });
 
         $("#editTable").on("hide.bs.modal", function (e) {

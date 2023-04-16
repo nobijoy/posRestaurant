@@ -144,10 +144,9 @@ Route::group(['middleware' => ['auth']], function(){
 //    Route::get('menu/{id}/{menu}', 'App\Http\Controllers\MenuController@edit')->name('menu.edit');
     Route::post('purchase/{id}/update', 'App\Http\Controllers\PurchaseController@update')->name('purchase.update');
 
-    //    Route::delete('table/{id}', 'App\Http\Controllers\TableController@delete')->name('table.delete');
-//    Route::put('table/{id}', 'App\Http\Controllers\TableController@restore')->name('table.restore');
+    Route::delete('warehousetype/{id}', 'App\Http\Controllers\WarehouseTypeController@delete')->name('warehousetype.delete');
     Route::resource('warehousetype', 'App\Http\Controllers\WarehouseTypeController')->parameters('warehousetype', 'id');
-//    Route::post('table/update', 'App\Http\Controllers\TableController@update')->name('table.update');
+    Route::post('warehousetype/update', 'App\Http\Controllers\WarehouseTypeController@update')->name('warehousetype.update');
 
 //    Route::delete('table/{id}', 'App\Http\Controllers\TableController@delete')->name('table.delete');
 //    Route::put('table/{id}', 'App\Http\Controllers\TableController@restore')->name('table.restore');
@@ -172,7 +171,7 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::get('cashRegister', 'App\Http\Controllers\POSRegisterController@cashRegister')->name('cashRegister');
     Route::post('openRegister', 'App\Http\Controllers\POSRegisterController@openRegister')->name('openRegister');
-    Route::get('closeRegister/{id}', 'App\Http\Controllers\POSRegisterController@closeRegister')->name('closeRegister');
+    Route::post('closeRegister/{id}', 'App\Http\Controllers\POSRegisterController@closeRegister')->name('closeRegister');
     Route::get('getRegisterDetails', 'App\Http\Controllers\POSController@getRegisterDetails')->name('getRegisterDetails');
 
 

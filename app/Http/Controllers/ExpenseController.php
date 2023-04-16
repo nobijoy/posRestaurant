@@ -56,6 +56,7 @@ class ExpenseController extends Controller
             $data->date = $request->date;
             $data->responsible_person = $request->responsible_person;
             $data->amount = $request->amount;
+            $data->payment_method = $request->payment_method;
             $data->category = $request->category;
             $data->note = $request->note;
             $data->is_active = 1;
@@ -115,6 +116,7 @@ class ExpenseController extends Controller
             $data->date = $request->date;
             $data->responsible_person = $request->responsible_person;
             $data->amount = $request->amount;
+            $data->payment_method = $request->payment_method;
             $data->category = $request->category;
             $data->note = $request->note;
             $data->is_active = 1;

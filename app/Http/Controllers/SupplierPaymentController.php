@@ -22,9 +22,9 @@ class SupplierPaymentController extends Controller
     {
         $datas = SupplierPayment::with(['supplierInfo','createdBy'])->where('is_active', 1)-> get()->reverse();
         $suppliers = Supplier::where('is_active', 1)-> get()->reverse();
-        $payment_methods = PaymentMethod::where('is_active', 1)-> get();
+//        $payment_methods = PaymentMethod::where('is_active', 1)-> get();
         $sl = 0;
-        return view('admin.supplier.payment', compact('datas', 'sl', 'suppliers', 'payment_methods'));
+        return view('admin.supplier.payment', compact('datas', 'sl', 'suppliers'));
     }
 
     /**

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\WarehouseCategory;
 use Illuminate\Http\Request;
+use Auth;
+use DB;
 
 class WarehouseTypeController extends Controller
 {
@@ -13,7 +16,9 @@ class WarehouseTypeController extends Controller
      */
     public function index()
     {
-        return view('admin.inventory.warehouse.warehousetype');
+        $datas = WarehouseCategory::where('is_active', 1)->get();
+        $sl = 0 ;
+        return view('admin.inventory.warehouse.warehousetype', compact('datas','sl'));
     }
 
     /**
@@ -37,7 +42,7 @@ class WarehouseTypeController extends Controller
         DB::beginTransaction();
 
         try {
-            $data = new PaymentMethod;
+            $data = new WarehouseCategory;
             $data->name = $request->name;
             $data->description = $request->description;
             $data->is_active = 1;
@@ -88,12 +93,10 @@ class WarehouseTypeController extends Controller
         DB::beginTransaction();
 
         try {
-            $data = new PaymentMethod;
+            $data = WarehouseCategory::findorfail($id);
             $data->name = $request->name;
             $data->description = $request->description;
-            $data->is_active = 1;
-
-            $data->created_by = Auth()->user()->id;
+            $data->updated_by = Auth()->user()->id;
             $data->save();
             DB::commit();
 

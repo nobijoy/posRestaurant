@@ -22,7 +22,7 @@
                         </div>
                         <div style="float: right; width: 50%;">
                             <p>Date : {{ date('Y-m-d')}}</p>
-                            <p>Payment Type : {{$order->payment_method ?  $order->paymentMethod->name : ''}}</p>
+                            <p>Payment Type : {{$order->payment_method }}</p>
                         </div>
 
                         <p style="margin-bottom:20px;"><strong>Order Details</strong></p>

@@ -20,9 +20,14 @@
         <label for="payment_method">Payment Methods <span class="text-danger">*</span></label>
         <select name="payment_method" id="payment_method" class="form-control select2">
             <option value="">Select</option>
-            @foreach($payment_methods as $type)
-                <option value="{{$type->id}}" @if(($url == 'purchase.edit') && ($data->payment_method == $type->id)) selected @endif">{{$type->name}}</option>
-            @endforeach
+            <option value="cash">Cash</option>
+            <option value="bkash">Bkash</option>
+            <option value="nagad">Nagad</option>
+            <option value="rocket">Rocket</option>
+            <option value="credit">Credit </option>
+            <option value="debit">Debit</option>
+            <option value="check">Check</option>
+            <option value="bank_transfer">Bank Transfer</option>
         </select>
     </div>
 
