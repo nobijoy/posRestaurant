@@ -18,8 +18,8 @@ class AddMultipleColumnsToPurchasesTable extends Migration
             $table->float('paid')->change();
             $table->float('total')->nullable()->after('note');
             $table->float('due')->nullable()->after('paid');
+            $table->string('payment_method', 30)->nullable()->after('supplier');
             $table->UnsignedBigInteger('payment_method')->Unsigned()->nullable()->after('supplier');
-            $table->foreign('payment_method')->references('id')->on('payment_methods')->onDelete('restrict');
         });
     }
 
@@ -33,7 +33,6 @@ class AddMultipleColumnsToPurchasesTable extends Migration
         Schema::table('purchases', function (Blueprint $table) {
             $table->dropColumn('total');
             $table->dropColumn('due');
-            $table->dropForeign(['payment_method']);
         });
     }
 }

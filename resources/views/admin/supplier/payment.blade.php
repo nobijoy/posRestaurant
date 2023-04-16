@@ -69,7 +69,7 @@
                                                     <tr>
                                                         <td>{{++$sl}}</td>
                                                         <td>{{$data->name ? $data->supplierInfo->name: ''}}</td>
-                                                        <td>{{$data->payment_method ? $data->paymentInfo->name: ''}}</td>
+                                                        <td>{{$data->payment_method }}</td>
                                                         <td>{{$data->receipt_number}}</td>
                                                         <td>{{$data->amount}}</td>
                                                         <td>{{$data->payment_time}}</td>
@@ -142,9 +142,14 @@
                                 <label for="payment_method">Payment Method<span class="text-danger">*</span></label>
                                 <select name="payment_method" id="payment_method" class="select2 form-control" required>
                                     <option value="" >Select</option>
-                                    @foreach ($payment_methods as $method)
-                                        <option value="{{$method->id}}">{{$method->name}}</option>
-                                    @endforeach
+                                    <option value="cash">Cash</option>
+                                    <option value="bkash">Bkash</option>
+                                    <option value="nagad">Nagad</option>
+                                    <option value="rocket">Rocket</option>
+                                    <option value="credit">Credit </option>
+                                    <option value="debit">Debit</option>
+                                    <option value="check">Check</option>
+                                    <option value="bank_transfer">Bank Transfer</option>
                                 </select>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">
@@ -201,9 +206,14 @@
                                 <label for="edit_payment_method">Payment Method<span class="text-danger">*</span></label>
                                 <select name="payment_method" id="edit_payment_method" class="select2 form-control" required>
                                     <option value="" >Select</option>
-                                    @foreach ($payment_methods as $method)
-                                        <option value="{{$method->id}}">{{$method->name}}</option>
-                                    @endforeach
+                                    <option value="cash">Cash</option>
+                                    <option value="bkash">Bkash</option>
+                                    <option value="nagad">Nagad</option>
+                                    <option value="rocket">Rocket</option>
+                                    <option value="credit">Credit </option>
+                                    <option value="debit">Debit</option>
+                                    <option value="check">Check</option>
+                                    <option value="bank_transfer">Bank Transfer</option>
                                 </select>
                             </fieldset>
                             <fieldset class="form-group floating-label-form-group">

@@ -310,14 +310,12 @@
                     <div class="modal-header">
                         <h3 class="modal-title" id="">Register Details</h3>
                     </div>
-                    <div class="modal-body">
-                        <div class="row justify-content-end" id="register_detail">
-                            @include('pos.partials.registerDetails')
-                        </div>
+                    <div class="modal-body" id="register_detail">
+
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
-                        <a type="button" href="{{route('closeRegister', $register->id)}}" class="btn btn-outline-primary">
+                        <a type="button" href="{{route('closeRegister', $register->id)}}" class="btn btn-outline-primary" id="close_register">
                             Close Register
                         </a>
                     </div>
@@ -389,9 +387,15 @@
                                 </div>
                                 <div class="col-md-8">
                                     <select name="payment_list" id="payment_list" class="form-control select2" required>
-                                        @foreach ($payments as $type)
-                                            <option value="{{$type->id}}" >{{$type->name}}</option>
-                                        @endforeach
+                                        <option value="">Select</option>
+                                        <option value="cash">Cash</option>
+                                        <option value="bkash">Bkash</option>
+                                        <option value="nagad">Nagad</option>
+                                        <option value="rocket">Rocket</option>
+                                        <option value="credit">Credit </option>
+                                        <option value="debit">Debit</option>
+                                        <option value="check">Check</option>
+                                        <option value="bank_transfer">Bank Transfer</option>
                                     </select>
                                 </div>
                             </div>
@@ -451,9 +455,15 @@
                                 </div>
                                 <div class="col-md-8">
                                     <select name="unpaid_payment_list" id="unpaid_payment_list" class="form-control select2" required>
-                                        @foreach ($payments as $type)
-                                            <option value="{{$type->id}}" >{{$type->name}}</option>
-                                        @endforeach
+                                        <option value="">Select</option>
+                                        <option value="cash">Cash</option>
+                                        <option value="bkash">Bkash</option>
+                                        <option value="nagad">Nagad</option>
+                                        <option value="rocket">Rocket</option>
+                                        <option value="credit">Credit </option>
+                                        <option value="debit">Debit</option>
+                                        <option value="check">Check</option>
+                                        <option value="bank_transfer">Bank Transfer</option>
                                     </select>
                                 </div>
                             </div>
@@ -1229,12 +1239,83 @@
                 url : url,
                 success: function (data) {
                     $("#register_detail").empty().html(data.view);
+
+                    // Define an array with the account types
+                    const accountTypes = ['cash', 'bkash', 'rocket', 'nagad', 'credit', 'debit', 'check', 'bank'];
+
+                    // Loop through each account type
+                    accountTypes.forEach(accountType => {
+                        // Calculate the closing balance for the current account type
+                        const opening = parseFloat($(`#${accountType}_opening`).val());
+                        const purchase = parseFloat($(`#${accountType}_purchase`).val());
+                        const sale = parseFloat($(`#${accountType}_sale`).val());
+                        const due = parseFloat($(`#${accountType}_due`).val());
+                        const expense = parseFloat($(`#${accountType}_expense`).val());
+                        const closing = opening - purchase + sale - due - expense;
+
+                        // Set the value of the closing balance input field for the current account type
+                        $(`#${accountType}_closing`).val(closing);
+                    });
+
+                    // Calculate the total closing balance for all account types
+                    const totalClosing = accountTypes.reduce((sum, accountType) => {
+                        const closing = parseFloat($(`#${accountType}_closing`).val());
+                        return sum + closing;
+                    }, 0);
+
+                    // Set the value of the total closing balance input field
+                    $("#register_total").val(totalClosing);
+
                 },
 
                 error: function (error) {
                     console.log(error);
                 }
             });
+        });
+
+        $('#close_register').click(function(event) {
+            event.preventDefault(); // prevent the default behavior of the link
+            var url = $(this).attr('href'); // get the URL from the href attribute
+
+            let cash_closing = $("#cash_closing").val();
+            let bkash_closing = $("#bkash_closing").val();
+            let check_closing = $("#check_closing").val();
+            let nagad_closing = $("#nagad_closing").val();
+            let rocket_closing = $("#rocket_closing").val();
+            let credit_closing = $("#credit_closing").val();
+            let debit_closing = $("#debit_closing").val();
+            let bank_closing = $("#bank_closing").val();
+            let totalClosing = $("#register_total").val();
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data:{
+                    "_token": "{{ csrf_token() }}",
+                    cash_closing: cash_closing,
+                    bkash_closing: bkash_closing,
+                    check_closing: check_closing,
+                    nagad_closing: nagad_closing,
+                    rocket_closing: rocket_closing,
+                    credit_closing: credit_closing,
+                    debit_closing: debit_closing,
+                    bank_closing: bank_closing,
+                    total: totalClosing,
+                },
+                success: function(response) {
+                    if (response.redirect_url) {
+                        window.location.href = response.redirect_url;
+                    } else {
+                        // handle the successful response data
+                    }
+                },
+                error: function(e) {
+                    console.log(e)
+                }
+
+            });
+
         });
     </script>
 @endsection

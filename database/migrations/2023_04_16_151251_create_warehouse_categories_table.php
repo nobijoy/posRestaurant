@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSupplierPaymentsTable extends Migration
+class CreateWarehouseCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateSupplierPaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('supplier_payments', function (Blueprint $table) {
+        Schema::create('warehouse_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->double('receipt_number')->nullable();
-            $table->string('payment_method', 30)->nullable();
-            $table->integer('amount')->nullable();
-            $table->dateTime('payment_time')->nullable();
+            $table->string('name')->unique();
+            $table->text('description')->nullable();
             $table->tinyInteger('is_active')->default(1);
             $table->UnsignedBigInteger('created_by')->Unsigned()->nullable();
             $table->UnsignedBigInteger('updated_by')->Unsigned()->nullable();
@@ -38,6 +35,6 @@ class CreateSupplierPaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supplier_payments');
+        Schema::dropIfExists('warehouse_categories');
     }
 }

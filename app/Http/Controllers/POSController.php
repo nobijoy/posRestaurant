@@ -101,13 +101,13 @@ class POSController extends Controller
         $menuCategories = MenuCategory::where('is_active', 1)->orderBY('name')->get();
         $menus = Menu::where('is_active', 1)->orderBY('name')->get();
         $tables = Table::where('is_active', 1)->get();
-        $payments = PaymentMethod::where('is_active', 1)->orderBy('id')->get();
-        $orders = Order::with(['customerInfo','waiterInfo','paymentMethod'])->where('status', 'running')->latest()->get();
+//        $payments = PaymentMethod::where('is_active', 1)->orderBy('id')->get();
+        $orders = Order::with(['customerInfo','waiterInfo'])->where('status', 'running')->latest()->get();
         $register = DB::table('p_o_sregisters')->get()->last();
 //        return response()->json([
 //            'view' => view('pos.pos_view', compact('customers', 'waiters', 'menuCategories', 'menus', 'orders', 'tables','payments'))->render(),
 //        ]);
-        return view('pos.pos_view_copy', compact('customers', 'waiters', 'menuCategories', 'menus', 'orders', 'tables','payments', 'register'));
+        return view('pos.pos_view_copy', compact('customers', 'waiters', 'menuCategories', 'menus', 'orders', 'tables', 'register'));
     }
     public function setting()
     {
@@ -185,17 +185,32 @@ class POSController extends Controller
     }
 
     public function getRegisterDetails(){
-        $time = POSregister::latest()->first();
-        $start_time = $time->created_at;
+        $register = POSregister::latest()->first();
+        $start_time = $register->created_at;
         $end_time = date('Y-m-d H:i:s');
-        $purchases = Purchase::whereBetween('created_at', [$start_time, $end_time])->get(['paid',]);
-        $payments = SupplierPayment::whereBetween('created_at', [$start_time, $end_time])->where('payment_method', 1)->get(['amount',]);
-        $expenses = Expense::whereBetween('created_at', [$start_time, $end_time])->get(['amount',]);
-        $sales = Order::whereBetween('created_at', [$start_time, $end_time])->where('payment_status','Paid')->get(['total',]);
-        return json_encode(['payments'=>$payments, 'purchases'=>$purchases, 'expenses'=>$expenses, 'sales'=>$sales]);
+
+        $payment_methods = ['cash', 'bkash', 'nagad', 'rocket', 'credit', 'debit', 'check', 'bank_transfer'];
+
+        $register_amount = [];
+
+        foreach ($payment_methods as $method) {
+            $query = Purchase::whereBetween('created_at', [$start_time, $end_time])->where('payment_method', $method);
+            $register_amount[$method]['purchases'] = $query->sum('paid');
+
+            $query = SupplierPayment::whereBetween('created_at', [$start_time, $end_time])->where('payment_method', $method);
+            $register_amount[$method]['payments'] = $query->sum('amount');
+
+            $query = Expense::whereBetween('created_at', [$start_time, $end_time])->where('payment_method', $method);
+            $register_amount[$method]['expenses'] = $query->sum('amount');
+
+            $query = Order::whereBetween('created_at', [$start_time, $end_time])->where('payment_method', $method);
+            $register_amount[$method]['sales'] = $query->sum('total');
+        }
+
+//        return json_encode(['amount'=>$register_amount, 'register'=>$register]);
 
         return response()->json([
-            'view' => view('pos.partials.registerDetails', compact('payments', 'purchases', 'expenses', 'sales'))->render(),
+            'view' => view('pos.partials.registerDetails', compact('register_amount','register'))->render(),
         ]);
     }
 

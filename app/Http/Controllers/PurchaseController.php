@@ -34,8 +34,7 @@ class PurchaseController extends Controller
     {
         $suppliers = Supplier::where('is_active', 1)->orderBy('name')->get();
         $ingredients = Ingredient::where('is_active', 1)->orderBy('name')->get();
-        $payment_methods = PaymentMethod::where('is_active', 1)->orderBy('id','desc')->get();
-        return view('admin.inventory.purchase.create', compact('suppliers', 'ingredients', 'payment_methods'));
+        return view('admin.inventory.purchase.create', compact('suppliers', 'ingredients'));
     }
 
     /**

@@ -73,7 +73,7 @@
                                                             <td>{{$data->reference_no}}</td>
                                                             <td>{{date('Y-m-d', strtotime($data->date))}}</td>
                                                             <td>{{$data->supplier ? $data->supplierInfo->name : ''}}</td>
-                                                            <td>{{$data->payment_method ? $data->paymentInfo->name : ''}}</td>
+                                                            <td>{{$data->payment_method}}</td>
                                                             <td>{{$data->total}}</td>
                                                             <td>{{$data->due}}</td>
                                                             <td>{{$data->totalIngredient()}}</td>
