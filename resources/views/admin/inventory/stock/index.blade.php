@@ -55,12 +55,14 @@
                                                 <th>SN</th>
                                                 <th>Ingredient(Code)</th>
                                                 <th>Category</th>
+                                                <th>Warehouse</th>
                                                 <th>Stock Qty/Amount</th>
                                                 <th>Alert Qty/Amount</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
+                                                <td>gdg</td>
                                                 <td>gdg</td>
                                                 <td>gdg</td>
                                                 <td>gdg</td>

@@ -57,7 +57,7 @@ class WasteController extends Controller
         DB::beginTransaction();
 
         try {
-            $data = new Waste();
+            $data = new Waste;
             $data->reference_no = $request->reference_no;
             $data->date = $request->date;
             $data->res_person = $request->res_person;
@@ -79,7 +79,6 @@ class WasteController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', $th->getMessage());
             return back()->with('error', 'Somethings went wrong. Try Again');
         }
     }
