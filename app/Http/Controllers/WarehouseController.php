@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Warehouse;
+use App\Models\WarehouseCategory;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
@@ -15,7 +17,10 @@ class WarehouseController extends Controller
      */
     public function index()
     {
-        return view('admin.inventory.warehouse.warehouse');
+        $datas = Warehouse::where('is_active',1)->get();
+        $types = WarehouseCategory::where('is_active', 1)->get();
+        $sl = 0;
+        return view('admin.inventory.warehouse.warehouse',compact('datas','types', 'sl'));
     }
 
     /**
@@ -38,16 +43,16 @@ class WarehouseController extends Controller
     {
         $validatedData = $request->validate([
             'name' => ['required'],
-            'warehouse_type' => ['required'],
+            'category' => ['required'],
         ]);
 
         DB::beginTransaction();
 
         try {
-            $data = new Designation;
+            $data = new Warehouse;
             $data->name = $request->name;
             $data->address = $request->address;
-            $data->warehouse_type = $request->warehouse_type;
+            $data->category = $request->category;
             $data->is_active = 1;
             $data->created_by = Auth()->user()->id;
             $data->save();
@@ -90,23 +95,23 @@ class WarehouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $validatedData = $request->validate([
             'name' => ['required'],
-            'warehouse_type' => ['required'],
+            'category' => ['required'],
         ]);
 
         DB::beginTransaction();
 
         try {
-            $data = new Designation;
+            $data = Warehouse::findorfail($request->id);
             $data->name = $request->name;
             $data->address = $request->address;
-            $data->warehouse_type = $request->warehouse_type;
-            $data->is_active = 1;
-            $data->created_by = Auth()->user()->id;
+            $data->category = $request->category;
+            $data->updated_by = Auth()->user()->id;
             $data->save();
+
             DB::commit();
 
             return back()->with('success', 'Warehouse Updated Successfully');
@@ -132,7 +137,7 @@ class WarehouseController extends Controller
     {
         DB::beginTransaction();
         try {
-            $data = Designation::findorFail($id);
+            $data = Warehouse::findorFail($id);
             $data->is_active = 0;
             $data->deleted_by = Auth()->user()->id;
             $data->save();

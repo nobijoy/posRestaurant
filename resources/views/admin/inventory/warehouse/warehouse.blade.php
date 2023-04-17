@@ -56,42 +56,32 @@
                                                 <th>ID</th>
                                                 <th>Name</th>
                                                 <th>Address</th>
-                                                <th>Type</th>
+                                                <th>Category</th>
                                                 <th>Actions</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-{{--                                            @if (sizeof ($datas) > 0)--}}
-{{--                                                @foreach ($datas as $data)--}}
-{{--                                                    <tr>--}}
-{{--                                                        <td>{{++$sl}}</td>--}}
-{{--                                                        <td>{{$data->name}}</td>--}}
-{{--                                                        <td>{{$data->address}}</td>--}}
-{{--                                                        <td>{{$data->contact_person}}</td>--}}
-{{--                                                        <td>{{$data->phone}}</td>--}}
-{{--                                                        <td>{{$data->email}}</td>--}}
-{{--                                                        <td>{{$data->description}}</td>--}}
-{{--                                                        <td>--}}
-{{--                                                            @if($data->is_active == 1)--}}
-{{--                                                                <a data-toggle="modal" data-target="#edit_warehouse" data-target-id="{{$data->id}}"--}}
-{{--                                                                   data-name="{{$data->name}}" data-address="{{$data->address}}" data-warehouse="{{$data->warehouse_type}}">--}}
-{{--                                                                    <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">--}}
-{{--                                                                        <i class="fa fa-pencil-square"></i></button>--}}
-{{--                                                                </a>--}}
-{{--                                                                <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive"--}}
-{{--                                                                        onclick="deleteData('{{ route('supplier.delete', [$data->id]) }}')">--}}
-{{--                                                                    <i class="fa fa-trash" aria-hidden="true"></i>--}}
-{{--                                                                </button>--}}
-{{--                                                            @else--}}
-{{--                                                                <button type="button" class="btn btn-icon btn-outline-primary btn-sm" title="Restore"--}}
-{{--                                                                        onclick="restoreData('{{ route('supplier.restore', [$data->id]) }}')">--}}
-{{--                                                                    <i class="fa fa-undo" aria-hidden="true"></i>--}}
-{{--                                                                </button>--}}
-{{--                                                            @endif--}}
-{{--                                                        </td>--}}
-{{--                                                    </tr>--}}
-{{--                                                @endforeach--}}
-{{--                                            @endif--}}
+                                            @if (sizeof ($datas) > 0)
+                                                @foreach ($datas as $data)
+                                                    <tr>
+                                                        <td>{{++$sl}}</td>
+                                                        <td>{{$data->name}}</td>
+                                                        <td>{{$data->address}}</td>
+                                                        <td>{{$data->category ? $data->categoryInfo->name : ''}}</td>
+                                                        <td>
+                                                            <a data-toggle="modal" data-target="#edit_warehouse" data-target-id="{{$data->id}}"
+                                                               data-name="{{$data->name}}" data-address="{{$data->address}}" data-category="{{$data->category}}">
+                                                                <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
+                                                                    <i class="fa fa-pencil-square"></i></button>
+                                                            </a>
+                                                            <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive"
+                                                                    onclick="deleteData('{{ route('warehouse.delete', [$data->id]) }}')">
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
                                             </tbody>
                                         </table>
                                     </div>
@@ -115,10 +105,19 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{route('supplier.store')}}" method="POST"  class="clearForm form" enctype="multipart/form-data">
+                    <form action="{{route('warehouse.store')}}" method="POST"  class="clearForm form" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                             <div class="row">
+                                <fieldset class="form-group col-md-12 floating-label-form-group">
+                                    <label for="category">Warehouse Type<span class="text-danger">*</span></label>
+                                    <select name="category" id="category" class="select2 form-control" required>
+                                        <option name="category" value="" >Select</option>
+                                        @foreach ($types as $type)
+                                            <option name="category" value="{{$type->id}}">{{$type->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </fieldset>
                                 <fieldset class="form-group col-md-12 floating-label-form-group">
                                     <label for="name">Name<span class="text-danger">*</span></label>
                                     <input type="text" name="name" class="form-control" id="name" placeholder="Cold Storage" value="" >
@@ -126,15 +125,6 @@
                                 <fieldset class="form-group col-md-12 floating-label-form-group">
                                     <label for="address">Address<span class="text-danger">*</span></label>
                                     <input type="text" name="address" class="form-control" id="address" placeholder="House-1, Road-2" value="" >
-                                </fieldset>
-                                <fieldset class="form-group col-md-12 floating-label-form-group">
-                                    <label for="warehouse_type">Warehouse Type<span class="text-danger">*</span></label>
-                                    <select name="warehouse_type" id="warehouse_type" class="select2 form-control" required>
-                                        <option name="warehouse_type" value="" >Select</option>
-{{--                                        @foreach ($payment_methods as $method)--}}
-{{--                                            <option name="warehouse_type" value="{{$method->id}}">{{$method->name}}</option>--}}
-{{--                                        @endforeach--}}
-                                    </select>
                                 </fieldset>
                             </div>
                         </div>
@@ -151,7 +141,7 @@
         <!-- Start Edit Modal -->
         <div class="modal fade text-left" id="edit_warehouse" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel35" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="myModalLabel35">Edit Warehouse Info</h3>
@@ -159,27 +149,27 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('supplier.update') }}" method="POST"  class="clearForm form" enctype="multipart/form-data">
+                    <form action="{{ route('warehouse.update') }}" method="POST"  class="clearForm form" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                             <div class="row">
                                 <input type="hidden" name="id" id="id">
-                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                <fieldset class="form-group col-md-12 floating-label-form-group">
+                                    <label for="category">Warehouse Type<span class="text-danger">*</span></label>
+                                    <select name="category" id="edit_category" class="select2 form-control" required>
+                                        <option name="category" value="" >Select</option>
+                                        @foreach ($types as $type)
+                                            <option name="category" value="{{$type->id}}">{{$type->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </fieldset>
+                                <fieldset class="form-group col-md-12 floating-label-form-group">
                                     <label for="edit_name">Name<span class="text-danger">*</span></label>
                                     <input type="text" name="name" class="form-control" id="edit_name" placeholder="" value="" >
                                 </fieldset>
-                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                <fieldset class="form-group col-md-12 floating-label-form-group">
                                     <label for="edit_address">Address<span class="text-danger">*</span></label>
                                     <input type="text" name="address" class="form-control" id="edit_address" placeholder="" value="" >
-                                </fieldset>
-                                <fieldset class="form-group col-md-12 floating-label-form-group">
-                                    <label for="warehouse_type">Warehouse Type<span class="text-danger">*</span></label>
-                                    <select name="edit_warehouse_type" id="edit_warehouse_type" class="select2 form-control" required>
-                                        <option name="edit_warehouse_type" value="" >Select</option>
-                                        {{--                                        @foreach ($payment_methods as $method)--}}
-                                        {{--                                            <option name="warehouse_type" value="{{$method->id}}">{{$method->name}}</option>--}}
-                                        {{--                                        @endforeach--}}
-                                    </select>
                                 </fieldset>
                             </div>
                         </div>
@@ -200,13 +190,13 @@
             var id = $(e.relatedTarget).data('target-id');
             var name = $(e.relatedTarget).data('name');
             var address = $(e.relatedTarget).data('address');
-            var warehouse = $(e.relatedTarget).data('warehouse');
+            var category = $(e.relatedTarget).data('category');
 
 
             $('.modal-body #id').val(id);
             $('.modal-body #edit_name').val(name);
             $('.modal-body #edit_address').val(address);
-            $('.modal-body #edit_warehouse_type').val(warehouse).change();
+            $('.modal-body #edit_category').val(category).change();
 
 
         });

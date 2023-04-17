@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/loadMenuByCategory/{id}', [App\Http\Controllers\POSController::class, 'loadMenuByCategory'])->name('loadMenuByCategory');
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 
-    Route::get('/stock', [App\Http\Controllers\HomeController::class, 'stock'])->name('stock.index');
+    Route::get('/stock', [App\Http\Controllers\StockController::class, 'stock'])->name('stock.index');
     Route::get('/stock_adjustment', [App\Http\Controllers\HomeController::class, 'stockAdjustment'])->name('stock_adjustment.index');
     Route::get('/stock_adjustment/add', [App\Http\Controllers\HomeController::class, 'stockAdjustmentAdd'])->name('stock_adjustment.add');
     Route::get('/stock_adjustment/edit', [App\Http\Controllers\HomeController::class, 'stockAdjustmentEdit'])->name('stock_adjustment.edit');
@@ -148,10 +148,9 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('warehousetype', 'App\Http\Controllers\WarehouseTypeController')->parameters('warehousetype', 'id');
     Route::post('warehousetype/update', 'App\Http\Controllers\WarehouseTypeController@update')->name('warehousetype.update');
 
-//    Route::delete('table/{id}', 'App\Http\Controllers\TableController@delete')->name('table.delete');
-//    Route::put('table/{id}', 'App\Http\Controllers\TableController@restore')->name('table.restore');
+    Route::delete('table/{id}', 'App\Http\Controllers\WarehouseController@delete')->name('warehouse.delete');
     Route::resource('warehouse', 'App\Http\Controllers\WarehouseController')->parameters('warehouse', 'id');
-//    Route::post('table/update', 'App\Http\Controllers\TableController@update')->name('table.update');
+    Route::post('warehouse/update', 'App\Http\Controllers\WarehouseController@update')->name('warehouse.update');
 
 
     Route::resource('waste', 'App\Http\Controllers\WasteController')->parameters('waste', 'id');

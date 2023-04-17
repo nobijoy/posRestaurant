@@ -88,19 +88,19 @@ class WarehouseTypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         DB::beginTransaction();
 
         try {
-            $data = WarehouseCategory::findorfail($id);
+            $data = WarehouseCategory::findorfail($request->id);
             $data->name = $request->name;
             $data->description = $request->description;
             $data->updated_by = Auth()->user()->id;
             $data->save();
             DB::commit();
 
-            return back()->with('success', 'New Category Created Successfully');
+            return back()->with('success', 'Category Updated Successfully');
 
         } catch (\Throwable $th) {
             DB::rollback();
@@ -123,12 +123,12 @@ class WarehouseTypeController extends Controller
     {
         DB::beginTransaction();
         try {
-            $data = PaymentMethod::findorFail($id);
+            $data = WarehouseCategory::findorFail($id);
             $data->is_active = 0;
             $data->deleted_by = Auth()->user()->id;
             $data->save();
             DB::commit();
-            return 'Payment Method Inactive Successfully!';
+            return 'Category Inactive Successfully!';
         } catch (\Throwable $th) {
             DB::rollback();
             return 'Somethings Went Wrong!';
