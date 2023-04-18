@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
@@ -22,7 +23,8 @@ class IngredientController extends Controller
         $datas = Ingredient::with(['category', 'unit'])->where('is_active', 1)->get()->reverse();
         $units = IngredientUnit::where('is_active', 1)->orderBy('name')->get();
         $categories = IngredientCategory::where('is_active', 1)->orderBy('name')->get();
-        return view('admin.pos.ingredients', compact('sl', 'datas', 'units', 'categories'));
+        $warehouses = Warehouse::where('is_active', 1)->orderBy('id')->get();
+        return view('admin.pos.ingredients', compact('sl', 'datas', 'units', 'categories','warehouses'));
     }
 
     /**
@@ -45,6 +47,7 @@ class IngredientController extends Controller
     {
         $validatedData = $request->validate([
             'name' => ['required', 'unique:ingredients,name,'.$request->category_id.',category_id,unit_id,'.$request->unit_id],
+            'warehouse' => ['required'],
         ]);
 
         DB::beginTransaction();
@@ -52,6 +55,7 @@ class IngredientController extends Controller
             $data = new Ingredient;
             $data->category_id = $request->category_id;
             $data->name = $request->name;
+            $data->warehouse = $request->warehouse;
             $data->unit_id = $request->unit_id;
             $data->price = $request->price;
             $data->alert_qty = $request->alert_qty;
@@ -108,6 +112,7 @@ class IngredientController extends Controller
             $data = Ingredient::find($request->id);
             $data->category_id = $request->category_id;
             $data->name = $request->name;
+            $data->warehouse = $request->warehouse;
             $data->unit_id = $request->unit_id;
             $data->price = $request->price;
             $data->alert_qty = $request->alert_qty;

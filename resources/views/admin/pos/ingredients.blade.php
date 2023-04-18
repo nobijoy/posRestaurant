@@ -58,6 +58,7 @@
                                                 <th>Name</th>
                                                 <th>Purchase Price(in unit)</th>
                                                 <th>Category</th>
+                                                <th>Warehouse</th>
                                                 <th>Alert Quantity</th>
                                                 <th>Units</th>
                                                 <th>Action</th>
@@ -72,6 +73,7 @@
                                                 <td>{{$data->name}}</td>
                                                 <td>{{$data->price}}</td>
                                                 <td>{{$data->category->name}}</td>
+                                                <td>{{$data->warehouse ? $data->warehouseInfo->name : ''}}</td>
                                                 <td>{{$data->alert_qty}}</td>
                                                 <td>{{$data->unit->name}}</td>
                                                 <td>
@@ -80,7 +82,7 @@
                                                         data-target-id="{{$data->id}}" data-name="{{$data->name}}"
                                                         data-price="{{$data->price}}" data-category_id="{{$data->category_id}}"
                                                         data-unit_id="{{$data->unit_id}}" data-alert_qty="{{$data->alert_qty}}"
-                                                        data-code="{{$data->code}}">
+                                                        data-code="{{$data->code}}" data-warehouse = {{$data->warehouse}}>
                                                         <button type="button" title="Edit"
                                                             class="btn btn-icon btn-outline-primary btn-sm">
                                                             <i class="fa fa-pencil-square"></i></button>
@@ -134,6 +136,15 @@
                                 <label for="name">Name<span class="text-danger">*</span></label>
                                 <input type="text" name="name" class="form-control" id="name" placeholder="Name"
                                     required>
+                            </fieldset>
+                            <fieldset class="col-md-6 form-group floating-label-form-group">
+                                <label for="warehouse">Warehouse <span class="text-danger">*</span></label>
+                                <select name="warehouse" id="warehouse" class="form-control select2">
+                                    <option value="">Select</option>
+                                    @foreach($warehouses as $type)
+                                        <option value="{{$type->id}}" @if(($url == 'purchase.edit') && ($data->supplier == $type->id)) selected @endif">{{$type->name}}</option>
+                                    @endforeach
+                                </select>
                             </fieldset>
                             <fieldset class="col-md-6 form-group floating-label-form-group">
                                 <label for="price">Purchase Price( <small>you can change it in purchage form</small>
@@ -202,6 +213,15 @@
                                     required>
                             </fieldset>
                             <fieldset class="col-md-6 form-group floating-label-form-group">
+                                <label for="ewarehouse">Warehouse <span class="text-danger">*</span></label>
+                                <select name="warehouse" id="ewarehouse" class="form-control select2">
+                                    <option value="">Select</option>
+                                    @foreach($warehouses as $type)
+                                        <option value="{{$type->id}}" @if(($url == 'purchase.edit') && ($data->supplier == $type->id)) selected @endif">{{$type->name}}</option>
+                                    @endforeach
+                                </select>
+                            </fieldset>
+                            <fieldset class="col-md-6 form-group floating-label-form-group">
                                 <label for="price">Purchase Price( <small>you can change it in purchage form</small>
                                     )</label>
                                 <input type="number" name="price" class="form-control" id="eprice" placeholder="210">
@@ -256,6 +276,7 @@
         var unit_id = $(e.relatedTarget).data('unit_id');
         var alert_qty = $(e.relatedTarget).data('alert_qty');
         var code = $(e.relatedTarget).data('code');
+        var warehouse = $(e.relatedTarget).data('warehouse');
 
         $('.modal-body #id').val(id);
         $('.modal-body #ename').val(name);
@@ -264,6 +285,7 @@
         $('.modal-body #eunit_id').val(unit_id).change();
         $('.modal-body #ealert_qty').val(alert_qty);
         $('.modal-body #ecode').val(code);
+        $('.modal-body #ewarehouse').val(warehouse).change();
 
     });
 

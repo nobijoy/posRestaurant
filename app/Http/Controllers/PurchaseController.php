@@ -21,7 +21,7 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        $datas = Purchase::where('is_active', 1)->get()->reverse();
+        $datas = Purchase::with(['supplierInfo',])->where('is_active', 1)->get()->reverse();
         $sl = 0;
         return view('admin.inventory.purchase.index', compact('datas', 'sl'));
     }
@@ -35,8 +35,7 @@ class PurchaseController extends Controller
     {
         $suppliers = Supplier::where('is_active', 1)->orderBy('name')->get();
         $ingredients = Ingredient::where('is_active', 1)->orderBy('name')->get();
-        $warehouses = Warehouse::where('is_active', 1)->orderBy('id')->get();
-        return view('admin.inventory.purchase.create', compact('suppliers', 'ingredients','warehouses'));
+        return view('admin.inventory.purchase.create', compact('suppliers', 'ingredients'));
     }
 
     /**
@@ -105,12 +104,11 @@ class PurchaseController extends Controller
         $ingredients = Ingredient::where('is_active', 1)->orderBy('name')->get();
         $payment_methods = PaymentMethod::where('is_active', 1)->orderBy('id','desc')->get();
         $purchase_ingredient = PurchaseIngredient::where('purchase_id', $id)->where('is_active', 1)->get();
-        $warehouses = Warehouse::where('is_active', 1)->orderBy('id')->get();
         $purId = [];
         foreach ($purchase_ingredient as $key => $value) {
             array_push($purId, strval($value->ingredient_id));
         }
-        return view('admin.inventory.purchase.edit', compact('suppliers', 'ingredients', 'data', 'purchase_ingredient', 'purId', 'payment_methods','warehouses'));
+        return view('admin.inventory.purchase.edit', compact('suppliers', 'ingredients', 'data', 'purchase_ingredient', 'purId', 'payment_methods'));
     }
 
     /**

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddWarehouseColumnToPurchasesTable extends Migration
+class AddWarehouseColumnToIngredientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddWarehouseColumnToPurchasesTable extends Migration
      */
     public function up()
     {
-        Schema::table('purchases', function (Blueprint $table) {
-            $table->UnsignedBigInteger('warehouse')->Unsigned()->nullable()->after('due');
+        Schema::table('ingredients', function (Blueprint $table) {
+            $table->UnsignedBigInteger('warehouse')->Unsigned()->nullable()->after('code');
             $table->foreign('warehouse')->references('id')->on('warehouses')->onDelete('restrict');
         });
     }
@@ -26,7 +26,7 @@ class AddWarehouseColumnToPurchasesTable extends Migration
      */
     public function down()
     {
-        Schema::table('purchases', function (Blueprint $table) {
+        Schema::table('ingredients', function (Blueprint $table) {
             $table->dropForeign(['warehouse']);
             $table->dropColumn('warehouse');
         });

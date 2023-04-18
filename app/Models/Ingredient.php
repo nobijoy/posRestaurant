@@ -13,6 +13,10 @@ class Ingredient extends Model
         return $this->belongsTo(IngredientCategory::class, 'category_id', 'id');
     }
 
+    public function warehouseInfo(){
+        return $this->belongsTo(Warehouse::class, 'warehouse', 'id');
+    }
+
     public function unit(){
         return $this->belongsTo(IngredientUnit::class, 'unit_id', 'id');
     }
