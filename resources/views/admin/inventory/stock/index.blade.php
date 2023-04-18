@@ -61,14 +61,18 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>gdg</td>
-                                                <td>gdg</td>
-                                                <td>gdg</td>
-                                                <td>gdg</td>
-                                                <td>gdg</td>
-                                                <td>gdg</td>
-                                            </tr>
+                                                @if(sizeof($ingredients) > 0)
+                                                    @foreach($ingredients as $ingredient)
+                                                        <tr>
+                                                            <td>{{$sl++}}</td>
+                                                            <td>{{$ingredient->name}} ({{$ingredient->code}})</td>
+                                                            <td>{{$ingredient->category_id}}</td>
+                                                            <td>{{$ingredient->warehouse}}</td>
+                                                            <td></td>
+                                                            <td>{{$ingredient->alert_qty}} ({{$ingredient->unit_id}})</td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                             </tbody>
                                             <tfoot class="display-hidden">
                                             </tfoot>

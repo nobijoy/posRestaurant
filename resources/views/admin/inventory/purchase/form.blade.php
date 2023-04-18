@@ -34,7 +34,7 @@
     <div class="form-group col-md-4 ">
         <label for="date">Date <span class="text-danger">*</span></label>
         <input type="date" id="date" class="form-control" placeholder="" name="date"
-               @if($url == 'purchase.edit') value="{{date('Y-m-d', strtotime($data->date))}}" @else value="{{old('date')}}" @endif  required>
+           @if($url == 'purchase.edit') value="{{date('Y-m-d', strtotime($data->date))}}" @else value="{{old('date')}}" @endif  required>
     </div>
 
     <div class="form-group col-md-4 ">
@@ -47,15 +47,7 @@
         </select>
     </div>
 
-    <div class="form-group col-md-4 ">
-        <label for="warehouse">Warehouse <span class="text-danger">*</span></label>
-        <select name="warehouse" id="warehouse" class="form-control select2">
-            <option value="">Select</option>
-            @foreach($warehouses as $type)
-                <option value="{{$type->id}}" @if(($url == 'purchase.edit') && ($data->supplier == $type->id)) selected @endif">{{$type->name}}</option>
-            @endforeach
-        </select>
-    </div>
+
 
 {{--    <div class="form-group col-md-4 pt-2">--}}
 {{--        <a href="#" data-toggle="modal" data-target="#read_me" class="btn btn-danger">Read Me First</a>--}}
