@@ -4,21 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Ingredient;
 use App\Models\PurchaseIngredient;
+use App\Models\Stock;
 use Illuminate\Http\Request;
+use DB;
 
 class StockController extends Controller
 {
-    public function stock()
+    public function index()
     {
-        $ingredient_id = PurchaseIngredient::pluck('ingredient_id');
-        $ingredients =  Ingredient::whereIn('id', $ingredient_id)->get();
-
-//        $ingredients = Ingredient::whereIn('id', $ingredient_id)
-//            ->with('purchaseIngredients')
+        $stocks = Stock::select( 'ingredient', DB::raw('sum(stock_quantity) as total_purchased'))->groupBy('ingredient')->get();
+//        $stocks = Ingredient::leftJoin('stocks', 'ingredients.id', '=', 'stocks.ingredient')
+//            ->select('ingredients.id as ingredient', DB::raw('sum(stocks.stock_quantity) as total_purchased'))
+//            ->groupBy('ingredients.id')
 //            ->get();
+        $sl = 1;
 
-
-        $sl =0 ;
-        return view('admin.inventory.stock.index', compact('ingredients', 'sl'));
+        return view('admin.inventory.stock.index', compact('stocks', 'sl'));
     }
 }
