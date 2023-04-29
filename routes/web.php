@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/loadMenuByCategory/{id}', [App\Http\Controllers\POSController::class, 'loadMenuByCategory'])->name('loadMenuByCategory');
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 
-    Route::get('/stock', [App\Http\Controllers\StockController::class, 'stock'])->name('stock.index');
+    Route::get('/stock', [App\Http\Controllers\StockController::class, 'index'])->name('stock.index');
     Route::get('/stock_adjustment', [App\Http\Controllers\HomeController::class, 'stockAdjustment'])->name('stock_adjustment.index');
     Route::get('/stock_adjustment/add', [App\Http\Controllers\HomeController::class, 'stockAdjustmentAdd'])->name('stock_adjustment.add');
     Route::get('/stock_adjustment/edit', [App\Http\Controllers\HomeController::class, 'stockAdjustmentEdit'])->name('stock_adjustment.edit');

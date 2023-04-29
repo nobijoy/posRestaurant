@@ -82,7 +82,7 @@
                                                                 </a>
                                                                 <button type="button" class="btn btn-icon btn-outline-danger btn-sm"
                                                                         title="Inactive"
-                                                                        onclick="deleteData('{{ route('table.delete', [$data->id]) }}')">
+                                                                        onclick="deleteData('{{ route('table.delete',[$data->id]) }}')">
                                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                                 </button>
                                                             @else

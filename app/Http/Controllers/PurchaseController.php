@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PaymentMethod;
 use App\Models\Purchase;
+use App\Models\Stock;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
@@ -61,7 +62,6 @@ class PurchaseController extends Controller
             $data->paid = $request->paid;
             $data->total = $request->g_total;
             $data->due = $request->due;
-            $data->warehouse = $request->warehouse;
             $data->payment_method = $request->payment_method;
             $data->is_active = 1;
             $data->created_by = Auth()->user()->id;
@@ -69,6 +69,7 @@ class PurchaseController extends Controller
 
             $ingredientPurchase = $this->purchaseIngredients($data->id, $request->purchase_ingredient_id, $request->ingredient_id, $request->unit_price, $request->quantity_amount, $request->total_price);
 
+            $this->addStock($request->ingredient_id, $request->quantity_amount);
 
             DB::commit();
 
@@ -76,7 +77,7 @@ class PurchaseController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', 'Somethings went wrong. Try Again');
+            return back()->with('error', $th->getMessage());
         }
     }
 
@@ -145,6 +146,7 @@ class PurchaseController extends Controller
             $ingredientPurchase = $this->purchaseIngredients($data->id, $request->purchase_ingredient_id,
                 $request->ingredient_id, $request->unit_price, $request->quantity_amount, $request->total_price);
 
+//            $this->addStock($request->ingredient_id, $request->purchase_ingredient_id, $request->quantity_amount);
 
             DB::commit();
 
@@ -198,6 +200,7 @@ class PurchaseController extends Controller
         }
     }
 
+
     public function purchaseIngredients($purchaseId, $purchase_ingredient_ids, $ingredients, $unitPrices, $amounts, $prices){
         if (isset($ingredients)) {
             if (sizeof($ingredients) > 0) {
@@ -221,6 +224,23 @@ class PurchaseController extends Controller
             }
         }
         return 1;
+    }
+
+    public function addStock($ingredients, $amounts){
+        if (isset($ingredients)) {
+            if (sizeof($ingredients) > 0) {
+                foreach ($ingredients as $key => $ingredient) {
+//                    if ($purchase_ingredient_ids[$key]) {
+//                        $stock = Stock::find($purchase_ingredient_ids[$key]);
+//                    } else {
+//                    }
+                    $stock = new Stock;
+                    $stock->ingredient = $ingredient;
+                    $stock->stock_quantity = $amounts[$key];
+                    $stock->save();
+                }
+            }
+        }
     }
 
 

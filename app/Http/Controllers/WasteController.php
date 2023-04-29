@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Models\Ingredient;
 use App\Models\IngredientConsumption;
 use App\Models\Menu;
+use App\Models\Stock;
 use App\Models\Waste;
 use Illuminate\Http\Request;
 use Auth;
@@ -73,6 +74,9 @@ class WasteController extends Controller
 
             $data->created_by = auth()->user()->id;
             $data->save();
+
+            $this->deductStock($request->ingredient_id, $request->quantity_amount);
+
             DB::commit();
 
             return back()->with('success', 'New waste added Successfully');
@@ -186,5 +190,18 @@ class WasteController extends Controller
             ->orderBy('id', 'desc')
             ->get();
         return json_encode($ingredients);
+    }
+
+    public function addStock($ingredients, $amounts){
+        if (isset($ingredients)) {
+            if (sizeof($ingredients) > 0) {
+                foreach ($ingredients as $key => $ingredient) {
+                    $stock = new Stock;
+                    $stock->ingredient = $ingredient;
+                    $stock->stock_quantity = $amounts[$key];
+                    $stock->save();
+                }
+            }
+        }
     }
 }
