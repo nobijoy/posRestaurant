@@ -47,7 +47,7 @@
                                                             <td>{{$stock->ingredients->name ?? '' }} ({{$stock->ingredients->code ?? '' }})</td>
                                                             <td>{{$stock->ingredients->category->name ?? ''}}</td>
                                                             <td>{{$stock->ingredients->warehouseInfo->name ?? ''}}</td>
-                                                            <td @if($stock->total_purchased <= $stock->ingredients->alert_qty) class="text-danger" @endif>{{$stock->total_purchased }} {{$stock->ingredients->unit->name ?? ''}}</td>
+                                                            <td @if($stock->total_purchased <= $stock->ingredients->alert_qty) class="text-danger font-weight-bold" @endif>{{$stock->total_purchased }} {{$stock->ingredients->unit->name ?? ''}}</td>
                                                             <td>{{$stock->ingredients->alert_qty ?? ''}} {{$stock->ingredients->unit->name ?? ''}}</td>
                                                         </tr>
                                                     @endforeach
