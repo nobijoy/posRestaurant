@@ -139,7 +139,7 @@
                         '</td>' +
                         '<td>' +
                         '<div class="input-group">' +
-                        '<input type="number" class="form-control" onkeyup="lostCost(this)" data-check_id="'+ingredient_details[0]+'" data-unit_price="'+ingredient_details[3]+'" name="quantity[]" placeholder="Waste Amount/Quantity" aria-describedby="basic-addon_'+ingredient_details[0] + '" required>' +
+                        '<input type="text" class="form-control" onkeyup="lostCost(this)" data-check_id="'+ingredient_details[0]+'" data-unit_price="'+ingredient_details[3]+'" name="quantity[]" placeholder="Waste Amount/Quantity" aria-describedby="basic-addon_'+ingredient_details[0] + '" required>' +
                         '<div class="input-group-append">' +
                         '<span class="input-group-text" id="basic-addon_'+ingredient_details[0] + '">'+ingredient_details[2]+'</span>' +
                         '</div>' +
