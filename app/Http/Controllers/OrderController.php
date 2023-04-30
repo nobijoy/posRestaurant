@@ -264,4 +264,14 @@ class OrderController extends Controller
         }
     }
 
+    public function sale(){
+        $sl = 1 ;
+        $orders = Order::where('status', 'complete')->get();
+        return view('admin.sale.sale', compact('orders', 'sl'));
+    }
+
+    public function orderCompleted(Request $request){
+        dd($request->all());
+    }
+
 }

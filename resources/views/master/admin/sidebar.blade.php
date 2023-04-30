@@ -26,6 +26,18 @@
                 </a>
             </li>
 
+            <li @if($url == 'kitchenDashboard') class="active" @else class="nav-item" @endif>
+                <a  href="{{route('kitchenDashboard')}}">
+                    <i class="feather icon-airplay"></i><span class="menu-title">Kitchen Dashboard</span>
+                </a>
+            </li>
+
+            <li @if($url == 'sale') class="active" @else class="nav-item" @endif>
+                <a  href="{{route('sale')}}">
+                    <i class="feather icon-shopping-cart"></i><span class="menu-title">Sale List</span>
+                </a>
+            </li>
+
 {{--            <li  class="nav-item @if($url == 'pos') active @endif"  >--}}
 {{--                <a href="javascript:" onclick="openPosWindow(this)">--}}
 {{--                    <i class="feather icon-pocket"></i><span class="menu-title">POS</span>--}}
