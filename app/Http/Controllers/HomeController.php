@@ -29,7 +29,7 @@ class HomeController extends Controller
     }
     public function dashboard()
     {
-        return view('admin.dashboard');
+        return view('admin.dashboard.dashboard');
     }
 
     public function setting()

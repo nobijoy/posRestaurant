@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/loadMenuByCategory/{id}', [App\Http\Controllers\POSController::class, 'loadMenuByCategory'])->name('loadMenuByCategory');
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/kitchenDashboard', [App\Http\Controllers\KitchenDashboardController::class, 'dashboard'])->name('kitchenDashboard');
 
     Route::get('/stock', [App\Http\Controllers\StockController::class, 'index'])->name('stock.index');
     Route::get('/stock_adjustment', [App\Http\Controllers\HomeController::class, 'stockAdjustment'])->name('stock_adjustment.index');
@@ -122,7 +123,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::resource('attendence', 'App\Http\Controllers\AttendenceController')->parameters('attendence', 'id');
     Route::post('attendence/update', 'App\Http\Controllers\AttendenceController@update')->name('attendence.update');
 
-    Route::delete('table/{id}', 'App\Http\Controllers\TableController@delete')->name('table.delete');
+    Route::delete('tableDelete/{id}', 'App\Http\Controllers\TableController@delete')->name('table.delete');
     Route::put('table/{id}', 'App\Http\Controllers\TableController@restore')->name('table.restore');
     Route::resource('table', 'App\Http\Controllers\TableController')->parameters('table', 'id');
     Route::post('table/update', 'App\Http\Controllers\TableController@update')->name('table.update');
@@ -161,11 +162,13 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::post('orderPost','App\Http\Controllers\OrderController@orderPost')->name('orderPost');
     Route::get('/loadOrdersByStatus/{status}','App\Http\Controllers\OrderController@loadOrdersByStatus')->name('loadOrdersByStatus');
+    Route::post('/orderCompleted/{id}','App\Http\Controllers\OrderController@orderCompleted')->name('orderCompleted');
     Route::get('/clearTable/{id}','App\Http\Controllers\OrderController@clearTable')->name('clearTable');
     Route::get('/reserveTable/{id}','App\Http\Controllers\OrderController@reserveTable')->name('reserveTable');
     Route::get('/loadOrderDetails/{id}','App\Http\Controllers\OrderController@loadOrderDetails')->name('loadOrderDetails');
     Route::get('/invoicePrint/{id}','App\Http\Controllers\OrderController@invoicePrint')->name('invoicePrint');
     Route::get('/orderPaidStatus/{id}','App\Http\Controllers\OrderController@orderPaidStatus')->name('orderPaidStatus');
+    Route::get('/sale','App\Http\Controllers\OrderController@sale')->name('sale');
 
 
     Route::get('cashRegister', 'App\Http\Controllers\POSRegisterController@cashRegister')->name('cashRegister');
