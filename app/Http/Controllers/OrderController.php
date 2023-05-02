@@ -270,8 +270,23 @@ class OrderController extends Controller
         return view('admin.sale.sale', compact('orders', 'sl'));
     }
 
-    public function orderCompleted(Request $request){
-        dd($request->all());
+    public function orderCompleted($id){
+        try {
+            Order::where('id', $id)->update(['status' => "complete"]);
+            $orders = Order::where('status', 'running')->latest()->get();
+    //        dd($orders);
+            return response()->json([
+                'url' => route('kitchenDashboard'),
+                'status'=> 1,
+                'msg'=> 'Order Completed Successfully',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'view' => '',
+                'msg' => $th->getMessage(),
+                'status'=> 0,
+            ]);
+        }
     }
 
 }

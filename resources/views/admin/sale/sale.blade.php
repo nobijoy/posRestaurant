@@ -5,7 +5,7 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
                 <h3 class="content-header-title">
-                    <h5>Sales List</h5>
+                    <h4 class="font-weight-bold">Sales List</h4>
                 </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
@@ -53,21 +53,19 @@
                                             <thead>
                                             <tr>
                                                 <th>Sl</th>
-                                                <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Action</th>
+                                                <th>Reciept No</th>
+                                                <th>Total</th>
+                                                <th>Date</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             @if (sizeof ($orders) > 0)
                                                 @foreach ($orders as $order)
                                                     <tr>
-                                                        <td>{{++$sl}}</td>
-                                                        <td>{{$orders->name}}</td>
-                                                        <td>{{$orders->description}}</td>
-                                                        <td>
-                                                        <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm"><i class="fa fa-pencil-square"></i></button>
-                                                        </td>
+                                                        <td>{{$sl++}}</td>
+                                                        <td>{{$order->reference_no}}</td>
+                                                        <td>{{$order->total}}</td>
+                                                        <td>{{$order->updated_at}}</td>
                                                     </tr>
                                                 @endforeach
                                             @endif
