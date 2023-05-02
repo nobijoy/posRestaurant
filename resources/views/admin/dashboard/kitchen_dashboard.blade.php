@@ -12,7 +12,7 @@
         </div>
         <div class="content-body">
                 <div class="col-md-12">
-            <div class="row">
+            <div class="row" id="runningOrder">
 
                     @if(sizeof($orders) > 0)
                         @foreach ($orders as $order)
@@ -46,17 +46,34 @@
     <script type="text/javascript">
         function completeOrder(url) {
             $.ajax({
+                type: "get",
                 url: url,
-                type: 'POST',
-                data: {
-                    _method: 'POST',
-                    _token: '{{ csrf_token() }}'
+                data:{
+                    {{--"_token": "{{ csrf_token() }}",--}}
                 },
-                success: function(response) {
+                success: function(data) {
+                    if(data.status == 1){
+                        Swal.fire({
+                            type: "success",
+                            text: data.msg,
+                            confirmButtonClass: "btn btn-primary",
+                            buttonsStyling: false
+                        });
+
+                    }else{
+                        Swal.fire({
+                            type: "error",
+                            text: data.msg,
+                            confirmButtonClass: "btn btn-primary",
+                            buttonsStyling: false
+                        });
+                    }
                     location.reload();
+                    // window.location.href = response.url;
+                    // $("#runningOrder").empty().html(data.view);
                 },
-                error: function(xhr, status, error) {
-                    // handle error here
+                error: function(e) {
+                    console.log(e)
                 }
             });
         }
