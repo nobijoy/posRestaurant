@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sale;
 use DB;
 use App\Models\Order;
 use App\Models\Table;
@@ -264,17 +265,29 @@ class OrderController extends Controller
         }
     }
 
-    public function sale(){
-        $sl = 1 ;
-        $orders = Order::where('status', 'complete')->get();
-        return view('admin.sale.sale', compact('orders', 'sl'));
-    }
 
     public function orderCompleted($id){
+        DB::beginTransaction();
         try {
             Order::where('id', $id)->update(['status' => "complete"]);
+            $order = Order::findorFail($id);
+
+            $sale = new Sale;
+            $sale->reciept_no = $order->reference_no;
+            $sale->order_type = $order->order_type;
+            $sale->subtotal = $order->subtotal;
+            $sale->vat = $order->vat;
+            $sale->discount = $order->discount;
+            $sale->charge = $order->charge;
+            $sale->total = $order->total;
+            $sale->payment_method = $order->payment_method;
+            $sale->customer = $order->customer;
+            $sale->created_by = Auth()->user()->id;
+            $sale->save();
+
+            DB::commit();
+
             $orders = Order::where('status', 'running')->latest()->get();
-    //        dd($orders);
             return response()->json([
                 'url' => route('kitchenDashboard'),
                 'status'=> 1,

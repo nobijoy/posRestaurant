@@ -54,18 +54,30 @@
                                             <tr>
                                                 <th>Sl</th>
                                                 <th>Reciept No</th>
+                                                <th>Type</th>
+                                                <th>Subtotal</th>
+                                                <th>VAT</th>
+                                                <th>Discount</th>
+                                                <th>Charge</th>
                                                 <th>Total</th>
+                                                <th>Method</th>
                                                 <th>Date</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @if (sizeof ($orders) > 0)
-                                                @foreach ($orders as $order)
+                                            @if (sizeof ($sales) > 0)
+                                                @foreach ($sales as $sale)
                                                     <tr>
                                                         <td>{{$sl++}}</td>
-                                                        <td>{{$order->reference_no}}</td>
-                                                        <td>{{$order->total}}</td>
-                                                        <td>{{$order->updated_at}}</td>
+                                                        <td>{{$sale->reciept_no}}</td>
+                                                        <td>{{$sale->order_type}}</td>
+                                                        <td>{{$sale->subtotal}}</td>
+                                                        <td>{{$sale->vat}}</td>
+                                                        <td>{{$sale->discount}}</td>
+                                                        <td>{{$sale->charge}}</td>
+                                                        <td>{{$sale->total}}</td>
+                                                        <td>{{$sale->payment_method}}</td>
+                                                        <td>{{$sale->created_at}}</td>
                                                     </tr>
                                                 @endforeach
                                             @endif

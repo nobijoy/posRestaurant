@@ -24,12 +24,20 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/loadMenuByCategory/{id}', [App\Http\Controllers\POSController::class, 'loadMenuByCategory'])->name('loadMenuByCategory');
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+
+
     Route::get('/kitchenDashboard', [App\Http\Controllers\KitchenDashboardController::class, 'dashboard'])->name('kitchenDashboard');
+    Route::get('/kitchenStock', [App\Http\Controllers\KitchenStockController::class, 'kitchenStock'])->name('kitchenStock');
+
+    Route::get('/sale','App\Http\Controllers\SaleController@sale')->name('sale');
+
 
     Route::get('/stock', [App\Http\Controllers\StockController::class, 'index'])->name('stock.index');
-    Route::get('/stock_adjustment', [App\Http\Controllers\HomeController::class, 'stockAdjustment'])->name('stock_adjustment.index');
-    Route::get('/stock_adjustment/add', [App\Http\Controllers\HomeController::class, 'stockAdjustmentAdd'])->name('stock_adjustment.add');
-    Route::get('/stock_adjustment/edit', [App\Http\Controllers\HomeController::class, 'stockAdjustmentEdit'])->name('stock_adjustment.edit');
+    Route::get('/stock_adjustment', [App\Http\Controllers\StockController::class, 'stock'])->name('stock_adjustment');
+    Route::post('/stock_adjustment/add', [App\Http\Controllers\StockController::class, 'stockAdjustment'])->name('stock_adjustment.add');
+
+//    Route::get('/stock_adjustment', [App\Http\Controllers\HomeController::class, 'stockAdjustment'])->name('stock_adjustment.index');
+//    Route::get('/stock_adjustment/edit', [App\Http\Controllers\HomeController::class, 'stockAdjustmentEdit'])->name('stock_adjustment.edit');
 
     Route::get('/pos', [App\Http\Controllers\POSController::class, 'pos'])->name('pos');
     Route::post('/pos/order', [App\Http\Controllers\POSController::class, 'posOrder'])->name('posOrder');
@@ -168,13 +176,14 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/loadOrderDetails/{id}','App\Http\Controllers\OrderController@loadOrderDetails')->name('loadOrderDetails');
     Route::get('/invoicePrint/{id}','App\Http\Controllers\OrderController@invoicePrint')->name('invoicePrint');
     Route::get('/orderPaidStatus/{id}','App\Http\Controllers\OrderController@orderPaidStatus')->name('orderPaidStatus');
-    Route::get('/sale','App\Http\Controllers\OrderController@sale')->name('sale');
 
 
     Route::get('cashRegister', 'App\Http\Controllers\POSRegisterController@cashRegister')->name('cashRegister');
     Route::post('openRegister', 'App\Http\Controllers\POSRegisterController@openRegister')->name('openRegister');
     Route::post('closeRegister/{id}', 'App\Http\Controllers\POSRegisterController@closeRegister')->name('closeRegister');
     Route::get('getRegisterDetails', 'App\Http\Controllers\POSController@getRegisterDetails')->name('getRegisterDetails');
+
+
 
 
 
