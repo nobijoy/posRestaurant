@@ -196,48 +196,48 @@ class WasteController extends Controller
         DB::beginTransaction();
 
         try {
-        if (isset($ingredients)) {
-            if (sizeof($ingredients) > 0) {
-                foreach ($ingredients as $key => $ingredient) {
-                    $quantity = floatval($quantities[$key]);
+            if (isset($ingredients)) {
+                if (sizeof($ingredients) > 0) {
+                    foreach ($ingredients as $key => $ingredient) {
+                        $quantity = floatval($quantities[$key]);
 
-                    $stock_quantity = Stock::where('ingredient', $ingredient)->sum('stock_quantity');
+                        $stock_quantity = Stock::where('ingredient', $ingredient)->sum('stock_quantity');
 
-                    if($quantity <= $stock_quantity){
-                        while ($quantity > 0){
-                            $latestStock = Stock::where('ingredient', $ingredient)
-                                ->where('stock_quantity', '>', 0)
-                                ->latest()
-                                ->first();
+                        if($quantity <= $stock_quantity){
+                            while ($quantity > 0){
+                                $latestStock = Stock::where('ingredient', $ingredient)
+                                    ->where('stock_quantity', '>', 0)
+                                    ->orderBy('id')
+                                    ->first();
 
-                            if ($latestStock) {
-                                $remainingQuantity = $latestStock->stock_quantity - $quantity;
+                                if ($latestStock) {
+                                    $remainingQuantity = $latestStock->stock_quantity - $quantity;
 
-                                if ($remainingQuantity < 0) {
-                                    $latestStock->stock_quantity = 0;
-                                    $latestStock->save();
+                                    if ($remainingQuantity < 0) {
+                                        $latestStock->stock_quantity = 0;
+                                        $latestStock->save();
 
-                                    $quantity = abs($remainingQuantity);
+                                        $quantity = abs($remainingQuantity);
 
+                                    } else {
+
+                                        $latestStock->stock_quantity = $remainingQuantity;
+                                        $latestStock->save();
+                                        $quantity = 0;
+                                    }
                                 } else {
-
-                                    $latestStock->stock_quantity = $remainingQuantity;
-                                    $latestStock->save();
-                                    $quantity = 0;
+                                    return redirect()->back()->with('error', 'Ingredient not found in Stock');
                                 }
-                            } else {
-                                return redirect()->back()->with('error', 'Ingredient not found in Stock');
+
                             }
+                        }else{
+                            return back()->with('error', 'Invalid data! Stock amount mismatch');
 
                         }
-                    }else{
-                        return back()->with('error', 'Invalid data! Stock amount mismatch');
 
                     }
-
                 }
             }
-        }
 
         DB::commit();
 

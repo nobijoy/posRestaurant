@@ -10,7 +10,7 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
                 <h3 class="content-header-title">
-                    <a href="{{route('stock_adjustment.index')}}" class="btn btn-primary">Stock List <i class="fa fa-eye"></i></a>
+                    <a href="{{route('stock.index')}}" class="btn btn-primary">Stock List <i class="fa fa-eye"></i></a>
                 </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
@@ -66,17 +66,17 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title" id="basic-layout-card-center">Add New Stock Adjustment</h4>
+                                <h4 class="card-title" id="basic-layout-card-center">Stock Adjustment</h4>
                             </div>
                             <div class="card-content collapse show">
                                 <div class="card-body">
-                                    <form class="form" method="post" action="" enctype="multipart/form-data">@csrf
+                                    <form class="form" method="post" action="{{route('stock_adjustment.add')}}" enctype="multipart/form-data">@csrf
                                         <div class="form-body">
                                             @include('admin.inventory.stock_adjustment.form')
                                         </div>
 
                                         <div class="form-actions text-right">
-                                            <a href="{{ route ('stock_adjustment.index')}}" class="btn btn-warning mr-1">
+                                            <a href="{{ route ('stock.index')}}" class="btn btn-warning mr-1">
                                                 <i class="feather icon-x"></i> Cancel</a>
                                             <button type="submit" id="submitBtn" class="btn btn-primary">
                                                 <i class="fa fa-check-square-o"></i> Submit
@@ -114,6 +114,7 @@
                         '<input type="hidden" id="ingreadient_id_'+count + '" name="ingredient_id[]" value="'+id+'">' +
                         '<span id="ingreadient_name_'+count +'">'+name+'</span>' +
                         '</td>' +
+
                         // '<td>' +
                         // '<div class="input-group">' +
                         // '<input type="text" class="form-control" name="consumption[]" placeholder="" aria-describedby="basic-addon_'+count + '">' +
@@ -123,11 +124,11 @@
                         // '</div>' +
                         // '</td>' +
                         '<td>' +
-                        '<input type="number" class="form-control" id="quantity'+count + '" name="quantity[]" value="">' +
+                        '<input type="text" class="form-control" id="quantity'+count + '" name="quantity[]" value="">' +
                         '</td>' +
-                        '<td>' +
-                        '<input type="number" class="form-control" id="total'+count + '" name="total[]" value="" >' +
-                        '</td>' +
+                        // '<td>' +
+                        // '<input type="number" class="form-control" id="total'+count + '" name="total[]" value="" >' +
+                        // '</td>' +
                         '<td>' +
                         '<button type="button" title="Delete" class="btn btn-danger" onclick="deleteContactRow(this)" data-count="'+count + '"> <i class="fa fa-trash"></i></button>' +
                         '</td>' +

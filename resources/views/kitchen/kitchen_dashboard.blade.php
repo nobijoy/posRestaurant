@@ -27,7 +27,7 @@
                                                 <span>{{$order_detail->menu}}:</span>
                                                 <span>{{$order_detail->qty}}</span><br>
                                             @endforeach
-                                            <button class="btn btn-success btn-sm" onclick="completeOrder('{{ route('orderCompleted', [$order->id]) }}')">Complete</button>
+                                            <a class="btn btn-success btn-sm" href="{{ route('orderCompleted', [$order->id]) }}" onclick="completeOrder('{{ route('orderCompleted', [$order->id]) }}')">Complete</a>
                                         </div>
                                     </div>
                                 </div>
@@ -44,6 +44,13 @@
 
 @section('script')
     <script type="text/javascript">
+
+        $(document).ready(function() {
+                setTimeout(function() {
+                    window.location.reload();
+                }, 60000); // Reload the page every 5 seconds
+        });
+
         function completeOrder(url) {
             $.ajax({
                 type: "get",

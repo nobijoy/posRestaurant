@@ -32,9 +32,16 @@
                 </a>
             </li>
 
+
+            <li @if($url == 'kitchenStock') class="active" @else class="nav-item" @endif>
+                <a  href="{{route('kitchenStock')}}">
+                    <i class="feather icon-shopping-cart"></i><span class="menu-title">Kitchen Stock</span>
+                </a>
+            </li>
+
             <li @if($url == 'sale') class="active" @else class="nav-item" @endif>
                 <a  href="{{route('sale')}}">
-                    <i class="feather icon-shopping-cart"></i><span class="menu-title">Sale List</span>
+                    <i class="feather icon-list"></i><span class="menu-title">Sale List</span>
                 </a>
             </li>
 
@@ -119,6 +126,9 @@
                     </li>
                     <li @if($url == 'stock.index') class="active"  @endif>
                         <a href="{{route('stock.index')}}">Stock</a>
+                    </li>
+                    <li @if($url == 'stock_adjustment') class="active"  @endif>
+                        <a href="{{route('stock_adjustment')}}">Stock Adjustment</a>
                     </li>
                     <li @if($url == 'warehousetype.index') class="active"  @endif>
                         <a href="{{route('warehousetype.index')}}">Warehouse Category</a>
