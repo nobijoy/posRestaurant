@@ -29,4 +29,10 @@ class CommonController extends Controller
         $datas = Purchase::where('supplier', $request->id)->where('due','>', 0)->get();
         return json_encode($datas);
     }
+
+    public function getDueFromReceipt(Request $request){
+        $data = Purchase::where('reference_no', $request->reciept_no)->firstOrFail();
+//        dd($data->due);
+        return json_encode($data->due);
+    }
 }

@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('getDegAgainstDept', 'App\Http\Controllers\CommonController@getDegAgainstDept')->name('getDegAgainstDept');
     Route::get('getIngrerdientInfoById', 'App\Http\Controllers\CommonController@getIngrerdientInfoById')->name('getIngrerdientInfoById');
     Route::get('getReceiptBySupplier', 'App\Http\Controllers\CommonController@getReceiptBySupplier')->name('getReceiptBySupplier');
+    Route::get('getDueFromReceipt', 'App\Http\Controllers\CommonController@getDueFromReceipt')->name('getDueFromReceipt');
+    Route::get('generateReciept', 'App\Http\Controllers\PurchaseController@generateReciept')->name('generateReciept');
 
     Route::delete('ingredient_category/{id}', 'App\Http\Controllers\IngredientCategoryController@delete')->name('ingredient_category.delete');
     Route::put('ingredient_category/{id}', 'App\Http\Controllers\IngredientCategoryController@restore')->name('ingredient_category.restore');

@@ -288,18 +288,28 @@ class OrderController extends Controller
             DB::commit();
 
             $orders = Order::where('status', 'running')->latest()->get();
-            return response()->json([
-                'url' => route('kitchenDashboard'),
-                'status'=> 1,
-                'msg'=> 'Order Completed Successfully',
-            ]);
+
+            return redirect()->back();
+//            return response()->json([
+//                'url' => route('kitchenDashboard'),
+//                'status'=> 1,
+//                'msg'=> 'Order Completed Successfully',
+//            ]);
         } catch (\Throwable $th) {
-            return response()->json([
-                'view' => '',
-                'msg' => $th->getMessage(),
-                'status'=> 0,
-            ]);
+            return back()->with('error', 'Something is wrong');
+//            return response()->json([
+//                'view' => '',
+//                'msg' => $th->getMessage(),
+//                'status'=> 0,
+//            ]);
         }
     }
+
+
+    public function reserveOrder(Request $request){
+        dd($request->all());
+    }
+
+
 
 }

@@ -3,7 +3,7 @@
     <div class="form-group col-md-4 ">
         <label for="reference_no">Receipt No <span class="text-danger">*</span></label>
         <input type="number" id="reference_no" class="form-control" placeholder="" name="reference_no"
-               @if($url == 'purchase.edit') value="{{$data->reference_no}}" @else value="{{old('reference_no')}}" @endif required>
+               @if($url == 'purchase.edit') value="{{$data->reference_no}}" @else value="{{old('reference_no')}}" @endif readonly>
     </div>
 
     <div class="form-group col-md-4 ">

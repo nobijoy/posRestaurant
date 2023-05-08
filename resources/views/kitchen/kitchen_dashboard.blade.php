@@ -27,7 +27,7 @@
                                                 <span>{{$order_detail->menu}}:</span>
                                                 <span>{{$order_detail->qty}}</span><br>
                                             @endforeach
-                                            <a class="btn btn-success btn-sm" href="{{ route('orderCompleted', [$order->id]) }}" onclick="completeOrder('{{ route('orderCompleted', [$order->id]) }}')">Complete</a>
+                                            <a class="btn btn-success btn-sm submitBtn" type="submit" id="submitBtn" href="{{ route('orderCompleted', [$order->id]) }}" onclick="completeOrder(this)"  >Complete</a>
                                         </div>
                                     </div>
                                 </div>
@@ -46,43 +46,16 @@
     <script type="text/javascript">
 
         $(document).ready(function() {
-                setTimeout(function() {
-                    window.location.reload();
-                }, 60000); // Reload the page every 5 seconds
+                // setTimeout(function() {
+                //     window.location.reload();
+                // }, 60000); // Reload the page every 1 minute
+
+
+            $(".submitBtn").submit( function (){
+                $("#submitBtn").attr("disabled", true);
+                return true;
+            });
         });
 
-        function completeOrder(url) {
-            $.ajax({
-                type: "get",
-                url: url,
-                data:{
-                    {{--"_token": "{{ csrf_token() }}",--}}
-                },
-                success: function(data) {
-                    if(data.status == 1){
-                        Swal.fire({
-                            type: "success",
-                            text: data.msg,
-                            confirmButtonClass: "btn btn-primary",
-                            buttonsStyling: false
-                        });
-
-                    }else{
-                        Swal.fire({
-                            type: "error",
-                            text: data.msg,
-                            confirmButtonClass: "btn btn-primary",
-                            buttonsStyling: false
-                        });
-                    }
-                    location.reload();
-                    // window.location.href = response.url;
-                    // $("#runningOrder").empty().html(data.view);
-                },
-                error: function(e) {
-                    console.log(e)
-                }
-            });
-        }
     </script>
 @endsection
