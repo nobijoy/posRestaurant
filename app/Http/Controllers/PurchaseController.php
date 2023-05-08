@@ -243,5 +243,15 @@ class PurchaseController extends Controller
         }
     }
 
+    public function generateReciept(){
+        $receipt = 1001;
+
+        $count = Purchase::all()->count();
+        if($count > 0){
+            $receipt = $receipt + $count;
+        }
+        return response()->json($receipt);
+    }
+
 
 }

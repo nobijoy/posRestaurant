@@ -78,7 +78,7 @@
                                                             @if($data->is_active == 1)
                                                                 <a data-toggle="modal" data-target="#edit_payment" data-target-id="{{$data->id}}"
                                                                    data-name="{{$data->name}}" data-receipt_number="{{$data->receipt_number}}" data-amount="{{$data->amount}}"
-                                                                   data-payment_time="{{$data->payment_time}}" data-payment="{{ $data->payment_method }}">
+                                                                   data-payment_time="{{$data->payment_time}}" data-reciept="{{$data->receipt_number}}" data-payment="{{ $data->payment_method }}">
                                                                     <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
                                                                         <i class="fa fa-pencil-square"></i></button>
                                                                 </a>
@@ -111,7 +111,7 @@
         <!-- Start Edit Modal -->
         <div class="modal fade text-left" id="add_payment" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel35" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="myModalLabel35">Add Payment Info</h3>
@@ -122,44 +122,50 @@
                     <form action="{{route('supplier_payment.store')}}" method="POST"  class="clearForm form" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
-                            <fieldset class="form-group floating-label-form-group">
-                                <label for="name">Supplier Name<span class="text-danger">*</span></label>
-                                <select name="name" id="name" class="select2 form-control" required>
-                                    <option value="" >Select</option>
-                                    @foreach ($suppliers as $supplier)
-                                        <option value="{{$supplier->id}}">{{$supplier->name}}</option>
-                                    @endforeach
-                                </select>
-                            </fieldset>
-                            <fieldset class="form-group floating-label-form-group">
-                                <label for="receipt_number">Receipt Number<span class="text-danger">*</span></label>
-                                <select name="receipt_number" id="receipt_number" class="select2 form-control" required>
-                                    <option value="" >Select</option>
+                            <div class="row">
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="name">Supplier Name<span class="text-danger">*</span></label>
+                                    <select name="name" id="name" class="select2 form-control" required>
+                                        <option value="" >Select</option>
+                                        @foreach ($suppliers as $supplier)
+                                            <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="receipt_number">Receipt Number<span class="text-danger">*</span></label>
+                                    <select name="receipt_number" id="receipt_number" class="select2 form-control" required>
+                                        <option value="" >Select</option>
 
-                                </select>
-                            </fieldset>
-                            <fieldset class="form-group floating-label-form-group">
-                                <label for="payment_method">Payment Method<span class="text-danger">*</span></label>
-                                <select name="payment_method" id="payment_method" class="select2 form-control" required>
-                                    <option value="" >Select</option>
-                                    <option value="cash">Cash</option>
-                                    <option value="bkash">Bkash</option>
-                                    <option value="nagad">Nagad</option>
-                                    <option value="rocket">Rocket</option>
-                                    <option value="credit">Credit </option>
-                                    <option value="debit">Debit</option>
-                                    <option value="check">Check</option>
-                                    <option value="bank_transfer">Bank Transfer</option>
-                                </select>
-                            </fieldset>
-                            <fieldset class="form-group floating-label-form-group">
-                                <label for="amount">Amount<span class="text-danger">*</span></label>
-                                <input type="number" name="amount" class="form-control" id="amount" placeholder="" value="" required>
-                            </fieldset>
-                            <fieldset class="form-group floating-label-form-group">
-                                <label for="payment_time">Payment Time<span class="text-danger">*</span></label>
-                                <input type="datetime-local" name="payment_time" class="form-control" id="payment_time" value="" required>
-                            </fieldset>
+                                    </select>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="payment_method">Payment Method<span class="text-danger">*</span></label>
+                                    <select name="payment_method" id="payment_method" class="select2 form-control" required>
+                                        <option value="" >Select</option>
+                                        <option value="cash">Cash</option>
+                                        <option value="bkash">Bkash</option>
+                                        <option value="nagad">Nagad</option>
+                                        <option value="rocket">Rocket</option>
+                                        <option value="credit">Credit </option>
+                                        <option value="debit">Debit</option>
+                                        <option value="check">Check</option>
+                                        <option value="bank_transfer">Bank Transfer</option>
+                                    </select>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="payment_time">Payment Time<span class="text-danger">*</span></label>
+                                    <input type="datetime-local" name="payment_time" class="form-control" id="payment_time" value="" required>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="p_amount">Payable Amount</label>
+                                    <input type="text" class="form-control" id="p_amount" placeholder="" value="" readonly>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="amount">Amount<span class="text-danger">*</span></label>
+                                    <input type="number" name="amount" class="form-control" id="amount" placeholder="" value="" required>
+                                </fieldset>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
@@ -171,10 +177,10 @@
         </div>
         <!-- End Add Modal -->
 
-        <!-- Start Add Modal -->
+        <!-- Start Edit Modal -->
         <div class="modal fade text-left" id="edit_payment" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel35" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="myModalLabel35">Edit Payment Info</h3>
@@ -185,45 +191,51 @@
                     <form action="{{route('supplier_payment.update')}}" method="POST"  class="clearForm form" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
-                            <input type="hidden" name="id" id="id">
-                            <fieldset class="form-group floating-label-form-group">
-                                <label for="edit_name">Supplier Name<span class="text-danger">*</span></label>
-                                <select name="name" id="edit_name" class="select2 form-control" required>
-                                    <option value="" >Select</option>
-                                    @foreach ($suppliers as $supplier)
-                                        <option value="{{$supplier->id}}">{{$supplier->name}}</option>
-                                    @endforeach
-                                </select>
-                            </fieldset>
-                            <fieldset class="form-group floating-label-form-group">
-                                <label for="edit_receipt_number">Receipt Number<span class="text-danger">*</span></label>
-                                <select name="receipt_number" id="edit_receipt_number" class="select2 form-control" required>
-                                    <option value="" >Select</option>
+                            <div class="row">
+                                <input type="hidden" name="id" id="id">
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="edit_name">Supplier Name<span class="text-danger">*</span></label>
+                                    <select name="name" id="edit_name" class="select2 form-control" required>
+                                        <option value="" >Select</option>
+                                        @foreach ($suppliers as $supplier)
+                                            <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="edit_receipt_number">Receipt Number<span class="text-danger">*</span></label>
+                                    <select name="receipt_number" id="edit_receipt_number" class="select2 form-control" required>
+                                        <option value="" >Select</option>
 
-                                </select>
-                            </fieldset>
-                            <fieldset class="form-group floating-label-form-group">
-                                <label for="edit_payment_method">Payment Method<span class="text-danger">*</span></label>
-                                <select name="payment_method" id="edit_payment_method" class="select2 form-control" required>
-                                    <option value="" >Select</option>
-                                    <option value="cash">Cash</option>
-                                    <option value="bkash">Bkash</option>
-                                    <option value="nagad">Nagad</option>
-                                    <option value="rocket">Rocket</option>
-                                    <option value="credit">Credit </option>
-                                    <option value="debit">Debit</option>
-                                    <option value="check">Check</option>
-                                    <option value="bank_transfer">Bank Transfer</option>
-                                </select>
-                            </fieldset>
-                            <fieldset class="form-group floating-label-form-group">
-                                <label for="amount">Amount<span class="text-danger">*</span></label>
-                                <input type="number" name="amount" class="form-control" id="edit_amount" placeholder="" value="" required>
-                            </fieldset>
-                            <fieldset class="form-group floating-label-form-group">
-                                <label for="payment_time">Payment Time<span class="text-danger">*</span></label>
-                                <input type="datetime-local" name="payment_time" class="form-control" id="edit_payment_time" value="" required>
-                            </fieldset>
+                                    </select>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="edit_payment_method">Payment Method<span class="text-danger">*</span></label>
+                                    <select name="payment_method" id="edit_payment_method" class="select2 form-control" required>
+                                        <option value="" >Select</option>
+                                        <option value="cash">Cash</option>
+                                        <option value="bkash">Bkash</option>
+                                        <option value="nagad">Nagad</option>
+                                        <option value="rocket">Rocket</option>
+                                        <option value="credit">Credit </option>
+                                        <option value="debit">Debit</option>
+                                        <option value="check">Check</option>
+                                        <option value="bank_transfer">Bank Transfer</option>
+                                    </select>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="e_p_amount">Payable Amount</label>
+                                    <input type="text" class="form-control" id="e_p_amount" placeholder="" value="" readonly>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="edit_amount">Amount<span class="text-danger">*</span></label>
+                                    <input type="number" name="amount" class="form-control" id="edit_amount" placeholder="" value="" required>
+                                </fieldset>
+                                <fieldset class="form-group col-md-6 floating-label-form-group">
+                                    <label for="edit_payment_time">Payment Time<span class="text-danger">*</span></label>
+                                    <input type="datetime-local" name="payment_time" class="form-control" id="edit_payment_time" value="" required>
+                                </fieldset>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
@@ -246,6 +258,7 @@
             var payment_time = $(e.relatedTarget).data('payment_time');
             var payment = $(e.relatedTarget).data('payment');
 
+            console.log(receipt_number);
 
             $('.modal-body #id').val(id);
             $('.modal-body #edit_name').val(name).change();
@@ -254,17 +267,45 @@
             $('.modal-body #edit_payment_time').val(payment_time);
             $('.modal-body #edit_payment_method').val(payment).change();
 
-            $('#edit_name').on('change', function () {
-                var id = $(this).val();
-                var url = "{{route('getReceiptBySupplier')}}";
-                if(id != ''){
-                    getReceiptBySupplier(id, url, '#edit_receipt_number');
-                }else{
-                    var output = '<option value="">No data available</option>';
-                    $('#edit_designation').html(output) ;
+
+
+            $('.select2').select2();
+
+        });
+
+
+        $("#edit_receipt_number").on('change', function (e) {
+            let reciept_no = $("#edit_receipt_number").find(":selected").text();
+            console.log(reciept_no);
+            let url = "{{route('getDueFromReceipt')}}";
+            $.ajax({
+                url: url,
+                type: "get",
+                data: {
+                    "reciept_no": reciept_no,
+                },
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (data) {
+                    $('#e_p_amount').val(data);
+                },
+
+                error: function (e) {
+                    console.log(e);
                 }
             });
-            $('.select2').select2();
+        });
+
+
+        $('#edit_name').on('change', function () {
+            var id = $(this).val();
+            var url = "{{route('getReceiptBySupplier')}}";
+            if(id != ''){
+                getReceiptBySupplier(id, url, '#edit_receipt_number');
+            }else{
+                var output = '<option value="">No data available</option>';
+                $('e_p_amount').html(output) ;
+            }
         });
 
         $("#add_payment").on("show.bs.modal", function (e) {
@@ -282,6 +323,8 @@
             $('.select2').select2();
         });
 
+
+
         function getReceiptBySupplier(id, url, view) {
             $.ajax({
                 url: url,
@@ -296,7 +339,6 @@
                     if (data.length > 0) {
                         var output = '<option value="">Select</option>';
                         $.each(data, function (index, value) {
-                            console.log(value);
                             output += '<option value="' + value['id'] + '">' + value['reference_no'] + '</option>';
                         });
                     } else {
@@ -310,6 +352,31 @@
                 }
             });
         }
+
+
+        $("#receipt_number").on('change', function (e) {
+            let reciept_no = $("#receipt_number").find(":selected").text();
+            let url = "{{route('getDueFromReceipt')}}";
+            $.ajax({
+                url: url,
+                type: "get",
+                data: {
+                    "reciept_no": reciept_no,
+                },
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (data) {
+                    $('#p_amount').val(data);
+                },
+
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        });
+
+
+
 
         $("#edit_payment").on("hide.bs.modal", function (e) {
             location.reload();

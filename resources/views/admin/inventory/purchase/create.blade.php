@@ -160,7 +160,7 @@
                 due();
 
             })
-            
+
         });
         function deleteConsumptionRow(cr){
             var rowId = $(cr).attr('data-count');
@@ -223,5 +223,25 @@
             console.log(total, paid);
 
         }
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            let url = "{{route('generateReciept')}}"
+            $.ajax({
+                url: url,
+                type: "get",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (data) {
+
+                    $('#reference_no').val(data);
+                },
+
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        });
     </script>
 @endsection
