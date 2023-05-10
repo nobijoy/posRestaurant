@@ -65,7 +65,7 @@
                                         <div class="row align-items-center d-block">
                                             @if($data && $data->logo)
                                                 <div class="col-6 mb-2 mx-auto">
-                                                    <img src="{{ asset('public/uploads/image/'.$data->logo)}}" class="main-logo">
+                                                    <img src="{{ asset('/uploads/image/'.$data->logo)}}" class="main-logo">
                                                 </div>
                                             @endif
 
@@ -76,7 +76,7 @@
 
                                             @if($data && $data->favicon)
                                                 <div class="col-6 mb-2 mx-auto">
-                                                    <img src="{{ asset('public/uploads/image/'.$data->favicon)}}" class="fav">
+                                                    <img src="{{ asset('/uploads/image/'.$data->favicon)}}" class="fav">
                                                 </div>
                                             @endif
 

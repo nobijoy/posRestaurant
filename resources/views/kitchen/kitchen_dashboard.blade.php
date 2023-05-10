@@ -27,7 +27,7 @@
                                                 <span>{{$order_detail->menu}}:</span>
                                                 <span>{{$order_detail->qty}}</span><br>
                                             @endforeach
-                                            <a class="btn btn-success btn-sm submitBtn" type="submit" id="submitBtn" href="{{ route('orderCompleted', [$order->id]) }}" onclick="completeOrder(this)"  >Complete</a>
+                                            <a class="btn btn-success btn-sm submitBtn" id="submitBtn" href="{{ route('orderCompleted', [$order->id]) }}" onclick="completeOrder(this)"  >Complete</a>
                                         </div>
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
                 // }, 60000); // Reload the page every 1 minute
 
 
-            $(".submitBtn").submit( function (){
+            $("#submitBtn").click( function (){
                 $("#submitBtn").attr("disabled", true);
                 return true;
             });
