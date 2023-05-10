@@ -1,19 +1,22 @@
 @extends('master.admin.master')
-@section('title', 'Menu Item')
+@section('title', 'Booking List')
 @section('body')
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
                 <h3 class="content-header-title">
-                    <a href="{{ route ('menu.create')}}" class="btn btn-primary"> Add Menu Item <i class="fa fa-plus"></i></a>
+                <!-- <a href="{{ route ('booking.create')}}" class="btn btn-primary">Booking <i class="fa fa-plus"></i></a> -->
                 </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
                 <div class="breadcrumb-wrapper col-12">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route ('home') }}">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Setup</a></li>
-                        <li class="breadcrumb-item active"><a href="#">Menu List</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route ('home') }}">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active"><a href="#">Manage Guest</a>
+                        </li>
+                        <li class="breadcrumb-item active"><a href="#">Booking List</a>
+                        </li>
                     </ol>
                 </div>
             </div>
@@ -50,39 +53,34 @@
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered" id="action-table">
                                             <thead>
-                                                <tr>
-                                                    <th>Sl</th>
-                                                    <th>Name</th>
-                                                    <th>Category</th>
-                                                    <th>Sele Price</th>
-                                                    <th>Total Ingredients</th>
-                                                    <th>Image</th>
-                                                    <th>Action</th>
-                                                </tr>
+                                            <tr>
+                                                <th>Sl</th>
+                                                <th>Guest Name</th>
+                                                <th>Phone</th>
+                                                <th>Email</th>
+                                                <th>Total Guest</th>
+                                                <th>Prefered Date</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
                                             </thead>
                                             <tbody>
                                                 @if (sizeof ($datas) > 0)
                                                     @foreach ($datas as $data)
                                                         <tr>
                                                             <td>{{++$sl}}</td>
-                                                            <td>{{$data->name}}</td>
-                                                            <td>{{$data->category_id ? $data->category->name : ''}}</td>
-                                                            <td>{{$data->price}}</td>
-                                                            <td>{{$data->totalIngredient()}}</td>
+                                                            <td>{{$data->fullName()}}</td>
+                                                            <td>{{$data->phone_number}}</td>
+                                                            <td>{{$data->email}}</td>
+                                                            <td>{{$data->no_of_guest}}</td>
+                                                            <td>{{date('d M Y', strtotime($data->date))}}</td>
+                                                            <td>{{$data->status}}</td>
                                                             <td>
-                                                                <a href="{{ $data->image ? asset ('/uploads/image/'.$data->image) : '#' }}" target="_blank"
-                                                                    rel="noopener noreferrer">
-                                                                    <img src="{{ $data->image ? asset ('/uploads/image/'.$data->image) : '#' }}"
-                                                                    width="70px" height="40px" alt="">
-                                                                </a>
-                                                            </td>
-                                                            <td>
-                                                                <a href="{{ route ('menu.edit', ['id'=>$data->id, 'menu'=>str_replace(" ","-",$data->name)])}}">
+                                                                <a data-toggle="modal"data-target="#editDesignation"  >
                                                                     <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
                                                                         <i class="fa fa-pencil-square"></i></button>
                                                                 </a>
-                                                                <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive"
-                                                                        onclick="deleteData('{{ route('menu.delete', [$data->id]) }}')">
+                                                                <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive">
                                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                                 </button>
                                                             </td>
@@ -90,8 +88,6 @@
                                                     @endforeach
                                                 @endif
                                             </tbody>
-                                            <tfoot class="display-hidden">
-                                            </tfoot>
                                         </table>
                                     </div>
                                 </div>

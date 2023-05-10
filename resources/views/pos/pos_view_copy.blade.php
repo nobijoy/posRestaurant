@@ -346,6 +346,70 @@
             </div>
         </div>
 
+
+{{--        Reservation List--}}
+
+        <div class="modal fade text-left" id="reservation_list" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel35" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="myModalLabel35">Today's Reservation List</h3>
+                        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body card-dashboard" id="">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered" id="action-table">
+                                <thead>
+                                <tr>
+{{--                                    <th>Id</th>--}}
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Total Guest</th>
+                                    <th>Date</th>
+{{--                                    <th>Time</th>--}}
+{{--                                    <th>Status</th>--}}
+{{--                                    <th>Action</th>--}}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @if (sizeof ($reservations) > 0)
+                                        @foreach ($reservations as $reservation)
+                                            <tr>
+{{--                                                <td>{{$reservation->id}}</td>--}}
+                                                <td>{{$reservation->first_name}} {{$reservation->last_name}}</td>
+                                                <td>{{$reservation->phone_number}}</td>
+                                                <td>{{$reservation->email}}</td>
+                                                <td>{{$reservation->no_of_guest}}</td>
+                                                <td>{{date('d M Y', strtotime($reservation->date))}}</td>
+{{--                                                <td>{{date('h:ia', strtotime($reservation->preferred_time))}}</td>--}}
+{{--                                                <td>--}}
+{{--                                                    <a data-toggle="modal"data-target="#editDesignation"  >--}}
+{{--                                                        <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">--}}
+{{--                                                            <i class="fa fa-pencil-square"></i></button>--}}
+{{--                                                    </a>--}}
+{{--                                                    <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive">--}}
+{{--                                                        <i class="fa fa-trash" aria-hidden="true"></i>--}}
+{{--                                                    </button>--}}
+{{--                                                </td>--}}
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="reset" class="btn btn-outline-secondary" data-dismiss="modal" value="Close">
+                        <input type="button" id="table_list" onclick="loadTableDetails()" class="btn btn-outline-primary" value="Save">
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {{--        Order Details Modal--}}
 
         <div class="modal fade text-left" id="order_details_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel35" aria-hidden="true">
@@ -507,8 +571,8 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset ('public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js') }}"></script>
-    <script src="{{ asset ('public/app-assets/js/scripts/forms/input-groups.js') }}"></script>
+    <script src="{{ asset ('/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js') }}"></script>
+    <script src="{{ asset ('/app-assets/js/scripts/forms/input-groups.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('input[type=radio][name=type]').change(function () {

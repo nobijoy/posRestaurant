@@ -461,8 +461,8 @@
 
 
 {{--    </section>--}}
-    <script src="{{ asset ('public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js') }}"></script>
-    <script src="{{ asset ('public/app-assets/js/scripts/forms/input-groups.js') }}"></script>
+    <script src="{{ asset ('/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js') }}"></script>
+    <script src="{{ asset ('/app-assets/js/scripts/forms/input-groups.js') }}"></script>
     <script type="text/javascript">
         $("#closeInvoiceButton").click(function () {
             $("#quick_invoice").hide();

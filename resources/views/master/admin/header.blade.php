@@ -8,7 +8,7 @@
                 <li class="nav-item">
                     <div>
                         <a class="navbar-brand logo-div" href="{{ route ('home') }}">
-                            <img class="brand-logo logo" alt="stack admin logo" src="{{ $gsetting->logo ? asset ('public/uploads/image/'. $gsetting->logo) :
+                            <img class="brand-logo logo" alt="stack admin logo" src="{{ $gsetting->logo ? asset ('/uploads/image/'. $gsetting->logo) :
                         asset ('backend/images/logo/stack-logo-light-big.png')}}" id="mainLogo">
                         </a>
                     </div>
@@ -31,7 +31,7 @@
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <div class="avatar avatar-online">
-                                <img src="{{Auth()->user()->user_img ? asset('public/uploads/image/'.Auth()->user()->user_img) : asset('public/backend/images/avatar.jpg')}}"
+                                <img src="{{Auth()->user()->user_img ? asset('/uploads/image/'.Auth()->user()->user_img) : asset('/backend/images/avatar.jpg')}}"
                                     alt="avatar"><i></i>
                             </div>
                             <span class="user-name">{{Auth()->user()->name}}</span>

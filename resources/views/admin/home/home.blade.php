@@ -9,7 +9,7 @@ Home
         </div>
         <div class="content-body row">
             <div class="col-md-4 col-sm-12 my-2">
-                <img src="{{Auth()->user()->user_img ? asset('public/uploads/image/'.Auth()->user()->user_img) : asset('public/backend/images/avatar.jpg')}}"
+                <img src="{{Auth()->user()->user_img ? asset('/uploads/image/'.Auth()->user()->user_img) : asset('/backend/images/avatar.jpg')}}"
                 alt="{{auth()->user()->name}}" class="w-100">
             </div>
             <div class="col-sm-12 mt-5 col-md-8">

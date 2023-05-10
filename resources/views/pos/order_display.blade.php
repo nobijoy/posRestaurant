@@ -33,5 +33,5 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset ('public/app-assets/js/scripts/forms/input-groups.js') }}"></script>
+    <script src="{{ asset ('/app-assets/js/scripts/forms/input-groups.js') }}"></script>
 @endsection

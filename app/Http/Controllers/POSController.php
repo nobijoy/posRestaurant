@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Expense;
 use App\Models\Order;
 use App\Models\PaymentMethod;
@@ -104,10 +105,15 @@ class POSController extends Controller
 //        $payments = PaymentMethod::where('is_active', 1)->orderBy('id')->get();
         $orders = Order::with(['customerInfo','waiterInfo'])->where('status', 'running')->latest()->get();
         $register = DB::table('p_o_sregisters')->get()->last();
+
+        $today = Carbon::now()->toDateString();
+        $reservations = Booking::whereDate('date', $today)->where('status', 'pending')->get();
+
 //        return response()->json([
 //            'view' => view('pos.pos_view', compact('customers', 'waiters', 'menuCategories', 'menus', 'orders', 'tables','payments'))->render(),
 //        ]);
-        return view('pos.pos_view_copy', compact('customers', 'waiters', 'menuCategories', 'menus', 'orders', 'tables', 'register'));
+
+        return view('pos.pos_view_copy', compact('customers', 'waiters', 'menuCategories', 'menus', 'orders', 'tables', 'register','reservations'));
     }
     public function setting()
     {

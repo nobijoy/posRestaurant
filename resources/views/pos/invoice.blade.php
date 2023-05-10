@@ -15,7 +15,7 @@
             <tr>
                 <td>
                     <div style="display: flex; justify-content: center">
-                        <img src="{{asset('public/uploads/image/1678164462logo.png')}}" height="30px" width="30px">
+                        <img src="{{asset('/uploads/image/1678164462logo.png')}}" height="30px" width="30px">
                     </div>
 
                     <p style="text-align: center; margin: 0; font-weight: bold">Bangladesh Parjatan Corporation</p>

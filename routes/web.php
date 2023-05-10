@@ -53,6 +53,12 @@ Route::group(['middleware' => ['auth']], function(){
     Route::match(['get', 'post'], 'setting', 'App\Http\Controllers\SettingController@manage')->name('setting');
     Route::match(['get', 'post'], 'printer_setup', 'App\Http\Controllers\SettingController@printer_setup')->name('printer_setup');
 
+//    Route::delete('menuCategory/{id}', 'App\Http\Controllers\MenuCategoryController@delete')->name('menuCategory.delete');
+//    Route::put('menuCategory/{id}', 'App\Http\Controllers\MenuCategoryController@restore')->name('menuCategory.restore');
+    Route::resource('booking', 'App\Http\Controllers\BookingController')->parameters('booking', 'id');
+//    Route::post('menuCategory/update', 'App\Http\Controllers\MenuCategoryController@update')->name('menuCategory.update');
+
+
     Route::delete('menuCategory/{id}', 'App\Http\Controllers\MenuCategoryController@delete')->name('menuCategory.delete');
     Route::put('menuCategory/{id}', 'App\Http\Controllers\MenuCategoryController@restore')->name('menuCategory.restore');
     Route::resource('menuCategory', 'App\Http\Controllers\MenuCategoryController')->parameters('menuCategory', 'id');

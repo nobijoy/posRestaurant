@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Sale;
 use DB;
 use App\Models\Order;
@@ -305,10 +306,6 @@ class OrderController extends Controller
         }
     }
 
-
-    public function reserveOrder(Request $request){
-        dd($request->all());
-    }
 
 
 
