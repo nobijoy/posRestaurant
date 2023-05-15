@@ -13,7 +13,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ route ('home') }}">Home</a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#">Menu</a>
+                        <li class="breadcrumb-item"><a href="#">Setup</a>
                         </li>
                         <li class="breadcrumb-item active"><a href="#">Menu List</a>
                         </li>

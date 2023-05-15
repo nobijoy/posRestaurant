@@ -42,8 +42,8 @@ class MenuSubCategoryController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'category_id' => ['required'],
-            'name' => ['required', 'unique:menu_sub_categories,name,'.$request->id.',id,menu_category_id,'.$request->category_id],
+            'category' => ['required'],
+            'name' => ['required', 'unique:menu_sub_categories,name,'.$request->id.',id,category,'.$request->category_id],
         ]);
 
         DB::beginTransaction();
@@ -51,10 +51,9 @@ class MenuSubCategoryController extends Controller
         try {
             $data = new MenuSubCategory;
             $data->name = ucwords(strtolower($request->name));
-            $data->menu_category_id = $request->category_id;
+            $data->category = $request->category;
             $data->short_note = $request->short_note;
             $data->is_active = 1;
-            $data->created_by = Auth()->user()->id;
             $data->save();
             DB::commit();
 
@@ -62,7 +61,7 @@ class MenuSubCategoryController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('error', 'Somethings went wrong. Try Again');
+            return back()->with('error', $th->getMessage());
         }
     }
 
@@ -98,8 +97,8 @@ class MenuSubCategoryController extends Controller
     public function update(Request $request)
     {
         $validatedData = $request->validate([
-            'category_id' => ['required'],
-            'name' => ['required', 'unique:menu_sub_categories,name,'.$request->id.',id,menu_category_id,'.$request->category_id],
+            'category' => ['required'],
+            'name' => ['required', 'unique:menu_sub_categories,name,'.$request->id.',id,category,'.$request->category],
         ]);
 
         DB::beginTransaction();
@@ -107,10 +106,9 @@ class MenuSubCategoryController extends Controller
         try {
             $data = MenuSubCategory::find($request->id);
             $data->name = ucwords(strtolower($request->name));
-            $data->menu_category_id = $request->category_id;
+            $data->category = $request->category;
             $data->short_note = $request->short_note;
             $data->is_active = 1;
-            $data->updated_by = Auth()->user()->id;
             $data->save();
             DB::commit();
 
@@ -139,7 +137,6 @@ class MenuSubCategoryController extends Controller
         try {
             $data = MenuSubCategory::findorFail($id);
             $data->is_active = 0;
-            $data->deleted_by = Auth()->user()->id;
             $data->save();
             DB::commit();
             return 'Sub Category Inactive Successfully!';

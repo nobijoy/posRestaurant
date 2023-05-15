@@ -109,8 +109,7 @@ class BookingController extends Controller
             $customer->name = $booking->first_name . " " .$booking->first_name;
             $customer->phone = $booking->phone_number ;
             $customer->email = $booking->email ;
-
-
+            $customer->save();
 
             DB::commit();
             return response()->json(['msg'=> 'Success']);
@@ -121,6 +120,16 @@ class BookingController extends Controller
 //                return back()->with('error', 'Somethings went wrong. Try Again');
         }
     }
+
+    public function bookingCancel($id){
+        Booking::where('id', $id)->update(['status' => 'Canceled']);
+        return response()->json(['msg'=> 'Success']);
+    }
+    public function bookingConfirm($id){
+        Booking::where('id', $id)->update(['status' => 'Confirmed']);
+        return response()->json(['msg'=> 'Success']);
+    }
+
 
 
 

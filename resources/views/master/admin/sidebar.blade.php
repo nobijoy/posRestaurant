@@ -108,7 +108,10 @@
                         <a href="{{route('ingredient.index')}}">Ingredient</a>
                     </li>
                     <li @if($url == 'menuCategory.index') class="active"  @endif>
-                        <a href="{{route('menuCategory.index')}}">Food Menu Category</a>
+                        <a href="{{route('menuCategory.index')}}">Menu Category</a>
+                    </li>
+                    <li @if($url == 'menuSubCategory.index') class="active"  @endif>
+                        <a href="{{route('menuSubCategory.index')}}">Menu Sub Category</a>
                     </li>
                     <li @if($url == 'menu.index' || $url == "menu.create" || $url == "menu.edit") class="active"  @endif>
                         <a href="{{route('menu.index')}}">Food Menu</a>

@@ -385,14 +385,14 @@
                                                 <td>{{$reservation->email}}</td>
                                                 <td>{{$reservation->no_of_guest}}</td>
                                                 <td>{{date('d M Y', strtotime($reservation->date))}}</td>
+{{--                                                <td>{{$reservation->status}}</td>--}}
 {{--                                                <td>{{date('h:ia', strtotime($reservation->preferred_time))}}</td>--}}
 {{--                                                <td>--}}
-{{--                                                    <a data-toggle="modal"data-target="#editDesignation"  >--}}
-{{--                                                        <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">--}}
-{{--                                                            <i class="fa fa-pencil-square"></i></button>--}}
-{{--                                                    </a>--}}
-{{--                                                    <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive">--}}
-{{--                                                        <i class="fa fa-trash" aria-hidden="true"></i>--}}
+{{--                                                    <button type="button" title="Confirmed" class="btn btn-icon btn-outline-primary btn-sm">--}}
+{{--                                                        <i class="fa fa-check-circle"></i>--}}
+{{--                                                    </button>--}}
+{{--                                                    <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Cancel">--}}
+{{--                                                        <i class="fa fa-times-circle" aria-hidden="true"></i>--}}
 {{--                                                    </button>--}}
 {{--                                                </td>--}}
                                             </tr>

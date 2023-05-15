@@ -5,14 +5,15 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
                 <h3 class="content-header-title">
-                    <a href="#" data-toggle="modal"data-target="#addsubCategory" class="btn btn-primary">ADD</a>
+                    <a href="#" data-toggle="modal"data-target="#addsubCategory" class="btn btn-primary">Add SubCategories</a>
                 </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route ('home') }}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Setup</a></li>
                             <li class="breadcrumb-item active"><a href="#">Menu Sub Categories</a></li>
                         </ol>
                     </div>
@@ -65,12 +66,12 @@
                                                     <tr>
                                                         <td>{{++$sl}}</td>
                                                         <td>{{$data->name}}</td>
-                                                        <td>{{$data->menu_category_id ? $data->category->name : ''}}</td>
+                                                        <td>{{$data->category ? $data->categoryInfo->name : ''}}</td>
                                                         <td>{{mb_strimwidth($data->short_note, 0, 50, '...')}}</td>
                                                         <td>
                                                             @if($data->is_active == 1)
                                                                 <a data-toggle="modal"data-target="#editsubCategory" data-target-id="{{$data->id}}"
-                                                                   data-name="{{$data->name}}" data-category_id="{{$data->menu_category_id}}" data-short_note="{{$data->short_note}}" >
+                                                                   data-name="{{$data->name}}" data-category="{{$data->category}}" data-short_note="{{$data->short_note}}" >
                                                                     <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
                                                                         <i class="fa fa-pencil-square"></i></button>
                                                                 </a>
@@ -90,13 +91,6 @@
                                             @endif
                                             </tbody>
                                             <tfoot class="display-hidden">
-                                            <tr>
-                                                <th>Sl</th>
-                                                <th>Name</th>
-                                                <th>Category</th>
-                                                <th>Short Note</th>
-                                                <th>Action</th>
-                                            </tr>
                                             </tfoot>
                                         </table>
                                     </div>
@@ -124,8 +118,9 @@
                           enctype="multipart/form-data">@csrf
                         <div class="modal-body">
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="category_id">Select Category<span class="text-danger">*</span></label>
-                                <select name="category_id" id="category_id" class="form-control select2" required>
+                                <label for="category">Select Category<span class="text-danger">*</span></label>
+                                <select name="category" id="category" class="form-control select2" required>
+                                    <option value="">Select</option>
                                     @foreach ($categories as $type)
                                         <option value="{{$type->id}}">{{$type->name}}</option>
                                     @endforeach
@@ -166,8 +161,8 @@
                         <div class="modal-body">
                             <input type="hidden" name="id" id="id">
                             <fieldset class="form-group floating-label-form-group">
-                                <label for="ecategory_id">Select Category<span class="text-danger">*</span></label>
-                                <select name="category_id" id="ecategory_id" class="select2 form-control" required>
+                                <label for="ecategory">Select Category<span class="text-danger">*</span></label>
+                                <select name="category" id="ecategory" class="select2 form-control" required>
                                     @foreach ($categories as $type)
                                         <option value="{{$type->id}}">{{$type->name}}</option>
                                     @endforeach
@@ -198,12 +193,12 @@
         $("#editsubCategory").on("show.bs.modal", function (e) {
             var id = $(e.relatedTarget).data('target-id');
             var name = $(e.relatedTarget).data('name');
-            var category_id = $(e.relatedTarget).data('category_id');
+            var category = $(e.relatedTarget).data('category');
             var short_note = $(e.relatedTarget).data('short_note');
 
             $('.modal-body #id').val(id);
             $('.modal-body #ename').val(name);
-            $('.modal-body #ecategory_id').val(category_id).change();
+            $('.modal-body #ecategory').val(category).change();
             $('.modal-body #eshort_note').val(short_note).change();
             $(".select2").select2();
 
