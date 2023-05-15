@@ -107,7 +107,7 @@ class POSController extends Controller
         $register = DB::table('p_o_sregisters')->get()->last();
 
         $today = Carbon::now()->toDateString();
-        $reservations = Booking::whereDate('date', $today)->where('status', 'pending')->get();
+        $reservations = Booking::whereDate('date', $today)->where('status', 'Confirmed')->get();
 
 //        return response()->json([
 //            'view' => view('pos.pos_view', compact('customers', 'waiters', 'menuCategories', 'menus', 'orders', 'tables','payments'))->render(),

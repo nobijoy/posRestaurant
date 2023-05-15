@@ -51,9 +51,8 @@
                 // }, 60000); // Reload the page every 1 minute
 
 
-            $("#submitBtn").click( function (){
-                $("#submitBtn").attr("disabled", true);
-                return true;
+            $("#submitBtn").click( function (event){
+                event.preventDefault();
             });
         });
 

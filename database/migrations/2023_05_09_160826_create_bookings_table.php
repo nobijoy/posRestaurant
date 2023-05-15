@@ -24,6 +24,8 @@ class CreateBookingsTable extends Migration
             $table->string('date')->nullable();
             $table->string('preferred_time')->nullable();
             $table->text('special_request')->nullable();
+            $table->string('menu')->nullable();
+            $table->string('quantity')->nullable();
             $table->string('status')->default('pending');
             $table->timestamps();
         });

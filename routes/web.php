@@ -56,6 +56,8 @@ Route::group(['middleware' => ['auth']], function(){
 //    Route::delete('menuCategory/{id}', 'App\Http\Controllers\MenuCategoryController@delete')->name('menuCategory.delete');
 //    Route::put('menuCategory/{id}', 'App\Http\Controllers\MenuCategoryController@restore')->name('menuCategory.restore');
     Route::resource('booking', 'App\Http\Controllers\BookingController')->parameters('booking', 'id');
+    Route::get('bookingCancel/{id}', 'App\Http\Controllers\BookingController@bookingCancel')->name('bookingCancel');
+    Route::get('bookingConfirm/{id}', 'App\Http\Controllers\BookingController@bookingConfirm')->name('bookingConfirm');
 //    Route::post('menuCategory/update', 'App\Http\Controllers\MenuCategoryController@update')->name('menuCategory.update');
 
 
@@ -63,6 +65,11 @@ Route::group(['middleware' => ['auth']], function(){
     Route::put('menuCategory/{id}', 'App\Http\Controllers\MenuCategoryController@restore')->name('menuCategory.restore');
     Route::resource('menuCategory', 'App\Http\Controllers\MenuCategoryController')->parameters('menuCategory', 'id');
     Route::post('menuCategory/update', 'App\Http\Controllers\MenuCategoryController@update')->name('menuCategory.update');
+
+    Route::delete('menuSubCategory/{id}', 'App\Http\Controllers\MenuSubCategoryController@delete')->name('menuSubCategory.delete');
+    Route::put('menuSubCategory/{id}', 'App\Http\Controllers\MenuSubCategoryController@restore')->name('menuSubCategory.restore');
+    Route::resource('menuSubCategory', 'App\Http\Controllers\MenuSubCategoryController')->parameters('menuSubCategory', 'id');
+    Route::post('menuSubCategory/update', 'App\Http\Controllers\MenuSubCategoryController@update')->name('menuSubCategory.update');
 
     Route::delete('delete-menu-ingredient/{id}', 'App\Http\Controllers\MenuController@deleteMenuIngredient')->name('deleteMenuIngredient');
     Route::delete('menu/{id}', 'App\Http\Controllers\MenuController@delete')->name('menu.delete');

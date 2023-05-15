@@ -76,12 +76,11 @@
                                                             <td>{{date('d M Y', strtotime($data->date))}}</td>
                                                             <td>{{$data->status}}</td>
                                                             <td>
-                                                                <a data-toggle="modal"data-target="#editDesignation"  >
-                                                                    <button type="button" title="Edit" class="btn btn-icon btn-outline-primary btn-sm">
-                                                                        <i class="fa fa-pencil-square"></i></button>
-                                                                </a>
-                                                                <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Inactive">
-                                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                <button type="button" title="Confirmed" class="btn btn-icon btn-outline-primary btn-sm" onclick="changeStatus('{{route('bookingConfirm', $data->id)}}')">
+                                                                    <i class="fa fa-check-circle"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-icon btn-outline-danger btn-sm" title="Cancel"  onclick="changeStatus('{{route('bookingCancel', $data->id)}}')">
+                                                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
                                                                 </button>
                                                             </td>
                                                         </tr>
@@ -101,4 +100,22 @@
     </div>
 @endsection
 @section('script')
+
+<script type="text/javascript">
+    function changeStatus(url) {
+        $.ajax({
+            url : url,
+            dataType : 'json',
+            success: function () {
+                // $("#menu-section").empty().html(data.view);
+                location.reload();
+            },
+
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+
 @endsection

@@ -5,7 +5,7 @@
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-1">
                 <h3 class="content-header-title">
-                    <a href="#" data-toggle="modal"data-target="#addcategory" class="btn btn-primary">Add Menu Categories</a>
+                    <a href="#" data-toggle="modal"data-target="#addcategory" class="btn btn-primary">Add Categories</a>
                 </h3>
             </div>
             <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
