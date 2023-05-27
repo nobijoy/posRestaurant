@@ -17,7 +17,7 @@ class CreateMenusTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('code')->nullable();
-            $table->UnsignedBigInteger('category_id')->Unsigned()->nullable();
+            $table->UnsignedBigInteger('category')->Unsigned()->nullable();
             $table->double('price')->nullable();
             $table->string('description')->nullable();
             $table->string('image')->nullable();
@@ -28,7 +28,7 @@ class CreateMenusTable extends Migration
             $table->UnsignedBigInteger('created_by')->Unsigned()->nullable();
             $table->UnsignedBigInteger('updated_by')->Unsigned()->nullable();
             $table->UnsignedBigInteger('deleted_by')->Unsigned()->nullable();
-            $table->foreign('category_id')->references('id')->on('menu_categories')->onDelete('restrict');
+            $table->foreign('category')->references('id')->on('menu_sub_categories')->onDelete('restrict');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('restrict');
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('restrict');
             $table->foreign('deleted_by')->references('id')->on('users')->onDelete('restrict');

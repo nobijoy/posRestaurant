@@ -1,16 +1,18 @@
 <div class="row">
 
+{{--    <div class="form-group col-md-6 ">--}}
+{{--        <label for="code">Item Code <span class="text-danger">*</span></label>--}}
+{{--        <input type="text" id="code" class="form-control" placeholder="Ex:101" name="code"--}}
+{{--        @if($url == 'menu.edit') value="{{$data->code}}" @else value="{{old('code')}}" @endif required>--}}
+{{--    </div>--}}
+
+
     <div class="form-group col-md-6 ">
         <label for="name">Item Name <span class="text-danger">*</span></label>
-        <input type="text" id="name" class="form-control" placeholder="Ex:Beef Burger" name="name" 
+        <input type="text" id="name" class="form-control" placeholder="Ex:Beef Burger" name="name"
         @if($url == 'menu.edit') value="{{$data->name}}" @else value="{{old('name')}}" @endif required>
     </div>
 
-    <div class="form-group col-md-6 ">
-        <label for="code">Item Code <span class="text-danger">*</span></label>
-        <input type="text" id="code" class="form-control" placeholder="Ex:101" name="code" 
-        @if($url == 'menu.edit') value="{{$data->code}}" @else value="{{old('code')}}" @endif required>
-    </div>
 
     <div class="form-group col-md-6 ">
         <label for="category_id">Select Item Category <span class="text-danger">*</span></label>
@@ -18,6 +20,16 @@
             <option value="">Select</option>
             @foreach ($categories as $type)
                 <option value="{{$type->id}}" @if(($url == 'menu.edit') && $data->category_id == $type->id) selected @endif>{{$type->name}}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="form-group col-md-6 ">
+        <label for="category">Select Sub Category <span class="text-danger">*</span></label>
+        <select name="category" id="category" class="form-control select2" required>
+            <option value="">Select</option>
+            @foreach ($subcategories as $type)
+                <option value="{{$type->id}}" @if(($url == 'menu.edit') && $data->category == $type->id) selected @endif>{{$type->name}}</option>
             @endforeach
         </select>
     </div>
@@ -59,13 +71,13 @@
                                 <input type="hidden" name="ingredient_consuption_id[]" value="{{$ci->id}}">
                                 <td id="sl_0{{$ci->id}}"><p>{{++$ciSl}}</p></td>
                                 <td>
-                                    <input type="hidden" id="ingreadient_id_0{{$ci->id}}" value="{{$ci->ingredient_id}}" 
+                                    <input type="hidden" id="ingreadient_id_0{{$ci->id}}" value="{{$ci->ingredient_id}}"
                                     name="ingredient_id[]" value="'+ingredient_details[0]+'">
                                     <span id="ingreadient_name_'+ingredient_details[0] +'">{{$ci->ingredient->name}}</span>
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="consumption[]" value="{{$ci->consumption_amount}}" placeholder="Consumption" 
+                                        <input type="text" class="form-control" name="consumption[]" value="{{$ci->consumption_amount}}" placeholder="Consumption"
                                         aria-describedby="basic-addon_0{{$ci->id}}" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon_0{{$ci->id}}">{{$ci->ingredient->unit->name}}</span>
@@ -81,7 +93,7 @@
                             @endforeach
                         @endif
                     @endif
-                    
+
                 </tbody>
             </table>
         </div>
@@ -91,7 +103,7 @@
 
     <div class="form-group col-md-6 ">
         <label for="price">Sales Price<span class="text-danger">*</span></label>
-        <input type="number" id="price" class="form-control phone" placeholder="Ex: 100" name="price" 
+        <input type="number" id="price" class="form-control phone" placeholder="Ex: 100" name="price"
         @if($url == 'menu.edit') value="{{$data->price}}" @else value="{{old('price')}}" @endif required>
     </div>
 
@@ -130,15 +142,15 @@
         </select>
     </div>
 
-    <div class="form-group col-md-6 ">
-        <label for="vat">Vat</label>
-        <div class="input-group">
-            <input type="number" class="form-control phone" name="vat" placeholder="Ex:5" aria-describedby="basic-addon_vat"
-            @if($url == 'menu.edit') value="{{$data->vat}}" @else value="{{old('vat')}}" @endif >
-            <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon_vat">%</span>
-            </div>
-        </div>
-    </div>
+{{--    <div class="form-group col-md-6 ">--}}
+{{--        <label for="vat">Vat</label>--}}
+{{--        <div class="input-group">--}}
+{{--            <input type="number" class="form-control phone" name="vat" placeholder="Ex:5" aria-describedby="basic-addon_vat"--}}
+{{--            @if($url == 'menu.edit') value="{{$data->vat}}" @else value="{{old('vat')}}" @endif >--}}
+{{--            <div class="input-group-append">--}}
+{{--                <span class="input-group-text" id="basic-addon_vat">%</span>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 </div>

@@ -146,7 +146,7 @@
                     updateRowNo();
                 }
             });
-            
+
         });
         function deleteConsumptionRow(cr){
             var rowId = $(cr).attr('data-count');
@@ -169,5 +169,16 @@
                 $("#ingredient_consumption_table tbody tr").eq(r).find("td:first p").text(r + 1);
             }
         }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var url = "{{ route ('getSubCatAgainstCat') }}";
+            $("#category_id").on("change", function(){
+                var id = $(this).val();
+                if (id != '') {
+                    getSubCatAgainstCat(id, url, '#category');
+                }
+            });
+        })
     </script>
 @endsection
