@@ -54,7 +54,8 @@
                                                     <th>Sl</th>
                                                     <th>Name</th>
                                                     <th>Category</th>
-                                                    <th>Sele Price</th>
+                                                    <th>Sub Category</th>
+                                                    <th>Price</th>
                                                     <th>Total Ingredients</th>
                                                     <th>Image</th>
                                                     <th>Action</th>
@@ -66,7 +67,8 @@
                                                         <tr>
                                                             <td>{{++$sl}}</td>
                                                             <td>{{$data->name}}</td>
-                                                            <td>{{$data->category_id ? $data->category->name : ''}}</td>
+                                                            <td>{{$data->category ? $data->categoryInfo->name : ''}}</td>
+                                                            <td>{{$data->category ? $data->categoryInfo->categoryInfo->name : ''}}</td>
                                                             <td>{{$data->price}}</td>
                                                             <td>{{$data->totalIngredient()}}</td>
                                                             <td>

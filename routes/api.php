@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //Route::post('/reserveOrder', 'OrderController@reserveOrder');
 Route::post('/reserveOrder', [BookingController::class, 'reserveOrder']);
+Route::get('/menus', [\App\Http\Controllers\MenuController::class, 'getMenus']);

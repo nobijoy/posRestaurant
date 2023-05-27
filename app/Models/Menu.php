@@ -9,8 +9,8 @@ class Menu extends Model
 {
     use HasFactory;
 
-    public function category() {
-        return $this->belongsTo(MenuCategory::class, 'category_id', 'id');
+    public function categoryInfo() {
+        return $this->belongsTo(MenuSubCategory::class, 'category', 'id');
     }
     public function createdBy(){
         return $this->belongsTo(User::class, 'created_by', 'id');

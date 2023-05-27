@@ -148,7 +148,9 @@
                     updateRowNo();
                 }
             });
-            
+
+
+
         });
         function deleteConsumptionRow(cr){
             var rowId = $(cr).attr('data-count');
